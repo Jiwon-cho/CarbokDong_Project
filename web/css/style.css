@@ -1,0 +1,273 @@
+#footer {
+	height: 140px;
+	background: #272424e8;
+	color: #fff;
+}
+
+/* 푸터 영역1 */
+#footer .inner .addr {
+	float: left;
+	font-style: normal;
+	width: 100%;
+	padding-top: 15px
+}
+/* 푸터 영역2 */
+#footer .inner .copy {
+	float: left;
+	width: 100%;
+	padding-top: 20px;
+}
+/* 푸터 로그인, 회원가입 영역 */
+#footer .inner .social {
+	float: right;
+	margin-right: 25px;
+	margin-top: -90px;
+	list-style-type: none;
+}
+
+#footer .inner .social li {
+	float: left;
+	margin-left: 25px;
+	top: 19px;	
+}
+#footer .inner .social li a {
+	text-decoration: none;
+}
+#footer .inner .social li a img {
+	height: 38px;
+	width: 38px;
+}
+
+  .layout{
+    display:inline-block;
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    margin:20px 0 0 0;
+   
+    text-align: center;
+
+  }
+.container{
+    display:block;
+    width: 100%;
+    margin: auto;
+    position:relative;
+    background-color: rgba(190, 187, 187, 0.781);
+   
+   height:500px;
+    
+
+}
+
+.notice{
+    margin:0 auto;
+    display:block;
+    width:1200px;
+    position:relative;
+}
+
+.notice2{
+
+    height: 100%;
+    width: 600px;
+    position:absolute;
+    float: left;
+     margin-left:1000px;
+
+}
+
+.mbti{
+    text-align: center;
+    width: 500px;
+    height:300px;
+    background-repeat: no-repeat;
+    background-image:url("https://t1.daumcdn.net/cfile/tistory/99D8F24E5F07D10C2A");
+    position: absolute;
+    border : 1px black solid;
+    float:left;
+    margin-left:1150px;
+    background-size: cover;
+}
+
+
+.weather{
+    text-align: center;
+    width: 500px;
+    height: 300px;
+    background-color: rgba(128, 128, 128, 0.486);
+  position:absolute;
+    border : 1px black solid;
+    float:left;
+    margin-left:650px;
+    
+  
+}
+.weather table{
+	margin-top:20px;
+}
+
+.news{
+    text-align: left;
+    font-size:25px;
+    color:#fff;
+    font-weight: bold;
+    /* top: 20px; */
+    width: 350px;
+    height: 300px;
+    
+    position:absolute ;
+    float:left;
+    overflow:hidden;
+    margin-left:300px;
+    border : 1px black solid;
+    background-repeat: no-repeat;
+      background-size: cover;
+    
+}
+.news p{
+  font-size:40px;
+  margin-left: 35px;
+}
+
+.news span#campnews{
+  
+  margin-left: 35px;
+}
+
+.event{
+    text-align: center;
+    height: 500px;
+    margin: 150px 0;
+    background-color: rgba(128, 128, 128, 0.555);
+    background-image: url("https://parks.seoul.go.kr/file/info/view.do?tableName=BANNER&bIdx=537");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    body {
+      font-family: "East Sea Dokdo", "cursive";
+      font-size: 20px;
+      text-decoration: none;
+      /* background-image: url("https://media.cntraveler.com/photos/5f3c1421163f0cf4e60af119/16:9/w_2560%2Cc_limit/GettyImages-618049526.jpg"); */
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin:0;
+      padding:0;
+    
+    }
+    .navbar__logo {
+      font-size: 70px;
+      margin-left:100px;
+      text-align: center;
+      height:150px;
+      margin-top: 30px;
+    }
+    .navbar__menu {
+      font-family: "Black Han Sans", sans-serif;
+      display: flex;
+      font-size:40px;
+      list-style: none;
+ 
+      
+    }
+    .navbar__menu li {
+      padding: 8px 140px;
+    }
+    .navbar__menu li:hover {
+      background-color: rgba(163, 218, 240, 0.336);
+      border-radius: 25px;
+      
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: rgba(133, 133, 133, 0.212);
+    }
+    .navbar__icons {
+      list-style: none ;
+      color: black;
+      display: flex;
+      padding-left: 0;
+    }
+    .navbar__icons li {
+      padding: 8px 12px;
+     
+    }
+    a {
+      text-decoration: none;
+      color: rgb(0, 61, 31);
+    }
+    i {
+      font-size: 50px;
+      text-decoration: none;
+    }
+
+    .navbar__toggleBtn {
+      display: none;
+      position: absolute;
+      right: 32px;
+      color: rgb(0, 69, 172);
+      
+    }
+    .headbar{
+      display: flex;
+            background-color: rgba(133, 133, 133, 0.212);
+        justify-content: space-between;
+        flex-direction: row-reverse;
+      margin-top:0px;
+    }
+    ul.list>li{
+      float:left;
+      list-style:none;
+    }
+    ul.list>li:first-child{
+   
+      margin-right: 130px;  
+      
+
+
+    }
+    ul.list>li:last-child{
+      margin-right:300px;
+    }
+  li{
+    list-style: none;
+  }
+   
+    li a.arrow{
+ position: relative;
+ list-style: none;
+ float:left;
+ margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    color:black;
+}
+li a.arrow::after{
+ content:"";
+ display: block;
+ width:10px;
+ height:10px;
+ border-top:2px solid #fff;
+ border-right:2px solid #fff;
+ -webkit-transform: rotate(45deg);
+ transform: rotate(45deg);
+ position: absolute;
+ right:10px;
+ top:50%;
+ margin-top:-7px;
+ margin: 0 0 0 0;
+    padding: 0 0 0 0;
+ list-style: none;
+}
+
+/* div.weather>div{
+  display:inline-table;
+    float: left;
+} */
+
+
+
+
