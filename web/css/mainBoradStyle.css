@@ -1,0 +1,52 @@
+@charset "UTF-8";
+.side li{position: relative;border-bottom: 1px solid #f3f3f3;}
+li,ul{list-style: none;margin: 0; padding: 0;}
+div{margin: 0; padding: 0;}
+li{display: list-item; text-align: -webkit-match-parent;}
+.sida{width: 100%;overflow-x: hidden;}
+.aaa{
+	display: inline-block;
+	width: 100%;
+	min-height: 73px;
+	padding: 16px 15px;
+	line-height: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	color: #333;
+}
+.artice{
+	display: inline-block;
+	line-height: 100%;
+	vertical-align: top;
+}
+.tit{
+	display: block;
+	font-size: 0;
+	white-space: nowrap;
+	word-break: break-all;
+	line-height: 22px;
+	color: #000;
+	vertical-align: top;
+}
+.txt_de{
+	display: inline;
+	color: #000;
+	font-size: 17px;
+	line-height: 22px;
+	vertical-align: top;
+	white-space: normal;
+	word-break: break-all;
+	}
+
+	.txt_info{
+	display: list-item;
+	overflow: hidden;
+	padding-top: 6px;
+	font-size: 13px;
+	line-height: 16px;
+	color: #909090;
+	vertical-align: top;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+}
