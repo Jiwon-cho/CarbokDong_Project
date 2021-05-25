@@ -29,10 +29,12 @@ String pageBar=(String)request.getAttribute("pageBar");
       list-style: none;
       margin-top: 20px;
       border-top: 1px solid #eee;
+      height:auto;
     
   }
 .pbdt{
     margin-left: 10px;
+
 }
 .tt2{
  margin-left: 45%;
@@ -43,9 +45,9 @@ String pageBar=(String)request.getAttribute("pageBar");
 margin-top:10px;
 }
 .pageBar{
-margin-top:30px;
-margin-left:50%;
-font-size:20px;
+margin-top:50px;
+margin-left:45%;
+font-size:40px;
 }   
 
 
@@ -68,7 +70,7 @@ margin-top:30px;
     <ul class="articles">
     <%for(News n: list){ %>
         <li>  
-    <a href="">   <span class="tt2"><%=n.getNewsTitle() %></span>
+    <a href="<%=request.getContextPath()%>/news/newsViews?newsNo=<%=n.getNewsNo()%>">   <span class="tt2"><%=n.getNewsTitle() %></span>
         <span class="fl" style="display: block;width: 700px;height:160px;">
       
             <img src="<%=n.getImgUrl() %>" class="ig">
@@ -86,7 +88,7 @@ margin-top:30px;
 	<%} %>
 	</ul> --%>
 <div class="pageBar">
-<span><%=pageBar %></span>
+<span>&lt<%=pageBar %>&gt</span>
 </div>	
 </section>
 <%@ include file="/views/common/footer.jsp" %>	
