@@ -1,36 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>  
-</head>
-<body>
-<script type="text/javascript" language="javascript">
+ <%@ page import="com.news.model.vo.News" %>
+ <%
  
-    $(document).ready(function(){
-    	
-        $.ajax({
-            type : "get", //전송방식을 지정한다 (POST,GET)
-            url : "http://pop.heraldcorp.com/view.php?ud=202105232102500066857_1&ACE_SEARCH=1",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
-            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
-            error : function(){
-                alert("통신실패!!!!");
-            },
-            success : function(Parse_data){
-                $("#Parse_Area").html(Parse_data); //div에 받아온 값을 넣는다.
-                alert("통신 데이터 값 : " + Parse_data);
-            }
-             
-        });
-    });
+ News n=(News)request.getAttribute("news");
+ String[] img=n.getImgUrl().split(",");
  
-</script>
-<div>나나나</div>
-    <div id="Parse_Area"></div>
+ %>
+ <style>
+.article-view{
+margin-left: 35%;
+margin-right: 35%;
+width: 630px;
+display: block;
+text-align: left;
+}
 
+.top{
+    width: 500px;
+display: block;
+text-align: left;
+word-break: break-all;
+margin-left: 10%;
+    font-size: 30px;
+}
+img{
+    margin-left: 5%;
+}
 
-</body>
-</html>
+</style>   
+<%@ include file="/views/common/header.jsp" %>
+ <div class="article-view">
+    <div class="top">
+    <div class="tit"> 	<%=n.getNewsTitle() %></div></div>
+    <div class="contents" style="display:block; text-align: left;"> 
+    <%for(String s: img){ %>
+        <div class="ig"><img src="<%=s %>" style="width:540px;" alt="이미지중앙" border="0"></div>
+   <%} %>
+        <br>
+        <br>
+        <div>
+           <%=n.getNewsContent() %>
+        </div>
+    </div>
+</div>
+<%@ include file="/views/common/footer.jsp" %>	

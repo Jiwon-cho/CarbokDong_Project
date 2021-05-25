@@ -14,5 +14,9 @@ public class NewsService {
 		return list;
 	}
 	
+	public News selectNewsView(int newsNo, int cPage) {
+		News n=dao.selectNewsView(newsNo,cPage);
+		return n;
+	}
 	
 }

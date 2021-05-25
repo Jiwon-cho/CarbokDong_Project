@@ -11,13 +11,15 @@ public class News {
 	private String newsContent;
 	private String newsPrev;
 	private String imgUrl;
+	private String newsUrl;
 	
 	public News() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public News(int newsNo, String newsTitle, String newsWriter, String newsDate, int newsReadCount, String newsContent,
-			String newsPrev, String imgUrl) {
+			String newsPrev, String imgUrl, String newsUrl) {
 		super();
 		this.newsNo = newsNo;
 		this.newsTitle = newsTitle;
@@ -27,63 +29,87 @@ public class News {
 		this.newsContent = newsContent;
 		this.newsPrev = newsPrev;
 		this.imgUrl = imgUrl;
+		this.newsUrl = newsUrl;
 	}
+
 	public int getNewsNo() {
 		return newsNo;
 	}
+
 	public void setNewsNo(int newsNo) {
 		this.newsNo = newsNo;
 	}
+
 	public String getNewsTitle() {
 		return newsTitle;
 	}
+
 	public void setNewsTitle(String newsTitle) {
 		this.newsTitle = newsTitle;
 	}
+
 	public String getNewsWriter() {
 		return newsWriter;
 	}
+
 	public void setNewsWriter(String newsWriter) {
 		this.newsWriter = newsWriter;
 	}
+
 	public String getNewsDate() {
 		return newsDate;
 	}
+
 	public void setNewsDate(String newsDate) {
 		this.newsDate = newsDate;
 	}
+
 	public int getNewsReadCount() {
 		return newsReadCount;
 	}
+
 	public void setNewsReadCount(int newsReadCount) {
 		this.newsReadCount = newsReadCount;
 	}
+
 	public String getNewsContent() {
 		return newsContent;
 	}
+
 	public void setNewsContent(String newsContent) {
 		this.newsContent = newsContent;
 	}
+
 	public String getNewsPrev() {
 		return newsPrev;
 	}
+
 	public void setNewsPrev(String newsPrev) {
 		this.newsPrev = newsPrev;
 	}
+
 	public String getImgUrl() {
 		return imgUrl;
 	}
+
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
+
+	public String getNewsUrl() {
+		return newsUrl;
+	}
+
+	public void setNewsUrl(String newsUrl) {
+		this.newsUrl = newsUrl;
+	}
+
 	@Override
 	public String toString() {
 		return "News [newsNo=" + newsNo + ", newsTitle=" + newsTitle + ", newsWriter=" + newsWriter + ", newsDate="
 				+ newsDate + ", newsReadCount=" + newsReadCount + ", newsContent=" + newsContent + ", newsPrev="
-				+ newsPrev + ", imgUrl=" + imgUrl + "]";
+				+ newsPrev + ", imgUrl=" + imgUrl + ", newsUrl=" + newsUrl + "]";
 	}
-	
-	
 	
 	
 	

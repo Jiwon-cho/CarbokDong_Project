@@ -31,7 +31,7 @@
     
     <div class="navbar">
       <div class="navbar__menu">
-        <li><a href="">커뮤니티</a></li>
+        <li><a href="<%=request.getContextPath()%>/borad/mainBorad">커뮤니티</a></li>
         <li>
           <a
             href="https://www.google.com/maps/d/u/0/viewer?ie=UTF8&oe=UTF8&msa=0&mid=1GS6L7YRskgtfzVebJsDhbgbNsyQ&ll=36.12610142320005%2C128.9769752008968&z=8"

@@ -12,14 +12,34 @@ import org.jsoup.select.Elements;
 import com.news.model.dao.NewsDao;
 
 public class main {
-	private static String url="http://www.heraldpop.com/search.php?searchvalue=%EC%BA%A0%ED%95%91+%EC%BA%A0%ED%95%91%EC%9E%A5&ACE_SEARCH=1&pg=1";
+	private static String url="http://pop.heraldcorp.com/view.php?ud=202105232102500066857_1&ACE_SEARCH=1";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int a=(2/5)*5+1;
+		Document doc=null;
+		try {
+			doc = Jsoup.connect(url).get();
+		}catch(IOException	 e) {
+			throw new RuntimeException("[Error: Crawling fail : " + e.getMessage() + "]");
+		}
+		Elements title=doc.select("#content > div.article > div.top > div.title > h1");
+		Elements images=doc.select("#CmAdContent > div > div > img");
+		Elements contents=doc.select("#CmAdContent");
+		News n=new News();
+		String src="";
+		for(Element el: images) {
+			src+=el.attr("src")+",";
+			
+		}
+		n.setImgUrl(src);
 		
-	
-		System.out.println(a);
+
+		for(Element el: title) {
+			n.setNewsTitle(el.text());
+		}
+		
+		System.out.println(n.getNewsTitle());
+		
 	}
 
 }

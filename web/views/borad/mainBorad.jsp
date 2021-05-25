@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.borad.model.vo.Board" %>
 <%
-	List<Board>list=(List<Board>)request.getAttribute("list");
+	List<Board> list=(List<Board>)request.getAttribute("list");
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">

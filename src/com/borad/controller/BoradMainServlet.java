@@ -84,7 +84,7 @@ public class BoradMainServlet extends HttpServlet {
 		}
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("list", list);
-
+		System.out.println(list);
 		request.getRequestDispatcher("/views/borad/mainBorad.jsp").forward(request, response);
 	}
 

@@ -50,11 +50,59 @@ public class NewsDao {
 			n.setImgUrl(el.select("dt > a > img").attr("src"));
 			n.setNewsPrev(el.select("dd > a > p").text());
 			n.setNewsDate(el.select("dd > span").text());
+			n.setNewsUrl(el.select("dt > a").attr("href"));
 			idx++;
 			list.add(n);
 		}
 	
 	return list;
 	}
+	
+	
+	
+	
+	
+	public News selectNewsView(int newsNo, int cPage) {
+		List<News> list=getNewsList(cPage);
+		String url=null;
+		for(News n: list) {
+			if(n.getNewsNo()==newsNo) {
+				url=n.getNewsUrl();
+			}
+		}
+		
+		Document doc=null;
+		try {
+			doc = Jsoup.connect(url).get();
+		}catch(IOException	 e) {
+			throw new RuntimeException("[Error: Crawling fail : " + e.getMessage() + "]");
+		}
+		Elements title=doc.select("#content > div.article > div.top > div.title > h1");
+		Elements images=doc.select("#CmAdContent > div > div > img");
+		Elements contents=doc.select("#CmAdContent");
+		News n=new News();
+		
+		
+		String src="";
+		for(Element el: images) {
+			src+=el.attr("src")+",";
+			
+		}
+		n.setImgUrl(src);
+		
+
+		for(Element el: title) {
+			n.setNewsTitle(el.text());
+		}
+		
+		for(Element el: contents) {
+			n.setNewsContent(el.text());
+		}
+		
+		return n;
+	}
+	
+	
+	
 
 }

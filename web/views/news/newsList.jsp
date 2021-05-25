@@ -12,6 +12,7 @@ String pageBar=(String)request.getAttribute("pageBar");
       margin-left: 30%;
       margin-right:30%;
       height:auto;
+      
   }
   .ig{
       float:left;
@@ -70,7 +71,7 @@ margin-top:30px;
     <ul class="articles">
     <%for(News n: list){ %>
         <li>  
-    <a href="<%=request.getContextPath()%>/news/newsViews?newsNo=<%=n.getNewsNo()%>">   <span class="tt2"><%=n.getNewsTitle() %></span>
+    <a href="<%=request.getContextPath()%>/news/newsViews?newsNo=<%=n.getNewsNo()%>&cPage=<%=request.getParameter("cPage")%>">   <span class="tt2"><%=n.getNewsTitle() %></span>
         <span class="fl" style="display: block;width: 700px;height:160px;">
       
             <img src="<%=n.getImgUrl() %>" class="ig">
