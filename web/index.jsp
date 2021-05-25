@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="views/common/header.jsp" %>
+<style>
+
+</style>
   <script>
     $.getJSON('https://api.openweathermap.org/data/2.5/onecall?lat=37.5683&lon=126.9778&appid=72d907e7254e1bb6390f7526c46e9e72&units=metric'
     ,function(result){
@@ -78,7 +81,7 @@
            </div>
       
             <!-- <div class="notice2"> -->
-                <div class="weather">
+                <div class="weather" style="font-size: 20px">
                     <table align="center">
                       <tr>
                       <th colspan="5">===== 날씨예보 ====</th>
