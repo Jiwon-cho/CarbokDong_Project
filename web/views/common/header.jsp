@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="com.member.model.vo.Member" %>
+<%
+	Member loginMember=(Member)session.getAttribute("loginMember");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +21,17 @@
  <header> 
   <body>
     <div class="headbar">
+       <%if(loginMember==null) {%>
       <ul class="list">
-        <li>로그인</li>
-        <li>회원 가입</li>
-        
+        <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
+        <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
       </ul>
+	<%}else {%>
+	  <ul class="head-list">
+	  	<li><a href="">마이페이지</a></li>
+	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
+	  </ul>
+	<%} %>
 
     </div>
     <div class="navbar__logo">
