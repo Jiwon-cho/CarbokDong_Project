@@ -145,9 +145,10 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-       body {
+
+    body {
       font-family: "East Sea Dokdo", "cursive";
-      
+      font-size: 20px;
       text-decoration: none;
       /* background-image: url("https://media.cntraveler.com/photos/5f3c1421163f0cf4e60af119/16:9/w_2560%2Cc_limit/GettyImages-618049526.jpg"); */
       background-repeat: no-repeat;
@@ -261,12 +262,13 @@ li a.arrow::after{
     padding: 0 0 0 0;
  list-style: none;
 }
-#borad-container{
-		
-	width:1500px;
-	margin:0 auto;
-	
-}
+
+/* div.weather>div{
+  display:inline-table;
+    float: left;
+} */
+
+
 
 #insertborad{
 	position:relative;
@@ -305,7 +307,11 @@ vertical-align: top;}
   display:inline-table;
     float: left;
 } */
-
+#borad-container{
+		
+	width:1500px;
+	margin:0 auto;
+}
 
 
 
