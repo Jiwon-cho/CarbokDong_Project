@@ -35,7 +35,7 @@
             '<td>평균 기온: '+cTemp+'</td>'+
             '<td>최고 기온: '+maxTemp+'</td>'+
             '<td>최저 기온: '+minTemp+'</td>'+
-            '<td><img src="http://openweathermap.org/img/wn/'+wIcon+'@2x.png" alt="'+result.daily[i].weather[0].description+'" width="15px" height="15px"></td>'+'</tr>' ;
+            '<td><img src="http://openweathermap.org/img/wn/'+wIcon+'@2x.png" alt="'+result.daily[i].weather[0].description+'" width="25px" height="22px"></td>'+'</tr>' ;
         
             $('tbody').append(tableHtml);
        

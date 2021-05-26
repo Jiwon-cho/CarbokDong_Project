@@ -12,10 +12,14 @@ import org.jsoup.select.Elements;
 import com.news.model.dao.NewsDao;
 
 public class main {
-	private static String url="http://pop.heraldcorp.com/view.php?ud=202105232102500066857_1&ACE_SEARCH=1";
+	//private static String url="http://pop.heraldcorp.com/view.php?ud=202105232102500066857_1&ACE_SEARCH=1";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+	
+		String url="http://pop.heraldcorp.com/view.php?ud=202105232102500066857_1&ACE_SEARCH=1";
+		
+		
 		Document doc=null;
 		try {
 			doc = Jsoup.connect(url).get();
@@ -26,19 +30,15 @@ public class main {
 		Elements images=doc.select("#CmAdContent > div > div > img");
 		Elements contents=doc.select("#CmAdContent");
 		News n=new News();
-		String src="";
-		for(Element el: images) {
-			src+=el.attr("src")+",";
-			
-		}
-		n.setImgUrl(src);
 		
-
-		for(Element el: title) {
-			n.setNewsTitle(el.text());
-		}
 		
-		System.out.println(n.getNewsTitle());
+	
+		
+		for(Element el: contents) {
+			n.setNewsContent(el.html());
+		}
+	
+		System.out.println(n.getNewsContent());
 		
 	}
 

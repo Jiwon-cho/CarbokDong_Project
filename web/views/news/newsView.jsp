@@ -8,6 +8,10 @@
  
  %>
  <style>
+ .tit{
+ margin-top:10px;
+ }
+ 
 .article-view{
 margin-left: 35%;
 margin-right: 35%;
@@ -28,6 +32,12 @@ img{
     margin-left: 5%;
 }
 
+.newsContent{
+line-height:30px;
+font-size:22px;
+margin-bottom:10px
+}
+
 </style>   
 <%@ include file="/views/common/header.jsp" %>
  <div class="article-view">
@@ -39,7 +49,7 @@ img{
    <%} %>
         <br>
         <br>
-        <div>
+        <div class="newsContent">
            <%=n.getNewsContent() %>
         </div>
     </div>
