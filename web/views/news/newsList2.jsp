@@ -5,11 +5,11 @@
 List<News> list=(List<News>)request.getAttribute("list");
 String pageBar=(String)request.getAttribute("pageBar");
 %>
+<%@ include file="/views/common/header.jsp" %>
 
 
 
 
-    </style>
 <div class="search">
 <span class="camptit">캠핑 뉴스</span>
 </div>
