@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="com.member.model.vo.Member" %>
+<%
+	Member loginMember=(Member)session.getAttribute("loginMember");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>카복동</title>
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">  
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>  
@@ -18,11 +22,17 @@
  <header> 
   <body>
     <div class="headbar">
+    <%if(loginMember==null) {%>
       <ul class="list">
-        <li>로그인</li>
-        <li>회원 가입</li>
+        <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
+        <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
       </ul>
-
+	<%}else {%>
+	  <ul class="list">
+	  	<li><a href="">마이페이지</a></li>
+	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
+	  </ul>
+	<%} %>
     </div>
     <div class="navbar__logo">
       <a href="<%=request.getContextPath()%>">차박왕카복동</a>

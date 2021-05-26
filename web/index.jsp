@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@page import="com.common.AESEncrypt"%>
 <%@ include file="views/common/header.jsp" %>
   <script>
     $.getJSON('https://api.openweathermap.org/data/2.5/onecall?lat=37.5683&lon=126.9778&appid=72d907e7254e1bb6390f7526c46e9e72&units=metric'
