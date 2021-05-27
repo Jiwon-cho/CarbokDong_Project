@@ -20,7 +20,7 @@
     /* alert(naver_id_login.getProfileData('email'));
     alert(naver_id_login.getProfileData('nickname'));
     alert(naver_id_login.getProfileData('age')); */
-
+	window.close();
   }
 </script>
 </body>

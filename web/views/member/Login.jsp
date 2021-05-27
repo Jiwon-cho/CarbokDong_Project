@@ -19,7 +19,7 @@
                 <div id="naver_id_login" class="btn_newNaverMember"></div>
                 
             </form>
-            <form id="" action="<%=request.getContextPath() %>/enrollMember" method="post">
+            <form id="" action="<%=request.getContextPath() %>/memberEnroll" method="post">
             	<button type="submit" class="btn_newMember" >회원가입</button>
             </form>
             

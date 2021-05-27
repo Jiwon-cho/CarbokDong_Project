@@ -33,18 +33,26 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
-		//클라이언트가 보낸 데이터를 가져와 DB에 저장하는 서비스!
 		String userId=request.getParameter("userId");
-		String password=request.getParameter("password");
+		String password=request.getParameter("pwd");
+		try {
+			password=AESEncrypt.encrypt(password);			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		String userName=request.getParameter("userName");
-		int age=Integer.parseInt(request.getParameter("age"));
-		String gender=request.getParameter("gender");
 		String nikname=request.getParameter("nikname");
-		String email=request.getParameter("email");
-		int memberType=Integer.parseInt(request.getParameter("memberType"));
-		int cpNb=Integer.parseInt(request.getParameter("cpNb"));
+		String email=(request.getParameter("email1")+"@"+request.getParameter("email2"));
 		try {
 			email=AESEncrypt.encrypt(email);			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		int memberType=Integer.parseInt(request.getParameter("memberType"));
+		int cpNb=Integer.parseInt(request.getParameter("memberType"));
+		String userNo=(request.getParameter("userNo")+request.getParameter("userNo2"));
+		try {
+			userNo=AESEncrypt.encrypt(userNo);			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -54,10 +62,9 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		String address=request.getParameter("address");
-		String[] hobby=request.getParameterValues("hobby");
+		String address=(request.getParameter("sample4_jibunAddress")+"("+request.getParameter("sample4_postcode")+")"+request.getParameter("address"));
 		
-		Member m=new Member(userId,password,userName,gender,nikname,age,email,phone,address,memberType,cpNb);
+		Member m=new Member(userName,password,userName,nikname,email,phone,address,memberType,cpNb,userNo);
 	
 		int result=new MemberService().insertMember(m);
 		

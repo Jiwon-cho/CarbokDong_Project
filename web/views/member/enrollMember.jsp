@@ -11,19 +11,26 @@
         </div>
         <div class="contents-mid">
             <div class="join-type">
-                <h3 class="join-type-title">개인회원<br><img src="individual.jpg" alt="" width="100" height="100"></h3>
+                <h3 class="join-type-title">개인회원<br><img src="./images/individual.jpg" alt="" width="100" height="100"></h3>
                 <p class="join-type-desc">만19세 이상 회원가입</p>
-                <button type="button" class="btn-join">가입하기</button>
+                <button type="button" class="btn-join" onclick="fn_individual();">가입하기</button>
             </div>
             <div class="join-type">
-                <h3 class="join-type-title">사업자회원<br><img src="company.png" alt="" width="100" height="100"></h3>
+                <h3 class="join-type-title">사업자회원<br><img src="./images/company.png" alt="" width="100" height="100"></h3>
                 <p class="join-type-desc">사업자 회원가입</p>
-                <button type="button" class="btn-join">가입하기</button>
-            </div>
+                <button type="button" class="btn-join" onclick="fn_company();">가입하기</button>
             </div>
         </div>
     </div>
     </center>
+    <script>
+	    const fn_individual=()=>{
+			location.assign("<%=request.getContextPath()%>/enrollMember2");
+		}	
+	    const fn_company=()=>{
+			location.assign("<%=request.getContextPath()%>/enrollMember3");
+		}
+    </script>
     <style>
         .join-type {
             width: 233px;
@@ -55,6 +62,7 @@
         }
         .contents-mid{
             display: inline-block;
+            margin-bottom : 50px;
         }
     </style>
 <%@ include file="/views/common/footer.jsp" %>
