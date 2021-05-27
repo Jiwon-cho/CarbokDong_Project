@@ -29,7 +29,7 @@
 			
 			<tr height="50">
 				<td align="center">
-					<font size="5" color="blue">캠핑장 예약 총 금액 <%=%> 원 </font>
+					<font size="5" color="blue">캠핑장 예약 총 금액 원 </font>
 				</td>
 			</tr>
 
