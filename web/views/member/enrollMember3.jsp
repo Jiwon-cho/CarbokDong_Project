@@ -2,20 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 <center>
-        <form action="사업자회원가입" method="post" name="">
+        <form action="<%=request.getContextPath() %>/memberEnrollEnd" method="post" name="">
             <table width="800">
                 <tr height="40">
                     <td align="center"><b>[사업자회원가입]</b></td>
                 </tr>
             </table>    
-            <table width="700" height="600" cellpadding="0" style="border-collapse:collapse; font-size:9pt;">
+            <table width="700" height="600" cellpadding="0" style="border-collapse:collapse; font-size:9; margin-bottom: 30px">
                 <tr height="7">
-                    <td colspan="3"><hr></td>
+                    <td colspan="3"><input type="hidden" id="memberType" name="memberType" value="3"><hr></td>
                 </tr>
                 <tr class="" height="30">
                     <td width="5%" align="center">*</td>
                     <td width="15%">사업자 선택</td>
-                    <td>개인 사업자<input type="radio" name="gender" value="1" checked />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;법인 사업자<input type="radio" name="gender" value="2"/></td>
+                    <td>개인 사업자<input type="radio" name="companyType" value="1" checked />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;법인 사업자<input type="radio" name="companyType" value="2"/></td>
                 </tr>
                 <tr height="7">
                     <td colspan="3"><hr></td>
@@ -148,8 +148,12 @@
                     <td colspan="3"><hr></td>
                 </tr>
                 <tr>
-                    <td colspan="3" align="center"><input type="submit" value="확인"></td>
+                    <td colspan="3" align="center">
+                    	<input type="submit" value="확인">
+                    	<input type="reset" value="취소">
+                    </td>
                 </tr>
+                </table>
         </form>
     </center>
 <%@ include file="/views/common/footer.jsp" %>
