@@ -177,5 +177,29 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return result;
 	}
-
+	public List<Board>selectppBoard(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Board>pplist=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectppBoard"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Board b=new Board();
+				b.setBoardNb(rs.getInt("board_nb"));
+				b.setBoardTitle(rs.getString("board_title"));
+				b.setBoardContents(rs.getString("board_contents"));
+				b.setMemberId(rs.getString("member_id"));
+				b.setBoradDate(rs.getDate("board_date"));
+				b.setFilepath(rs.getString("filepath"));
+				b.setLikeCount(rs.getInt("likecount"));
+				pplist.add(b);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return pplist;
+	}
 }

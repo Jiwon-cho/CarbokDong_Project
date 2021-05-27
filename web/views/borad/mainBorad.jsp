@@ -3,6 +3,7 @@
 <%@ page import="java.util.List,com.borad.model.vo.Board" %>
 <%
 	List<Board>list=(List<Board>)request.getAttribute("list");
+	List<Board>pplist=(List<Board>)request.getAttribute("pplist");
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -50,16 +51,17 @@
 				<td class="hit" style="font-size: 13px;">10</td>
 			</tr>
 			<%} %>
-				<%for(int i=0;i<4;i++){ %>
+				<%for(Board bbc:pplist){ %>
 			<tr>
 				<td class="title">
 				<input type="button" value="인기글" class="btnmain" readonly="readonly">
-				<a href="#" style="font-size: 20px;">게시판 제목이 들어갑니다</a>
+				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=bbc.getBoardNb() %>" style="font-size: 20px;"><%=bbc.getBoardTitle() %></a>
 				</td>
-				<td class="name" style="font-size: 20px;">글쓴이이름</td>
-				<td class="date" style="font-size: 13px;">2021/05/15</td>
-				<td class="hit" style="font-size: 13px;">10</td>
+				<td class="name" style="font-size: 20px;"><%=bbc.getMemberId() %></td>
+				<td class="date" style="font-size: 13px;"><%=bbc.getBoradDate() %></td>
+				<td class="hit" style="font-size: 13px;"><%=bbc.getLikeCount() %></td>
 			</tr>
+
 			<%} %>
 		</tbody>
 		</table>

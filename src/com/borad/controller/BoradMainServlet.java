@@ -82,9 +82,14 @@ public class BoradMainServlet extends HttpServlet {
 			pageBar+="<a href='"+request.getContextPath()
 			+"/borad/mainBorad?cPage="+pageNo+"'>[다음]</a>";
 		}
+		
+		
+		List<Board>pplist=new BoardService().selectppBoard();
+		
+		
+		request.setAttribute("pplist", pplist);
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("list", list);
-
 		request.getRequestDispatcher("/views/borad/mainBorad.jsp").forward(request, response);
 	}
 

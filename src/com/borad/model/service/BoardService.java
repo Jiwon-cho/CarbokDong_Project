@@ -67,4 +67,10 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return result;
 	}
+	public List<Board>selectppBoard(){
+		Connection conn=getConnection();
+		List<Board>pplist=dao.selectppBoard(conn);
+		close(conn);
+		return pplist;
+	}
 }
