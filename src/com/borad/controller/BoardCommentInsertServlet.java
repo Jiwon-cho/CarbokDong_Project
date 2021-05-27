@@ -1,7 +1,6 @@
 package com.borad.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.borad.model.service.BoardService;
-import com.borad.model.vo.Board;
 import com.borad.model.vo.BoardComment;
 
 /**
- * Servlet implementation class BoardViewServlet
+ * Servlet implementation class BoardCommentInsertServlet
  */
-@WebServlet("/borad/boardView")
-public class BoardViewServlet extends HttpServlet {
+@WebServlet("/board/commentInsert")
+public class BoardCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardViewServlet() {
+    public BoardCommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,18 +31,25 @@ public class BoardViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		int No=Integer.parseInt(request.getParameter("No"));
-		Board b=new BoardService().selectNoPage(No);
+		String comment=request.getParameter("comment");
+		int level=Integer.parseInt(request.getParameter("level"));
+		String commentWriter=request.getParameter("commentWriter");
+		int boardRef=Integer.parseInt(request.getParameter("boardRef"));
+		int commentRef=Integer.parseInt(request.getParameter("commentRef"));
 		
-		List<BoardComment>list=new BoardService().selectBoardComment(No);
 		
-		int replycount=new BoardService().selectReplyCount(No);
+		BoardComment bc=new BoardComment(0,level,commentWriter,comment,boardRef,commentRef,null);
 		
-		request.setAttribute("replycount", replycount);
-		request.setAttribute("list", list);
-		request.setAttribute("b", b);
-		request.getRequestDispatcher("/views/borad/BoardView.jsp").forward(request, response);
+		int result=new BoardService().insertBoardComment(bc);
+		String msg="";
+		if(result>0) {
+			msg="댓글등록성공";
+		}else {
+			msg="댓글등록실패";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/borad/boardView?No="+boardRef);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

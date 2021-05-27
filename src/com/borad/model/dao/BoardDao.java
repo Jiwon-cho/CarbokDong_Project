@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.borad.model.vo.BoardComment;
 import com.borad.model.vo.Board;
 
 import static com.common.JDBCTemplate.close;
@@ -114,4 +115,67 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return b;
 	}
+	public int insertBoardComment(Connection conn,BoardComment bc) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertBoardComment"));
+			pstmt.setInt(1,bc.getBoardCommentLevel());
+			pstmt.setString(2,bc.getBoardCommentWriter());
+			pstmt.setString(3,bc.getBoardCommentContent());
+			pstmt.setInt(4,bc.getBoardRef());
+			//pstmt.setInt(5,bc.getBoardCommentRef()); 
+			pstmt.setString(5, bc.getBoardCommentRef()==0?null:String.valueOf(bc.getBoardCommentRef()));
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public List<BoardComment>selectBoardComment(Connection conn, int No){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<BoardComment>list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectBoardComment"));
+			pstmt.setInt(1, No);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				BoardComment bc=new BoardComment();
+				bc.setBoardCommentNo(rs.getInt("board_comment_no"));
+				bc.setBoardCommentLevel(rs.getInt("board_comment_level"));
+				bc.setBoardCommentWriter(rs.getString("board_comment_writer"));
+				bc.setBoardCommentContent(rs.getString("board_comment_content"));
+				bc.setBoardRef(rs.getInt("board_ref"));
+				bc.setBoardCommentRef(rs.getInt("board_comment_ref"));
+				bc.setBoardCommentDate(rs.getDate("board_comment_date"));
+				list.add(bc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public int selectReplyCount(Connection conn,int No) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectReplyCount"));
+			pstmt.setInt(1, No);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+
 }

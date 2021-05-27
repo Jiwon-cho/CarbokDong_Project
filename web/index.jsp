@@ -21,7 +21,7 @@
             var dt=ot.getDate();
             var dy=ot.getDay();
             switch(dy){
-                case 1: dy="월";break;
+                case 1: dy="월";break;564
                 case 2: dy="화";break;
                 case 3: dy="수";break;
                 case 4: dy="목";break;
