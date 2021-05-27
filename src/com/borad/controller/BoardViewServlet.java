@@ -1,14 +1,18 @@
 package com.borad.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
+import com.borad.model.vo.BoardComment;
 
 /**
  * Servlet implementation class BoardViewServlet
@@ -33,6 +37,13 @@ public class BoardViewServlet extends HttpServlet {
 
 		int No=Integer.parseInt(request.getParameter("No"));
 		Board b=new BoardService().selectNoPage(No);
+		
+		List<BoardComment>list=new BoardService().selectBoardComment(No);
+		
+		int replycount=new BoardService().selectReplyCount(No);
+		
+		request.setAttribute("replycount", replycount);
+		request.setAttribute("list", list);
 		request.setAttribute("b", b);
 		request.getRequestDispatcher("/views/borad/BoardView.jsp").forward(request, response);
 	}
