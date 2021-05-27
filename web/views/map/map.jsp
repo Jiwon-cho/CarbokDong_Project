@@ -178,16 +178,11 @@
 </head>
 <body>
 	<div class="header">Header</div>
-	<!-- 1. DB에서 모든 회원의 정보르 가져온다
-		2. table 태그를 이용해서 회원정보를 화면에 출력
-	 -->
 	 
 	 <%
 
 	 	CampDao campDao = new CampDao();
-	 	// 회원들의 정보가 얼마나 저장됐는지 모르니깸에 Vector를 이용해서 데이터 저장
-	 	// Vector의 최상위는 object 클래스.. 이므로 미지정시 object
-		Vector<Camp> vec = campDao.allSelectMember();
+		Vector<Camp> vec = campDao.selectAllMember();
 
 	 %>
 
@@ -220,7 +215,7 @@
         	평점 : <%= vec.get(i).getRating() %> <br/>
         	위도 : <%= vec.get(i).getLatitude() %> <br/>
         	경도 : <%= vec.get(i).getLongitude() %> <br/> 
-        	<button onclick="location.href='CampReservation.jsp?id=<%=vec.get(i).getName()%>'">예약하기</button> <br/> 
+        	<button onclick="location.href='campReserveView.jsp?name=<%=camp.getName()%>'">예약하기</button> <br/> 
         	-------------------</div>
         	<%} %> 
         	
