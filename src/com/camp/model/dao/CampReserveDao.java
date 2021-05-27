@@ -60,4 +60,23 @@ public class CampReserveDao {
 		return v;
 	}
 	
+	public void setReserve (CampReserve camp) {
+		getCon();
+		
+		try {
+			String sql = "INSERT INTO CAMPRESERVE VALUES(RESERVENO.NEXTVAL,?,?,?,? )";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, camp.getUserId());
+			pstmt.setString(2, camp.getCampName());
+			pstmt.setInt(3, camp.getPeriod());
+			pstmt.setString(4, camp.getDate());
+			
+			pstmt.executeUpdate();
+			
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
