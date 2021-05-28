@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.camp.model.vo.Camp"%>
 <%@page import="java.util.Vector"%>
 <%@page import="com.camp.model.dao.CampDao"%>
@@ -16,7 +18,7 @@
 	 <%
 
 	 	CampDao campDao = new CampDao();
-		Vector<Camp> vec = campDao.selectAllMember();
+	 List<Camp> list = campDao.selectAllMember();
 
 	 %>
 
@@ -40,15 +42,15 @@
         <ul id="placesList">
 
         <% 
-        	for(int i=0; i<vec.size(); i++){
-        		Camp camp = vec.get(i);
+        	for(int i=0; i<list.size(); i++){
+        		Camp camp = list.get(i);
         	
         %><div>
-        	<%= vec.get(i).getName() %> <br/>
-        	가격 : <%= vec.get(i).getPrice() %> <br/>
-        	평점 : <%= vec.get(i).getRating() %> <br/>
-        	위도 : <%= vec.get(i).getLatitude() %> <br/>
-        	경도 : <%= vec.get(i).getLongitude() %> <br/> 
+        	<%= list.get(i).getName() %> <br/>
+        	가격 : <%= list.get(i).getPrice() %> <br/>
+        	평점 : <%= list.get(i).getRating() %> <br/>
+        	위도 : <%= list.get(i).getLatitude() %> <br/>
+        	경도 : <%= list.get(i).getLongitude() %> <br/> 
         	<button onclick="location.href='campReserveView.jsp?name=<%=camp.getName()%>'">예약하기</button> <br/> 
         	-------------------</div>
         	<%} %> 
@@ -81,16 +83,16 @@
       // 마커 생성
       // 마커를 담을 배열
       const markers = [];
-      <%for(int i=0; i<vec.size(); i++){%>
+      <%for(int i=0; i<list.size(); i++){%>
     	  var mark = new kakao.maps.Marker({
-    	        position: markerTest(<%=vec.get(i).getLatitude()%>, <%=vec.get(i).getLongitude()%>)
+    	        position: markerTest(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)
     	      });
     	  markers.push(mark);
     	  mark.setMap(map);
     	  
     	  var infowindow = new kakao.maps.InfoWindow({
-    		    position : markerTest(<%=vec.get(i).getLatitude()%>, <%=vec.get(i).getLongitude()%>), 
-    		    content : '<%= vec.get(i).getName() %>'
+    		    position : markerTest(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>), 
+    		    content : '<%= list.get(i).getName() %>'
     		});
     	  infowindow.open(map, mark);
      <%}%>;

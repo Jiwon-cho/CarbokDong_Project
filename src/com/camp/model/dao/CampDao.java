@@ -1,7 +1,8 @@
 package com.camp.model.dao;
 
 import java.sql.*;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.camp.model.vo.Camp;
 import com.camp.model.vo.CampReserve;
@@ -27,8 +28,8 @@ public class CampDao {
 		}
 	}
 	
-		public Vector<Camp> selectAllMember(){
-			Vector<Camp> v = new Vector<>();
+		public List<Camp> selectAllMember(){
+			List<Camp> v = new ArrayList();
 			
 			try {
 				getCon();
@@ -87,8 +88,8 @@ public class CampDao {
 	     	return camp;
 	    }
 	    
-	    public Vector<CampReserve> campReserveInfo(){
-			Vector<CampReserve> v = new Vector<>();
+	    public List<CampReserve> campReserveInfo(){
+			List<CampReserve> v = new ArrayList();
 			
 			try {
 				getCon();
