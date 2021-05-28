@@ -1,1 +1,3 @@
-/bin/
+/web/WEB-INF/classes/
+resources/
+/web/images/
