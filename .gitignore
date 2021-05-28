@@ -1,5 +1,5 @@
 web/WEB-INF/classes/
 resources/
-/web/images/
+web/images/
 *.properties
 
