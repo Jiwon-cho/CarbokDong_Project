@@ -33,8 +33,8 @@ public class BoardWrite extends HttpServlet {
 
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
-		
-		int result=new BoardService().WriteBorad(title,content);
+		String id=request.getParameter("id");
+		int result=new BoardService().WriteBorad(title,content,id);
 		String msg="";
 		String loc="";
 		if(result>0) {

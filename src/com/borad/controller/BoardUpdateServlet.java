@@ -1,7 +1,6 @@
 package com.borad.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
-import com.borad.model.vo.Reply;
+import com.borad.model.vo.Board;
 
 /**
- * Servlet implementation class BoardCommentInsertServlet
+ * Servlet implementation class BoardUpdateServlet
  */
-@WebServlet("/board/commentInsert")
-public class BoardCommentInsertServlet extends HttpServlet {
+@WebServlet("/board/updateBoard")
+public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardCommentInsertServlet() {
+    public BoardUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +30,10 @@ public class BoardCommentInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String comment=request.getParameter("comment");
-		int level=Integer.parseInt(request.getParameter("level"));
-		String commentWriter=request.getParameter("commentWriter");
-		int boardRef=Integer.parseInt(request.getParameter("boardRef"));
-		int commentRef=Integer.parseInt(request.getParameter("commentRef"));
-		
-		
-		Reply bc=new Reply(0,comment,null,boardRef,level,commentRef,commentWriter);
-		
-		int result=new BoardService().insertBoardComment(bc);
-		String msg="";
-		if(result>0) {
-			msg="댓글등록성공";
-		}else {
-			msg="댓글등록실패";
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/borad/boardView?No="+boardRef);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		int No=Integer.parseInt(request.getParameter("No"));
+		Board b=new BoardService().selectNoPage(No);
+		request.setAttribute("b", b);
+		request.getRequestDispatcher("/views/borad/UpdateBoard.jsp").forward(request, response);
 	}
 
 	/**

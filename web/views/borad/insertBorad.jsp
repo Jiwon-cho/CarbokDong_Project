@@ -108,7 +108,7 @@
 	
 	<div class="iscontainer">
 		
-		<form method="post" id="frm" action="<%=request.getContextPath() %>/boardWrite">
+		<form method="post" id="frm" action="<%=request.getContextPath() %>/boardWrite?id=<%=loginMember.getUserId()%>">
 			<ul>
 				<li class="title_input"><textarea name="title" id="subject" rows="1" type="text" placeholder="제목을 입력해주세요." maxlength="76" style="height: 26px;"></textarea></li>
 				

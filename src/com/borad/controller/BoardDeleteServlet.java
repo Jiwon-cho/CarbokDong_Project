@@ -1,7 +1,6 @@
 package com.borad.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
-import com.borad.model.vo.Reply;
 
 /**
- * Servlet implementation class BoardCommentInsertServlet
+ * Servlet implementation class BoardDeleteServlet
  */
-@WebServlet("/board/commentInsert")
-public class BoardCommentInsertServlet extends HttpServlet {
+@WebServlet("/board/deleteBoard")
+public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardCommentInsertServlet() {
+    public BoardDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +29,20 @@ public class BoardCommentInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String comment=request.getParameter("comment");
-		int level=Integer.parseInt(request.getParameter("level"));
-		String commentWriter=request.getParameter("commentWriter");
-		int boardRef=Integer.parseInt(request.getParameter("boardRef"));
-		int commentRef=Integer.parseInt(request.getParameter("commentRef"));
+		int No=Integer.parseInt(request.getParameter("No"));
+		int result=new BoardService().deleteBoard(No);
 		
-		
-		Reply bc=new Reply(0,comment,null,boardRef,level,commentRef,commentWriter);
-		
-		int result=new BoardService().insertBoardComment(bc);
 		String msg="";
+		String loc="";
 		if(result>0) {
-			msg="댓글등록성공";
+			msg="게시물이 삭제되었습니다.";
+			loc="/borad/mainBorad";
 		}else {
-			msg="댓글등록실패";
+			msg="게시물 삭제에 실패하였습니다.";
+			loc="/borad/BoardView?No="+No;
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/borad/boardView?No="+boardRef);
+		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 

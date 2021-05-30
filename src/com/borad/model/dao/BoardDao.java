@@ -32,13 +32,14 @@ private Properties prop=new Properties();
 		}
 	}
 	
-	public int WriteBoard(Connection conn,String title,String content) {
+	public int WriteBoard(Connection conn,String title,String content,String id) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertboard"));
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
+			pstmt.setString(3, id);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -122,7 +123,7 @@ private Properties prop=new Properties();
 			pstmt.setInt(2, bc.getBoardNb());
 			pstmt.setInt(3,bc.getReplyLevel());
 			pstmt.setString(4, bc.getReplyRef()==0?null:String.valueOf(bc.getReplyRef()));
-
+			pstmt.setString(5, bc.getReplyWriter());
 			//pstmt.setInt(5,bc.getBoardCommentRef()); 
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -197,5 +198,34 @@ private Properties prop=new Properties();
 			close(rs);
 			close(pstmt);
 		}return pplist;
+	}
+	public int updateBoard(Connection conn,String title,String content,int No) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateBoard"));
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, No);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}return result;
+	}
+	
+	public int deleteBoard(Connection conn,int No) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteBoard"));
+			pstmt.setInt(1, No);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
 }

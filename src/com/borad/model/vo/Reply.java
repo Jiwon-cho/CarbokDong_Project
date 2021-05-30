@@ -10,6 +10,7 @@ public class Reply {
 	private int boardNb;
 	private int replyLevel;
 	private int replyRef;
+	private String replyWriter;
 	
 	
 	public Reply() {
@@ -17,7 +18,8 @@ public class Reply {
 	}
 
 
-	public Reply(int replyNo, String replyContent, Date replyDate, int boardNb, int replyLevel, int replyRef) {
+	public Reply(int replyNo, String replyContent, Date replyDate, int boardNb, int replyLevel, int replyRef,
+			String replyWriter) {
 		super();
 		this.replyNo = replyNo;
 		this.replyContent = replyContent;
@@ -25,6 +27,7 @@ public class Reply {
 		this.boardNb = boardNb;
 		this.replyLevel = replyLevel;
 		this.replyRef = replyRef;
+		this.replyWriter = replyWriter;
 	}
 
 
@@ -86,6 +89,19 @@ public class Reply {
 	public void setReplyRef(int replyRef) {
 		this.replyRef = replyRef;
 	}
+
+
+	public String getReplyWriter() {
+		return replyWriter;
+	}
+
+
+	public void setReplyWriter(String replyWriter) {
+		this.replyWriter = replyWriter;
+	}
+
+
+	
 
 	
 	

@@ -12,10 +12,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/BoardView.css">
 <style>
 	#btn-insert{
-		width:50px; height:50px; color:#fff; background:#ff5656; 
+		width:50px; height:60px; color:#fff; background:#ff5656; 
    	 	font-size: 13px;
    	 	position: relative;
-   	 	top:-20px;
+   	 	top:-27px;
    	 	
    	 	
     }
@@ -31,7 +31,7 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 			<span class="txt_bar">|</span>
 			<span class="numnum" style="font-size: 20px;"><%=b.getBoradDate()%></span>
 			<span class="txt_bar">|</span>
-			<span class="numnum" style="font-size: 20px;">조회수</span>
+			<span class="numnum" style="font-size: 20px;"><%=b.getViewCount() %></span>
 		</span>
 		<span class="desc_subjeck">
 			<a id="gomain" role="button" class="btnbtn_1" style="font-size: 15px; cursor: pointer;">목록</a>
@@ -40,8 +40,11 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 				<!-- 스펜에 추천수 -->
 				<span class="num_count">0</span>
 			</a>
-			<a href="" role="button" class="btnbtn_2" style="font-size: 15px;">수정</a>
-			<a href="" role="button" class="btnbtn_2" style="font-size: 15px;">삭제</a>
+			<%-- <%if(loginMember!=null&&loginMember.getUserId()==b.getMemberId()){ %> --%>
+			<a href="<%=request.getContextPath() %>/board/updateBoard?No=<%=b.getBoardNb() %>" role="button" class="btnbtn_2" style="font-size: 15px;">수정</a>
+			<a href="<%=request.getContextPath() %>/board/deleteBoard?No=<%=b.getBoardNb() %>" id="deletebtn" role="button" class="btnbtn_2" style="font-size: 15px;">삭제</a>
+			<%-- <%}else{ %>
+			<%} %> --%>
 		</span>
 	</div>
 	<div class="view_info">
@@ -62,7 +65,7 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 				<li>
 					<div class="reply_div">
 						<span class="txt_info" style="font-size: 15px;">
-							<%=loginMember.getUserId() %>
+							<%=bc.getReplyWriter() %>
 							<span class="txt_bar" style="font-size: 15px;">|</span>
 							<span class="txt_num" style="font-size: 15px;"><%=bc.getReplyDate() %></span>
 						</span>
@@ -131,6 +134,25 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 		ul.insertAfter($(e.target).parents("ul")).children("li").slideDown(800);
 		
 		$(e.target).off("click");
+	});
+	$(".comment-editor textarea").focus(e=>{
+		if(<%=loginMember==null%>){
+			alert("로그인후 이용하세요");
+			$("#gomain").focus();
+			$(e.target).blur();
+			location.assign("<%=request.getContextPath()%>/loginPage");
+		}
+	});
+	$(".btn-reply").focus(e=>{
+		if(<%=loginMember==null%>){
+			alert("로그인후 이용하세요!");
+			$(e.target).blur();
+			location.assign("<%=request.getContextPath()%>/loginPage");
+		}
+	});
+	$("#deletebtn").click(e=>{
+		confirm("정말로 삭제하시겠습니까?");
+	
 	});
 </script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -115,8 +115,15 @@
 	</section>
 	<br><br>
 	<script>
+	<%if(loginMember!=null){%>
 	   $("#insertborad").on("click",(e)=>{
            location.assign("<%=request.getContextPath()%>/insertBorad");
        });
+	   <%}else{%>
+	   $("#insertborad").on("click",(e)=>{
+		   alert("로그인후 이용해주세요.");
+           location.assign("<%=request.getContextPath()%>/loginPage");
+       });
+	   <%}%>
 	</script>
 <%@ include file="/views/common/footer.jsp"%>

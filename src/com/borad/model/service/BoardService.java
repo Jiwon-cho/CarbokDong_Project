@@ -19,10 +19,10 @@ public class BoardService {
 	
 private BoardDao dao=new BoardDao();
 	
-	public int WriteBorad(String title,String content) {
+	public int WriteBorad(String title,String content,String id) {
 		
 		Connection conn=getConnection();
-		int result=dao.WriteBoard(conn,title,content);
+		int result=dao.WriteBoard(conn,title,content,id);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -72,5 +72,21 @@ private BoardDao dao=new BoardDao();
 		List<Board>pplist=dao.selectppBoard(conn);
 		close(conn);
 		return pplist;
+	}
+	public int updateBoard(String title,String content,int No) {
+		Connection conn=getConnection();
+		int result=dao.updateBoard(conn,title,content,No);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int deleteBoard(int No) {
+		Connection conn=getConnection();
+		int result=dao.deleteBoard(conn,No);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }
