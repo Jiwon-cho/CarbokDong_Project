@@ -230,9 +230,7 @@ body, button, input, select, td, textarea, th {
     height: 500px;
     margin: 150px 0;
     background-color: rgba(128, 128, 128, 0.555);
-    background-image: url("https://parks.seoul.go.kr/file/info/view.do?tableName=BANNER&bIdx=537");
-    background-repeat: no-repeat;
-    background-size: cover;
+
 }
 
     body {
@@ -285,10 +283,16 @@ body, button, input, select, td, textarea, th {
       padding: 8px 12px;
      
     }
-    a {
-      text-decoration: none;
-      color: rgb(0, 61, 31);
+    
+    a	{
+      text-decoration: none !important;
+      color:#039B25 ;
     }
+    
+    a:hover{
+    color:#039B25 	;
+    }
+    
     i {
       font-size: 50px;
       text-decoration: none;
@@ -357,6 +361,9 @@ li a.arrow::after{
     float: left;
 } */
 
+#weather-tb{
+	font-size:50px;
+}
 
 
 

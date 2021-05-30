@@ -4,6 +4,7 @@
 <%
 	Member loginMember=(Member)session.getAttribute("loginMember");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,15 +12,50 @@
 <title>카복동</title>
 
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">  
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>  
+
     <link
       href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">  
+
   </head>
+
+  </style>
  <header> 
   <body>
+<!--   <div class="row">
+    <div class="col" style="background-color:rgb(211, 202, 202); height:30px;" ></div>
+
+</div>
+<div class="row">
+    <div class="col" style=" height:95px;text-align: center;margin-top: 30px;"><h1 style="color: green  ;;"> <a href="" style="text-decoration: none; color: green"> 차박왕 카복동</a></h1></div>
+
+
+</div>
+  <div class="row">
+
+    <div class="col" style="background-color:lavender;text-align: center;">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+    <div class="row">
+    <div class="col" style="height: 50px;"></div>
+</div> -->
     <div class="headbar">
        <%if(loginMember==null) {%>
       <ul class="list">
