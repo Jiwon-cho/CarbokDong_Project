@@ -8,7 +8,7 @@ import static com.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
-import com.borad.model.vo.BoardComment;
+import com.borad.model.vo.Reply;
 import com.borad.model.dao.BoardDao;
 import com.borad.model.vo.Board;
 
@@ -47,7 +47,7 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return b;
 	}
-	public int insertBoardComment(BoardComment bc) {
+	public int insertBoardComment(Reply bc) {
 		Connection conn=getConnection();
 		int result=dao.insertBoardComment(conn,bc);
 		if(result>0) commit(conn);
@@ -55,9 +55,9 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return result;
 	}
-	public List<BoardComment>selectBoardComment(int No){
+	public List<Reply>selectBoardComment(int No){
 		Connection conn=getConnection();
-		List<BoardComment>list=dao.selectBoardComment(conn,No);
+		List<Reply>list=dao.selectBoardComment(conn,No);
 		close(conn);
 		return list;
 	}

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
-import com.borad.model.vo.BoardComment;
+import com.borad.model.vo.Reply;
 
 /**
  * Servlet implementation class BoardViewServlet
@@ -38,7 +38,7 @@ public class BoardViewServlet extends HttpServlet {
 		int No=Integer.parseInt(request.getParameter("No"));
 		Board b=new BoardService().selectNoPage(No);
 		
-		List<BoardComment>list=new BoardService().selectBoardComment(No);
+		List<Reply>list=new BoardService().selectBoardComment(No);
 		
 		int replycount=new BoardService().selectReplyCount(No);
 		

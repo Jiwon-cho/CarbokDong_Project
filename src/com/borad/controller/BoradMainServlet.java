@@ -52,40 +52,40 @@ public class BoradMainServlet extends HttpServlet {
 		int totalData=new BoardService().selectNoticeCount();
 		
 		int pageBarSize=5;
-		Paging p=new Paging(totalData,cPage,numPerpage,pageBarSize);
-		String pageBar=p.pageBar();
-		System.out.println(pageBar);
+		//Paging p=new Paging(totalData,cPage,numPerpage,pageBarSize);
+		//String pageBar=p.pageBar();
+		//System.out.println(pageBar);
 		
-		//		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-//		
-//		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-//		int pageEnd=pageNo+pageBarSize-1;
-//		
-//		
-//		String pageBar="";
-//		if(pageNo==1) {
-//			pageBar+="<span>[이전]</span>";
-//		}else {
-//			pageBar+="<a href='"+request.getContextPath()
-//			+"/borad/mainBorad?cPage="+(pageNo-1)+"'>[이전]</a>";
-//		}
-//		
-//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-//			if(cPage==pageNo) {
-//				pageBar+="<span>"+pageNo+"</span>";
-//			}else {
-//				pageBar+="<a href='"+request.getContextPath()
-//				+"/borad/mainBorad?cPage="+pageNo+"'>"+pageNo+"</a>";
-//			}
-//			pageNo++;
-//		}
-//		
-//		if(pageNo>totalPage) {
-//			pageBar+="<span>[다음]</span>";
-//		}else {
-//			pageBar+="<a href='"+request.getContextPath()
-//			+"/borad/mainBorad?cPage="+pageNo+"'>[다음]</a>";
-//		}
+				int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		
+		String pageBar="";
+		if(pageNo==1) {
+			pageBar+="<span>[이전]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()
+			+"/borad/mainBorad?cPage="+(pageNo-1)+"'>[이전]</a>";
+		}
+		
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href='"+request.getContextPath()
+				+"/borad/mainBorad?cPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()
+			+"/borad/mainBorad?cPage="+pageNo+"'>[다음]</a>";
+		}
 		
 		
 		List<Board>pplist=new BoardService().selectppBoard();

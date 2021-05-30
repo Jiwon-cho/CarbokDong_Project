@@ -59,7 +59,7 @@
 				</td>
 				<td class="name" style="font-size: 20px;"><%=bbc.getMemberId() %></td>
 				<td class="date" style="font-size: 13px;"><%=bbc.getBoradDate() %></td>
-				<td class="hit" style="font-size: 13px;"><%=bbc.getLikeCount() %></td>
+				<td class="hit" style="font-size: 13px;"><%=bbc.getViewCount() %></td>
 			</tr>
 
 			<%} %>
@@ -74,10 +74,10 @@
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
 					<span class="artice">
-						<%if(b.getFilepath()==null){ %>
+						<%if(b!=null){ %>
 						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120" >
 						<%}else{ %>
-						<img src="<%=request.getContextPath() %>/images/<%=b.getFilepath()%>" width="60" height="60" >
+						<img src="<%=request.getContextPath() %>/images/" width="60" height="60" >
 						<%} %>
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>
@@ -93,7 +93,7 @@
 							||
 							</span>
 							<span style="font-size: 17px;">
-							<%=b.getLikeCount() %>
+							<%=b.getViewCount() %>
 							</span>
 						</span>
 					</span>
@@ -116,7 +116,7 @@
 	<br><br>
 	<script>
 	   $("#insertborad").on("click",(e)=>{
-           location.assign("<%=request.getContextPath()%>/insertBorad")
+           location.assign("<%=request.getContextPath()%>/insertBorad");
        });
 	</script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.borad.model.vo.BoardComment;
+import com.borad.model.vo.Reply;
 import com.borad.model.vo.Board;
 
 import static com.common.JDBCTemplate.close;
@@ -60,11 +60,10 @@ private Properties prop=new Properties();
 				Board b=new Board();
 				b.setBoardNb(rs.getInt("board_nb"));
 				b.setBoardTitle(rs.getString("board_title"));
-				b.setBoardContents(rs.getString("board_contents"));
-				b.setMemberId(rs.getString("member_id"));
 				b.setBoradDate(rs.getDate("board_date"));
-				b.setFilepath(rs.getString("filepath"));
-				b.setLikeCount(rs.getInt("likecount"));
+				b.setBoardContents(rs.getString("board_contents"));
+				b.setViewCount(rs.getInt("board_viewcount"));
+				b.setMemberId(rs.getString("member_id"));
 				list.add(b);
 			}
 		}catch(SQLException e) {
@@ -102,11 +101,10 @@ private Properties prop=new Properties();
 				b=new Board();
 				b.setBoardNb(rs.getInt("board_nb"));
 				b.setBoardTitle(rs.getString("board_title"));
-				b.setBoardContents(rs.getString("board_contents"));
-				b.setMemberId(rs.getString("member_id"));
 				b.setBoradDate(rs.getDate("board_date"));
-				b.setFilepath(rs.getString("filepath"));
-				b.setLikeCount(rs.getInt("likecount"));
+				b.setBoardContents(rs.getString("board_contents"));
+				b.setViewCount(rs.getInt("board_viewcount"));
+				b.setMemberId(rs.getString("member_id"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -115,17 +113,17 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return b;
 	}
-	public int insertBoardComment(Connection conn,BoardComment bc) {
+	public int insertBoardComment(Connection conn,Reply bc) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertBoardComment"));
-			pstmt.setInt(1,bc.getBoardCommentLevel());
-			pstmt.setString(2,bc.getBoardCommentWriter());
-			pstmt.setString(3,bc.getBoardCommentContent());
-			pstmt.setInt(4,bc.getBoardRef());
+			pstmt.setString(1,bc.getReplyContent());
+			pstmt.setInt(2, bc.getBoardNb());
+			pstmt.setInt(3,bc.getReplyLevel());
+			pstmt.setString(4, bc.getReplyRef()==0?null:String.valueOf(bc.getReplyRef()));
+
 			//pstmt.setInt(5,bc.getBoardCommentRef()); 
-			pstmt.setString(5, bc.getBoardCommentRef()==0?null:String.valueOf(bc.getBoardCommentRef()));
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -133,23 +131,22 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return result;
 	}
-	public List<BoardComment>selectBoardComment(Connection conn, int No){
+	public List<Reply>selectBoardComment(Connection conn, int No){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<BoardComment>list=new ArrayList();
+		List<Reply>list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectBoardComment"));
 			pstmt.setInt(1, No);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				BoardComment bc=new BoardComment();
-				bc.setBoardCommentNo(rs.getInt("board_comment_no"));
-				bc.setBoardCommentLevel(rs.getInt("board_comment_level"));
-				bc.setBoardCommentWriter(rs.getString("board_comment_writer"));
-				bc.setBoardCommentContent(rs.getString("board_comment_content"));
-				bc.setBoardRef(rs.getInt("board_ref"));
-				bc.setBoardCommentRef(rs.getInt("board_comment_ref"));
-				bc.setBoardCommentDate(rs.getDate("board_comment_date"));
+				Reply bc=new Reply();
+				bc.setReplyNo(rs.getInt("reply_no"));
+				bc.setReplyContent(rs.getString("reply_contents"));
+				bc.setReplyDate(rs.getDate("reply_date"));
+				bc.setBoardNb(rs.getInt("board_nb"));
+				bc.setReplyLevel(rs.getInt("reply_level"));
+				bc.setReplyRef(rs.getInt("reply_ref"));
 				list.add(bc);
 			}
 		}catch(SQLException e) {
@@ -188,11 +185,10 @@ private Properties prop=new Properties();
 				Board b=new Board();
 				b.setBoardNb(rs.getInt("board_nb"));
 				b.setBoardTitle(rs.getString("board_title"));
-				b.setBoardContents(rs.getString("board_contents"));
-				b.setMemberId(rs.getString("member_id"));
 				b.setBoradDate(rs.getDate("board_date"));
-				b.setFilepath(rs.getString("filepath"));
-				b.setLikeCount(rs.getInt("likecount"));
+				b.setBoardContents(rs.getString("board_contents"));
+				b.setViewCount(rs.getInt("board_viewcount"));
+				b.setMemberId(rs.getString("member_id"));
 				pplist.add(b);
 			}
 		}catch(SQLException e) {

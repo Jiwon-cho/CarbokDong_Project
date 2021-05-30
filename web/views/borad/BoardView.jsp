@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.borad.model.vo.Board,java.util.List,com.borad.model.vo.BoardComment" %>
+<%@ page import="com.borad.model.vo.Board,java.util.List,com.borad.model.vo.Reply" %>
 <%
-	List<BoardComment>list=(List<BoardComment>)request.getAttribute("list");
+List<Reply>list=(List<Reply>)request.getAttribute("list");
 	Board b=(Board)request.getAttribute("b");
 	int replycount=(int)request.getAttribute("replycount");
 %>    
@@ -23,13 +23,13 @@
 <br><br>
 <article id="ar">
 	<div class="divdivv">
-		<h3 class="tit_subject" style="font-size: 40px;"><%=b.getBoardTitle() %></h3>
+		<h3 class="tit_subject" style="font-size: 40px;"><%=b.getBoardTitle()%></h3>
 		<span class="spandd">
 			<a><h3 style="font-size: 25px;"><img alt="" width="30" height="30" style="border-radius: 100px"
-			src="<%=request.getContextPath() %>/images/user.jpg"><%=b.getMemberId() %></h3></a>
+			src="<%=request.getContextPath()%>/images/user.jpg"><%=b.getMemberId()%></h3></a>
 			<br>
 			<span class="txt_bar">|</span>
-			<span class="numnum" style="font-size: 20px;"><%=b.getBoradDate() %></span>
+			<span class="numnum" style="font-size: 20px;"><%=b.getBoradDate()%></span>
 			<span class="txt_bar">|</span>
 			<span class="numnum" style="font-size: 20px;">조회수</span>
 		</span>
@@ -45,44 +45,46 @@
 		</span>
 	</div>
 	<div class="view_info">
-		<div id="article" style="font-size: 20px;"><%=b.getBoardContents() %></div>
+		<div id="article" style="font-size: 20px;"><%=b.getBoardContents()%></div>
 	</div>
 	<div class="viewrecom">
 		<div>
 			<ul class="tab_tt">
 				<li class="on">
-					<a class="ahref" style="font-size: 20px;">댓글<span class="num_total"><%=replycount %></span></a>
+					<a class="ahref" style="font-size: 20px;">댓글<span class="num_total"><%=replycount%></span></a>
 				</li>
 			</ul>
-			<%for(BoardComment bc : list){ 
-				if(bc.getBoardCommentLevel()==1){%>
+			<%
+			for(Reply bc : list){ 
+					if(bc.getReplyLevel()==1){
+			%>
 			<ul class="level1">
 				<li>
 					<div class="reply_div">
 						<span class="txt_info" style="font-size: 15px;">
-							<%=bc.getBoardCommentWriter() %>
+							<%=loginMember.getUserId() %>
 							<span class="txt_bar" style="font-size: 15px;">|</span>
-							<span class="txt_num" style="font-size: 15px;"><%=bc.getBoardCommentDate() %></span>
+							<span class="txt_num" style="font-size: 15px;"><%=bc.getReplyDate() %></span>
 						</span>
 						<strong class="reply_st">
-							<span class="txt_de" style="font-size: 20px;"><%=bc.getBoardCommentContent() %></span>
+							<span class="txt_de" style="font-size: 20px;"><%=bc.getReplyContent() %></span>
 						</strong>
 						<button class="btn-delete" style="font-size: 20px;">삭제</button>
 						<button class="btn-reply" style="font-size: 20px;">답글</button>
 					</div>
 				</li>
 			</ul>
-			<%}else if(bc.getBoardCommentLevel()==2) {%>
+			<%}else if(bc.getReplyLevel()==2) {%>
 			<ul class="level2">
 				<li>
 					<div class="reply_div">
 						<span class="txt_info" style="font-size: 15px;">
-							<%=bc.getBoardCommentWriter() %>
+							작성자
 							<span class="txt_bar" style="font-size: 15px;">|</span>
-							<span class="txt_num" style="font-size: 15px;"><%=bc.getBoardCommentDate() %></span>
+							<span class="txt_num" style="font-size: 15px;"><%=bc.getReplyDate() %></span>
 						</span>
 						<strong class="reply_st">
-							<span class="txt_de" style="font-size: 20px;"><%=bc.getBoardCommentContent() %></span>
+							<span class="txt_de" style="font-size: 20px;"><%=bc.getReplyContent() %></span>
 						</strong>
 						<button class="btn-delete" style="font-size: 20px;">삭제</button>
 						<button class="btn-reply" style="font-size: 20px;">답글</button>
