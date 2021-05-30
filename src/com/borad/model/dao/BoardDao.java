@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.borad.model.vo.Reply;
 import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
 
 import static com.common.JDBCTemplate.close;
 
@@ -32,14 +33,14 @@ private Properties prop=new Properties();
 		}
 	}
 	
-	public int WriteBoard(Connection conn,String title,String content,String id) {
+	public int WriteBoard(Connection conn,Board b) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertboard"));
-			pstmt.setString(1, title);
-			pstmt.setString(2, content);
-			pstmt.setString(3, id);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContents());
+			pstmt.setString(3, b.getMemberId());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -221,6 +222,32 @@ private Properties prop=new Properties();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("deleteBoard"));
 			pstmt.setInt(1, No);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int updateReadCount(Connection conn,int No) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateReadCount"));
+			pstmt.setInt(1, No);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int insertFile(Connection conn,Files f) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertFile"));
+			pstmt.setString(1, f.getFileNm());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

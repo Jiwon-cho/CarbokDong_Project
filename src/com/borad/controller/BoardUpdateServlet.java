@@ -30,8 +30,9 @@ public class BoardUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		boolean readFlag=false;
 		int No=Integer.parseInt(request.getParameter("No"));
-		Board b=new BoardService().selectNoPage(No);
+		Board b=new BoardService().selectNoPage(No,readFlag);
 		request.setAttribute("b", b);
 		request.getRequestDispatcher("/views/borad/UpdateBoard.jsp").forward(request, response);
 	}

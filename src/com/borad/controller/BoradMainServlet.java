@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
 import com.common.Paging;
 
 

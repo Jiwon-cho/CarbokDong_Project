@@ -81,6 +81,12 @@
 	#content{
 		resize: none;
 	}	
+	.iscontainer{
+	width: 70%;
+	position: relative;
+	padding: 100px 100px 100px 100px;
+	left: 200px;
+	}	
 </style>
 <script>
 	$(function(){
@@ -108,15 +114,17 @@
 	
 	<div class="iscontainer">
 		
-		<form method="post" id="frm" action="<%=request.getContextPath() %>/boardWrite?id=<%=loginMember.getUserId()%>">
+		<form method="post" id="frm" action="<%=request.getContextPath() %>/boardWrite" enctype="multipart/form-data">
 			<ul>
-				<li class="title_input"><textarea name="title" id="subject" rows="1" type="text" placeholder="제목을 입력해주세요." maxlength="76" style="height: 26px;"></textarea></li>
+				<li class="title_input"><textarea name="title" id="subject" rows="1" placeholder="제목을 입력해주세요." maxlength="76" style="height: 26px;"></textarea></li>
 				
-				<li><input class="btbt" type="file"></li>
+				<li><input class="btbt" type="file" name="upfile"></li>
 				<li><textarea name="content" id="content" cols="100" rows="50" ></textarea></li>
 			</ul>
 			<br>
 			<hr>
+			<!-- 주석처리 할것 -->
+			<input name="id" value="admin" type="hidden">
 			<br>
 			<div class="btn">
 			<input class="btnbtn" type="submit" value="등록하기" width="20" height="20">

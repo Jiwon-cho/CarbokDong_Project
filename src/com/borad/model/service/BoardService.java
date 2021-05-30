@@ -11,6 +11,7 @@ import java.util.List;
 import com.borad.model.vo.Reply;
 import com.borad.model.dao.BoardDao;
 import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
 
 
 
@@ -19,10 +20,10 @@ public class BoardService {
 	
 private BoardDao dao=new BoardDao();
 	
-	public int WriteBorad(String title,String content,String id) {
+	public int WriteBorad(Board b) {
 		
 		Connection conn=getConnection();
-		int result=dao.WriteBoard(conn,title,content,id);
+		int result=dao.WriteBoard(conn,b);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -41,9 +42,16 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return result;
 	}
-	public Board selectNoPage(int No) {
+	public Board selectNoPage(int No,boolean readFlag) {
 		Connection conn=getConnection();
 		Board b=dao.selectNoPage(conn,No);
+		if(b!=null&&!readFlag) {
+			int result=dao.updateReadCount(conn,No);
+			if(result>0) { 
+			commit(conn);
+			b.setViewCount(b.getViewCount()+1);
+			}else rollback(conn);
+		}
 		close(conn);
 		return b;
 	}
@@ -89,4 +97,13 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return result;
 	}
+	public int insertFile(Files f) {
+		Connection conn=getConnection();
+		int result=dao.insertFile(conn,f);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 }
