@@ -242,17 +242,56 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return result;
 	}
-	public int insertFile(Connection conn,Files f) {
+	public int insertFile(Connection conn,Files f,int num) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertFile"));
 			pstmt.setString(1, f.getFileNm());
+			pstmt.setInt(2, num);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	public int FileNoSelect(Connection conn,Board b) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int num=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("FileNoSelect"));
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getMemberId());
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				num=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return num;
+	}
+	public Files selectImgName(Connection conn,int No) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Files f=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectImgName"));
+			pstmt.setInt(1, No);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				f=new Files();
+				f.setFileNm(rs.getString("file_nm"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return f;
 	}
 }

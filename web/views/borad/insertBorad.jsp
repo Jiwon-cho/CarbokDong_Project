@@ -107,7 +107,9 @@
 		  confirm("정말로 취소하시겠습니까?");
           location.assign('<%=request.getContextPath()%>/borad/mainBorad');
 
-	}
+	};
+	function setThumbnail(event) { var reader = new FileReader(); reader.onload = function(event) { var img = document.createElement("img"); img.setAttribute("src", event.target.result); document.querySelector("div#image_container").appendChild(img); }; reader.readAsDataURL(event.target.files[0]); }
+
 </script>
 
 <body>
@@ -118,7 +120,8 @@
 			<ul>
 				<li class="title_input"><textarea name="title" id="subject" rows="1" placeholder="제목을 입력해주세요." maxlength="76" style="height: 26px;"></textarea></li>
 				
-				<li><input class="btbt" type="file" name="upfile"></li>
+				<li><input class="btbt" type="file" name="upfile" accept="image/*" onchange="setThumbnail(event);"></li>
+				<li><div id="image_container"></div><li>
 				<li><textarea name="content" id="content" cols="100" rows="50" ></textarea></li>
 			</ul>
 			<br>

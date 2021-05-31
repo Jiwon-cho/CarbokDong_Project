@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.borad.model.vo.Board,java.util.List,com.borad.model.vo.Reply" %>
+<%@ page import="com.borad.model.vo.Board,java.util.List,com.borad.model.vo.Reply,com.borad.model.vo.Files" %>
 <%
 List<Reply>list=(List<Reply>)request.getAttribute("list");
 	Board b=(Board)request.getAttribute("b");
 	int replycount=(int)request.getAttribute("replycount");
+	Files f=(Files)request.getAttribute("f");
 %>    
     
     
@@ -48,6 +49,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 		</span>
 	</div>
 	<div class="view_info">
+		<%if(f!=null){ %>
+		<img src="<%=request.getContextPath() %>/upload/board/<%=f.getFileNm() %>" width="600" height="400" >
+		<%}else{ %>
+		<%} %>
 		<div id="article" style="font-size: 20px;"><%=b.getBoardContents()%></div>
 	</div>
 	<div class="viewrecom">
@@ -111,11 +116,11 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 				</div>
 			</div>
 	</div>
-	<br><br><br><br><br>
-	<button class="pagebtn"> &lt;prev </button>
-	<button class="pagebtn"> next&gt; </button>
+	<br><br><br>
+
 </article>
 <script >
+
 	$("#gomain").click(e=>{
 		location.assign('<%=request.getContextPath() %>/borad/mainBorad');
 	});
@@ -135,7 +140,7 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 		
 		$(e.target).off("click");
 	});
-	$(".comment-editor textarea").focus(e=>{
+<%-- 	$(".comment-editor textarea").focus(e=>{
 		if(<%=loginMember==null%>){
 			alert("로그인후 이용하세요");
 			$("#gomain").focus();
@@ -149,7 +154,7 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 			$(e.target).blur();
 			location.assign("<%=request.getContextPath()%>/loginPage");
 		}
-	});
+	}); --%>
 	$("#deletebtn").click(e=>{
 		confirm("정말로 삭제하시겠습니까?");
 	

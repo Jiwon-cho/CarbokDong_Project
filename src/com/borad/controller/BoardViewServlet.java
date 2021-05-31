@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
 import com.borad.model.vo.Reply;
 
 /**
@@ -69,6 +70,10 @@ public class BoardViewServlet extends HttpServlet {
 		
 		int replycount=new BoardService().selectReplyCount(No);
 		
+		Files f=new BoardService().selectImgName(No);
+		
+		
+		request.setAttribute("f", f);
 		request.setAttribute("replycount", replycount);
 		request.setAttribute("list", list);
 		request.setAttribute("b", b);

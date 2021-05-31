@@ -74,7 +74,10 @@ public class BoardWrite extends HttpServlet {
 		//String content=request.getParameter("content");
 		//String id=request.getParameter("id");
 		int result=new BoardService().WriteBorad(b);
-		int re=new BoardService().insertFile(f);
+		
+		int num=new BoardService().FileNoSelect(b);
+		
+		int re=new BoardService().insertFile(f,num);
 		String msg="";
 		String loc="";
 		if(result>0) {

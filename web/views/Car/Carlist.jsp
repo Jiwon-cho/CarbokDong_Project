@@ -16,7 +16,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
       <a class="nav-link" href="<%=request.getContextPath()%>/car/carList">전체 차량</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="소형" href="">소형/준중형</a>
+      <a class="nav-link" id="소형" href="<%=request.getContextPath()%>/car/searchCar?carType=소형">소형/준중형</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="<%=request.getContextPath()%>/car/searchCar?carType=중형">중형</a>
@@ -40,11 +40,16 @@ List<Car> list=(List<Car>)request.getAttribute("list");
           <h3><%=c.getCarModel() %></h3>
           <br>
           <h4><%=c.getCarInfo() %></h4>
-          <button class="reservation">예약하기</button>
+          
+          <button class="reservation" onclick="location.assign('<%=request.getContextPath()%>/car/carView?carNb=<%=c.getCarNB()%>')">예약하기</button>
         </div>
         <%} %>
        
     </div>
+    <script>
+    
+    </script>
+    
     <style>
       .header {
         width: 100%;
@@ -122,22 +127,38 @@ color:blue;
       
     </style>
     
-  <script>
+ <%--  <script>
   
   $("#소형").click(e=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/car/searchCar?carType=소형",
-			type:"post",
-			data:"html",
+			dataType:"text",
 			success:data=>{
 				console.log(data);
-				$("#container").html(data);
+				const table=$("<table>");
+				const cars=data.split("\n");
+				console.log(cars);
+				for(let i=0;i<cars.length;i++){
+					let pData=persons[i].split(",");
+					console.log(pData);
+					let tr=$("<tr>");
+					let name=$("<td>").html(pData[0]);
+					let phone=$("<td>").html( pData[1]);
+					let profile=$("<td>").append($("<img>").attr({
+						"src":"<%=request.getContextPath()%>/images/"+pData[2],
+						"width":"100px",
+						"height":"100px"
+					}));
+					tr.append(name).append(phone).append(profile);
+					table.append(tr);
+					$("#target").html(table);
+				}
 			}
-		})
+		});
 	});
   
   
-  </script>
+  </script> --%>
     
 
 <%@ include file="/views/common/footer.jsp" %>	
