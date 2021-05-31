@@ -51,7 +51,7 @@
         	평점 : <%= list.get(i).getRating() %> <br/>
         	위도 : <%= list.get(i).getLatitude() %> <br/>
         	경도 : <%= list.get(i).getLongitude() %> <br/> 
-        	<button onclick="location.href='campReserveView.jsp?name=<%=camp.getName()%>'">예약하기</button> <br/> 
+        	<button onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">예약하기</button> <br/> 
         	-------------------</div>
         	<%} %> 
         	
