@@ -82,12 +82,9 @@
           <div class="detail">
             🔹 <%= camp.getInfo() %>
           </div>
-         <!--
-			<div class="detail">🔹 연락처 : 033-1213-2133</div>
-			-->
-            
+			<div class="detail">🔹 1박당 요금 : <%= camp.getPrice() %></div>
           <div class="detail">
-            🔹 부대시설 : 바베큐 그릴 / 족구장 / 산책로 / 매점
+            🔹 부대시설 : <%= camp.getFacility() %>
           </div>
           <div class="like">
             <div class="heart">💗</div>
