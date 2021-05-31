@@ -10,7 +10,7 @@
             </table>    
             <table width="700" height="600" cellpadding="0" style="border-collapse:collapse; font-size:9; margin-bottom: 30px">
                 <tr height="7">
-                    <td colspan="3"><input type="hidden" id="memberType" name="memberType" value="3"><hr></td>
+                    <td colspan="3"><input type="hidden" id="memberType" name="memberType" value="2"><hr></td>
                 </tr>
                 <tr class="" height="30">
                     <td width="5%" align="center">*</td>

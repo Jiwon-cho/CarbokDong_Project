@@ -42,7 +42,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		String address=(request.getParameter("sample4_jibunAddress")+"("+request.getParameter("sample4_postcode")+")"+request.getParameter("address"));
-		String nikname=request.getParameter("nikname");
+		String nikname=request.getParameter("nikName");
 		char userNo=(request.getParameter("userNo")+"-"+request.getParameter("userNo2")).charAt(7);
 		String gender="";
 		if(userNo=='1' || userNo=='3') {gender="M";}
