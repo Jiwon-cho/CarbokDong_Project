@@ -28,4 +28,18 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	public Member selectMemberId(String userId) {
+		Connection conn=getConnection();
+		Member m=dao.selectMemberId(conn,userId);
+		close(conn);
+		return m;
+	}
+	
+	public Member selectMemberNickName(String nickName) {
+		Connection conn=getConnection();
+		Member m=dao.selectMemberNickName(conn,nickName);
+		close(conn);
+		return m;
+	}
 }

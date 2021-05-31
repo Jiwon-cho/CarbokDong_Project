@@ -82,12 +82,9 @@
           <div class="detail">
             🔹 <%= camp.getInfo() %>
           </div>
-         <!--
-			<div class="detail">🔹 연락처 : 033-1213-2133</div>
-			-->
-            
+			<div class="detail">🔹 1박당 요금 : <%= camp.getPrice() %></div>
           <div class="detail">
-            🔹 부대시설 : 바베큐 그릴 / 족구장 / 산책로 / 매점
+            🔹 부대시설 : <%= camp.getFacility() %>
           </div>
           <div class="like">
             <div class="heart">💗</div>
@@ -130,13 +127,9 @@
       </div>
     </section>
     <div class="route">
-      오시는길
+     <span class="coming">오시는길</span> 
       <div class="routeMap">
-        <img
-          class="routeImg"
-          src="https://blog.kakaocdn.net/dn/sRcY1/btqDVUPrDqr/zbqnfe1JkO8gyLnxboBuDK/img.jpg"
-          alt=""
-        />
+
       </div>
     </div>
     <!-- arrow  -->
@@ -147,6 +140,60 @@
         </button>
       </div>
     </section>
+    
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9e43696a44b958e8d5154bc1b138b81"></script>
+		<script>
+		var mapContainer = document.querySelector('.routeMap'), // 지도를 표시할 div 
+    		mapOption = { 
+        		center: new kakao.maps.LatLng(<%=camp.getLatitude()%>, <%=camp.getLongitude()%>), // 지도의 중심좌표
+        		level: 3 // 지도의 확대 레벨
+    		};
+
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+	      // 마커가 표시될 위치입니다
+
+	      function markerTest(latitude, longitude){
+	    	  return new kakao.maps.LatLng(latitude, longitude);
+	      };
+
+	      // 마커 생성
+	      // 마커를 담을 배열
+	      const markers = [];
+	    	  var mark = new kakao.maps.Marker({
+	    	        position: markerTest(<%=camp.getLatitude()%>, <%=camp.getLongitude()%>)
+	    	      });
+	    	  markers.push(mark);
+	    	  mark.setMap(map);
+	    	  
+	    	  var content = '<div class="marker_title"><%= camp.getName() %><br/> <span class="route_location"><%=camp.getLocation()%></span></div>';
+	    	  
+	    	 
+	    	  
+	    	  var customOverlay = new kakao.maps.CustomOverlay({
+	    		    position : markerTest(<%=camp.getLatitude()%>, <%=camp.getLongitude()%>), 
+	    		    content : content,
+	    		    yAnchor: 2.8,
+	    		});
+	    	  customOverlay.setMap(map);
+		</script>
+		
+		<style>
+		.marker_title{
+      	font-family: "Black Han Sans", sans-serif;
+      	font-size: 1.5rem;
+      	background-color: rgba(245, 222, 179, 0.815);
+      	padding : 5px;
+      	border: 3px solid black;
+      	border-radius: 5px;
+      }
+      
+      	.route_location{
+      	font-size: 15px;
+        font-family: 'Sunflower', sans-serif;
+      	}
+      </style>
 
     <script type="text/javascript">
       $(".mainPhoto").slick({

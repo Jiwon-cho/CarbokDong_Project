@@ -8,21 +8,9 @@ public class Camp {
 	private String info;
 	private double latitude;
 	private double longitude;
+	private int price;
+	private String facility;
 	
-	public Camp() {}
-	
-	
-	public Camp(int num, String name, String location, String info, double latitude, double longitude) {
-		super();
-		this.num = num;
-		this.name = name;
-		this.location = location;
-		this.info = info;
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
-
-
 	public int getNum() {
 		return num;
 	}
@@ -59,6 +47,19 @@ public class Camp {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public String getFacility() {
+		return facility;
+	}
+	public void setFacility(String facility) {
+		this.facility = facility;
+	}
+	
+	
 	
 }

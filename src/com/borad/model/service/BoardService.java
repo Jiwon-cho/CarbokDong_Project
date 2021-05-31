@@ -117,4 +117,16 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return f;
 	}
+	public List<Board>selectSearchMember(String type,String keyword,int cPage,int numPerpage){
+		Connection conn=getConnection();
+		List<Board>list=dao.selectSearchMember(conn,type,keyword,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public int selectSearchMemberCount(String type,String keyword) {
+		Connection conn=getConnection();
+		int result=dao.selectSearchMemberCount(conn,type,keyword);
+		close(conn);
+		return result;
+	}
 }

@@ -1,4 +1,4 @@
-	@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Hi+Melody&family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@100&family=Poor+Story&display=swap");
+	@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Hi+Melody&family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@100&family=Poor+Story&family=Sunflower:wght@300&display=swap");
 	@import url(https://fonts.googleapis.com/css?family=BenchNine:700);
 	 
 	 .header{
@@ -26,18 +26,19 @@
         position: relative;
         width: 90%;
         height: 1000px;
-        margin: 50px auto;
+        margin: auto;
+
       }
       
       .camp_name{
-      	font-family: "Black Han Sans", sans-serif;
+      	font-family: 'Do Hyeon', sans-serif;
         font-size: 22px;
         cursor: pointer;
       }
       
       .camp_location{
       	font-size: 15px;
-        font-family: "Do Hyeon", sans-serif;
+        font-family: 'Sunflower', sans-serif;
         cursor: pointer;
       }
 
@@ -55,6 +56,13 @@
         z-index: 1;
         font-size: 12px;
         border-radius: 10px;
+        border: 3px solid black;
+        -webkit-box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 15px -2px rgba(0,0,0,0); 
+		box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 15px -2px rgba(0,0,0,0);
+		background: #FFFFFF;
+}
+body#tinymce {
+background: #FFFFFF
       }
       .bg_white {
         background: #fff;
@@ -178,10 +186,22 @@
         color: #777;
       }
       
+      .marker_title{
+
+      	font-family: "Do Hyeon", sans-serif;
+      	font-size: 1rem;
+      	background-color: wheat;
+      	padding : 5px;
+      	border: 3px solid black;
+      	border-radius: 5px;
+      	
+      }
+      
       .list_line{
       	width: 100%;
-      	height: 2px;
-      	background-color: black;
+      	height: 3px;
+      	background-color: rgba(128, 128, 128, 0.493);
+      	border-radius: 5px;
       	
       }
 

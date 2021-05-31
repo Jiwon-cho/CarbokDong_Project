@@ -45,6 +45,8 @@ public class CampDao {
 					camp.setInfo(rs.getString(4));
 					camp.setLatitude(rs.getDouble(5));
 					camp.setLongitude(rs.getDouble(6));
+					camp.setPrice(rs.getInt(7));
+					camp.setFacility(rs.getString(8));
 					System.out.println("ƒ∑«Œ¿Â¿Ã∏ß : "+camp.getName());
 					
 					v.add(camp);
@@ -82,6 +84,8 @@ public class CampDao {
 					camp.setInfo(rs.getString(4));
 					camp.setLatitude(rs.getDouble(5));
 					camp.setLongitude(rs.getDouble(6));
+					camp.setPrice(rs.getInt(7));
+					camp.setFacility(rs.getString(8));
 	     		}
 	     		con.close();
 	     	}catch (Exception e){
