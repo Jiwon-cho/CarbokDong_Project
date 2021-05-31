@@ -51,6 +51,7 @@ public class BoradMainServlet extends HttpServlet {
 		List<Board>list=new BoardService().selectBoardList(cPage,numPerpage);
 		//List<Board>list2=new BoardService().selectpopularBoardList(cPage,numPerpage);
 		int totalData=new BoardService().selectNoticeCount();
+
 		
 		int pageBarSize=5;
 		//Paging p=new Paging(totalData,cPage,numPerpage,pageBarSize);

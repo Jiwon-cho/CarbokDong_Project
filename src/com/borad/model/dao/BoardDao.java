@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.borad.model.vo.Reply;
+import com.member.model.vo.Member;
 import com.borad.model.vo.Board;
 import com.borad.model.vo.Files;
 
@@ -293,5 +294,50 @@ private Properties prop=new Properties();
 			close(rs);
 			close(pstmt);
 		}return f;
+	}
+	public List<Board>selectSearchMember(Connection conn,String type,String keyword,int cPage,int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Board>list=new ArrayList();
+		String sql=prop.getProperty("selectSearchMember");
+		try {
+			pstmt=conn.prepareStatement(sql.replace("#",type));
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Board b=new Board();
+				b.setBoardNb(rs.getInt("board_nb"));
+				b.setBoardTitle(rs.getString("board_title"));
+				b.setBoradDate(rs.getDate("board_date"));
+				b.setBoardContents(rs.getString("board_contents"));
+				b.setViewCount(rs.getInt("board_viewcount"));
+				b.setMemberId(rs.getString("member_id"));
+				list.add(b);
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	}return list;
+	}
+	public int selectSearchMemberCount(Connection conn,String type,String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectSeachMemberCount");
+		try {
+			pstmt=conn.prepareStatement(sql.replace("#", type));
+			pstmt.setString(1, "%"+keyword+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
 	}
 }
