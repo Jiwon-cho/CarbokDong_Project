@@ -11,7 +11,7 @@
 		</table>
 		<table width="700" height="650" cellpadding="0" style="border-collapse: collapse;">
 			<tr height="7">
-				<td colspan="3"><input type="hidden" id="memberType" name="memberType" value="2"><hr></td>
+				<td colspan="3"><input type="hidden" id="memberType" name="memberType" value="1"><hr></td>
 			</tr>
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
@@ -136,30 +136,35 @@
 		const email1=$("#email1").val();
 		const email2=$("#email2").val();
 		const password=$("#password_").val();
+		const checkpwd=$("#checkpwd").val();		
 		const userId=$("#userId_").val();
+		const checkId=$("#checkId").val();
 		const nikName=$("#nikName").val();
+		const checknickName=$("#checknickName").val();
+		const checkaddress=$("#sample4_postcode").val();
+		const checkdriver=$("#checkdriver").val();
 		
-		if(userId==null){
+		if(userId.trim()==""){
 			alert("아이디를 입력해주세요");
 			$("#userId_").focus();
 			return false;
 		}
-		if($("#checkId").value==0){
+		if(checkId==0){
 			alert("아이디 중복확인을 해주세요");
 			$("#userId_").focus();
 			return false;
 		}
-		if(password==null){
+		if(password.trim()==""){
 			alert("비밀번호를 입력해주세요");
 			$("#password_").focus();
 			return false;
 		}
-		if($("#checkpwd").value==0){
+		if(checkpwd==0){
 			alert("비밀번호 확인을 해주세요");
 			$("#pwdCheck").focus();
 			return false;
 		}
-		if(userName==null){
+		if(userName.trim()==""){
 			alert("이름을 입력해주세요");
 			$("#userName").focus();
 			return false;
@@ -180,26 +185,26 @@
 			return false;
 		}
 		
-		if(nikName==null){
+		if(nikName.trim()==""){
 			alert("닉네임을 입력해주세요");
 			$("#nikName").focus();
 			return false;
 		}
-		if($("#checknickName").value==0){
+		if(checknickName==0){
 			alert("닉네임 중복확인을 해주세요");
 			$("#nikName").focus();
 			return false;
 		}
-		if(email1==null || email2==null){
+		if(email1.trim()=="" || email2.trim()==""){
 			alert("이메일을 입력해주세요");
 			$("#email1").focus();
 			return false;
 		}
-		if($("#checkaddress").value==0){
-			alert("주소를 선택해주세요");
+		if(checkaddress.trim()==""){
+			alert("주소를 입력해주세요");
 			return false;
 		}
-		if($("#checkdriver").value==0){
+		if(checkdriver==0){
 			alert("운전면허 확인을 해주세요");
 			$("#driver2").focus();
 			return false;
@@ -221,10 +226,10 @@
 		if(driver.trim().length>12 || driver.trim().length<12){
 			alert("12숫자를 제대로 입력하세요");
 			$("#driver2").focus();
-			$("#checkdriver").value="0"
+			$("#checkdriver").val("0");
 		}else{
 			alert("확인되셨습니다!");
-			$("#checkdriver").value="1"
+			$("#checkdriver").val("1");
 		}
 	}
 	const fn_pwcheck=()=>{
@@ -232,10 +237,10 @@
 		const pwck=$("#pwCheck").val();
 		if(pw!=pwck){
 			alert("패스워드가 일치하지 않습니다.");
-			$("#checkpwd").value="0"
+			$("#checkpwd").val("0");
 		}else{
 			alert("패스워드가 일치합니다.");
-			$("#checkpwd").value="1"
+			$("#checkpwd").val("1");
 		}
 	}
 	const fn_duplicateId=()=>{
@@ -293,7 +298,6 @@
                 } else {
                     document.getElementById('guide').innerHTML = '';
                 }
-                $("#checkaddress").value="1"
             }
         
         }).open();
