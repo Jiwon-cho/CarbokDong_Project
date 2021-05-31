@@ -50,8 +50,8 @@
         		Camp camp = list.get(i);
         	
         %><div>
-        	<div class="camp_name"><%= list.get(i).getName() %></div> <br/>
-        	<div class="camp_location"><%= list.get(i).getLocation() %></div> <br/>
+        	<div class="camp_name" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)"><%= list.get(i).getName() %></div> <br/>
+        	<div class="camp_location" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)"><%= list.get(i).getLocation() %></div> <br/>
         	<button class="snip1535" onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">상세정보</button> <br/><br/>
         	<div class="list_line"></div><br/></div>
         	<%} %> 
@@ -300,8 +300,14 @@
         const resultDiv = document.getElementById("clickLatlng");
         console.log(message);
       });
-
+		
+      const campName = document.querySelector('.camp_name');
+      const campLocation = document.querySelector('.camp_location');
       
+      function panTo(a,b){
+        var moveLatLon = new kakao.maps.LatLng(a, b);
+        map.panTo(moveLatLon); 
+      }
       
       </script>
       
