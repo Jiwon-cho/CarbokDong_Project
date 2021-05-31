@@ -7,6 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mapStyle.css">       
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -44,9 +50,9 @@
         		Camp camp = list.get(i);
         	
         %><div>
-        	<%= list.get(i).getName() %> <br/><br/>
-        	<%= list.get(i).getLocation() %> <br/><br/>
-        	<button onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">상세정보</button> <br/><br/>
+        	<div class="camp_name"><%= list.get(i).getName() %></div> <br/>
+        	<div class="camp_location"><%= list.get(i).getLocation() %></div> <br/>
+        	<button class="snip1535" onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">상세정보</button> <br/><br/>
         	<div class="list_line"></div></div>
         	<%} %> 
         	
@@ -54,12 +60,18 @@
         <div id="pagination"></div>
       </div>
     </div>
-
+	<script>    	
+	$(".hover").mouseleave(function () {
+    	$(this).removeClass("hover");
+  	});
+	</script>
     <script
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9e43696a44b958e8d5154bc1b138b81&libraries=services"
     ></script>
     <script>
+
+    
       const mapContainer = document.getElementById("map"), // 지도를 표시할 div
         mapOption = {
           center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
