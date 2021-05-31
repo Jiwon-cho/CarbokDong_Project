@@ -35,16 +35,14 @@ public class MemberDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				m=new Member();
-				m.setUserName(rs.getString("member_nm"));
 				m.setUserId(rs.getString("member_Id"));
-				m.setPassword(rs.getString("password"));
+				m.setUserName(rs.getString("member_nm"));
 				m.setEmail(rs.getString("email"));
 				m.setAddress(rs.getString("address"));
 				m.setNikname(rs.getString("nickname"));
-				m.setPhone(rs.getString("phone"));
-				m.setUserNo(rs.getString("userNo"));
+				m.setGender(rs.getString("gender"));
 				m.setMemberType(rs.getInt("member_Type"));
-				m.setCpNb(rs.getInt("cpNb"));
+				m.setPassword(rs.getString("password"));
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -59,24 +57,15 @@ public class MemberDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			if(m.getMemberType()==2) {
-				pstmt=conn.prepareStatement(prop.getProperty("insertMember"));
-				pstmt.setInt(10, m.getCpNb());
-			}else if(m.getMemberType()==3){
-				pstmt=conn.prepareStatement(prop.getProperty("insertMember2"));
-			}
-			pstmt.setString(1, m.getUserName());
-			pstmt.setString(2, m.getUserId());
-			pstmt.setString(3, m.getPassword());
-			pstmt.setString(4, m.getEmail());
-			pstmt.setString(5, m.getAddress());
-			pstmt.setString(6, m.getNikname());
-			pstmt.setString(7, m.getPhone());
-			pstmt.setString(8, m.getUserNo());
-			pstmt.setInt(9, m.getMemberType());
-			
-			
-			
+			pstmt=conn.prepareStatement(prop.getProperty("insertMember"));
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserName());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getAddress());
+			pstmt.setString(5, m.getNikname());
+			pstmt.setString(6, m.getGender());
+			pstmt.setInt(7, m.getMemberType());
+			pstmt.setString(8, m.getPassword());
 			result=pstmt.executeUpdate();
 		}catch (SQLException e) {
 			e.printStackTrace();

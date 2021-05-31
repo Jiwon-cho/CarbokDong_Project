@@ -66,15 +66,6 @@
 			<tr height="7">
 				<td colspan="3"><hr></td>
 			</tr>
-
-			<tr class="" height="30">
-				<td width="5%" align="center">*</td>
-				<td width="15%">휴대전화</td>
-				<td><input type="tel" name="phone" /></td>
-			</tr>
-			<tr height="7">
-				<td colspan="3"><hr></td>
-			</tr>
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
 				<td width="15%">이메일</td>

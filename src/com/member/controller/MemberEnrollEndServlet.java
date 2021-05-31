@@ -34,37 +34,28 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
 		String userId=request.getParameter("userId");
-		String password=request.getParameter("pwd");
-		try {
-			password=AESEncrypt.encrypt(password);			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 		String userName=request.getParameter("userName");
-		String nikname=request.getParameter("nikname");
 		String email=(request.getParameter("email1")+"@"+request.getParameter("email2"));
 		try {
 			email=AESEncrypt.encrypt(email);			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		int memberType=Integer.parseInt(request.getParameter("memberType"));
-		int cpNb=Integer.parseInt(request.getParameter("memberType"));
-		String userNo=(request.getParameter("userNo")+request.getParameter("userNo2"));
-		try {
-			userNo=AESEncrypt.encrypt(userNo);			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		String phone=request.getParameter("phone");
-		try {
-			phone=AESEncrypt.encrypt(phone);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 		String address=(request.getParameter("sample4_jibunAddress")+"("+request.getParameter("sample4_postcode")+")"+request.getParameter("address"));
+		String nikname=request.getParameter("nikname");
+		char userNo=(request.getParameter("userNo")+"-"+request.getParameter("userNo2")).charAt(7);
+		String gender="";
+		if(userNo=='1' || userNo=='3') {gender="M";}
+		else {gender="F";}
+		int memberType=Integer.parseInt(request.getParameter("memberType"));
+		String password=request.getParameter("pwd");
+		try {
+			password=AESEncrypt.encrypt(password);			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		Member m=new Member(userName,password,userName,nikname,email,phone,address,memberType,cpNb,userNo);
+		Member m=new Member(userId,userName,email,address,nikname,gender,memberType,password);
 	
 		int result=new MemberService().insertMember(m);
 		
