@@ -64,7 +64,7 @@
       </ul>
 	<%}else {%>
 	  <ul class="head-list">
-	  	<li><a href="">마이페이지</a></li>
+	  	<li><a href="<%=request.getContextPath()%>/myPage">마이페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 	  </ul>
 	<%} %>

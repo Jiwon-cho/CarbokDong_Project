@@ -34,8 +34,8 @@
       }
 
       .title {
-        font-family: "Black Han Sans", sans-serif;
-        font-size: 50px;
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 55px;
         margin: 30px;
       }
 
@@ -248,7 +248,11 @@
         padding-top: 100px;
         margin: auto;
         text-align: center;
-        font-family: "Black Han Sans", sans-serif;
+        
+      }
+      
+      .coming{
+      	font-family: "Black Han Sans", sans-serif;
         font-size: 50px;
       }
 
@@ -257,6 +261,11 @@
         height: 80%;
         background-color: gray;
         margin: auto;
+        border: 5px solid black;
+        -webkit-box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 15px -2px rgba(0,0,0,0); 
+		box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 15px -2px rgba(0,0,0,0);
+		background: #FFFFFF;
+       
       }
       .routeImg {
         width: 100%;
@@ -280,3 +289,5 @@
         border: 0;
         cursor: pointer;
       }
+      
+      

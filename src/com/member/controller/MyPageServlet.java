@@ -1,4 +1,4 @@
-package com.car.controller;
+package com.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CarViewServlet
+ * Servlet implementation class MyPageServlet
  */
-@WebServlet("/car/carView")
-public class CarViewServlet extends HttpServlet {
+@WebServlet("/myPage")
+public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CarViewServlet() { 
+    public MyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class CarViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
 	}
 
 	/**
@@ -35,13 +35,7 @@ public class CarViewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
-		int carNB=Integer.parseInt(request.getParameter("carNb"));
-		
-		
-		
-		response.sendRedirect(request.getContextPath()+"/views/Car/carViews.jsp");
-//		request.getRequestDispatcher("/views/Car/carViews.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }
