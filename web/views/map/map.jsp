@@ -1,19 +1,23 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.camp.model.vo.Camp"%>
-<%@page import="java.util.Vector"%>
 <%@page import="com.camp.model.dao.CampDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mapStyle.css">       
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="header">Header</div>
 	 
 	 <%
 
@@ -46,29 +50,32 @@
         		Camp camp = list.get(i);
         	
         %><div>
-        	<%= list.get(i).getName() %> <br/>
-        	가격 : <%= list.get(i).getPrice() %> <br/>
-        	평점 : <%= list.get(i).getRating() %> <br/>
-        	위도 : <%= list.get(i).getLatitude() %> <br/>
-        	경도 : <%= list.get(i).getLongitude() %> <br/> 
-        	<button onclick="location.href='campReserveView.jsp?name=<%=camp.getName()%>'">예약하기</button> <br/> 
-        	-------------------</div>
+        	<div class="camp_name"><%= list.get(i).getName() %></div> <br/>
+        	<div class="camp_location"><%= list.get(i).getLocation() %></div> <br/>
+        	<button class="snip1535" onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">상세정보</button> <br/><br/>
+        	<div class="list_line"></div><br/></div>
         	<%} %> 
         	
         </ul>
         <div id="pagination"></div>
       </div>
     </div>
-
+	<script type="text/javascript">    	
+	$(".hover").mouseleave(function () {
+    	$(this).removeClass("hover");
+  	});
+	</script>
     <script
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9e43696a44b958e8d5154bc1b138b81&libraries=services"
     ></script>
     <script>
+
+    
       const mapContainer = document.getElementById("map"), // 지도를 표시할 div
         mapOption = {
-          center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
+          center: new kakao.maps.LatLng(36.64213353295997, 127.87458257769703), // 지도의 중심좌표
+          level: 12, // 지도의 확대 레벨
         };
 
       // 지도를 생성합니다
@@ -98,6 +105,9 @@
      <%}%>;
 
 
+
+
+     
       // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
       //const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
@@ -291,6 +301,8 @@
         console.log(message);
       });
 
+      
+      
       </script>
       
 

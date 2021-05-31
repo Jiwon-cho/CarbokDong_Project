@@ -84,7 +84,7 @@
             여행지 지도
           </a>
         </li>
-        <li><a href="">렌트 차 종류</a></li>
+        <li><a href="<%=request.getContextPath()%>/car/carList">렌트 차 종류</a></li>
         <!-- <li><a href="">마이페이지</a></li> -->
         <li><a href="">Q&A</a></li>
       </div>
