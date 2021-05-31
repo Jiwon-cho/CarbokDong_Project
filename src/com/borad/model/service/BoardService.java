@@ -129,4 +129,23 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return result;
 	}
+	public int recUpdate(int no,String id) {
+		Connection conn=getConnection();
+		int result=dao.recUpdate(conn,no,id);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public void recDelete(int no,String id) {
+		Connection conn=getConnection();
+		dao.recDelete(conn,no,id);
+		close(conn);
+	}
+	public int recCount(int no) {
+		Connection conn=getConnection();
+		int count=dao.recCount(conn,no);
+		close(conn);
+		return count;
+	}
 }

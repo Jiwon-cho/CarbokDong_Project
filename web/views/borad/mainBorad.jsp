@@ -6,7 +6,6 @@
 	List<Board>pplist=(List<Board>)request.getAttribute("pplist");
 	String searchType= request.getParameter("searchType");
 	String searchKeyword= request.getParameter("searchKeyword");
-
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -88,7 +87,7 @@
 			<%for(Board b: list){ %>
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
-				<input type="hidden" name="No" value="<%=b.getBoardNb()%>">
+				<input type="hidden" name="boardNo" value="<%=b.getBoardNb()%>">
 					<span class="artice">
 						<%if(b==null){ %>
 						<img src="<%=request.getContextPath() %>/upload/" width="130" height="120" >

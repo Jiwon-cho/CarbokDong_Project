@@ -340,4 +340,49 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return result;
 	}
+	public int recUpdate(Connection conn,int no,String id) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("recUpdate"));
+			pstmt.setString(1, id);
+			pstmt.setInt(2, no);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public void recDelete(Connection conn,int no,String id) {
+		PreparedStatement pstmt=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("recDelete"));
+			pstmt.setString(1, id);
+			pstmt.setInt(2, no);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+	}
+	public int recCount(Connection conn,int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("recCount"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				count=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return count;
+	}
 }
