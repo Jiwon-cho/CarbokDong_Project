@@ -35,15 +35,15 @@ public class MemberDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				m=new Member();
-				m.setUserName(rs.getString("userName"));
-				m.setUserId(rs.getString("userId"));
+				m.setUserName(rs.getString("member_nm"));
+				m.setUserId(rs.getString("member_Id"));
 				m.setPassword(rs.getString("password"));
 				m.setEmail(rs.getString("email"));
 				m.setAddress(rs.getString("address"));
-				m.setNikname(rs.getString("nikname"));
+				m.setNikname(rs.getString("nickname"));
 				m.setPhone(rs.getString("phone"));
 				m.setUserNo(rs.getString("userNo"));
-				m.setMemberType(rs.getInt("memberType"));
+				m.setMemberType(rs.getInt("member_Type"));
 				m.setCpNb(rs.getInt("cpNb"));
 			}
 		}catch (SQLException e) {
