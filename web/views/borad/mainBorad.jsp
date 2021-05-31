@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.borad.model.vo.Board" %>
+<%@ page import="java.util.List,com.borad.model.vo.Board,com.borad.model.vo.Files" %>
 <%
 	List<Board>list=(List<Board>)request.getAttribute("list");
 	List<Board>pplist=(List<Board>)request.getAttribute("pplist");
+
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -16,9 +17,18 @@
 		left: 170px;
 		bottom: 40px;
 		column-span: all;
-		overflow: hidden;
-		
+		overflow: hidden;	
 	}
+	#pageBarb{
+	text-align: center;
+	}
+	#pageBarb a{
+		display: inline-block;
+		font-weight: bold;
+		text-decoration: none;
+		width: 30PX;
+	}
+
 </style>
 	<section id="borad-container">
 		<p id="titi" style="font-size: 35px;">  커뮤니티 게시판</p>
@@ -73,11 +83,12 @@
 			<%for(Board b: list){ %>
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
+				<input type="hidden" name="No" value="<%=b.getBoardNb()%>">
 					<span class="artice">
-						<%if(b!=null){ %>
-						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120" >
+						<%if(b==null){ %>
+						<img src="<%=request.getContextPath() %>/upload/" width="130" height="120" >
 						<%}else{ %>
-						<img src="<%=request.getContextPath() %>/images/" width="60" height="60" >
+						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120" >
 						<%} %>
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>

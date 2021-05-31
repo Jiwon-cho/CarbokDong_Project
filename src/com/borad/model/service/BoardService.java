@@ -97,13 +97,24 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return result;
 	}
-	public int insertFile(Files f) {
+	public int insertFile(Files f,int num) {
 		Connection conn=getConnection();
-		int result=dao.insertFile(conn,f);
+		int result=dao.insertFile(conn,f,num);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	}
-
+	public int FileNoSelect(Board b) {
+		Connection conn=getConnection();
+		int num=dao.FileNoSelect(conn,b);
+		close(conn);
+		return num;
+	}
+	public Files selectImgName(int No) {
+		Connection conn=getConnection();
+		Files f=dao.selectImgName(conn,No);
+		close(conn);
+		return f;
+	}
 }
