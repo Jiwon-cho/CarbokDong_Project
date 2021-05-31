@@ -1,64 +1,64 @@
 package com.camp.model.vo;
 
 public class Camp {
-
+	
+	private int num;
 	private String name;
+	private String location;
+	private String info;
 	private double latitude;
 	private double longitude;
-	private int price;
-	private int rating;
 	
 	public Camp() {}
 	
-	public Camp(String name, double latitude, double longitude, int price, int rating) {
+	
+	public Camp(int num, String name, String location, String info, double latitude, double longitude) {
 		super();
+		this.num = num;
 		this.name = name;
+		this.location = location;
+		this.info = info;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.price = price;
-		this.rating = rating;
 	}
 
+
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
 	public double getLatitude() {
 		return latitude;
 	}
-
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-
 	public double getLongitude() {
 		return longitude;
 	}
-
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getRating() {
-		return rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-	
-	
 	
 }

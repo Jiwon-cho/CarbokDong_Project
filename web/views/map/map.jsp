@@ -1,7 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.camp.model.vo.Camp"%>
-<%@page import="java.util.Vector"%>
 <%@page import="com.camp.model.dao.CampDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,7 +12,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="header">Header</div>
 	 
 	 <%
 
@@ -46,13 +44,10 @@
         		Camp camp = list.get(i);
         	
         %><div>
-        	<%= list.get(i).getName() %> <br/>
-        	가격 : <%= list.get(i).getPrice() %> <br/>
-        	평점 : <%= list.get(i).getRating() %> <br/>
-        	위도 : <%= list.get(i).getLatitude() %> <br/>
-        	경도 : <%= list.get(i).getLongitude() %> <br/> 
-        	<button onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">예약하기</button> <br/> 
-        	-------------------</div>
+        	<%= list.get(i).getName() %> <br/><br/>
+        	<%= list.get(i).getLocation() %> <br/><br/>
+        	<button onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">상세정보</button> <br/><br/>
+        	<div class="list_line"></div></div>
         	<%} %> 
         	
         </ul>

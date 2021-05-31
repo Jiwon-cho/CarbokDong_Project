@@ -162,3 +162,10 @@
         cursor: default;
         color: #777;
       }
+      
+      .list_line{
+      	width: 100%;
+      	height: 2px;
+      	background-color: black;
+      	
+      }

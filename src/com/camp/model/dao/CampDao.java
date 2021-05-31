@@ -9,9 +9,9 @@ import com.camp.model.vo.CampReserve;
 
 public class CampDao {
 	
-	String id = "map";
-	String pass = "map";
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String id = "CARBOK";
+	String pass = "CARBOK";
+	String url = "jdbc:oracle:thin:@rclass.iptime.org:1521:xe";
 	
 	Connection con;
 	PreparedStatement pstmt;
@@ -22,28 +22,30 @@ public class CampDao {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection(url, id, pass);
-			System.out.println("연결됨");
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 		public List<Camp> selectAllMember(){
-			List<Camp> v = new ArrayList();
+			List<Camp> v = new ArrayList<Camp>();
 			
 			try {
 				getCon();
-				String sql = "SELECT * FROM CAMP";
+				String sql = "SELECT * FROM CAMPING";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
+				System.out.println("연결됨2");
 				while(rs.next()) {
 					Camp camp = new Camp();
-					camp.setName(rs.getString(1));
-					camp.setLatitude(rs.getDouble(2));
-					camp.setLongitude(rs.getDouble(3));
-					camp.setPrice(rs.getInt(4));
-					camp.setRating(rs.getInt(5));
-					System.out.println(camp.getName());
+					camp.setNum(rs.getInt(1));
+					camp.setName(rs.getString(2));
+					camp.setLocation(rs.getString(3));
+					camp.setInfo(rs.getString(4));
+					camp.setLatitude(rs.getDouble(5));
+					camp.setLongitude(rs.getDouble(6));
+					System.out.println("캠핑장이름 : "+camp.getName());
 					
 					v.add(camp);
 
@@ -65,7 +67,7 @@ public class CampDao {
 	    	getCon();
 	 		
 	     	try {
-	     		String sql = "SELECT * FROM CAMP WHERE NAME = ?";
+	     		String sql = "SELECT * FROM CAMPING WHERE CAMPING_NM = ?";
 	     		pstmt = con.prepareStatement(sql);
 	     		pstmt.setString(1, name);
 	     		System.out.println("받아온 이름 : "+name);
@@ -74,11 +76,12 @@ public class CampDao {
 	     		//반복문을 돌면서 데이터를 저장
 	     		while(rs.next()){
 	     			camp = new Camp();
-					camp.setName(rs.getString(1));
-					camp.setLatitude(rs.getDouble(2));
-					camp.setLongitude(rs.getDouble(3));
-					camp.setPrice(rs.getInt(4));
-					camp.setRating(rs.getInt(5));
+	     			camp.setNum(rs.getInt(1));
+					camp.setName(rs.getString(2));
+					camp.setLocation(rs.getString(3));
+					camp.setInfo(rs.getString(4));
+					camp.setLatitude(rs.getDouble(5));
+					camp.setLongitude(rs.getDouble(6));
 	     		}
 	     		con.close();
 	     	}catch (Exception e){
@@ -119,24 +122,24 @@ public class CampDao {
 			return v;
 		}
 		
-		public void setReserve (CampReserve camp) {
-			getCon();
-			
-			try {
-				String sql = "INSERT INTO CAMPRESERVE VALUES(RESERVENO.NEXTVAL,?,?,?,? )";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, camp.getUserId());
-				pstmt.setString(2, camp.getCampName());
-				pstmt.setInt(3, camp.getPeriod());
-				pstmt.setString(4, camp.getDate());
-				
-				pstmt.executeUpdate();
-				
-				con.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
+//		public void setReserve (CampReserve camp) {
+//			getCon();
+//			
+//			try {
+//				String sql = "INSERT INTO CAMPRESERVE VALUES(RESERVENO.NEXTVAL,?,?,?,? )";
+//				pstmt = con.prepareStatement(sql);
+//				pstmt.setString(1, camp.getUserId());
+//				pstmt.setString(2, camp.getCampName());
+//				pstmt.setInt(3, camp.getPeriod());
+//				pstmt.setString(4, camp.getDate());
+//				
+//				pstmt.executeUpdate();
+//				
+//				con.close();
+//			} catch(Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 	
 	
 }

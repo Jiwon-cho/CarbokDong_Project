@@ -77,14 +77,17 @@
         </div>
         <div class="details">
           <div class="detail">
-            🔹 주소 : 걍원도 산척리 약수터길11 산골짜기 어딘가 카복동 캠핑장
+            🔹 주소 : <%=camp.getLocation() %>
           </div>
-          <div class="detail">🔹 연락처 : 033-1213-2133</div>
+          <div class="detail">
+            🔹 <%= camp.getInfo() %>
+          </div>
+         <!--
+			<div class="detail">🔹 연락처 : 033-1213-2133</div>
+			-->
+            
           <div class="detail">
             🔹 부대시설 : 바베큐 그릴 / 족구장 / 산책로 / 매점
-          </div>
-            <div class="detail">
-            🔹 숙박비 (1박) : 100000원
           </div>
           <div class="like">
             <div class="heart">💗</div>
