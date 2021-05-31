@@ -89,6 +89,7 @@ public class BoradMainServlet extends HttpServlet {
 		}
 		
 		
+		
 		List<Board>pplist=new BoardService().selectppBoard();
 		
 		
