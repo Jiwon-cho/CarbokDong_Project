@@ -32,11 +32,13 @@
       .camp_name{
       	font-family: "Black Han Sans", sans-serif;
         font-size: 22px;
+        cursor: pointer;
       }
       
       .camp_location{
       	font-size: 15px;
         font-family: "Do Hyeon", sans-serif;
+        cursor: pointer;
       }
 
       #menu_wrap {

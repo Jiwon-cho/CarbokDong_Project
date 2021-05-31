@@ -53,14 +53,14 @@
         	<div class="camp_name"><%= list.get(i).getName() %></div> <br/>
         	<div class="camp_location"><%= list.get(i).getLocation() %></div> <br/>
         	<button class="snip1535" onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">상세정보</button> <br/><br/>
-        	<div class="list_line"></div></div>
+        	<div class="list_line"></div><br/></div>
         	<%} %> 
         	
         </ul>
         <div id="pagination"></div>
       </div>
     </div>
-	<script>    	
+	<script type="text/javascript">    	
 	$(".hover").mouseleave(function () {
     	$(this).removeClass("hover");
   	});
@@ -74,8 +74,8 @@
     
       const mapContainer = document.getElementById("map"), // 지도를 표시할 div
         mapOption = {
-          center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
+          center: new kakao.maps.LatLng(36.64213353295997, 127.87458257769703), // 지도의 중심좌표
+          level: 12, // 지도의 확대 레벨
         };
 
       // 지도를 생성합니다
@@ -105,6 +105,9 @@
      <%}%>;
 
 
+
+
+     
       // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
       //const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
@@ -298,6 +301,8 @@
         console.log(message);
       });
 
+      
+      
       </script>
       
 
