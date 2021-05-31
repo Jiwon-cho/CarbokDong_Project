@@ -73,4 +73,60 @@ public class MemberDao {
 			close(pstmt);
 		}return result;
 	}
+	
+	public Member selectMemberId(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberId"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setUserId(rs.getString("member_Id"));
+				m.setUserName(rs.getString("member_nm"));
+				m.setEmail(rs.getString("email"));
+				m.setAddress(rs.getString("address"));
+				m.setNikname(rs.getString("nickname"));
+				m.setGender(rs.getString("gender"));
+				m.setMemberType(rs.getInt("member_Type"));
+				m.setPassword(rs.getString("password"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public Member selectMemberNickName(Connection conn, String nickName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberNickName"));
+			pstmt.setString(1, nickName);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setUserId(rs.getString("member_Id"));
+				m.setUserName(rs.getString("member_nm"));
+				m.setEmail(rs.getString("email"));
+				m.setAddress(rs.getString("address"));
+				m.setNikname(rs.getString("nickname"));
+				m.setGender(rs.getString("gender"));
+				m.setMemberType(rs.getInt("member_Type"));
+				m.setPassword(rs.getString("password"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 }

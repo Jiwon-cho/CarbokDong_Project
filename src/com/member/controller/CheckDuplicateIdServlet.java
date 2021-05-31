@@ -1,7 +1,6 @@
-package com.car.controller;
+package com.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.car.model.service.CarService;
-import com.car.model.vo.Car;
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class SearchCarServlet
+ * Servlet implementation class CheckDuplicateIdServlet
  */
-@WebServlet("/car/searchCar")
-public class SearchCarServlet extends HttpServlet {
+@WebServlet("/checkDuplicateId")
+public class CheckDuplicateIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchCarServlet() {
+    public CheckDuplicateIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +31,12 @@ public class SearchCarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String carType=request.getParameter("carType");
-		List<Car> list=new CarService().searchCar(carType);
+		String userId=request.getParameter("userId");
 		
+		Member m=new MemberService().selectMemberId(userId);
 		
-		/*
-		 * String csv=""; for(int i=0;i<list.size();i++) { if(i!=0) csv+="\n";
-		 * csv+=list.get(i);
-		 * 
-		 * } response.setContentType("text/csv;charset=utf-8");
-		 * response.getWriter().print(csv);
-		 */
-		
-		
-		  request.setAttribute("list", list);
-		  
-		  request.getRequestDispatcher("/views/Car/Carlist.jsp").forward(request,
-		  response);
-		 
+		request.setAttribute("result", m==null?true:false);
+		request.getRequestDispatcher("/views/member/checkDuplicateId.jsp").forward(request, response);
 	}
 
 	/**
