@@ -50,7 +50,7 @@
 				<th scope="col">제목</th>
 				<th scope="col">글쓴이</th>
 				<th scope="col">날짜</th>
-				<th scope="col">추천</th>
+				<th scope="col">조회수</th>
 			</tr>
 		</thead>
 		<tbody>

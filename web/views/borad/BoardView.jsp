@@ -37,7 +37,7 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 		</span>
 		<span class="desc_subjeck">
 			<a id="gomain" role="button" class="btnbtn_1" style="font-size: 15px; cursor: pointer;">목록</a>
-			<a id="rec_up" role="button" class="btnbtn_1" style="font-size: 15px;">
+			<a id="rec_up" role="button" class="btnbtn_1" style="font-size: 15px; cursor: pointer;">
 				추천 
 				<!-- 스펜에 추천수 -->
 				<span class="num_count"></span>
@@ -121,7 +121,13 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 
 </article>
 <script >
-
+<%--	$("#rec_up").click(e=>{
+		if(<%=loginMember==null%>){
+			alert("로그인후 이용하세요!");
+			$(e.target).blur();
+			location.assign("<%=request.getContextPath()%>/loginPage");
+		}
+	}); --%>
 	$("#gomain").click(e=>{
 		location.assign('<%=request.getContextPath() %>/borad/mainBorad');
 	});
