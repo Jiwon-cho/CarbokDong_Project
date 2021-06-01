@@ -93,7 +93,16 @@ public class BoradMainServlet extends HttpServlet {
 		
 		List<Board>pplist=new BoardService().selectppBoard();
 		
+//		for(Board b: list) {
+//			int boardNo=b.getBoardNb();
+//			String img=new BoardService().selectImages(boardNo);			
+//			
+//			System.out.println(img);
+//			request.setAttribute("img", img);
+//		}
+		List<Files>flist=new BoardService().selectFileList();
 		
+		request.setAttribute("flist", flist);
 		request.setAttribute("pplist", pplist);
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("list", list);
