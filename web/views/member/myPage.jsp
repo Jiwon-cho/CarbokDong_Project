@@ -3,35 +3,48 @@
 <%@ include file="/views/common/header.jsp" %>
 <body>
     <body>
-        <center>
+		<center>
         <div class="wrapper">
             <div class="contents-top">
                 <h2 class="join-title">마이페이지</h2>
             </div>
             <div class="contents-mid">
-                <a href=""><div class="join-type">
+            <form action="" method="post" name="form1">
+            	<input type="hidden" name="userId" value="<%=loginMember.getUserId() %>">
+                <div class="join-type">
                     <h3 class="join-type-title">장바구니<br><img src="https://media.istockphoto.com/vectors/add-to-cart-icon-shopping-cart-icon-vector-illustration-vector-id1179275901?k=6&m=1179275901&s=170667a&w=0&h=LTlzJ6cdRT0GeHtRL3LpDLrfjYrMHzrLsdKdDfyZl60=" alt="" width="100" height="100"></h3>
                     <p class="join-type-desc">찜목록</p>
-                </div></a>
-                <a href=""><div class="join-type">
+                    <input type="submit" onclick="btn_ShoppingBag();" value="선택">
+                </div>
+                <div class="join-type">
                     <h3 class="join-type-title">결재 내역<br><img src="https://img.icons8.com/ios/452/payment-history.png" alt="" width="100" height="100"></h3>
                     <p class="join-type-desc">구매 내역</p>
-                </div></a>
-                <a href=""><div class="join-type">
+                    <input type="submit" value="선택">
+                </div>
+                <div class="join-type">
                     <h3 class="join-type-title">내가 쓴글<br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6pbUybzmIExB2NazJYIj6rYorJdM_wxmQpg&usqp=CAU" alt="" width="100" height="100"></h3>
                     <p class="join-type-desc">나의글 / 나의댓글</p>
-                </div></a>
-                <a href=""><div class="join-type">
+                    <input type="submit" value="선택">
+                </div>
+                <div class="join-type">
                     <h3 class="join-type-title">내정보<br><img src="https://www.urbanbrush.net/web/wp-content/uploads/2020/09/urbanbrush-20200903091659987374.jpg" alt="" width="100" height="100"></h3>
                     <p class="join-type-desc">탈퇴 / 변경</p>
-                </div></a>    
+                    <input type="submit" value="선택">
+                </div>
+                </form>
             </div>
         </div>
         </center>
+        <script>
+        	function btn_ShoppingBag(){
+        		form1.action="<%=request.getContextPath() %>/member/carboard"
+        		
+        	}
+        </script>
         <style>
             .join-type {
                 width: 233px;
-                height: 210px;
+                height: 250px;
                 float: left;
                 margin-right: 20px;
                 border: 1px solid #d8d8d8;
@@ -57,6 +70,7 @@
             .wrapper{
                 text-align: center;
                 margin-bottom: 100px;
+                
             }
             .contents-mid{
                 display: inline-block;
