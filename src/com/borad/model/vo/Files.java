@@ -33,7 +33,7 @@ public class Files {
 
 	@Override
 	public String toString() {
-		return "Files [fileNm=" + fileNm + ", boardNb=" + boardNb + "]";
+		return  fileNm;
 	}
 	
 }
