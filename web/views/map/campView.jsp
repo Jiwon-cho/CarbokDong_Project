@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="java.sql.Array"%>
 <%@page import="com.camp.model.vo.Camp"%>
 <%@page import="com.camp.model.dao.CampDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,7 +15,12 @@
 		CampDao campDao  = new CampDao();
 		
 		Camp camp = campDao.getOneCamp(name);
-
+		
+		List<String> photos = campDao.getCampPhoto(camp.getNum());
+		
+		System.out.println("불러온 이미지배열:"+photos);
+		String path="/SemiTest/resources/campImgs";
+		System.out.println("불러온 경로:"+path);
 	%>
 	<title><%= camp.getName() %> 상세 보기</title>
 	
@@ -49,31 +56,22 @@
     <div class="container">
       <div class="head">
         <div class="title"><%= camp.getName() %></div>
-        <div class="hashtags">
-          <div class="tag">#멋있다</div>
-          <div class="tag">#가깝다</div>
-          <div class="tag">#좋다</div>
-          <div class="tag">#놀기좋다</div>
-          <div class="tag">#공기좋다</div>
-          <div class="tag">#그냥 좋다</div>
-        </div>
       </div>
       <div class="main">
         <div class="mainPhoto">
-          <div>
+        
+        <%for(int i=0; i<photos.size(); i++ ){%>
+        	<div>
             <img
-              class="mainImg"
-              src="https://kr.blog.kkday.com/wp-content/uploads/korea_camping_spot_5.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              class="mainImg"
-              src="http://tourimage.interpark.com/BBS/Tour/FckUpload/201408/6354273907343808120.jpg"
-              alt=""
-            />
-          </div>
+              	class="mainImg"
+              	src="<%=request.getContextPath() %>/images/campImgs/<%=photos.get(i)%>"
+             	alt="<%=photos.get(i)%> 이미지를 불러올 수 없어요"
+           	 />
+          	</div>
+        <%}%>
+        
+          
+
         </div>
         <div class="details">
           <div class="detail">
