@@ -1,4 +1,4 @@
-package com.borad.controller;
+package com.member.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,23 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.borad.model.service.BoardService;
-import com.borad.model.vo.Board;
-import com.borad.model.vo.Files;
-import com.common.Paging;
-
+import com.member.model.service.MemberService;
+import com.member.model.vo.CarBoard;
 
 /**
- * Servlet implementation class BoradMain
+ * Servlet implementation class CarBoardServlet
  */
-@WebServlet("/borad/mainBorad")
-public class BoradMainServlet extends HttpServlet {
+@WebServlet("/member/carboard")
+public class CarBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoradMainServlet() {
+    public CarBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +33,7 @@ public class BoradMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int cPage;
-		try {
+		try{
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
@@ -45,39 +42,29 @@ public class BoradMainServlet extends HttpServlet {
 		try {
 			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
 		}catch(NumberFormatException e) {
-			numPerpage=10;
+			numPerpage=5;
 		}
-		
-		List<Board>list=new BoardService().selectBoardList(cPage,numPerpage);
-		//List<Board>list2=new BoardService().selectpopularBoardList(cPage,numPerpage);
-		int totalData=new BoardService().selectNoticeCount();
-
-		
+		String userId=request.getParameter("userId");
+		System.out.println(userId);
+		List<CarBoard> list=new MemberService().selectCarBoardList(cPage,numPerpage,userId);
+		int totalData=new MemberService().selectCarBoardCount();
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
-		//Paging p=new Paging(totalData,cPage,numPerpage,pageBarSize);
-		//String pageBar=p.pageBar();
-		//System.out.println(pageBar);
-		
-				int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-		
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
-		
 		String pageBar="";
-		if(pageNo==1) {
+		if(pageNo==1){
 			pageBar+="<span>[이전]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/borad/mainBorad?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo-1)+"'>[이전]</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/borad/mainBorad?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -85,28 +72,15 @@ public class BoradMainServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/borad/mainBorad?cPage="+pageNo+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/board/carboard?cPage="+pageNo+"'>[다음]</a>";
 		}
 		
-		
-		
-		List<Board>pplist=new BoardService().selectppBoard();
-		
-//		for(Board b: list) {
-//			int boardNo=b.getBoardNb();
-//			String img=new BoardService().selectImages(boardNo);			
-//			
-//			System.out.println(img);
-//			request.setAttribute("img", img);
-//		}
-		List<Files>flist=new BoardService().selectFileList();
-		
-		request.setAttribute("flist", flist);
-		request.setAttribute("pplist", pplist);
-		request.setAttribute("pageBar",pageBar);
+		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/borad/mainBorad.jsp").forward(request, response);
+		
+		
+		
+		request.getRequestDispatcher("/views/member/ShoppingBag.jsp").forward(request, response);
 	}
 
 	/**

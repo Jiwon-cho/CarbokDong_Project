@@ -22,7 +22,6 @@
             <form id="" action="<%=request.getContextPath() %>/memberEnroll" method="post">
             	<button type="submit" class="btn_newMember" >회원가입</button>
             </form>
-            
         </div>
     </div>
     
