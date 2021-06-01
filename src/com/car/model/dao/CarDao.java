@@ -1,14 +1,16 @@
 package com.car.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import static com.common.JDBCTemplate.close;
 
 import com.car.model.vo.Car;
 import com.member.model.dao.MemberDao;
@@ -20,6 +22,7 @@ public class CarDao {
 
 	private CarDao() {
 		String path=MemberDao.class.getResource("/sql/car_sql.properties").getPath();
+	
 		try {
 			prop.load(new FileReader(path));
 		}catch (IOException e) {
@@ -56,6 +59,7 @@ public class CarDao {
 				c.setCarTotal(rs.getInt("car_total"));
 				c.setCarPsb(rs.getInt("car_psb_"));
 				c.setCarInfo(rs.getString("car_info"));
+				c.setPrice(rs.getInt("price"));
 				list.add(c);
 			}
 		}catch(Exception e) {
@@ -86,6 +90,7 @@ public class CarDao {
 				c.setCarTotal(rs.getInt("car_total"));
 				c.setCarPsb(rs.getInt("car_psb_"));
 				c.setCarInfo(rs.getString("car_info"));
+				c.setPrice(rs.getInt("price"));
 				list.add(c);
 			}
 		}catch(Exception e) {
@@ -116,6 +121,7 @@ public class CarDao {
 				c.setCarTotal(rs.getInt("car_total"));
 				c.setCarPsb(rs.getInt("car_psb_"));
 				c.setCarInfo(rs.getString("car_info"));
+				c.setPrice(rs.getInt("price"));
 				
 			}
 		}catch(Exception e) {
