@@ -73,6 +73,7 @@ public class BoardViewServlet extends HttpServlet {
 		Files f=new BoardService().selectImgName(No);
 		
 		
+		
 		request.setAttribute("f", f);
 		request.setAttribute("replycount", replycount);
 		request.setAttribute("list", list);

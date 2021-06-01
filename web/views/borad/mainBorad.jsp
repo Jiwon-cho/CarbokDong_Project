@@ -1,10 +1,14 @@
+<%@page import="org.jsoup.select.Evaluator.IsEmpty"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.borad.model.vo.Board,com.borad.model.vo.Files" %>
 <%
 	List<Board>list=(List<Board>)request.getAttribute("list");
 	List<Board>pplist=(List<Board>)request.getAttribute("pplist");
-
+	String searchType= request.getParameter("searchType");
+	String searchKeyword= request.getParameter("searchKeyword");
+	String img=(String)request.getAttribute("img");
+	List<Files>flist=(List<Files>)request.getAttribute("flist");
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -28,7 +32,10 @@
 		text-decoration: none;
 		width: 30PX;
 	}
-
+	#search-container{
+		position: relative;
+		left: 550px;
+	}
 </style>
 	<section id="borad-container">
 		<p id="titi" style="font-size: 35px;">  커뮤니티 게시판</p>
@@ -46,7 +53,7 @@
 				<th scope="col">제목</th>
 				<th scope="col">글쓴이</th>
 				<th scope="col">날짜</th>
-				<th scope="col">추천</th>
+				<th scope="col">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -83,13 +90,15 @@
 			<%for(Board b: list){ %>
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
-				<input type="hidden" name="No" value="<%=b.getBoardNb()%>">
+				<input type="hidden" name="boardNo" value="<%=b.getBoardNb()%>">
 					<span class="artice">
-						<%if(b==null){ %>
-						<img src="<%=request.getContextPath() %>/upload/" width="130" height="120" >
-						<%}else{ %>
-						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120" >
-						<%} %>
+					<%for(Files f:flist) {%>
+						<%if(b.getBoardNb()!=f.getBoardNb()){ %>
+						<img src="<%=request.getContextPath() %>/upload/board/<%=f.getFileNm() %>" width="130" height="120" 
+						alt="<%=request.getContextPath() %>/images/noimage.gif">
+						<%break;} %>
+	
+					<%} %>
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>
 						</strong>
@@ -116,14 +125,31 @@
 		<br><br>
 		<div id="pageBarb"><%=request.getAttribute("pageBar") %></div>
 		<br><br>
-		<select>
-			<option value="">내용으로찾기</option>
-			<option value="">작성자로찾기</option>
-			<option value="">내용+작성자</option>
+	<div id="search-container">
+		검색:
+		<select id="searchType" size="1">
+			<option value="member_Id" <%=searchType!=null&&searchType.equals("member_Id")?"selected":"" %>>작성자로찾기</option>
+			<option value="board_Contents"  <%=searchType!=null&&searchType.equals("board_Contents")?"selected":"" %>>내용으로찾기</option>
 		</select>
-		<textarea cols="20" rows="1"></textarea>
-		<input type="button" value="검색">
-	</section>
+		<div id="search-member_Id">
+			<form action="<%=request.getContextPath() %>/board/searchMemberList" method="post">
+				<input type="text" name="searchKeyword" size="25"
+				placeholder="검색할 아이디를 입력해주세요"
+				value="<%=searchType!=null&&searchType.equals("member_Id")?searchKeyword:""%>">
+				<input type="hidden" name="searchType" value="member_Id">
+				<button type="submit" >조회</button>
+			</form>
+		</div>
+		<div id="search-board_Contents">
+			<form action="<%=request.getContextPath() %>/board/searchMemberList" method="post">
+				<input type="text" name="searchKeyword" size="25"
+				placeholder="검색할 내용을 입력해주세요"
+				value="<%=searchType!=null&&searchType.equals("board_Contents")?searchKeyword:""%>">
+				<input type="hidden" name="searchType" value="board_Contents">
+				<button type="submit" >조회</button>
+			</form>
+		</div>
+			</div>
 	<br><br>
 	<script>
 	<%-- <%if(loginMember!=null){%> --%>
@@ -136,5 +162,19 @@
            location.assign("<%=request.getContextPath()%>/loginPage");
        });
 	   <%}%> --%>
+	   $("#searchType").change(e=>{
+			const userId=$("#search-member_Id");
+			const userName=$("#search-board_Contents");
+			
+			userId.css("display","none");
+			userName.css("display","none");
+
+			
+			$("#search-"+$(e.target).val()).css("display","inline-block");
+		});
+		$(function(){
+			$("#searchType").change();
+		});
+
 	</script>
 <%@ include file="/views/common/footer.jsp"%>

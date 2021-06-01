@@ -17,7 +17,7 @@ public class CarViewServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CarViewServlet() {
+    public CarViewServlet() { 
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,10 @@ public class CarViewServlet extends HttpServlet {
 //		doGet(request, response);
 		int carNB=Integer.parseInt(request.getParameter("carNb"));
 		
-		request.getRequestDispatcher("/views/Car/carViews.jsp").forward(request, response);
+		
+		
+		response.sendRedirect(request.getContextPath()+"/views/Car/carViews.jsp");
+//		request.getRequestDispatcher("/views/Car/carViews.jsp").forward(request, response);
 	}
 
 }

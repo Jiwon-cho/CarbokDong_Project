@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.borad.model.vo.Reply;
+import com.member.model.vo.Member;
 import com.borad.model.vo.Board;
 import com.borad.model.vo.Files;
 
@@ -293,5 +294,133 @@ private Properties prop=new Properties();
 			close(rs);
 			close(pstmt);
 		}return f;
+	}
+	public List<Board>selectSearchMember(Connection conn,String type,String keyword,int cPage,int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Board>list=new ArrayList();
+		String sql=prop.getProperty("selectSearchMember");
+		try {
+			pstmt=conn.prepareStatement(sql.replace("#",type));
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Board b=new Board();
+				b.setBoardNb(rs.getInt("board_nb"));
+				b.setBoardTitle(rs.getString("board_title"));
+				b.setBoradDate(rs.getDate("board_date"));
+				b.setBoardContents(rs.getString("board_contents"));
+				b.setViewCount(rs.getInt("board_viewcount"));
+				b.setMemberId(rs.getString("member_id"));
+				list.add(b);
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	}return list;
+	}
+	public int selectSearchMemberCount(Connection conn,String type,String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectSeachMemberCount");
+		try {
+			pstmt=conn.prepareStatement(sql.replace("#", type));
+			pstmt.setString(1, "%"+keyword+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	public int recUpdate(Connection conn,int no,String id) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("recUpdate"));
+			pstmt.setString(1, id);
+			pstmt.setInt(2, no);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public void recDelete(Connection conn,int no,String id) {
+		PreparedStatement pstmt=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("recDelete"));
+			pstmt.setString(1, id);
+			pstmt.setInt(2, no);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+	}
+	public int recCount(Connection conn,int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("recCount"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				count=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return count;
+	}
+	public String selectImages(Connection conn,int boardNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String img="";
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectImages"));
+			pstmt.setInt(1, boardNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				img=rs.getString(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return img;
+	}
+	public List<Files>selectFileList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Files>flist=new ArrayList();
+		try{
+			pstmt=conn.prepareStatement(prop.getProperty("selectFileList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				Files f=new Files();
+				f.setFileNm(rs.getString("file_nm"));
+				f.setBoardNb(rs.getInt("board_nb"));
+				flist.add(f);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return flist;
 	}
 }

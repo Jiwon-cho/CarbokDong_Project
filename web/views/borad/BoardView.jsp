@@ -6,6 +6,7 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 	Board b=(Board)request.getAttribute("b");
 	int replycount=(int)request.getAttribute("replycount");
 	Files f=(Files)request.getAttribute("f");
+
 %>    
     
     
@@ -36,10 +37,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 		</span>
 		<span class="desc_subjeck">
 			<a id="gomain" role="button" class="btnbtn_1" style="font-size: 15px; cursor: pointer;">목록</a>
-			<a href="" role="button" class="btnbtn_1" style="font-size: 15px;">
+			<a id="rec_up" role="button" class="btnbtn_1" style="font-size: 15px; cursor: pointer;">
 				추천 
 				<!-- 스펜에 추천수 -->
-				<span class="num_count">0</span>
+				<span class="num_count"></span>
 			</a>
 			<%-- <%if(loginMember!=null&&loginMember.getUserId()==b.getMemberId()){ %> --%>
 			<a href="<%=request.getContextPath() %>/board/updateBoard?No=<%=b.getBoardNb() %>" role="button" class="btnbtn_2" style="font-size: 15px;">수정</a>
@@ -120,7 +121,13 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 
 </article>
 <script >
-
+<%--	$("#rec_up").click(e=>{
+		if(<%=loginMember==null%>){
+			alert("로그인후 이용하세요!");
+			$(e.target).blur();
+			location.assign("<%=request.getContextPath()%>/loginPage");
+		}
+	}); --%>
 	$("#gomain").click(e=>{
 		location.assign('<%=request.getContextPath() %>/borad/mainBorad');
 	});
@@ -159,5 +166,34 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 		confirm("정말로 삭제하시겠습니까?");
 	
 	});
+	$("#rec_up").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/board/recUpdate.do",
+			type:"POST",
+			data:{
+				no:<%=b.getBoardNb()%>,
+				/* id값 loginMember.getUserId 로변경 */
+				id:"admin"
+			},
+			success: function(){
+				recCount();
+				console.log("추천로직");
+			},
+		})
+	})
+	function recCount(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/board/recCount.do",
+			type:"POST",
+			data:{
+				no:<%=b.getBoardNb()%>,
+			},
+			success: function(count){
+				console.log("카운트수");
+				$(".num_count").html(count);
+			},
+		})
+	};
+	recCount();
 </script>
 <%@ include file="/views/common/footer.jsp"%>

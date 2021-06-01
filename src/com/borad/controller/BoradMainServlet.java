@@ -51,6 +51,7 @@ public class BoradMainServlet extends HttpServlet {
 		List<Board>list=new BoardService().selectBoardList(cPage,numPerpage);
 		//List<Board>list2=new BoardService().selectpopularBoardList(cPage,numPerpage);
 		int totalData=new BoardService().selectNoticeCount();
+
 		
 		int pageBarSize=5;
 		//Paging p=new Paging(totalData,cPage,numPerpage,pageBarSize);
@@ -92,7 +93,16 @@ public class BoradMainServlet extends HttpServlet {
 		
 		List<Board>pplist=new BoardService().selectppBoard();
 		
+//		for(Board b: list) {
+//			int boardNo=b.getBoardNb();
+//			String img=new BoardService().selectImages(boardNo);			
+//			
+//			System.out.println(img);
+//			request.setAttribute("img", img);
+//		}
+		List<Files>flist=new BoardService().selectFileList();
 		
+		request.setAttribute("flist", flist);
 		request.setAttribute("pplist", pplist);
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("list", list);

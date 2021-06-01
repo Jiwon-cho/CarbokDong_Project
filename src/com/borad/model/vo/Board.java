@@ -87,5 +87,12 @@ public class Board {
 		this.memberId = memberId;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Board [boardNb=" + boardNb + ", boardTitle=" + boardTitle + ", boradDate=" + boradDate
+				+ ", boardContents=" + boardContents + ", viewCount=" + viewCount + ", memberId=" + memberId + "]";
+	}
+	
 	
 }

@@ -117,4 +117,47 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return f;
 	}
+	public List<Board>selectSearchMember(String type,String keyword,int cPage,int numPerpage){
+		Connection conn=getConnection();
+		List<Board>list=dao.selectSearchMember(conn,type,keyword,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public int selectSearchMemberCount(String type,String keyword) {
+		Connection conn=getConnection();
+		int result=dao.selectSearchMemberCount(conn,type,keyword);
+		close(conn);
+		return result;
+	}
+	public int recUpdate(int no,String id) {
+		Connection conn=getConnection();
+		int result=dao.recUpdate(conn,no,id);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public void recDelete(int no,String id) {
+		Connection conn=getConnection();
+		dao.recDelete(conn,no,id);
+		close(conn);
+	}
+	public int recCount(int no) {
+		Connection conn=getConnection();
+		int count=dao.recCount(conn,no);
+		close(conn);
+		return count;
+	}
+	public String selectImages(int boardNo) {
+		Connection conn=getConnection();
+		String img=dao.selectImages(conn,boardNo);
+		close(conn);
+		return img;
+	}
+	public List<Files> selectFileList(){
+		Connection conn=getConnection();
+		List<Files>flist=dao.selectFileList(conn);
+		close(conn);
+		return flist;
+	}
 }

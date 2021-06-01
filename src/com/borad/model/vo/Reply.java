@@ -101,6 +101,14 @@ public class Reply {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyDate=" + replyDate
+				+ ", boardNb=" + boardNb + ", replyLevel=" + replyLevel + ", replyRef=" + replyRef + ", replyWriter="
+				+ replyWriter + "]";
+	}
+
+
 	
 
 	
