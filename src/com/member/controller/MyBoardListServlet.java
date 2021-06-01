@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.borad.model.service.BoardService;
+import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
 import com.member.model.service.MemberService;
-import com.member.model.vo.CarBoard;
 
 /**
- * Servlet implementation class CarBoardServlet
+ * Servlet implementation class MyBoardListServlet
  */
-@WebServlet("/member/carboard")
-public class CarBoardServlet extends HttpServlet {
+@WebServlet("/member/myBoardList")
+public class MyBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CarBoardServlet() {
+    public MyBoardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +35,7 @@ public class CarBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int cPage;
-		try{
+		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
@@ -42,29 +44,32 @@ public class CarBoardServlet extends HttpServlet {
 		try {
 			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
 		}catch(NumberFormatException e) {
-			numPerpage=5;
+			numPerpage=10;
 		}
 		String userId=request.getParameter("userId");
 		
-		List<CarBoard> list=new MemberService().selectCarBoardList(cPage,numPerpage,userId);
-		int totalData=new MemberService().selectCarBoardCount(userId);
+		List<Board>list=new MemberService().selectMyBoardList(cPage,numPerpage,userId);
+		int totalData=new MemberService().selectMyNoticeCount(userId);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
+		
 		String pageBar="";
-		if(pageNo==1){
+		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/member/carboard?cPage="+(pageNo-1)+"&userId="+userId+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getContextPath()
+			+"/member/myBoardList?cPage="+(pageNo-1)+"&userId="+userId+"'>[이전]</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/member/carboard?cPage="+pageNo+"&userId="+userId+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()
+				+"/member/myBoardList?cPage="+pageNo+"&userId="+userId+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -72,15 +77,16 @@ public class CarBoardServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/member/carboard?cPage="+pageNo+"&userId="+userId+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getContextPath()
+			+"/member/myBoardList?cPage="+pageNo+"&userId="+userId+"'>[다음]</a>";
 		}
+		List<Board>pplist=new BoardService().selectppBoard();
 		
-		request.setAttribute("pageBar", pageBar);
+		
+		request.setAttribute("pplist", pplist);
+		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("list", list);
-		
-		
-		
-		request.getRequestDispatcher("/views/member/ShoppingBag.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/myBoardList.jsp").forward(request, response);
 	}
 
 	/**

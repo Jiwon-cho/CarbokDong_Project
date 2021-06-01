@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
 
@@ -162,12 +164,13 @@ public class MemberDao {
 		}return list;
 	}
 	
-	public int selectCarBoardCount(Connection conn) {
+	public int selectCarBoardCount(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectCarBoardCount"));
+			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 		}catch(SQLException e) {
@@ -191,5 +194,50 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public List<Board> selectMyBoardList(Connection conn,int cPage,int numPerpage, String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Board> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMyBoardList"));
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Board b=new Board();
+				b.setBoardNb(rs.getInt("board_nb"));
+				b.setBoardTitle(rs.getString("board_title"));
+				b.setBoradDate(rs.getDate("board_date"));
+				b.setBoardContents(rs.getString("board_contents"));
+				b.setViewCount(rs.getInt("board_viewcount"));
+				b.setMemberId(rs.getString("member_id"));
+				list.add(b);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public int selectMyNoticeCount(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMyNoticeCount"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
 	}
 }

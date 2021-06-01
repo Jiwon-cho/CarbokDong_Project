@@ -8,6 +8,8 @@ import static com.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
@@ -52,9 +54,9 @@ public class MemberService {
 		return list;
 	}
 	
-	public int selectCarBoardCount() {
+	public int selectCarBoardCount(String userId) {
 		Connection conn=getConnection();
-		int result=dao.selectCarBoardCount(conn);
+		int result=dao.selectCarBoardCount(conn,userId);
 		close(conn);
 		return result;
 	}
@@ -66,4 +68,17 @@ public class MemberService {
 		return result;
 	}
 	
+	public List<Board> selectMyBoardList(int cPage,int numPerpage, String userId){
+		Connection conn=getConnection();
+		List<Board>list=dao.selectMyBoardList(conn,cPage,numPerpage,userId);
+		close(conn);
+		return list;
+				
+	}
+	public int selectMyNoticeCount(String userId) {
+		Connection conn=getConnection();
+		int result=dao.selectMyNoticeCount(conn,userId);
+		close(conn);
+		return result;
+	}
 }

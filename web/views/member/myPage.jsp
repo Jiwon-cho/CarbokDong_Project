@@ -22,9 +22,10 @@
                     <input type="submit" value="선택">
                 </div>
                 <div class="join-type">
+                	<input type="hidden" name="userId" value="<%=loginMember.getUserId() %>">
                     <h3 class="join-type-title">내가 쓴글<br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6pbUybzmIExB2NazJYIj6rYorJdM_wxmQpg&usqp=CAU" alt="" width="100" height="100"></h3>
                     <p class="join-type-desc">나의글 / 나의댓글</p>
-                    <input type="submit" value="선택">
+                    <input type="submit" onclick="btn_MyBoardList();" value="선택">
                 </div>
                 <div class="join-type">
                     <h3 class="join-type-title">내정보<br><img src="https://www.urbanbrush.net/web/wp-content/uploads/2020/09/urbanbrush-20200903091659987374.jpg" alt="" width="100" height="100"></h3>
@@ -38,7 +39,9 @@
         <script>
         	function btn_ShoppingBag(){
         		form1.action="<%=request.getContextPath() %>/member/carboard"
-        		
+        	}
+        	function btn_MyBoardList(){
+        		form1.action="<%=request.getContextPath() %>/member/myBoardList"
         	}
         </script>
         <style>
