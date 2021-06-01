@@ -1,6 +1,7 @@
 package com.member.model.vo;
 
 public class CarBoard {
+	private int carIdx;
 	private String carPicName;
 	private String carName;
 	private int price;
@@ -14,14 +15,25 @@ public class CarBoard {
 	}
 
 
-	public CarBoard(String carPicName, String carName, int price, String isdel, int carTotal, int carPsb) {
+	public CarBoard(int carIdx, String carPicName, String carName, int price, String isdel, int carTotal, int carPsb) {
 		super();
+		this.carIdx = carIdx;
 		this.carPicName = carPicName;
 		this.carName = carName;
 		this.price = price;
 		this.isdel = isdel;
 		this.carTotal = carTotal;
 		this.carPsb = carPsb;
+	}
+
+
+	public int getCarIdx() {
+		return carIdx;
+	}
+
+
+	public void setCarIdx(int carIdx) {
+		this.carIdx = carIdx;
 	}
 
 
@@ -83,6 +95,9 @@ public class CarBoard {
 	public void setCarPsb(int carPsb) {
 		this.carPsb = carPsb;
 	}
+
+
+	
 
 
 	

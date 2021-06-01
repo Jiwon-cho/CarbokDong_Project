@@ -151,7 +151,7 @@ public class MemberDao {
 				c.setCarTotal(rs.getInt("CAR_TOTAL"));
 				c.setIsdel(rs.getString("ISDEL"));
 				c.setPrice(rs.getInt("PRICE"));
-				
+				c.setCarIdx(rs.getInt("CART_IDX"));
 				list.add(c);
 			}
 		}catch(SQLException e) {
@@ -176,5 +176,20 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}return result;
+	}
+	
+	public int shoppingBagDelet(Connection conn, String IDX) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("shoppingBagDelet"));
+			pstmt.setString(1, IDX);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

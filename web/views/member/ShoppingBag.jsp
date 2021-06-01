@@ -69,9 +69,18 @@ div#pageBar span.cPage {
 			<td>
 				<%if(c.getIsdel().equals("N")) {%>
 					<button name="" class="btn" onclick="">구매</button>
-                    <button name="" class="btn" onclick="">삭제</button>
+					<form action="<%=request.getContextPath() %>/ShoppingBagDelet" method="post">
+					<input type="hidden" name="IDX" value="<%=c.getCarIdx()%>">
+					<input type="hidden" name="userId" value="<%=loginMember.getUserId()%>">
+					<button type="submit" name="" class="btn" onclick="">삭제</button>
+					</form>
+                    
 				<%} else{%>
-					현재 남은 차량이 없습니다.
+					<form action="<%=request.getContextPath() %>/ShoppingBagDelet" method="post">
+					<input type="hidden" name="IDX" value="<%=c.getCarIdx()%>">
+					<input type="hidden" name="userId" value="<%=loginMember.getUserId()%>">
+					<button type="submit" name="" class="btn" onclick="">삭제</button>
+					</form>
 				<%} %>
 			</td>
 		</tr>

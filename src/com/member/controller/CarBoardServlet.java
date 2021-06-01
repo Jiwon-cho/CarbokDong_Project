@@ -45,7 +45,6 @@ public class CarBoardServlet extends HttpServlet {
 			numPerpage=5;
 		}
 		String userId=request.getParameter("userId");
-		System.out.println(userId);
 		List<CarBoard> list=new MemberService().selectCarBoardList(cPage,numPerpage,userId);
 		int totalData=new MemberService().selectCarBoardCount();
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);

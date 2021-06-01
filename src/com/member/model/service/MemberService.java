@@ -58,4 +58,12 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	public int shoppingBagDelet(String IDX) {
+		Connection conn=getConnection();
+		int result=dao.shoppingBagDelet(conn,IDX);
+		close(conn);
+		return result;
+	}
+	
 }
