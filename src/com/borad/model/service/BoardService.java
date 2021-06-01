@@ -148,16 +148,16 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return count;
 	}
-	public String selectImages(int boardNo) {
-		Connection conn=getConnection();
-		String img=dao.selectImages(conn,boardNo);
-		close(conn);
-		return img;
-	}
-	public List<Files> selectFileList(){
-		Connection conn=getConnection();
-		List<Files>flist=dao.selectFileList(conn);
-		close(conn);
-		return flist;
-	}
+//	public String selectImages(int boardNo) {
+//		Connection conn=getConnection();
+//		String img=dao.selectImages(conn,boardNo);
+//		close(conn);
+//		return img;
+//	}
+//	public List<Files> selectFileList(){
+//		Connection conn=getConnection();
+//		List<Files>flist=dao.selectFileList(conn);
+//		close(conn);
+//		return flist;
+//	}
 }

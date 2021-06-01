@@ -39,7 +39,7 @@ public class BoardDeleteServlet extends HttpServlet {
 			loc="/borad/mainBorad";
 		}else {
 			msg="게시물 삭제에 실패하였습니다.";
-			loc="/borad/BoardView?No="+No;
+			loc="/borad/mainBorad";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

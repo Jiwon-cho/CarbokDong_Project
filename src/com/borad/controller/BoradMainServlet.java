@@ -100,9 +100,10 @@ public class BoradMainServlet extends HttpServlet {
 //			System.out.println(img);
 //			request.setAttribute("img", img);
 //		}
-		List<Files>flist=new BoardService().selectFileList();
+		//List<Files>flist=new BoardService().selectFileList();
+		//request.setAttribute("flist", flist);
 		
-		request.setAttribute("flist", flist);
+		
 		request.setAttribute("pplist", pplist);
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("list", list);

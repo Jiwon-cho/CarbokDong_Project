@@ -127,7 +127,7 @@
 			<br>
 			<hr>
 			<!-- 주석처리 할것 -->
-			<input name="id" value="admin" type="hidden">
+			 <input name="id" value="<%=loginMember.getUserId() %>" type="hidden"> 
 			<br>
 			<div class="btn">
 			<input class="btnbtn" type="submit" value="등록하기" width="20" height="20">
