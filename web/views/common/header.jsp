@@ -13,23 +13,49 @@
 
 
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>  
-
+<%-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>	
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">   --%>
     <link
       href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
       rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">  
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">   
 
   </head>
 
-  </style>
+  
  <header> 
-  <body>
-<!--   <div class="row">
-    <div class="col" style="background-color:rgb(211, 202, 202); height:30px;" ></div>
+<!-- <div class="container-fluid"> -->
+   <%-- <div class="row">
+    <div class="col" style="background-color:rgb(211, 202, 202); height:30px;" >
+     <%if(loginMember==null) {%>
+     <ul class="nav justify-content-end" style="height:30px;">
+       <!--  <li class="nav-item">
+          <a class="nav-link" href="#" ><h5>Link</h5></a>
+        
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" ><h5>Link</h5></a>
+        
+        </li> -->
+    <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
+        <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
+      </ul>
+	<%}else {%>
+	<ul class="nav justify-content-end" style="height:30px;">
+		<li><a href="<%=request.getContextPath()%>/myPage">마이페이지</a></li>
+	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
+	  </ul>
+	<%} %>
+        <div class="row">
+    <div class="col" style="background-color:rgb(211, 202, 202); height:10px;" ></div></div>
+    </div>
 
 </div>
 <div class="row">
-    <div class="col" style=" height:95px;text-align: center;margin-top: 30px;"><h1 style="color: green  ;;"> <a href="" style="text-decoration: none; color: green"> 차박왕 카복동</a></h1></div>
+    <div class="col" style=" height:100px;text-align: center;margin-top: 40px;"><h1> <a href="" style="text-decoration: none; color: green">차박왕 카복동 </a></h1></div>
 
 
 </div>
@@ -38,16 +64,16 @@
     <div class="col" style="background-color:lavender;text-align: center;">
       <ul class="nav justify-content-center">
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#" id="menu-bar">Link</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#" id="menu-bar">Link</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#" id="menu-bar">Link</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link disabled" href="#" id="menu-bar">Disabled</a>
         </li>
       </ul>
     </div>
@@ -55,8 +81,8 @@
   </div>
     <div class="row">
     <div class="col" style="height: 50px;"></div>
-</div> -->
-    <div class="headbar">
+</div>  --%>
+     <div class="headbar">
        <%if(loginMember==null) {%>
       <ul class="list">
         <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
@@ -87,12 +113,12 @@
         <li><a href="<%=request.getContextPath()%>/car/carList">렌트 차 종류</a></li>
         <!-- <li><a href="">마이페이지</a></li> -->
         <li><a href="">Q&A</a></li>
-      </div>
+      </div>  
       <!-- <ul class="navbar__icons">
         <li>
           <a href="./mini_Login.html"><i class="fas fa-sign-in-alt"></i></a>
         </li>
       </ul> -->
-
-    </div>
+<!-- 
+    </div> -->
   </header>

@@ -1,7 +1,147 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.car.model.vo.Car"  %>
 <%@ include file="/views/common/header.jsp" %>
+<%
+Car c=(Car)request.getAttribute("car");
+String[] carinfos=c.getCarInfo().split("|");
+String id=null;
+if(loginMember!=null){
+	 id="'"+loginMember.getUserId()+"'";
+	 
+}
+
+
+
+%>
+<style>
+    table
+    {
+        border:1px solid #BDBDBD;
+        text-align:center;
+        width:320px;
+        height:300px;
+    }
+</style>
+ 
+<script language="javascript">
+    var today = new Date(); // 오늘 날짜
+    var date = new Date();
+ 
+    function beforem() //이전 달을 today에 값을 저장
+    { 
+        today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+        build(); //만들기
+        
+    }
+    
+    function nextm()  //다음 달을 today에 저장
+    {
+        today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+        build();
+    }
+    
+    function build()
+    {
+        var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
+        var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
+        var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
+        var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
+        yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
+        
+        if(today.getMonth()+1==12) //  눌렀을 때 월이 넘어가는 곳
+        {
+            before.innerHTML=(today.getMonth())+"월";
+            next.innerHTML="1월";
+        }
+        else if(today.getMonth()+1==1) //  1월 일 때
+        {
+        before.innerHTML="12월";
+        next.innerHTML=(today.getMonth()+2)+"월";
+        }
+        else //   12월 일 때
+        {
+            before.innerHTML=(today.getMonth())+"월";
+            next.innerHTML=(today.getMonth()+2)+"월";
+        }
+        
+       
+        // 남은 테이블 줄 삭제
+        while (tbcal.rows.length > 2) 
+        {
+            tbcal.deleteRow(tbcal.rows.length - 1);
+        }
+        var row = null;
+        row = tbcal.insertRow();
+        var cnt = 0;
+ 
+        // 1일 시작칸 찾기
+        for (i = 0; i < nMonth.getDay(); i++) 
+        {
+            cell = row.insertCell();
+            cnt = cnt + 1;
+        }
+ 
+        // 달력 출력
+        for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
+        { 
+            cell = row.insertCell();
+            cell.innerHTML = i;
+            cnt = cnt + 1;
+            if (cnt % 7 == 1) {//일요일 계산
+                cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
+            }
+            if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
+                cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
+                row = calendar.insertRow();// 줄 추가
+            }
+            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
+            {
+                cell.bgColor = "#BCF1B1"; //오늘날짜배경색
+            }
+        }
+        
+        cl();
+        carPv();	
+    }
+
+    function cl(){
+    $("td").click((e)=>{
+        var dt=String(today.getFullYear())+"-"+  String((today.getMonth() + 1))+"-"+ $(e.target).text();
+        var ddt=new Date(dt);
+        var det;
+        if($("#end").val!=null){
+        det=new Date($("#end").val());
+        }else{
+            det=today;
+        }
+        if($("#start").val()==""||ddt>=det){
+
+        $("#start").val(dt);
+        $("#end").val("");
+        
+    }else if(ddt<today||ddt<new Date($("#start").val())){
+        alert("안돼!");
+    }
+    else{
+        $("#end").val(dt);
+        
+    }
+})}
+    
+    
+     function carPV(){
+    
+   if(<%=id%>!==null){	
+     location.assign("<%=request.getContextPath()%>/car/carPurchaseView");
+    }else{
+    	alert("로그인을 하고 이용해 주십시오");	
+    	   location.assign("<%=request.getContextPath()%>/loginPage");
+    }
+    }  
+</script>
+ 
+<body onload="build();">
 <div class="content_container">
       <div class="book">
         <div class="book_img">
@@ -13,22 +153,51 @@
         </div>
         <div class="book_option">
           <div class="book_subject">
-            <h1>성능좋은 캠핑카</h1>
-            <h3 style="text-align: right">재고 : n대</h3>
-            <h2>상품 설명 ~ 성능좋고 싸고 튼튼합니다</h2>
+            <h1><%=c.getCarModel() %></h1>
+            <h3 style="text-align: right">재고 : <%=c.getCarPsb() %>대</h3>
+            <h2><%=c.getCarInfo() %></h2>
           </div>
+           <div style="height:320px;">
+    <table align="center" id="calendar">
+        <tr>
+            <th><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></th>
+            <th colspan="5" align="center" id="yearmonth"></th>
+            <th><font size=1%; color="#B3B6B3"><label onclick="nextm()" id="next"></label></font></th>
+        </tr>
+        <tr>
+            <th align="center"> <font color="#FF9090">일</font></th>
+            <th align="center"> 월 </th>
+            <th align="center"> 화 </th>
+            <th align="center"> 수 </th>
+            <th align="center"> 목 </th>
+            <th align="center"> 금 </th>
+            <th align="center"><font color=#7ED5E4>토</font></th>
+        </tr>
+    </table>
+</div>
+
+<div >
+
+    <input type="text" id="start" name="trip-start"
+    value="">
+    
+    <input type="text" id="end" name="trip-end"
+    value="">
+    
+</div>
           <div class="book_options">
-            <select name="gear" id="gear-select">
+           <!--  <select name="gear" id="gear-select">
               <option value="">--- 차량 대여일자 ---</option>
               <option value="rental_date">2021-05-05</option>
-            </select>
+            </select> -->
             <select name="gear" id="gear-select">
               <option value="">--- 추가 캠핑용품 ---</option>
-              <option value="grill">바베큐 그릴</option>
+              <option value="grill" >바베큐 그릴</option>
             </select>
             <br />
+            
             <button class="basket_btn">장바구니 담기</button>
-            <button class="buy_btn">구매하기</button>
+            <button class="buy_btn" onclick="carPV();">구매하기</button>
           </div>
         </div>
       </div>
@@ -74,7 +243,7 @@
       align-items: center;
       margin: auto;
       width: 70vw;
-      height: 3000px;
+      height: auoto;
       background-color: rgb(233, 233, 233);
     }
 
@@ -84,9 +253,10 @@
       justify-content: center;
       flex-direction: row;
       margin: 30px 0;
-      height: 700px;
+      height: 1620px;
       width: 100%;
       border: 1px gray solid;
+      background-color:white;
     }
 
     .book_img {
@@ -135,7 +305,7 @@
     .item {
       box-sizing: border-box;
       text-align: center;
-      height: 1500px;
+      height: 1700px;
       width: 100%;
       margin: 50px 0;
       border: 1px gray solid;
@@ -151,7 +321,7 @@
       flex-direction: column;
       margin: 0;
       width: 100%;
-      height: 500px;
+      height: 700px;
       border: 1px gray solid;
     }
 

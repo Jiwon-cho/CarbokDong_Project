@@ -312,7 +312,7 @@ body, button, input, select, td, textarea, th {
         flex-direction: row-reverse;
       margin-top:0px;
     }
-    ul.head-list>li{
+   /*  ul.head-list>li{
       float:left;
       list-style:none;
     }
@@ -325,7 +325,7 @@ body, button, input, select, td, textarea, th {
     }
     ul.head-list>li:last-child{
       margin-right:300px;
-    }
+    } */
   li{
     list-style: none;
   }
@@ -365,5 +365,8 @@ li a.arrow::after{
 	font-size:50px;
 }
 
-
+#menu-bar{
+	font-size:30px;
+	
+}
 

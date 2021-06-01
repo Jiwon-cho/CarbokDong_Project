@@ -214,6 +214,7 @@ function showSlides(n) {
 
   }
   </style>
+      <body>
    <section>
   <div class="container-fluid">
      <div class="row">
@@ -348,6 +349,7 @@ function showSlides(n) {
         </div>
       </div>
       </div>
+   
   <%-- 
     <div class="container">
         

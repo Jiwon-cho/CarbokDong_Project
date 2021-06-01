@@ -33,4 +33,12 @@ public class CarService {
 		
 	}
 	
+	public Car selectCar(int carNB) {
+		Connection conn=getConnection();
+		Car c=dao.selectCar(conn,carNB);
+		close(conn);
+		return c;
+	}
+	
+	
 }

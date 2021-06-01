@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+
     <div class="inner_login">
         <div class="login2">
             <form  id="" action="<%=request.getContextPath() %>/login" method="post">

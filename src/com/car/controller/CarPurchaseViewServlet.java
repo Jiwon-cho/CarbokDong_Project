@@ -1,27 +1,23 @@
 package com.car.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.car.model.service.CarService;
-import com.car.model.vo.Car;
-
 /**
- * Servlet implementation class CarViewServlet
+ * Servlet implementation class CarPurchaseViewServlet
  */
-@WebServlet("/car/carView")
-public class CarViewServlet extends HttpServlet {
+@WebServlet("/car/carPurchaseView")
+public class CarPurchaseViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CarViewServlet() { 
+    public CarPurchaseViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +27,7 @@ public class CarViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int carNB=Integer.parseInt(request.getParameter("carNB"));
-		
-		Car c=new CarService().selectCar(carNB);
-		
-		request.setAttribute("car", c);
-	
-		
-		
-		request.getRequestDispatcher("/views/Car/carViews.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/Car/carPurchaseView.jsp").forward(request, response);
 	}
 
 	/**
@@ -48,14 +36,6 @@ public class CarViewServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		/*
-		 * String carNB=request.getParameter("carNb");
-		 * 
-		 * HttpSession session=request.getSession(); session.setAttribute("carNB",
-		 * carNB);
-		 * response.sendRedirect(request.getContextPath()+"/views/Car/carViews.jsp");
-		 */
-//		request.getRequestDispatcher("/views/Car/carViews.jsp").forward(request, response);
 	}
 
 }

@@ -99,4 +99,33 @@ public class CarDao {
 		
 	}
 	
+	public Car selectCar(Connection conn, int carNB){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Car c=new Car();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectCar"));
+			pstmt.setInt(1, carNB);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				
+				c.setCarNB(rs.getInt("car_nb"));
+				c.setCarType(rs.getString("car_type"));
+				c.setCarModel(rs.getString("car_model"));
+				c.setCarPpl(rs.getInt("car_ppl"));
+				c.setCarTotal(rs.getInt("car_total"));
+				c.setCarPsb(rs.getInt("car_psb_"));
+				c.setCarInfo(rs.getString("car_info"));
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return c;
+		
+		
+	}
 }
