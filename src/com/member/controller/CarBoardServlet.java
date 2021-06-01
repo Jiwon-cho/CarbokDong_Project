@@ -45,8 +45,9 @@ public class CarBoardServlet extends HttpServlet {
 			numPerpage=5;
 		}
 		String userId=request.getParameter("userId");
+		
 		List<CarBoard> list=new MemberService().selectCarBoardList(cPage,numPerpage,userId);
-		int totalData=new MemberService().selectCarBoardCount();
+		int totalData=new MemberService().selectCarBoardCount(userId);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -56,14 +57,14 @@ public class CarBoardServlet extends HttpServlet {
 		if(pageNo==1){
 			pageBar+="<span>[이전]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/member/carboard?cPage="+(pageNo-1)+"&userId="+userId+"'>[이전]</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/member/carboard?cPage="+pageNo+"&userId="+userId+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -71,7 +72,7 @@ public class CarBoardServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/board/carboard?cPage="+pageNo+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/member/carboard?cPage="+pageNo+"&userId="+userId+"'>[다음]</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);

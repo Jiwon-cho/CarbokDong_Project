@@ -28,15 +28,7 @@ li{display: list-item; text-align: -webkit-match-parent;}
 	color: #000;
 	vertical-align: top;
 }
-.txt_de{
-	display: inline;
-	color: #000;
-	font-size: 17px;
-	line-height: 22px;
-	vertical-align: top;
-	white-space: normal;
-	word-break: break-all;
-	}
+
 
 	.txt_info{
 	display: list-item;

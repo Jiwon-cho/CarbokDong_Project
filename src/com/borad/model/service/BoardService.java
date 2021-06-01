@@ -154,10 +154,10 @@ private BoardDao dao=new BoardDao();
 //		close(conn);
 //		return img;
 //	}
-//	public List<Files> selectFileList(){
-//		Connection conn=getConnection();
-//		List<Files>flist=dao.selectFileList(conn);
-//		close(conn);
-//		return flist;
-//	}
+	public List<Files> selectFileList(){
+		Connection conn=getConnection();
+		List<Files>flist=dao.selectFileList(conn);
+		close(conn);
+		return flist;
+	}
 }

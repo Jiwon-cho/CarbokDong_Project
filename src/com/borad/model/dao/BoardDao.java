@@ -404,24 +404,24 @@ private Properties prop=new Properties();
 //			close(pstmt);
 //		}return img;
 //	}
-//	public List<Files>selectFileList(Connection conn){
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		List<Files>flist=new ArrayList();
-//		try{
-//			pstmt=conn.prepareStatement(prop.getProperty("selectFileList"));
-//			rs=pstmt.executeQuery();
-//			while(rs.next()){
-//				Files f=new Files();
-//				f.setFileNm(rs.getString("file_nm"));
-//				f.setBoardNb(rs.getInt("board_nb"));
-//				flist.add(f);
-//			}
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}return flist;
-//	}
+	public List<Files>selectFileList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Files>flist=new ArrayList();
+		try{
+			pstmt=conn.prepareStatement(prop.getProperty("selectFileList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				Files f=new Files();
+				f.setFileNm(rs.getString("file_nm"));
+				f.setBoardNb(rs.getInt("board_nb"));
+				flist.add(f);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return flist;
+	}
 }

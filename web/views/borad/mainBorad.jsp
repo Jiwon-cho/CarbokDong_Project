@@ -8,7 +8,7 @@
 	String searchType= request.getParameter("searchType");
 	String searchKeyword= request.getParameter("searchKeyword");
 	//String img=(String)request.getAttribute("img");
-	//List<Files>flist=(List<Files>)request.getAttribute("flist");
+	List<Files>flist=(List<Files>)request.getAttribute("flist");
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -18,8 +18,8 @@
 		height: 100px;
 		position: absolute;
 		display: block;
-		left: 170px;
-		bottom: 40px;
+		left: 200px;
+		bottom: 30px;
 		column-span: all;
 		overflow: hidden;	
 	}
@@ -36,7 +36,19 @@
 		position: relative;
 		left: 550px;
 	}
+	.txt_de{
+	position:relative;
+	left:150px;
+	bottom:100px;
+	color: #000;
+	font-size: 17px;
+	line-height: 22px;
+	vertical-align: top;
+	white-space: normal;
+	word-break: break-all;
+	}
 </style>
+
 	<section id="borad-container">
 		<p id="titi" style="font-size: 35px;">  커뮤니티 게시판</p>
 		<p id="insertborad" style="cursor:pointer; font-size: 25px;">글쓰기</p>
@@ -90,11 +102,16 @@
 			<%for(Board b: list){ %>
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
-				<input type="hidden" name="boardNo" value="<%=b.getBoardNb()%>">
 					<span class="artice">
-
-						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120">
-
+					<div id="imgdivback" style="width: 130px; height: 120px; background-color: rgb(234, 234, 234); position: relative; top: 20px;">
+					<%for(Files f:flist){%>
+						<%if(f.getBoardNb()==b.getBoardNb()){ %>
+						<img src="<%=request.getContextPath() %>/upload/board/<%=f.getFileNm() %>" width="130" height="120"
+						onerror="this.src='<%=request.getContextPath() %>/images/noimage.gif'">
+						<%}else{ %>
+						<%} %>
+					<%} %>
+					</div>
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>
 						</strong>
@@ -158,7 +175,7 @@
            location.assign("<%=request.getContextPath()%>/loginPage");
        });
 	   <%}%> 
-	   $("#searchType").change(e=>{
+	  $("#searchType").change(e=>{
 			const userId=$("#search-member_Id");
 			const userName=$("#search-board_Contents");
 			
