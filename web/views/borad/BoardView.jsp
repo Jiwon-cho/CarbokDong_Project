@@ -42,11 +42,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 				<!-- 스펜에 추천수 -->
 				<span class="num_count"></span>
 			</a>
-			<%-- <%if(loginMember!=null&&loginMember.getUserId()==b.getMemberId()){ %> --%>
+			 <%if(loginMember!=null&&loginMember.getUserId()==b.getMemberId()){ %> 
 			<a href="<%=request.getContextPath() %>/board/updateBoard?No=<%=b.getBoardNb() %>" role="button" class="btnbtn_2" style="font-size: 15px;">수정</a>
 			<a href="<%=request.getContextPath() %>/board/deleteBoard?No=<%=b.getBoardNb() %>" id="deletebtn" role="button" class="btnbtn_2" style="font-size: 15px;">삭제</a>
-			<%-- <%}else{ %>
-			<%} %> --%>
+			 <%} %>
 		</span>
 	</div>
 	<div class="view_info">
@@ -109,7 +108,7 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 					<form action="<%=request.getContextPath() %>/board/commentInsert" method="post">
 						<textarea name="comment" rows="3" cols="195" style="resize: none;" placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
 						<input type="hidden" name="level" value="1">
-						<input type="hidden" name="commentWriter" value="admin">
+						<input type="hidden" name="commentWriter" value="<%=loginMember==null?"":loginMember.getUserId()%>">
 						<input type="hidden" name="boardRef" value="<%=b.getBoardNb()%>">
 						<input type="hidden" name="commentRef" value="0">
 						<button type="submit" value="등록" id="btn-insert">등록</button>
@@ -121,16 +120,11 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 
 </article>
 <script >
-<%--	$("#rec_up").click(e=>{
-		if(<%=loginMember==null%>){
-			alert("로그인후 이용하세요!");
-			$(e.target).blur();
-			location.assign("<%=request.getContextPath()%>/loginPage");
-		}
-	}); --%>
+
 	$("#gomain").click(e=>{
 		location.assign('<%=request.getContextPath() %>/borad/mainBorad');
 	});
+	
 	$(".btn-reply").click(e=>{
 		const ul=$("<ul>");
 		const form=$(".comment-editor>form").clone();
@@ -147,40 +141,52 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 		
 		$(e.target).off("click");
 	});
-<%-- 	$(".comment-editor textarea").focus(e=>{
-		if(<%=loginMember==null%>){
+	
+ 	$(".comment-editor textarea").focus(e=>{
+		<%if(loginMember==null){%>
 			alert("로그인후 이용하세요");
 			$("#gomain").focus();
 			$(e.target).blur();
 			location.assign("<%=request.getContextPath()%>/loginPage");
-		}
+		<%}%>
 	});
+ 	
 	$(".btn-reply").focus(e=>{
-		if(<%=loginMember==null%>){
+		<%if(loginMember==null){%>
 			alert("로그인후 이용하세요!");
 			$(e.target).blur();
 			location.assign("<%=request.getContextPath()%>/loginPage");
-		}
-	}); --%>
+			<%}%>
+	}); 
+	
 	$("#deletebtn").click(e=>{
 		confirm("정말로 삭제하시겠습니까?");
 	
 	});
+	
 	$("#rec_up").click(e=>{
+		<%if(loginMember!=null){%>
 		$.ajax({
 			url:"<%=request.getContextPath()%>/board/recUpdate.do",
 			type:"POST",
 			data:{
 				no:<%=b.getBoardNb()%>,
 				/* id값 loginMember.getUserId 로변경 */
-				id:"admin"
+				id:"<%=loginMember.getUserId()%>",
 			},
 			success: function(){
 				recCount();
 				console.log("추천로직");
 			},
 		})
-	})
+		<%}else{%>
+		alert("로그인후 이용하세요!");
+		$(e.target).blur();
+		location.assign("<%=request.getContextPath()%>/loginPage");
+	
+		<%}%>
+	});
+	
 	function recCount(){
 		$.ajax({
 			url:"<%=request.getContextPath()%>/board/recCount.do",

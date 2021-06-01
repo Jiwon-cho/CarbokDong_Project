@@ -30,5 +30,10 @@ public class Files {
 	public void setBoardNb(int boardNb) {
 		this.boardNb = boardNb;
 	}
+
+	@Override
+	public String toString() {
+		return "Files [fileNm=" + fileNm + ", boardNb=" + boardNb + "]";
+	}
 	
 }

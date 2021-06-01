@@ -1,3 +1,4 @@
+<%@page import="org.jsoup.select.Evaluator.IsEmpty"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.borad.model.vo.Board,com.borad.model.vo.Files" %>
@@ -6,6 +7,8 @@
 	List<Board>pplist=(List<Board>)request.getAttribute("pplist");
 	String searchType= request.getParameter("searchType");
 	String searchKeyword= request.getParameter("searchKeyword");
+	//String img=(String)request.getAttribute("img");
+	//List<Files>flist=(List<Files>)request.getAttribute("flist");
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -27,7 +30,7 @@
 		display: inline-block;
 		font-weight: bold;
 		text-decoration: none;
-		width: 30PX;
+		width: 50PX;
 	}
 	#search-container{
 		position: relative;
@@ -89,11 +92,9 @@
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
 				<input type="hidden" name="boardNo" value="<%=b.getBoardNb()%>">
 					<span class="artice">
-						<%if(b==null){ %>
-						<img src="<%=request.getContextPath() %>/upload/" width="130" height="120" >
-						<%}else{ %>
-						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120" >
-						<%} %>
+
+						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120">
+
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>
 						</strong>
@@ -147,16 +148,16 @@
 			</div>
 	<br><br>
 	<script>
-	<%-- <%if(loginMember!=null){%> --%>
+	 <%if(loginMember!=null){%> 
 	   $("#insertborad").on("click",(e)=>{
            location.assign("<%=request.getContextPath()%>/insertBorad");
        });
-	   <%-- <%}else{%>
+	   <%}else{%>
 	   $("#insertborad").on("click",(e)=>{
 		   alert("로그인후 이용해주세요.");
            location.assign("<%=request.getContextPath()%>/loginPage");
        });
-	   <%}%> --%>
+	   <%}%> 
 	   $("#searchType").change(e=>{
 			const userId=$("#search-member_Id");
 			const userName=$("#search-board_Contents");
@@ -170,5 +171,6 @@
 		$(function(){
 			$("#searchType").change();
 		});
+
 	</script>
 <%@ include file="/views/common/footer.jsp"%>

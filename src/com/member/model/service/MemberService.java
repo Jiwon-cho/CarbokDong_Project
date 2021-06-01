@@ -6,8 +6,10 @@ import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.member.model.dao.MemberDao;
+import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
 
 public class MemberService {
@@ -42,4 +44,26 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	public List<CarBoard> selectCarBoardList(int cPage, int numPerpage,String userId){
+		Connection conn=getConnection();
+		List<CarBoard> list=dao.selectCarBoardList(conn,cPage,numPerpage,userId);
+		close(conn);
+		return list;
+	}
+	
+	public int selectCarBoardCount() {
+		Connection conn=getConnection();
+		int result=dao.selectCarBoardCount(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int shoppingBagDelet(String IDX) {
+		Connection conn=getConnection();
+		int result=dao.shoppingBagDelet(conn,IDX);
+		close(conn);
+		return result;
+	}
+	
 }

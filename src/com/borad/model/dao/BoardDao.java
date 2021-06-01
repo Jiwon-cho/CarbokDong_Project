@@ -150,6 +150,7 @@ private Properties prop=new Properties();
 				bc.setBoardNb(rs.getInt("board_nb"));
 				bc.setReplyLevel(rs.getInt("reply_level"));
 				bc.setReplyRef(rs.getInt("reply_ref"));
+				bc.setReplyWriter(rs.getString("reply_writer"));
 				list.add(bc);
 			}
 		}catch(SQLException e) {
@@ -385,4 +386,42 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return count;
 	}
+//	public String selectImages(Connection conn,int boardNo) {
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		String img="";
+//		try {
+//			pstmt=conn.prepareStatement(prop.getProperty("selectImages"));
+//			pstmt.setInt(1, boardNo);
+//			rs=pstmt.executeQuery();
+//			if(rs.next()) {
+//				img=rs.getString(1);
+//			}
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return img;
+//	}
+//	public List<Files>selectFileList(Connection conn){
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		List<Files>flist=new ArrayList();
+//		try{
+//			pstmt=conn.prepareStatement(prop.getProperty("selectFileList"));
+//			rs=pstmt.executeQuery();
+//			while(rs.next()){
+//				Files f=new Files();
+//				f.setFileNm(rs.getString("file_nm"));
+//				f.setBoardNb(rs.getInt("board_nb"));
+//				flist.add(f);
+//			}
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return flist;
+//	}
 }
