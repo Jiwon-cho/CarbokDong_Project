@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
 import com.member.model.vo.Member;
 
 /**
@@ -87,6 +88,9 @@ public class BoardSearchMemberServlet extends HttpServlet {
 			+"&searchType="+type+"&searchKeyword="+keyword+"'>[다음]</a>";
 		}
 		List<Board>pplist=new BoardService().selectppBoard();
+		
+		List<Files>flist=new BoardService().selectFileList();
+		request.setAttribute("flist", flist);
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("pplist", pplist);
 		request.setAttribute("list", list);

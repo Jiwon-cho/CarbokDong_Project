@@ -44,7 +44,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
           
          <%--  <button class="reservation" onclick="location.assign('<%=request.getContextPath()%>/car/carView?carNb=<%=c.getCarNB()%>')">예약하기</button> --%>
          <input type="hidden" name="carNB" value="<%=c.getCarNB()%>">
-         <input class="reservation" type="submit" value="예약하기">
+         <button class="reservation" type="submit">예약하기</button>
         </form>
         </div>
         <%} %>
