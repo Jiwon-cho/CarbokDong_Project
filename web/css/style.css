@@ -19,7 +19,7 @@
 	text-indent: -9999px;
 }
 
-body, button, input, select, td, textarea, th {
+button, input, select, td, textarea, th {
 	font-size: 13px;
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
@@ -233,133 +233,7 @@ body, button, input, select, td, textarea, th {
 
 }
 
-    body {
-      font-family: "East Sea Dokdo", "cursive";
-      font-size: 20px;
-      text-decoration: none;
-      /* background-image: url("https://media.cntraveler.com/photos/5f3c1421163f0cf4e60af119/16:9/w_2560%2Cc_limit/GettyImages-618049526.jpg"); */
-      background-repeat: no-repeat;
-      background-size: cover;
-      margin:0;
-      padding:0;
     
-    }
-    .navbar__logo {
-      font-size: 70px;
-      margin-left:100px;
-      text-align: center;
-      height:150px;
-      margin-top: 30px;
-    }
-    .navbar__menu {
-      font-family: "Black Han Sans", sans-serif;
-      display: flex;
-      font-size:40px;
-      list-style: none;
- 
-      
-    }
-    .navbar__menu li {
-      padding: 8px 140px;
-    }
-    .navbar__menu li:hover {
-      background-color: rgba(163, 218, 240, 0.336);
-      border-radius: 25px;
-      
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background-color: rgba(133, 133, 133, 0.212);
-    }
-    .navbar__icons {
-      list-style: none ;
-      color: black;
-      display: flex;
-      padding-left: 0;
-    }
-    .navbar__icons li {
-      padding: 8px 12px;
-     
-    }
-    
-    a	{
-      text-decoration: none !important;
-      color:#039B25 ;
-    }
-    
-    a:hover{
-    color:#039B25 	;
-    }
-    
-    i {
-      font-size: 50px;
-      text-decoration: none;
-    }
-
-    .navbar__toggleBtn {
-      display: none;
-      position: absolute;
-      right: 32px;
-      color: rgb(0, 69, 172);
-      
-    }
-    .headbar{
-      display: flex;
-            background-color: rgba(133, 133, 133, 0.212);
-        justify-content: space-between;
-        flex-direction: row-reverse;
-      margin-top:0px;
-    }
-   /*  ul.head-list>li{
-      float:left;
-      list-style:none;
-    }
-    ul.head-list>li:first-child{
-   
-      margin-right: 130px;  
-      
-
-
-    }
-    ul.head-list>li:last-child{
-      margin-right:300px;
-    } */
-  li{
-    list-style: none;
-  }
-   
-    li a.arrow{
- position: relative;
- list-style: none;
- float:left;
- margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    color:black;
-}
-li a.arrow::after{
- content:"";
- display: block;
- width:10px;
- height:10px;
- border-top:2px solid #fff;
- border-right:2px solid #fff;
- -webkit-transform: rotate(45deg);
- transform: rotate(45deg);
- position: absolute;
- right:10px;
- top:50%;
- margin-top:-7px;
- margin: 0 0 0 0;
-    padding: 0 0 0 0;
- list-style: none;
-}
-
-/* div.weather>div{
-  display:inline-table;
-    float: left;
-} */
 
 #weather-tb{
 	font-size:50px;
