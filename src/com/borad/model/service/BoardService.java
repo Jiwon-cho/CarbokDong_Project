@@ -160,4 +160,12 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return flist;
 	}
+	public int DeleteReply(int reNo) {
+		Connection conn=getConnection();
+		int result=dao.DeleteReply(conn,reNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

@@ -424,4 +424,17 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return flist;
 	}
+	public int DeleteReply(Connection conn,int reNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("DeleteReply"));
+			pstmt.setInt(1, reNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }

@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String userId = request.getParameter("loginId");
 		String password = request.getParameter("password");
-
+		System.out.println("userId : "+userId+" password : "+password);
 		Member m = new MemberService().login(userId, password);
 
 		if (m != null) {

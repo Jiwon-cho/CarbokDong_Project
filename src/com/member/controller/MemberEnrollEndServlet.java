@@ -41,19 +41,15 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		String address=(request.getParameter("sample4_jibunAddress")+"("+request.getParameter("sample4_postcode")+")"+request.getParameter("address"));
+		String password=request.getParameter("password");
+		String address=(request.getParameter("sample4_jibunAddress")+"/"+request.getParameter("sample4_postcode")+"/"+request.getParameter("sample4_roadAddress")+"/"+request.getParameter("address"));
 		String nikname=request.getParameter("nikName");
-		char userNo=(request.getParameter("userNo")+"-"+request.getParameter("userNo2")).charAt(7);
+		String userNo2=(request.getParameter("userNo")+"-"+request.getParameter("userNo2"));
+		char userNo=userNo2.charAt(7);
 		String gender="";
 		if(userNo=='1' || userNo=='3') {gender="M";}
 		else {gender="F";}
 		int memberType=Integer.parseInt(request.getParameter("memberType"));
-		String password=request.getParameter("pwd");
-		try {
-			password=AESEncrypt.encrypt(password);			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 		
 		Member m=new Member(userId,userName,email,address,nikname,gender,memberType,password);
 	

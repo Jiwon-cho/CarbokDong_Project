@@ -18,9 +18,8 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
    	 	font-size: 13px;
    	 	position: relative;
    	 	top:-27px;
-   	 	
-   	 	
-    }
+   	 	}
+
 </style>
 <br><br>
 <article id="ar">
@@ -42,9 +41,9 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 				<!-- 스펜에 추천수 -->
 				<span class="num_count"></span>
 			</a>
-			 <%if(loginMember!=null&&loginMember.getUserId()==b.getMemberId()){ %> 
+			 <%if(loginMember!=null&&loginMember.getUserId().equals(b.getMemberId())){ %> 
 			<a href="<%=request.getContextPath() %>/board/updateBoard?No=<%=b.getBoardNb() %>" role="button" class="btnbtn_2" style="font-size: 15px;">수정</a>
-			<a href="<%=request.getContextPath() %>/board/deleteBoard?No=<%=b.getBoardNb() %>" id="deletebtn" role="button" class="btnbtn_2" style="font-size: 15px;">삭제</a>
+			<a id="deletebtn" role="button" class="btnbtn_2" style="font-size: 15px; cursor: pointer;">삭제</a>
 			 <%} %>
 		</span>
 	</div>
@@ -77,8 +76,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 						<strong class="reply_st">
 							<span class="txt_de" style="font-size: 20px;"><%=bc.getReplyContent() %></span>
 						</strong>
-						<button class="btn-delete" style="font-size: 20px;">삭제</button>
-						<button class="btn-reply" style="font-size: 20px;">답글</button>
+						<%if(loginMember!=null&&loginMember.getUserId().equals(bc.getReplyWriter())){ %> 
+						<button onclick="location.assign('<%=request.getContextPath() %>/board/deleteReply?reNo=<%=bc.getReplyNo() %>&boNo=<%=b.getBoardNb()%>');" class="btn-reply" style="font-size: 20px;" value="<%=bc.getReplyNo()%>">삭제</button>
+						<%}%>
+						<button class="btn-reply" style="font-size: 20px;"  value="<%=bc.getReplyNo()%>">답글</button>
 					</div>
 				</li>
 			</ul>
@@ -87,15 +88,13 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 				<li>
 					<div class="reply_div">
 						<span class="txt_info" style="font-size: 15px;">
-							작성자
+							ㄴ <%=bc.getReplyWriter() %>
 							<span class="txt_bar" style="font-size: 15px;">|</span>
 							<span class="txt_num" style="font-size: 15px;"><%=bc.getReplyDate() %></span>
 						</span>
 						<strong class="reply_st">
 							<span class="txt_de" style="font-size: 20px;"><%=bc.getReplyContent() %></span>
 						</strong>
-						<button class="btn-delete" style="font-size: 20px;">삭제</button>
-						<button class="btn-reply" style="font-size: 20px;">답글</button>
 					</div>
 				</li>
 			</ul>
@@ -121,18 +120,22 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 </article>
 <script >
 
+	$("#btn-insert2").click(e=>{
+		location.assign('<%=request.getContextPath() %>/board/commentInsert');
+	});
 	$("#gomain").click(e=>{
 		location.assign('<%=request.getContextPath() %>/borad/mainBorad');
 	});
 	
 	$(".btn-reply").click(e=>{
 		const ul=$("<ul>");
-		const form=$(".comment-editor>form").clone();
+		const form=$(".inner-comment>form").clone();
 		form.find("textarea").attr("rows","1");
+		form.find("textarea").attr("cols","95");
 		form.find("[name=level]").val("2");
 		form.find("[name=commentRef]").val($(e.target).val());
 		form.find("button").removeAttr("id").addClass("btn-insert2");
-		
+		console.log($(e.target).val());
 		const li=$("<li>").attr("colspan","2");
 		ul.append(li.append(form));
 		ul.find("li").css("display","none");
@@ -160,8 +163,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 	}); 
 	
 	$("#deletebtn").click(e=>{
-		confirm("정말로 삭제하시겠습니까?");
-	
+		const result=confirm("정말로 삭제하시겠습니까?");
+		if(result){
+		location.assign('<%=request.getContextPath() %>/board/deleteBoard?No=<%=b.getBoardNb() %>');			
+		}	
 	});
 	
 	$("#rec_up").click(e=>{
