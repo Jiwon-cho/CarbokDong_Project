@@ -51,11 +51,11 @@
         		Camp camp = list.get(i);
         	
         %>	<div>
-        		<form action="<%=request.getContextPath()%>/map/CampView" method="post">
+        		<form id="campForm" action="<%=request.getContextPath()%>/map/CampView" method="post" >
         		<div class="camp_name" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)"><%= list.get(i).getName() %></div> <br/>
         		<div class="camp_location" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)">1박당 요금 : <%= list.get(i).getPrice() %></div> <br/>
         		<div class="camp_location" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)"><%= list.get(i).getLocation() %></div> <br/>
-        		<input type="hidden" name="campName" value="<%=camp.getName()%>"/>
+        		<input id="campInput" type="hidden" name="campName" value="<%=camp.getName()%>"/>
         		<button class="snip1535" type="submit">상세정보</button> <br/><br/>
         		<div class="list_line"></div><br/>
         		</form>
@@ -93,6 +93,15 @@
     	  return new kakao.maps.LatLng(latitude, longitude);
       };
 
+      
+     function goData(name){
+    	 {
+   			console.log(name)
+   			document.querySelector('#campInput').value=name;
+   			document.querySelector('#campForm').submit();
+   		}
+   		
+     }
       // 마커 생성
       // 마커를 담을 배열
       const markers = [];
@@ -103,9 +112,10 @@
     	  marker.setClickable(true);
     	  markers.push(marker);
     	  marker.setMap(map);
+    	  
     	// 마커 클릭이벤트
-      	kakao.maps.event.addListener(marker, 'click', function() {
-      		location.href='campView.jsp?name=<%=list.get(i).getName()%>'
+      	kakao.maps.event.addListener(marker, 'click', function(){
+      		goData(`<%=list.get(i).getName()%>`)
       	});
     	  
     	  var content = '<div class="marker_title"><%= list.get(i).getName() %> </div> ';
