@@ -17,6 +17,7 @@
 <meta charset="UTF-8">
 <title>캠핑장 지도</title>
 </head>
+<%@ include file="../common/header.jsp" %>
 <body>
 	 
 	 <%
@@ -131,4 +132,5 @@
       
 
 </body>
+<%@ include file="../common/footer.jsp" %>
 </html>
