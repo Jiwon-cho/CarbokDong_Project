@@ -1,3 +1,4 @@
+<%@page import="com.camp.model.vo.CampHotplace"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Array"%>
 <%@page import="com.camp.model.vo.Camp"%>
@@ -11,12 +12,14 @@
   
   	<% 
 		String name = request.getParameter("name");
-	
+  		
 		CampDao campDao  = new CampDao();
 		
 		Camp camp = campDao.getOneCamp(name);
-		
+		List<CampHotplace> campHots = campDao.getHotplace(camp.getNum());
 		List<String> photos = campDao.getCampPhoto(camp.getNum());
+		
+		
 		
 		System.out.println("불러온 이미지배열:"+photos);
 		String path="/SemiTest/resources/campImgs";
@@ -101,26 +104,20 @@
         </div>
 
         <div class="place__informations">
-          <a class="info" target="_blank" data-type="food">
+        
+        <%for(int i=0; i<campHots.size(); i++){%>
+        <a class="info" target="_blank" data-type="<%=campHots.get(i).getType()%>">
             <img
               class="info__img"
-              src="https://www.hotelbears.co.kr/app/dubu_sourcecode/docs/imgs/1508388474_%EB%B0%94%EB%B2%A0%ED%81%90.jpg"
+              src="<%=request.getContextPath() %>/images/hotplace/<%=campHots.get(i).getFile()%>"
               alt=""
             />
             <div class="info__description">
-              <h3>복동 바베큐</h3>
+              <h3><%=campHots.get(i).getName()%></h3>
             </div>
           </a>
-          <a class="info" target="_blank" data-type="site">
-            <img
-              class="info__img"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYeLSfabdYayla-Bxxkwna-0XHIilczbUTDw&usqp=CAU"
-              alt=""
-            />
-            <div class="info__description">
-              <h3>복동 계곡</h3>
-            </div>
-          </a>
+        <%} %>
+          
         </div>
       </div>
     </section>

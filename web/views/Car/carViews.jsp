@@ -102,7 +102,8 @@ if(loginMember!=null){
         }
         
         cl();
-        carPv();	
+     	page_move(url);
+        /*    carPv(); */	
     }
 
     function cl(){
@@ -129,16 +130,47 @@ if(loginMember!=null){
     }
 })}
     
-    
-     function carPV(){
+    function page_move(url) {
+    	if(<%=id%>!==null){	
+        var form = document.createElement("form");
+        var parm = new Array();
+        var input = new Array();
+		var dt=$('#start').val();
+		var dt2=$('#end').val();
+		var gear=$('#gear-select').val();
+        
+        form.action = url;
+        form.method = "post";
+
+
+        parm.push( ['carNB', '<%=c.getCarNB()%>'] );
+		parm.push( ['start',dt]);
+		parm.push( ['end',dt2]);
+		parm.push( ['gear',gear]);
+
+
+        for (var i = 0; i < parm.length; i++) {
+            input[i] = document.createElement("input");
+            input[i].setAttribute("type", "hidden");
+            input[i].setAttribute('name', parm[i][0]);
+            input[i].setAttribute("value", parm[i][1]);
+            form.appendChild(input[i]);
+        }
+        document.body.appendChild(form);
+        form.submit();}else{
+        	alert("로그인을 하고 이용해 주십시오");	
+     	   location.assign("<%=request.getContextPath()%>/loginPage");
+     }
+    }
+  <%--    function carPV(){
     
    if(<%=id%>!==null){	
-     location.assign("<%=request.getContextPath()%>/car/carPurchaseView");
+     location.assign("<%=request.getContextPath()%>/car/carPurchaseView?carNB=<%=c.getCarNB()%>");
     }else{
     	alert("로그인을 하고 이용해 주십시오");	
     	   location.assign("<%=request.getContextPath()%>/loginPage");
     }
-    }  
+    } --%>  
 </script>
  
 <body onload="build();">
@@ -154,8 +186,11 @@ if(loginMember!=null){
         <div class="book_option">
           <div class="book_subject">
             <h1><%=c.getCarModel() %></h1>
+            
             <h3 style="text-align: right">재고 : <%=c.getCarPsb() %>대</h3>
             <h2><%=c.getCarInfo() %></h2>
+            <br>
+            <%=c.getPrice() %>
           </div>
            <div style="height:320px;">
     <table align="center" id="calendar">
@@ -197,7 +232,11 @@ if(loginMember!=null){
             <br />
             
             <button class="basket_btn">장바구니 담기</button>
-            <button class="buy_btn" onclick="carPV();">구매하기</button>
+  
+     <!--        <button class="buy_btn" onclick="carPV();">구매하기</button>  -->
+                 <button class="buy_btn" onclick="page_move('<%=request.getContextPath()%>/car/carPurchaseView');">구매하기</button> 
+       
+            </form>
           </div>
         </div>
       </div>
