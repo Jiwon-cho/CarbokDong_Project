@@ -25,7 +25,7 @@
 		String path="/SemiTest/resources/campImgs";
 		System.out.println("불러온 경로:"+path);
 	%>
-	<title><%= camp.getName() %> 상세 보기</title>
+	<title><%= camp.getName() %>에 어서오세요</title>
 	
  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/campView.css">   
  	
