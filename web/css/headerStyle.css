@@ -1,19 +1,20 @@
 @charset "UTF-8";
 
-	body{
-	margin:0;
-	}
 	header {
         font-family: "East Sea Dokdo", cursive;
         font-size: 20px;
         text-decoration: none;
         background-size: cover;
+        margin:0;
+        z-index: 1;
+        position: relative;
       }
       .navbar__logo {
+      	margin: 0 0 0 100px;
         font-size: 70px;
       }
       .navbar__menu {
-      font-size: 20px;
+      	font-size: 20px;
         font-family: "Black Han Sans", sans-serif;
         display: flex;
         list-style: none;
@@ -30,7 +31,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: rgba(133, 133, 133, 0.212);
       }
       .navbar__icons {
         list-style: none;

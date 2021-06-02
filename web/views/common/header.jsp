@@ -24,7 +24,7 @@
  <header> 
      <nav class="navbar__main">
       <div class="navbar__logo">
-        <a href="<%=request.getContextPath()%>"> 차박왕카복동</a>
+        <a href="<%=request.getContextPath()%>" style="text-decoration: none;"> 차박왕카복동</a>
       </div>
       <div class="navbar__menu">
         <li><a href="<%=request.getContextPath()%>/borad/mainBorad">커뮤니티</a></li>

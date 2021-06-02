@@ -5,8 +5,11 @@
 <%@page import="com.camp.model.dao.CampDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
+
 <html>
+    <%@ include file="../common/header.jsp" %>
 <head>
 <meta charset="UTF-8">
   
@@ -53,8 +56,8 @@
     />
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/campView.css">   
 </head>
+
 <body>
-    <div class="header">Header</div>
 
     <div class="container">
       <div class="head">
@@ -188,6 +191,9 @@
       	font-size: 15px;
         font-family: 'Sunflower', sans-serif;
       	}
+      	body{
+			margin:0;
+		}
       </style>
 
     <script type="text/javascript">
@@ -252,7 +258,7 @@
       });
     </script>
   </body>
-	
+
 
 </html>
 
