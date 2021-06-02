@@ -112,7 +112,7 @@
         </li>
         <li><a href="<%=request.getContextPath()%>/car/carList">렌트 차 종류</a></li>
         <!-- <li><a href="">마이페이지</a></li> -->
-        <li><a href="">Q&A</a></li>
+        <li><a href="<%=request.getContextPath()%>/admin/adminMain">Q&A</a></li>
       </div>  
       <!-- <ul class="navbar__icons">
         <li>
