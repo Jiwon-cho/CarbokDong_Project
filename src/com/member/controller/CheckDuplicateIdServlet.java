@@ -32,7 +32,6 @@ public class CheckDuplicateIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId=request.getParameter("userId");
-		
 		Member m=new MemberService().selectMemberId(userId);
 		
 		request.setAttribute("result", m==null?true:false);
