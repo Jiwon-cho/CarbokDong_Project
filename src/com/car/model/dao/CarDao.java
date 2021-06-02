@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import com.car.model.vo.Car;
+import com.car.model.vo.Reviews;
 import com.member.model.dao.MemberDao;
 
 public class CarDao {
@@ -133,5 +134,47 @@ public class CarDao {
 		return c;
 		
 		
+	}
+	public int insertReviews(Connection conn,Reviews r) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertReviews"));
+			pstmt.setString(1, r.getReviewContents());
+			pstmt.setInt(2, r.getRating());
+			pstmt.setString(3, r.getMemberId());
+			pstmt.setInt(4, r.getCarNb());
+			pstmt.setString(5, r.getFileName());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public List<Reviews>selectReviewList(Connection conn,int carNB){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Reviews>rlist=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectReviewList"));
+			pstmt.setInt(1, carNB);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Reviews r=new Reviews();
+				r.setReviewNb(rs.getInt("review_nb"));
+				r.setReviewContents(rs.getString("review_contents"));
+				r.setRating(rs.getInt("rating"));
+				r.setMemberId(rs.getString("member_id"));
+				r.setCarNb(rs.getInt("car_nb"));
+				r.setFileName(rs.getString("file_name"));
+				rlist.add(r);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return rlist;
 	}
 }

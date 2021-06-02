@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.car.model.vo.Car"  %>
+<%@ page import="com.car.model.vo.Car,com.car.model.vo.Reviews,java.util.List"  %>
 <%@ include file="/views/common/header.jsp" %>
 <%
 Car c=(Car)request.getAttribute("car");
@@ -10,7 +10,7 @@ if(loginMember!=null){
 	 id="'"+loginMember.getUserId()+"'";
 	 
 }
-
+List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
 
 
 %>
@@ -171,6 +171,8 @@ if(loginMember!=null){
     	   location.assign("<%=request.getContextPath()%>/loginPage");
     }
     } --%>  
+    function setThumbnail(event) { var reader = new FileReader(); reader.onload = function(event) { var img = document.createElement("img"); img.setAttribute("src", event.target.result); document.querySelector("div#image_container").appendChild(img); }; reader.readAsDataURL(event.target.files[0]); }
+
 </script>
  
 <body onload="build();">
@@ -247,33 +249,45 @@ if(loginMember!=null){
           class="item_img"
         />
       </div>
+      <%for(Reviews r:rlist) {%>
       <hr>
       <ul class="level1" >
 				<li>
 					<div class="reply_div">
- 						<span>⭐⭐⭐⭐⭐</span>
+ 						<span>
+ 						<%if(r.getRating()==1){ %>
+ 						⭐
+ 						<%}else if(r.getRating()==2){ %>
+ 						⭐⭐
+ 						<%}else if(r.getRating()==3){ %>
+ 						⭐⭐⭐
+ 						<%}else if(r.getRating()==4){ %>
+ 						⭐⭐⭐⭐
+ 						<%}else if(r.getRating()==5){ %>
+ 						⭐⭐⭐⭐⭐
+ 						<%} %>
+ 						</span>
 						<span class="txt_info" style="font-size: 15px;">
-							작성자
-							<span class="txt_bar" style="font-size: 15px;">|</span>
-							<span class="txt_num" style="font-size: 15px;">2021/06/02</span>
+							<%=r.getMemberId() %>
 						</span>
 						<strong class="reply_st">
-							<span class="txt_de" style="font-size: 20px; ">&emsp;엄청 친절하고 차도 날아다니네요~아주 좋아요</span>
+							<span class="txt_de" style="font-size: 20px; ">&emsp;<%=r.getReviewContents() %></span>
 						</strong>
 						<div style="display: inline-block; float: right; position: relative; bottom: 20px;" >
           					  <img
-             					     src="https://auto.nate.com/news/photo/old/data/old_img/1804/6547f90d897e2144b85c467f2429ccdb_WGR6Eh1cdlUWlj.jpg"
+             					     src="<%=request.getContextPath() %>/upload/car/<%=r.getFileName() %>"
               						alt=""
-              						style="width: 80px;height: 70px;"
+              						style="width: 80px;height: 70px; float: right;"
             							/>
           					</div>
 					</div>
 				</li>
 			</ul>
 			<hr>
+			<%} %>
 			<br><br>
 			<div class="comment-editor" >
-			<form action="<%=request.getContextPath() %>/car/insertReview" method="post">			
+			<form action="<%=request.getContextPath() %>/car/insertReview" method="post" enctype="multipart/form-data">			
 				<span>
 					평점:
 					<select name="rating" size="1" style="width: 50px; height: 23px;">
@@ -283,8 +297,8 @@ if(loginMember!=null){
 						<option value="4">4점</option>
 						<option value="5">5점</option>
 					</select>
-					<input type="file" name="filename">
 				</span>
+					<input type="file" name="filename" accept="image/*" onchange="setThumbnail(event);">
 					<div class="inner-comment">
 							<textarea name="content" rows="3" cols="120" style="resize: none;" placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
 							<input type="hidden" name="memberId" value="<%=loginMember==null?"":loginMember.getUserId()%>">
