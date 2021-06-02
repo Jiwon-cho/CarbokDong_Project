@@ -24,7 +24,6 @@
  <header> 
      <nav class="navbar__main">
       <div class="navbar__logo">
-        <i class="fas fa-campground"></i>
         <a href="<%=request.getContextPath()%>"> 차박왕카복동</a>
       </div>
       <div class="navbar__menu">

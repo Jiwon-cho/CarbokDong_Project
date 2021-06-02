@@ -1,3 +1,7 @@
+body{
+	margin:0;
+}
+
 .inner_login {
 	left: 50%;
 	top: 50%;
