@@ -93,6 +93,14 @@ public class Member {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "Member [userId=" + userId + ", userName=" + userName + ", email=" + email + ", address=" + address
+				+ ", nikname=" + nikname + ", gender=" + gender + ", memberType=" + memberType + ", password="
+				+ password + "]";
+	}
+
+	
 
 	
 }

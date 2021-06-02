@@ -1,4 +1,4 @@
-package com.member.controller;
+package com.common;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginPageServlet
+ * Servlet implementation class PurchasingServlet
  */
-@WebServlet("/loginPage")
-public class LoginPageServlet extends HttpServlet {
+@WebServlet("/order/paySuccess")
+public class PurchasingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginPageServlet() {
+    public PurchasingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,11 +27,12 @@ public class LoginPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String referer = request.getHeader("REFERER")!=null&&!(request.getHeader("REFERER").equals("http://localhost:9090"+request.getContextPath()+"/loginPage"))? request.getHeader("REFERER") : request.getContextPath();
+		String msg=request.getParameter("msg");
+		request.setAttribute("msg", msg);
+		System.out.println(msg);
+		request.getRequestDispatcher("/views/common/purchasingResult.jsp").forward(request, response);
 		
 		
-		request.setAttribute("referer", referer);
-		request.getRequestDispatcher("/views/member/Login.jsp").forward(request, response);
 	}
 
 	/**

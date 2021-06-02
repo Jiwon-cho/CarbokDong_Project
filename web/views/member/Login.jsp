@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+
+String referer=(String)request.getAttribute("referer");
+%>
 <%@ include file="/views/common/header.jsp" %>
 
     <div class="inner_login">
         <div class="login2">
-            <form  id="" action="<%=request.getContextPath() %>/login" method="post">
-                <input type="hidden" name="" value="">
+             <form  id="" action="<%=request.getContextPath() %>/login" method="post"> 
+       
+                <input type="hidden" name="referer" value="<%=referer%>">
                 <div class="box_login">
                     <div class="inp_text">
                     <label for="loginId" class="screen_out">아이디</label>
@@ -16,6 +21,7 @@
                     <input type="password" id="password" name="password" placeholder="Password" >
                     </div>
                 </div>
+           
                 <button type="submit" class="btn_login" >로그인</button><br>
                 <div id="naver_id_login" class="btn_newNaverMember"></div>
                 

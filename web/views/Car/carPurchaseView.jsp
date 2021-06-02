@@ -16,7 +16,7 @@ int money=(int)request.getAttribute("money");
 <%@ include file="/views/common/header.jsp" %>    
 <body>
 
-<div>
+<div class="bigbox" >
 <div class="box1"><div class="carreser label" ><%=c.getCarModel() %>예약확인<br>대여일  반납일<br><%=start %><%=end %></div>
 <div div class="carreser insurance ">보험<br> 가입</div>
 <div div class="carreser info "><%=c.getCarInfo() %></div>
@@ -42,13 +42,21 @@ int money=(int)request.getAttribute("money");
 6.생선비린내/구토/실내 악취 발생시 클리닝 비용 10만원이 부과 됩니다.
 ※ 손해면책제도보험 및 특약보험은 1회 소멸성입니다.(사고발생 즉시 본사로 연락을 주셔야 보험처리 가능합니다.)</div>
     <div class="carbook pplinfo"><% %></div>
-    <div class="carbook prom"></div>
-    <div class="carbook money">총비용<br><%=money %></div>
+     <div class="carbook prom"></div>
+    <div class="carbook money">총비용<br><%=money %> <button onclick="location.assign('')">결제하기</button></div> 
 </div>
 </div>
 
 
 <style>
+.bigbox{
+display:flex;
+height:auto;
+
+}
+body{
+height:auto;
+}
 
 
 .carbook{
@@ -68,6 +76,7 @@ int money=(int)request.getAttribute("money");
 
 .money{
 height:100px;
+
 
 }
 
@@ -113,8 +122,8 @@ display: block;
     border:1px green solid;
             width:400px;
             height:700px;
-            position:fixed;
-            top:210px;
+            position:sticky;
+            top:0;
             left:400px;
             display: inline-block;
             background-color:white;
@@ -123,9 +132,10 @@ display: block;
 .box2{
     display: inline-block;
 width:800px;
-height: 1300px;
+height: 1600px;
 border:1px red solid;
-margin-left:820px;
+margin-left:520px;
+position:relative;
 }
 
 

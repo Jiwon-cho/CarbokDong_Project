@@ -32,7 +32,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
       <div class="car_container">
       <%for(Car c: list){ %>
         <div class="car_list">
-        <form action="<%=request.getContextPath()%>/car/carView" method="post">
+     
           <img
             src="https://auto.nate.com/news/photo/old/data/old_img/1804/6547f90d897e2144b85c467f2429ccdb_WGR6Eh1cdlUWlj.jpg"
             alt="car"
@@ -44,8 +44,8 @@ List<Car> list=(List<Car>)request.getAttribute("list");
           
          <%--  <button class="reservation" onclick="location.assign('<%=request.getContextPath()%>/car/carView?carNb=<%=c.getCarNB()%>')">예약하기</button> --%>
          <input type="hidden" name="carNB" value="<%=c.getCarNB()%>">
-         <button class="reservation" type="submit">예약하기</button>
-        </form>
+         <button class="reservation" onclick="location.assign('<%=request.getContextPath()%>/car/carView?carNB=<%=c.getCarNB()%>')">예약하기</button>
+     
         </div>
         <%} %>
        

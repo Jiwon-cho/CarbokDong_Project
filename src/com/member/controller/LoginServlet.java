@@ -36,17 +36,18 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String referer=request.getParameter("referer");
 		String userId = request.getParameter("loginId");
 		String password = request.getParameter("password");
-
 		Member m = new MemberService().login(userId, password);
-
+	
 		if (m != null) {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", m);
 
-			response.sendRedirect(request.getContextPath());
+			 //response.sendRedirect(request.getContextPath()); 
+			response.sendRedirect(referer);
 		} else {
 			String msg = "아이디, 비밀번호가 일치하지 않습니다!";
 			String loc = "/";
