@@ -50,12 +50,16 @@
         	for(int i=0; i<list.size(); i++){
         		Camp camp = list.get(i);
         	
-        %><div>
-        	<div class="camp_name" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)"><%= list.get(i).getName() %></div> <br/>
-        	<div class="camp_location" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)">1박당 요금 : <%= list.get(i).getPrice() %></div> <br/>
-        	<div class="camp_location" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)"><%= list.get(i).getLocation() %></div> <br/>
-        	<button class="snip1535" onclick="location.href='campView.jsp?name=<%=camp.getName()%>'">상세정보</button> <br/><br/>
-        	<div class="list_line"></div><br/></div>
+        %>	<div>
+        		<form action="<%=request.getContextPath()%>/map/CampView" method="post">
+        		<div class="camp_name" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)"><%= list.get(i).getName() %></div> <br/>
+        		<div class="camp_location" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)">1박당 요금 : <%= list.get(i).getPrice() %></div> <br/>
+        		<div class="camp_location" onclick="panTo(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)"><%= list.get(i).getLocation() %></div> <br/>
+        		<input type="hidden" name="campName" value="<%=camp.getName()%>"/>
+        		<button class="snip1535" type="submit">상세정보</button> <br/><br/>
+        		<div class="list_line"></div><br/>
+        		</form>
+        	</div>
         	<%} %> 
         	
         </ul>

@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
   
   	<% 
-		String name = request.getParameter("name");
+		String name = request.getParameter("campName");
   		
 		CampDao campDao  = new CampDao();
 		

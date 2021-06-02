@@ -29,11 +29,7 @@
       <div class="navbar__menu">
         <li><a href="<%=request.getContextPath()%>/borad/mainBorad">커뮤니티</a></li>
         <li>
-          <a
-            href="<%=request.getContextPath()%>/map"
-          >
-            여행지 지도
-          </a>
+          <a href="<%=request.getContextPath()%>/map">여행지 지도</a>
         </li>
         <li><a href="<%=request.getContextPath()%>/car/carList">렌트 차 종류</a></li>
         <li><a href="<%=request.getContextPath()%>/admin/adminMain">Q&A</a></li>
