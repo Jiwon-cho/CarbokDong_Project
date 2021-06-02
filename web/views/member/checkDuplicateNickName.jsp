@@ -23,7 +23,7 @@
 			[<span id="duplicated"><%=request.getParameter("nickName") %></span>]는 사용중입니다.
 			<br><br>
 			<form action="<%=request.getContextPath() %>/checkDuplicateNickname" method="post">
-				<input type="text" name="nikName" id="nikName">
+				<input type="text" name="nickName" id="nickName">
 				<input type="submit" value="중복검사" >
 			</form>
 		<%} %>

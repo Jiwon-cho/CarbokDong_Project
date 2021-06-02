@@ -247,22 +247,52 @@ if(loginMember!=null){
           class="item_img"
         />
       </div>
-      <div class="review">
-        <div class="review_content">
-          <div class="review_subject">
-            <span>⭐⭐⭐⭐⭐</span>
-            <h5>bokdong119</h5>
-            <h3>엄청 친절하고 차도 날아다니네요~ 아주 좋아요</h3>
-          </div>
-          <div>
-            <img
-              src="https://auto.nate.com/news/photo/old/data/old_img/1804/6547f90d897e2144b85c467f2429ccdb_WGR6Eh1cdlUWlj.jpg"
-              alt=""
-              class="review_img"
-            />
-          </div>
-        </div>
-      </div>
+      <hr>
+      <ul class="level1" >
+				<li>
+					<div class="reply_div">
+ 						<span>⭐⭐⭐⭐⭐</span>
+						<span class="txt_info" style="font-size: 15px;">
+							작성자
+							<span class="txt_bar" style="font-size: 15px;">|</span>
+							<span class="txt_num" style="font-size: 15px;">2021/06/02</span>
+						</span>
+						<strong class="reply_st">
+							<span class="txt_de" style="font-size: 20px; ">&emsp;엄청 친절하고 차도 날아다니네요~아주 좋아요</span>
+						</strong>
+						<div style="display: inline-block; float: right; position: relative; bottom: 20px;" >
+          					  <img
+             					     src="https://auto.nate.com/news/photo/old/data/old_img/1804/6547f90d897e2144b85c467f2429ccdb_WGR6Eh1cdlUWlj.jpg"
+              						alt=""
+              						style="width: 80px;height: 70px;"
+            							/>
+          					</div>
+					</div>
+				</li>
+			</ul>
+			<hr>
+			<br><br>
+			<div class="comment-editor" >
+			<form action="<%=request.getContextPath() %>/car/insertReview" method="post">			
+				<span>
+					평점:
+					<select name="rating" size="1" style="width: 50px; height: 23px;">
+						<option value="1">1점</option>
+						<option value="2">2점</option>
+						<option value="3">3점</option>
+						<option value="4">4점</option>
+						<option value="5">5점</option>
+					</select>
+					<input type="file" name="filename">
+				</span>
+					<div class="inner-comment">
+							<textarea name="content" rows="3" cols="120" style="resize: none;" placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
+							<input type="hidden" name="memberId" value="<%=loginMember==null?"":loginMember.getUserId()%>">
+							<input type="hidden" name="carNo" value="<%=c.getCarNB()%>">
+							<button type="submit" value="등록" id="btn-insert">등록</button>
+					</div>
+				</form>
+			</div>
     </div>
   </body>
 

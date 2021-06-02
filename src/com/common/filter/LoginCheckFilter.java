@@ -17,7 +17,7 @@ import com.member.model.vo.Member;
 /**
  * Servlet Filter implementation class LoginCheckFilter
  */
-@WebFilter(urlPatterns={"/memberView.do","/updateMember"})
+@WebFilter(urlPatterns={"/member/memberView","/memberUpdate"})
 public class LoginCheckFilter implements Filter {
 
     /**

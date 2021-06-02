@@ -24,7 +24,7 @@
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
 				<td width="15%">비밀번호</td>
-				<td><input type="password" name="pwd" id="password_" /></td>
+				<td><input type="password" name="password" id="password_" /></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
@@ -71,9 +71,9 @@
 				<td><input name="email1" type="text" class="box" id="email1"
 					size="15"> @ <input name="email2" type="text" class="box"
 					id="email2" size="20">
-				<input type="button" value="인증번호 받기" id="emailCheckBtn" name="emailCheckBtn"></td>
+				<!-- <input type="button" value="인증번호 받기" id="emailCheckBtn" name="emailCheckBtn"> --></td>
 			</tr>
-			<tr height="7">
+			<!-- <tr height="7">
 				<td colspan="3"><hr></td>
 			</tr>
 			<tr class="" height="30">
@@ -81,7 +81,7 @@
 				<td width="15%">인증번호</td>
 				<td><input type="text" name="emailCheck" id="emailCheck" /> <input
 					type="button" value="확인" id=""></td>
-			</tr>
+			</tr> -->
 			<tr height="7">
 				<td colspan="3"><hr></td>
 			</tr>
@@ -89,10 +89,10 @@
 				<td width="5%" align="center">*</td>
 				<td width="15%">주 소</td>
 				<td><input type="text" size="15" name="sample4_postcode" id="sample4_postcode"
-					placeholder="우편번호"> <input type="button" value="우편번호 찾기" onclick="sample4_execDaumPostcode()"><br>
+					placeholder="우편번호" readonly> <input type="button" value="우편번호 찾기" onclick="sample4_execDaumPostcode()"><br>
 				<br> <input type="text" size="30" name="sample4_roadAddress" id="sample4_roadAddress"
-					placeholder="도로명주소"> <input type="text" size="30" name="sample4_jibunAddress" id="sample4_jibunAddress"
-					placeholder="지번주소"><br>
+					placeholder="도로명주소" readonly> <input type="text" size="30" name="sample4_jibunAddress" id="sample4_jibunAddress"
+					placeholder="지번주소" readonly><br>
 				<br> <input type="text" name="address" placeholder="나머지 주소" size="70">
 				</td>
 			</tr>

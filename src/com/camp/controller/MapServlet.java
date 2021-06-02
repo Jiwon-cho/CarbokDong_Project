@@ -1,27 +1,23 @@
-package com.member.controller;
+package com.camp.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.member.model.service.MemberService;
-import com.member.model.vo.Member;
-
 /**
- * Servlet implementation class CheckDuplicateIdServlet
+ * Servlet implementation class MapServlet
  */
-@WebServlet("/checkDuplicateId")
-public class CheckDuplicateIdServlet extends HttpServlet {
+@WebServlet("/map")
+public class MapServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckDuplicateIdServlet() {
+    public MapServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,12 +26,7 @@ public class CheckDuplicateIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String userId=request.getParameter("userId");
-		Member m=new MemberService().selectMemberId(userId);
-		
-		request.setAttribute("result", m==null?true:false);
-		request.getRequestDispatcher("/views/member/checkDuplicateId.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/map/map.jsp").forward(request, response);
 	}
 
 	/**

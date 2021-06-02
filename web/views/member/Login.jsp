@@ -26,7 +26,7 @@ String referer=(String)request.getAttribute("referer");
                 <div id="naver_id_login" class="btn_newNaverMember"></div>
                 
             </form>
-            <form id="" action="<%=request.getContextPath() %>/memberEnroll" method="post">
+            <form id="" action="<%=request.getContextPath() %>/memberEnrollEnd" method="post">
             	<button type="submit" class="btn_newMember" >회원가입</button>
             </form>
         </div>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.camp.model.vo.Camp;
+import com.camp.model.vo.CampHotplace;
 import com.camp.model.vo.CampReserve;
 
 public class CampDao {
@@ -114,6 +115,37 @@ public class CampDao {
 	     	return photos;
 	    }
 	    
+	    // 핫플레이스 - 파일명, 장소이름, site/food 구분해서 객체로 저장
+	    // camping_nb 가 매개변수
+	    public List<CampHotplace> getHotplace(int num){
+	    	List<CampHotplace> hot = new ArrayList<CampHotplace>();
+	    	getCon();
+	 		
+	     	try {
+	     		String sql = "SELECT * FROM CAMPING_HOTPLACE WHERE CAMPING_NB = ?";
+	     		pstmt = con.prepareStatement(sql);
+	     		pstmt.setInt(1, num);
+	     		rs = pstmt.executeQuery();
+	     		
+	     		//반복문을 돌면서 데이터를 저장
+	     		while(rs.next()){
+	     			CampHotplace campHot = new CampHotplace();
+	     			campHot.setNum(rs.getInt(1));
+	     			campHot.setFile(rs.getString(2));
+	     			campHot.setName(rs.getString(3));
+	     			campHot.setType(rs.getString(4));
+	     			
+	     			
+	     			hot.add(campHot);
+	     			System.out.println(campHot.getName());
+	     		}
+	     		con.close();
+	     	}catch (Exception e){
+	     		e.printStackTrace();
+	     	}
+			
+	     	return hot;
+	    }
 	    
 //	    public List<CampReserve> campReserveInfo(){
 //			List<CampReserve> v = new ArrayList();

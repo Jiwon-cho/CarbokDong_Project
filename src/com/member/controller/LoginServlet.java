@@ -39,6 +39,9 @@ public class LoginServlet extends HttpServlet {
 		String referer=request.getParameter("referer");
 		String userId = request.getParameter("loginId");
 		String password = request.getParameter("password");
+
+		System.out.println("userId : "+userId+" password : "+password);
+
 		Member m = new MemberService().login(userId, password);
 	
 		if (m != null) {

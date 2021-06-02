@@ -152,7 +152,7 @@ public class MemberDao {
 				c.setCarPsb(rs.getInt("CAR_PSB_"));
 				c.setCarTotal(rs.getInt("CAR_TOTAL"));
 				c.setIsdel(rs.getString("ISDEL"));
-				c.setPrice(rs.getInt("PRICE"));
+				c.setPrice(rs.getInt("CART_PRICE"));
 				c.setCarIdx(rs.getInt("CART_IDX"));
 				list.add(c);
 			}
@@ -238,6 +238,50 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}return result;
-		
+	}
+	public int updateMember(Connection conn,Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateMember"));
+			pstmt.setString(1, m.getEmail());
+			pstmt.setString(2, m.getAddress());
+			pstmt.setString(3, m.getUserId());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updatePassword(Connection conn,String userId, String pw) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updatePassword"));
+			pstmt.setString(1, pw);
+			pstmt.setString(2, userId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int deleteMember(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteMember"));
+			pstmt.setString(1, userId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
 }

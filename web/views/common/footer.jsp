@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">  
 <footer id="footer">
       <div class="inner">
           <!-- ** .inner 시작 ** -->
