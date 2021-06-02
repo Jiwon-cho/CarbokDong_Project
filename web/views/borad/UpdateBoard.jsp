@@ -109,10 +109,12 @@
 		})
 	});
 	const fn_cancel=()=>{
-		  confirm("정말로 취소하시겠습니까?");
-          location.assign('<%=request.getContextPath()%>/borad/mainBorad');
+        const result=confirm("정말로 취소하시겠습니까?");
+  		if(result){
+  			location.assign('<%=request.getContextPath()%>/borad/mainBorad');		
+  		}	
 
-	}
+	};
 </script>
 
 <body>

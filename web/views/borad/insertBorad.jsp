@@ -104,8 +104,11 @@
 		})
 	});
 	const fn_cancel=()=>{
-		  confirm("정말로 취소하시겠습니까?");
-          location.assign('<%=request.getContextPath()%>/borad/mainBorad');
+
+  		const result=confirm("정말로 취소하시겠습니까?");
+		if(result){
+			location.assign('<%=request.getContextPath()%>/borad/mainBorad');			
+		}	
 
 	};
 	function setThumbnail(event) { var reader = new FileReader(); reader.onload = function(event) { var img = document.createElement("img"); img.setAttribute("src", event.target.result); document.querySelector("div#image_container").appendChild(img); }; reader.readAsDataURL(event.target.files[0]); }
