@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.car.model.dao.CarDao;
 import com.car.model.vo.Car;
+import com.car.model.vo.Reviews;
 
 
 public class CarService {
@@ -39,6 +40,17 @@ public class CarService {
 		close(conn);
 		return c;
 	}
-	
-	
+	public int insertReviews(Reviews r) {
+		Connection conn=getConnection();
+		int result=dao.insertReviews(conn,r);
+		if(result>0) commit(conn);
+		else  rollback(conn);
+		return result;
+	}
+	public List<Reviews>selectReviewList(int carNB){
+		Connection conn=getConnection();
+		List<Reviews>rlist=dao.selectReviewList(conn,carNB);
+		close(conn);
+		return rlist;
+	}
 }

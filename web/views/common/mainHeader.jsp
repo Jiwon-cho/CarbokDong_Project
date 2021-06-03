@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>카복동</title>
+
 	<link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -19,8 +20,9 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic&family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
       rel="stylesheet">
+
       
- 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/headerStyle.css">   
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mainHeaderStyle.css">   
 
   </head>
   
@@ -51,6 +53,7 @@
 	  </ul>
 	<%} %>
       </ul>
+
 
       <a href="#" class="navbar__toggleBtn">
         <i class="fas fa-bars"></i></a>

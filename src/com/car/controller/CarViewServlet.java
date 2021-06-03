@@ -1,6 +1,7 @@
 package com.car.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.car.model.service.CarService;
 import com.car.model.vo.Car;
+import com.car.model.vo.Reviews;
 
 /**
  * Servlet implementation class CarViewServlet
@@ -35,8 +37,10 @@ public class CarViewServlet extends HttpServlet {
 		
 		Car c=new CarService().selectCar(carNB);
 		
+		List<Reviews>rlist=new CarService().selectReviewList(carNB);
+		
 		request.setAttribute("car", c);
-	
+		request.setAttribute("rlist", rlist);
 		
 		
 		request.getRequestDispatcher("/views/Car/carViews.jsp").forward(request, response);

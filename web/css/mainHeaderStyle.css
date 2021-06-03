@@ -2,7 +2,7 @@
 
 	body{
 	margin:0;
-	line-height: 1;
+	line-height: 1.6;
 	}
 	
 	header {
@@ -63,17 +63,16 @@
         right: 32px;
         color: rgb(0, 69, 172);
       }
-      
-      ul{
+ul{
       	font-family: 'Do Hyeon', sans-serif;
       }
 
       @media screen and (max-width: 1200px) {
       
+      
         #navbar__main {
           flex-direction: column;
           align-items: flex-start;
-          padding: 21px;
         }
         #navbar__menu {
           display: none;
@@ -93,7 +92,7 @@
           width: 100%;
         }
         .navbar__toggleBtn {
-        	margin-top:10px;
+        	margin-top:30px;
           display: block;
         }
 

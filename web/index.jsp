@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>	
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">  
-
+      
   <script>
     $.getJSON('https://api.openweathermap.org/data/2.5/onecall?lat=37.5683&lon=126.9778&appid=72d907e7254e1bb6390f7526c46e9e72&units=metric'
     ,function(result){
@@ -105,11 +105,6 @@ function showSlides(n) {
 }
     </script> 
      <style>
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing:border-box;
-} */
 
 /* Slideshow container */
 .slideshow-container {
@@ -164,6 +159,7 @@ function showSlides(n) {
   bottom: 8px;
   width: 100%;
   text-align: center;
+  text-decoration: none;
 }
 
 /* Number text (1/3 etc) */
@@ -188,7 +184,7 @@ function showSlides(n) {
 }
 
 .active, .dot:hover {
-  background-color: #717171;
+  background-color: rgba(219, 219, 219, 0.4);
 }
 
 /* Fading animation */
@@ -208,9 +204,10 @@ function showSlides(n) {
   from {opacity: .4}
   to {opacity: 1}
 }
-  
   </style>
-  <%@ include file="views/common/header.jsp" %>
+  
+  <%@ include file="views/common/mainHeader.jsp" %>
+  
       <body>
    <section>
   <div class="container-fluid">
@@ -273,22 +270,8 @@ function showSlides(n) {
       </div>
 
       
-<!-- 	<div class="event"
-	style="    background-image: url('https://parks.seoul.go.kr/file/info/view.do?tableName=BANNER&bIdx=537');
-    background-repeat: no-repeat;
-    background-size: cover;">
-      <h1>============== 이벤트 이미지 ==============</h1>
-    </div>
-  
 
-    <div> 
- -->
-    <!-- <img class="slide1" src="https://item.kakaocdn.net/do/c5c470298d527ef65eb52883f0f186c49f17e489affba0627eb1eb39695f93dd" >
-    <img class="slide1" src="https://cdn.imweb.me/upload/S202002259d2c4f16c33cd/20e9d0fd888dc.jpg" width="300px", height="300px">
-    <img class="slide1" src="https://lh3.googleusercontent.com/proxy/rfhOC98Rjc_4cdAM2-wZVgeITTqcyyYyvUiGzQayYoevBzsZcdNpfb3C0bdjdPnjNvZTKTfy7CARxT4GAZfLyUcYhg8meeUFQwAJYEawGl78YdW2TK4SxlDtEgLABv7y2NUleG_ic_QLNJ2KjzXzz9j5Df1zNxlkkr5eLSy1UBASY5rlQldv4bRoYhzrW8AnPBUVj51l8IYtfyIyZ9Cvcv_DUScVfL12H3hXRo7wVtJLdYdpfifeN_KnuUVrBQldgHjNXtpxvpMAJLfn5sKZZV4OaZ33tOCsC9yVsPU9SA"width="300px", height="300px"> -->
-    <!-- <img class="slide1" src="https://e7.pngegg.com/pngimages/324/268/png-clipart-kakaotalk-computer-icons-kakao-friends-kakaostory-iphone-electronics-text.png"> -->
   <div style="height:100px;"></div>
-  	<!--       <div class="container-fluid"> -->
       <div class="row">
         <div class="col" style="height: 350px;background-color:rgba(248, 215, 176, 0.925);">
           <div class="container-fluid">
@@ -313,11 +296,7 @@ function showSlides(n) {
               <span id="campnews">캠핑소식&뉴스</span>
               <br>
               >>
-             <%--  <ul class="arrowul">
-                <li><a href="<%=request.getContextPath() %>/news/newsList"" class="arrow">link</a></li>
-                <li><a href="<%=request.getContextPath() %>/news/newsList"" class="arrow">link</a></li>
-                
-              </ul> --%>
+
               </h2>
               </a>
             </div>
@@ -346,54 +325,7 @@ function showSlides(n) {
         </div>
       </div>
       </div>
-   
-  <%-- 
-    <div class="container">
-        
-  
-        <div class="layout">
-          <span><h1>캠핑 스토리</h1></span>
-           <div class="news" style="background-image:url('<%=request.getContextPath() %>/images/campingnews.jpg');">
-              <!-- <h1>============== 뉴스 ==============</h1> -->
-              <a href="<%=request.getContextPath() %>/news/newsList" style="color:#FFF;">
-              <p>
-                                        CAMPING
-                <br>
-                <span>NEWS</span>
-              </p>
-              <span id="campnews">캠핑소식&뉴스</span>
-              <ul class="arrowul">
-                <li><a href="<%=request.getContextPath() %>/news/newsList"" class="arrow">link</a></li>
-                <li><a href="<%=request.getContextPath() %>/news/newsList"" class="arrow">link</a></li>
-                
-              </ul>
-              </a>
-           </div>
-      
-            <!-- <div class="notice2"> -->
-                <div class="weather">
-                    <table align="center">
-                      <tr>
-                      <th colspan="5">===== 날씨예보 ====</th>
-                  </tr>
-                 
-                  </table>
-                  
-                    <!-- <h2> - 날씨 정보</h2>
-                    <div class="cicon"> </div>
-                    <div class="ctemp">현재 온도:</div>
-                    <div class="clowtemp">최저 온도:</div>
-                    <div class="chighttemp">최고 온도:</div> -->
-                </div>
-               
-                <div class="mbti">
-                  <h2><a href="#">[MBTI 검사~!!]</a></h2>
-                </div>
-              
-            <!-- </div> -->
-      </div>
-    </div>
-		 --%>
+
 		</section>
 		</body>
 		
