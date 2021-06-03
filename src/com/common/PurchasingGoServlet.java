@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.car.model.service.CarService;
 import com.car.model.vo.Car;
+import com.payment.model.vo.Payment;
 
 /**
  * Servlet implementation class PurchasingGoServlet
@@ -42,9 +43,15 @@ public class PurchasingGoServlet extends HttpServlet {
 		case "grill" : g=2000;gn="바베큐그릴";break ;
 		}
 		Car c=new CarService().selectCar(carNB);
+		
+		Payment p=new Payment();
+		p.setPrice(money);
+		p.setMemberId(start);
+		p.setPaymentsNo(end);
 		request.setAttribute("car", c);
 		request.setAttribute("start", start);
 		request.setAttribute("end", end); 
+		request.setAttribute("p", p);
 		//request.setAttribute("referer", referer);
 		request.setAttribute("gear", gn);
 		request.setAttribute("gearprice", g);

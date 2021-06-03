@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.payment.model.service.PaymentService;
 import com.payment.model.vo.Payment;
 
 /**
@@ -37,6 +38,7 @@ public class PurchasingCheckServlet extends HttpServlet {
 		String merchant_uid=request.getParameter("merchant_uid");
 		 int paid_amount=Integer.parseInt(request.getParameter("paid_amount"));
 		 String sdate=request.getParameter("date") ;
+		 System.out.println(sdate);
 		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
 		 Date date=null;
 		 try {
@@ -44,11 +46,13 @@ public class PurchasingCheckServlet extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		 System.out.println(date);
          String pay_method=request.getParameter("pay_method");
          String pd_name=request.getParameter("pd_name");
-    	 String sstart=request.getParameter("start") ;
-    	 String send=request.getParameter("end") ;
-    	 
+    	 String sstart=request.getParameter("st") ;
+    	 System.out.println(sstart);
+    	 String send=request.getParameter("ed") ;
+    	 System.out.println(send);
     	 Date start=null;
     	 Date end=null;
     	 SimpleDateFormat sef=new SimpleDateFormat("yyyy-MM-dd");
@@ -59,15 +63,23 @@ public class PurchasingCheckServlet extends HttpServlet {
     	 }catch(Exception e) {
     		 e.printStackTrace();
     	 }
-    	 String product_nb=request.getParameter("carNB") ;
+    	 
+    	 
+    	 System.out.println(start);
+    	 System.out.println(end);
+    	 int product_nb=Integer.parseInt(request.getParameter("pd_no")) ;
     	 String buyer=request.getParameter("buyer");
 		 
 		
-		 //Payment p=new Payment(imp_uid,pay_method,date,start,end,paid_amount,product_nb,pd_name,buyer);
+		 Payment p=new Payment(imp_uid,pay_method,date,start,end,paid_amount,product_nb,buyer,pd_name);
+		 int result=new PaymentService().insertPayment(p);
+		 if(result<=0) {
+			 System.out.println("멈춰!");
+		 }
 		
 		 
 		 response.setContentType("application/json;charset=utf-8");
-		 //new Gson().toJson(p,response.getWriter());
+		 new Gson().toJson(p,response.getWriter());
 		
 		 
 		 

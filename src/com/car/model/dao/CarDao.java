@@ -14,15 +14,15 @@ import java.util.Properties;
 
 import com.car.model.vo.Car;
 import com.car.model.vo.Reviews;
-import com.member.model.dao.MemberDao;
+
 
 public class CarDao {
-	private static CarDao newsDao;
+	private static CarDao carDao;
 	private Properties prop=new Properties();
 	
 
 	private CarDao() {
-		String path=MemberDao.class.getResource("/sql/car_sql.properties").getPath();
+		String path=CarDao.class.getResource("/sql/car_sql.properties").getPath();
 	
 		try {
 			prop.load(new FileReader(path));
@@ -33,10 +33,10 @@ public class CarDao {
 
 	public static CarDao getInstance() {
 		try {
-			if (newsDao == null) {
-				newsDao = new CarDao();
+			if (carDao == null) {
+				carDao = new CarDao();
 			}
-			return newsDao;
+			return carDao;
 		} catch (Exception e) {
 			throw new RuntimeException("[Error: Creating instance fail : " + e.getMessage() + "]");
 		}

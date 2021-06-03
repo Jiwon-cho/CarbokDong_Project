@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.car.model.vo.Car" %>
+<%@ page import="com.car.model.vo.Car,com.payment.model.vo.Payment" %>
 <%
 Car c=(Car)request.getAttribute("car");
 String start=(String)request.getAttribute("start");
 String end=(String)request.getAttribute("end");
 String gear=(String)request.getAttribute("gear");
-int money=(int)request.getAttribute("money");   
+int money=(int)request.getAttribute("money");  
+Payment p=(Payment)request.getAttribute("p");
+System.out.println(start);
+System.out.println(p.getMemberId());
  
 %>
 <%@ include file="/views/common/header.jsp" %>    
@@ -37,15 +40,16 @@ int money=(int)request.getAttribute("money");
         
             return yy+"-"+mt+"-"+dt+"-"+dh+"-"+dm+"-"+ds;
         }
-        var currentTime=convertTime()
-
+        var currentTime=convertTime();
+		var start='<%=start%>';
+        var end='<%=end%>';
         
         IMP.request_pay({
             pg : 'inicis',
             pay_method : 'card',
             merchant_uid : 'merchant_' + cDate,
             name : '<%=c.getCarModel()%>',
-            amount : <%=money%>,
+            amount : 100,
             buyer_email : 'SS',
             buyer_name : '<%=loginMember.getUserId()%>',
             buyer_tel : '1',
@@ -62,28 +66,30 @@ int money=(int)request.getAttribute("money");
                     dataType: 'json',
                     data: {
                         imp_uid : rsp.imp_uid,
+                     	st:start,
+                     	ed:end,
                      	buyer: rsp.buyer_name,
                         paid_amount: rsp.paid_amount,
                     	pd_no:<%=c.getCarNB()%>,
                         date: currentTime,
                         pay_method:rsp.pay_method,
                         pd_name:rsp.name,
-                     	start:<%=start%>,
-                     	end:<%=end%>
                     },
                      success:data=>{
                     	console.log(data);
                     	const table=$("<table>");
-                    	const head=$("<tr>").html("<th>고유 아이디</th><th>결제자 이름</th><th>결제 금액</th><th>결제 시간</th><th>결제 물품</th><th>결제 방법</th>");
+                    	const head=$("<tr>").html("<th>고유 아이디</th><th>결제 방법</th><th>결제 시간</th><th>대여일</th><th>반납일</th><th>결제 비용</th><th>구매자</th><th>상품이름</th>");
                     	table.append(head);
                     	const body=$("<tr>");
-        				const id=$("<td>").html(data.imp_uid);
-        				const buyer=$("<td>").html(data.buyer);
-        				const amount=$("<td>").html(data.paid_amount);
+        				const id=$("<td>").html(data.paymentsNo);
+        				const pm=$("<td>").html(data.paymetType);
         				const time=$("<td>").html(currentTime);
-        				const pd=$("<td>").html(data.pd_name);
-        				const pm=$("<td>").html(data.pay_method);
-        				body.append(id).append(buyer).append(amount).append(time).append(pd).append(pm);
+        				const std=$("<td>").html(start);
+        				const etd=$("<td>").html(end);
+        				const amount=$("<td>").html(data.price);
+        				const buyer=$("<td>").html(data.memberId);
+        				const pd=$("<td>").html(data.productNm);
+        				body.append(id).append(pm).append(time).append(std).append(etd).append(amount).append(buyer).append(pd);
         				table.append(body);
                     	$("#result").html(table);
                     	
