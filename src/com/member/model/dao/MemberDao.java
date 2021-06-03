@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.Properties;
 
 import com.borad.model.vo.Board;
-import com.borad.model.vo.Files;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
+import com.member.model.vo.Payment;
+import com.member.model.vo.QnA;
 
 public class MemberDao {
 	private Properties prop=new Properties();
@@ -281,6 +282,144 @@ public class MemberDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public List<Payment> selectPayment(Connection conn,int cPage, int numPerpage,String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Payment> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectPayment"));
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Payment p=new Payment();
+				//b.setMemberId(rs.getString("member_id"));
+				p.setNo(rs.getInt("PAYMENTS_NO"));
+				p.setType(rs.getString("PAYMENT_NM"));
+				p.setToDate(rs.getDate("PAYDATE"));
+				p.setStartDate(rs.getDate("RENT_START_DATE"));
+				p.setEndDate(rs.getDate("REND_END_DATE"));
+				p.setPirce(rs.getInt("PRICE"));
+				p.setProductModel(rs.getString("CAR_MODEL"));
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int selectPaymentCount(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectPaymentCount"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
+	public List<QnA> selectQnAList(Connection conn,int cPage,int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<QnA> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectQnAList"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				QnA q=new QnA();
+				q.setNo(rs.getInt("QA_NB"));
+				q.setTitle(rs.getString("QA_TITLE"));
+				q.setContent(rs.getString("QA_CONTENT"));
+				q.setDate(rs.getDate("QA_DATE"));
+				q.setUserId(rs.getString("MEMBER_ID"));
+				q.setResult(rs.getString("QA_RESULT"));
+				list.add(q);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int selectQnACount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectQnACount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
+	public List<QnA> selectSearchQnA(Connection conn,int cPage,int numPerpage,String type,String keyword){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<QnA> list=new ArrayList();
+		String sql=prop.getProperty("selectSearchQnA");
+		try {
+			pstmt=conn.prepareStatement(sql.replace("#", type));
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				QnA q=new QnA();
+				q.setNo(rs.getInt("QA_NB"));
+				q.setTitle(rs.getString("QA_TITLE"));
+				q.setContent(rs.getString("QA_CONTENT"));
+				q.setDate(rs.getDate("QA_DATE"));
+				q.setUserId(rs.getString("MEMBER_ID"));
+				q.setResult(rs.getString("QA_RESULT"));
+				list.add(q);		
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int selectSearchQnACount(Connection conn,String type,String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectSearchQnACount");
+		try {
+			pstmt=conn.prepareStatement(sql.replace("#", type));
+			pstmt.setString(1, "%"+keyword+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
 			close(pstmt);
 		}return result;
 	}
