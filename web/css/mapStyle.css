@@ -11,6 +11,9 @@
       }
 	*/
 	
+		body::-webkit-scrollbar {
+   		 	display: none;
+		}
 	
       .map_wrap,
       .map_wrap * {
@@ -28,7 +31,7 @@
       .map_wrap {
         position: relative;
         width: 90%;
-        height: 1000px;
+        height: 800px;
         margin: auto;
 
       }

@@ -206,7 +206,7 @@ function showSlides(n) {
 }
   </style>
   
-  <%@ include file="views/common/header.jsp" %>
+  <%@ include file="views/common/mainHeader.jsp" %>
   
       <body>
    <section>

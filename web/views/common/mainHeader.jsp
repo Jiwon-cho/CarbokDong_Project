@@ -11,11 +11,13 @@
 <meta charset="UTF-8">
 <title>카복동</title>
 
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>  
+
     <link
       href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
       rel="stylesheet">
       
- 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/headerStyle.css">   
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mainHeaderStyle.css">   
 
   </head>
   
