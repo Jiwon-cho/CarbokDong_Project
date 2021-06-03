@@ -1,9 +1,6 @@
-package com.car.controller;
+package com.common;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +11,16 @@ import com.car.model.service.CarService;
 import com.car.model.vo.Car;
 
 /**
- * Servlet implementation class CarPurchaseViewServlet
+ * Servlet implementation class PurchasingGoServlet
  */
-@WebServlet("/car/carPurchaseView")
-public class CarPurchaseViewServlet extends HttpServlet {
+@WebServlet("/order/purchasingGo")
+public class PurchasingGoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CarPurchaseViewServlet() {
+    public PurchasingGoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,43 +30,26 @@ public class CarPurchaseViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//String referer = request.getHeader("REFERER")!=null? request.getHeader("REFERER") : "";
 		int carNB=Integer.parseInt(request.getParameter("carNB"));
 		String start=request.getParameter("start");
 		String end=request.getParameter("end");
+		int money=Integer.parseInt(request.getParameter("money"));
 		String gear=request.getParameter("gear")!=null?request.getParameter("gear"):"";		
 		String gn=null;
 		int g=0;
 		switch(gear) {
 		case "grill" : g=2000;gn="바베큐그릴";break ;
 		}
-		
-		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-		long calDate=0;
-		long calDateDays=0;
-	try {
-		Date startd=sdf.parse(start);
-		Date endd=sdf.parse(end);
-		
-		calDate=startd.getTime()-endd.getTime();
-		
-		calDateDays=Math.abs(calDate/(24*60*60*1000));
-	}catch(Exception e){
-		e.printStackTrace();
-	}
-	
-	
 		Car c=new CarService().selectCar(carNB);
-		
-		int money=c.getPrice()*(int)calDateDays+g;
-	
 		request.setAttribute("car", c);
 		request.setAttribute("start", start);
-		request.setAttribute("end", end);
-		//request.setAttribute("days", calDateDays);
+		request.setAttribute("end", end); 
+		//request.setAttribute("referer", referer);
 		request.setAttribute("gear", gn);
 		request.setAttribute("gearprice", g);
 		request.setAttribute("money", money);
-		request.getRequestDispatcher("/views/Car/carPurchaseView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/purchasing.jsp").forward(request, response);
 	}
 
 	/**

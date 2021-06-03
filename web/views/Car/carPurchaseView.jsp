@@ -43,7 +43,19 @@ int money=(int)request.getAttribute("money");
 ※ 손해면책제도보험 및 특약보험은 1회 소멸성입니다.(사고발생 즉시 본사로 연락을 주셔야 보험처리 가능합니다.)</div>
     <div class="carbook pplinfo"><% %></div>
      <div class="carbook prom"></div>
-    <div class="carbook money">총비용<br><%=money %> <button onclick="location.assign('')">결제하기</button></div> 
+     
+     
+    
+    <div class="carbook money">총비용<br><%=money %> 
+    <form action="<%=request.getContextPath()%>/order/purchasingGo" method="post">
+     <input type="hidden" name="carNB" value="<%=c.getCarNB() %>">
+     <input type="hidden" name="start" value="<%=start%>">
+     <input type="hidden" name="end" value="<%=end%>">
+     <input type="hidden" name="gear" value="<%=gear%>">
+     <input type="hidden" name="money" value="<%=money%>">
+    <button type="submit">결제하기</button> </form>
+    </div> 
+   
 </div>
 </div>
 

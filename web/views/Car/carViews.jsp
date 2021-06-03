@@ -143,7 +143,7 @@ if(loginMember!=null){
         form.method = "post";
 
 
-        parm.push( ['carNB', '<%=c.getCarNB()%>'] );
+         parm.push( ['carNB', '<%=c.getCarNB()%>'] ); 
 		parm.push( ['start',dt]);
 		parm.push( ['end',dt2]);
 		parm.push( ['gear',gear]);
@@ -234,7 +234,7 @@ if(loginMember!=null){
             <button class="basket_btn">장바구니 담기</button>
   
      <!--        <button class="buy_btn" onclick="carPV();">구매하기</button>  -->
-                 <button class="buy_btn" onclick="page_move('<%=request.getContextPath()%>/car/carPurchaseView');">구매하기</button> 
+                 <button class="buy_btn" onclick="page_move('<%=request.getContextPath()%>/car/carPurchaseView?carNB=<%=c.getCarNB()%>');">구매하기</button> 
        
             </form>
           </div>

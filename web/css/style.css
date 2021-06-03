@@ -248,3 +248,7 @@ button, input, select, td, textarea, th {
 	
 }
 
+a:hover{
+	   text-decoration: none ;
+}
+

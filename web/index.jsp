@@ -18,7 +18,7 @@
         var maxTemp=result.daily[i].temp.max;
          var cDate=result.daily[i].dt;
         var wIcon=result.daily[i].weather[0].icon;
-        
+         
         function convertTime(t){
             var ot= new Date(t*1000);
             var mt=ot.getMonth()+1;
