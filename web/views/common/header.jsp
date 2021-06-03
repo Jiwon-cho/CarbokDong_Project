@@ -19,7 +19,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic&family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
       rel="stylesheet">
-      
+      <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/headerStyle.css">   
 
   </head>

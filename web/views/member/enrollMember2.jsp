@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+
 <center>
 	<form action="<%=request.getContextPath() %>/memberEnrollEnd" method="post" name="" onsubmit="return fn_invalidate();">
 		<table width="800">
