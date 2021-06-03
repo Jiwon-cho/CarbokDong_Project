@@ -19,7 +19,7 @@
                 <div class="join-type">
                     <h3 class="join-type-title">결재 내역<br><img src="https://img.icons8.com/ios/452/payment-history.png" alt="" width="100" height="100"></h3>
                     <p class="join-type-desc">구매 내역</p>
-                    <input type="submit" value="선택">
+                    <input type="submit" onclick="btn_Payment();" value="선택">
                 </div>
                 <div class="join-type">
                     <h3 class="join-type-title">내가 쓴글<br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6pbUybzmIExB2NazJYIj6rYorJdM_wxmQpg&usqp=CAU" alt="" width="100" height="100"></h3>
@@ -36,6 +36,9 @@
         </div>
         </center>
         <script>
+	        function btn_Payment(){
+	    		form1.action="<%=request.getContextPath() %>/member/payment"
+	    	}
 	        function btn_MyUpdate(){
 	    		form1.action="<%=request.getContextPath() %>/member/memberView"
 	    	}
