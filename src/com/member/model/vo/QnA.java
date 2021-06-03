@@ -9,12 +9,13 @@ public class QnA {
 	private Date date;
 	private String userId;
 	private String result;
+	private String nickName;
 	
 	public QnA() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public QnA(int no, String title, String content, Date date, String userId, String result) {
+	public QnA(int no, String title, String content, Date date, String userId, String result, String nickName) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -22,6 +23,7 @@ public class QnA {
 		this.date = date;
 		this.userId = userId;
 		this.result = result;
+		this.nickName = nickName;
 	}
 
 	public int getNo() {
@@ -71,6 +73,14 @@ public class QnA {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
 	
 }

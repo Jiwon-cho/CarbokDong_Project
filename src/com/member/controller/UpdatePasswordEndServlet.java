@@ -40,6 +40,7 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 		
 		if(m==null) {
 			//비밀번호 불일치
+			System.out.println(curPw);
 			msg="현재 비밀번호가 일치하지 않습니다!";
 			loc="/member/updatePassword?userId="+userId;
 			

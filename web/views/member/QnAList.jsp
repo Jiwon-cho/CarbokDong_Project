@@ -27,7 +27,7 @@
         </tr>
         <%if(list.isEmpty()) {%>
 			<tr>
-            	<td colspan="6">조회된 게시글이 없습니다</td>
+            	<td colspan="5">조회된 게시글이 없습니다</td>
             </tr>
         <%}else{ 
         	
@@ -41,41 +41,43 @@
         <%}else{ %>
         	<td class="result1"><a>접수중</a></td>
         <%} %>
-        <td class="name"><%=q.getUserId() %></td>
+        <td class="name"><%=q.getNickName() %>(<%=q.getUserId() %>)</td>
         <td class="date"><%=q.getDate() %></td>
         </tr>
 		<%} 
 		}%>
 </table>
+<br>
 <div id="search-container">
         	검색타입 :
         	<select id="searchType">
-        		<option value="userId" <%=searchType!=null&&searchType.equals("userId")?"selected":"" %>>아이디</option>
-        		<option value="title" <%=searchType!=null&&searchType.equals("title")?"selected":""%>>제목</option>
+        		<option value="QA_MEMBER_ID" <%=searchType!=null&&searchType.equals("QA_MEMBER_ID")?"selected":"" %>>아이디</option>
+        		<option value="QA_TITLE" <%=searchType!=null&&searchType.equals("QA_TITLE")?"selected":""%>>제목</option>
         	</select>
-        	<div id="search-userId">
+        	<div id="search-QA_MEMBER_ID">
         		<form action="<%=request.getContextPath() %>/member/searchQnAList" method="post">
-        			<input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력해주세요" value="<%=searchType!=null&&searchType.equals("userId")?searchKeyword:""%>">
-        			<input type="hidden" name="searchType" value="MEMBER_ID">
+        			<input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력해주세요" value="<%=searchType!=null&&searchType.equals("QA_MEMBER_ID")?searchKeyword:""%>">
+        			<input type="hidden" name="searchType" value="QA_MEMBER_ID">
         			<button type="submit">조회</button>
         		</form>
         	</div>
-        	<div id="search-title">
+        	<div id="search-QA_TITLE">
         		<form action="<%=request.getContextPath() %>/member/searchQnAList" method="post">
-        			<input type="text" name="searchKeyword" size="25" placeholder="검색할 제목을 입력해주세요" value="<%=searchType!=null&&searchType.equals("title")?searchKeyword:""%>">
+        			<input type="text" name="searchKeyword" size="25" placeholder="검색할 제목을 입력해주세요" value="<%=searchType!=null&&searchType.equals("QA_TITLE")?searchKeyword:""%>">
         			<input type="hidden" name="searchType" value="QA_TITLE">
         			<button type="submit">조회</button>
         		</form>
         	</div>
-        	</center>
+        	
         <div id="pageBar">
         	<%=request.getAttribute("pageBar") %>
         </div>
 </div>
+</center>
         <script>
         	$("#searchType").change(e=>{
-        		const userId=$("#search-userId");
-        		const title=$("#search-title");
+        		const userId=$("#search-QA_MEMBER_ID");
+        		const title=$("#search-QA_TITLE");
         		
         		userId.css("display","none");
         		title.css("display","none");
@@ -87,6 +89,8 @@
 			});
         </script>
         <style>
+        	div#search-QA_MEMBER_ID{display:inline-block;}
+			div#search-QA_TITLE{display:none;}
 	        div#pageBar {
 				margin-top: 10px;
 				text-align: center;

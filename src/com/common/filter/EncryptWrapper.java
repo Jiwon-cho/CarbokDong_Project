@@ -8,6 +8,8 @@ import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import com.common.AESEncrypt;
+
 public class EncryptWrapper extends HttpServletRequestWrapper {
 	
 	public EncryptWrapper(HttpServletRequest request) {
@@ -16,7 +18,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 	
 	@Override
 	public String getParameter(String name) {
-		String value;
+		String value = null;
 		
 		if(name.equals("password")||name.equals("password_new")) {
 			

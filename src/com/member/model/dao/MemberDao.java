@@ -348,8 +348,9 @@ public class MemberDao {
 				q.setTitle(rs.getString("QA_TITLE"));
 				q.setContent(rs.getString("QA_CONTENT"));
 				q.setDate(rs.getDate("QA_DATE"));
-				q.setUserId(rs.getString("MEMBER_ID"));
+				q.setUserId(rs.getString("QA_MEMBER_ID"));
 				q.setResult(rs.getString("QA_RESULT"));
+				q.setNickName(rs.getString("NICKNAME"));
 				list.add(q);
 			}
 		}catch(SQLException e) {
@@ -393,8 +394,9 @@ public class MemberDao {
 				q.setTitle(rs.getString("QA_TITLE"));
 				q.setContent(rs.getString("QA_CONTENT"));
 				q.setDate(rs.getDate("QA_DATE"));
-				q.setUserId(rs.getString("MEMBER_ID"));
+				q.setUserId(rs.getString("QA_MEMBER_ID"));
 				q.setResult(rs.getString("QA_RESULT"));
+				q.setNickName(rs.getString("NICKNAME"));
 				list.add(q);		
 				
 			}

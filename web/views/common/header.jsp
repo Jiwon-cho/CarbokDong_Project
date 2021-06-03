@@ -46,7 +46,7 @@
       </ul>
 	<%}else {%>
 	  <ul class="head-list">
-	  	<li><a href="<%=request.getContextPath() %>/myPage?userId="+<%=loginMember.getUserId()%>>마이페이지</a></li>
+	  	<li><a href="<%=request.getContextPath() %>/myPage?userId=<%=loginMember.getUserId()%>">마이페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 	  </ul>
 	<%} %>

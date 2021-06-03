@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
+
 /**
  * Servlet implementation class MyPageServlet
  */
@@ -27,7 +30,14 @@ public class MyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
+		String userId=request.getParameter("userId");
+		Member m = new MemberService().selectMemberId(userId);
+		if(m.getMemberType()==0) {
+			response.sendRedirect("/admin/adminMain");
+		}else {
+			request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
+		}
+		
 	}
 
 	/**

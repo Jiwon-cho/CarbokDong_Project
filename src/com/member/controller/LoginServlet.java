@@ -50,12 +50,9 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("loginMember", m);
 
 			 //response.sendRedirect(request.getContextPath()); 
-			if(m.getMemberType()==0) {
-				response.sendRedirect(request.getContextPath()+"/admin/adminMain");
-			}else {
-				response.sendRedirect(referer);
+			
+			response.sendRedirect(referer);
 				
-			}
 		} else {
 			String msg = "아이디, 비밀번호가 일치하지 않습니다!";
 			String loc = "/";
