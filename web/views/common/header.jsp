@@ -10,9 +10,14 @@
 <head>
 <meta charset="UTF-8">
 <title>카복동</title>
-
+	<link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
     <link
-      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic&family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
       rel="stylesheet">
       
  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/headerStyle.css">   
@@ -33,7 +38,6 @@
         <li><a href="<%=request.getContextPath()%>/member/QnAList">Q&A</a></li>
       </div>
       <ul class="navbar__icons">
-        <div class="headbar">
         
        <%if(loginMember==null) {%>
       <ul class="list">
@@ -42,15 +46,24 @@
       </ul>
 	<%}else {%>
 	  <ul class="head-list">
-	  	<li><a href="<%=request.getContextPath()%>/myPage">마이페이지</a></li>
+	  	<li><a href="<%=request.getContextPath() %>/myPage?userId="+<%=loginMember.getUserId()%>>마이페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 	  </ul>
 	<%} %>
       </ul>
-
+	
 
       <a href="#" class="navbar__toggleBtn">
         <i class="fas fa-bars"></i></a>
     </nav>
+	<script>
+      const toggleBtn = document.querySelector(".navbar__toggleBtn");
+      const menu = document.querySelector("#navbar__menu");
+      const icons = document.querySelector(".navbar__icons");
 
+      toggleBtn.addEventListener("click", () => {
+        menu.classList.toggle("active");
+        icons.classList.toggle("active");
+      });
+    </script>
   </header>

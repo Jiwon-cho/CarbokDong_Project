@@ -63,20 +63,26 @@
         right: 32px;
         color: rgb(0, 69, 172);
       }
+      
+      ul{
+      	font-family: 'Do Hyeon', sans-serif;
+      }
 
-      @media screen and (max-width: 1300px) {
-        .navbar {
+      @media screen and (max-width: 1200px) {
+      
+        #navbar__main {
           flex-direction: column;
           align-items: flex-start;
+          padding: 21px;
         }
-        .navbar__menu {
+        #navbar__menu {
           display: none;
           flex-direction: column;
           align-items: center;
           width: 100%;
         }
 
-        .navbar__menu li {
+        #navbar__menu li {
           width: 100%;
           text-align: center;
         }
@@ -87,10 +93,11 @@
           width: 100%;
         }
         .navbar__toggleBtn {
+        	margin-top:10px;
           display: block;
         }
 
-        .navbar__menu.active,
+        #navbar__menu.active,
         .navbar__icons.active {
           display: flex;
         }

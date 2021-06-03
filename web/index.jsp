@@ -184,7 +184,7 @@ function showSlides(n) {
 }
 
 .active, .dot:hover {
-  background-color: #717171;
+  background-color: rgba(219, 219, 219, 0.4);
 }
 
 /* Fading animation */
