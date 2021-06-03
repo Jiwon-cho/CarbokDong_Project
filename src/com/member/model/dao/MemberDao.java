@@ -96,7 +96,7 @@ public class MemberDao {
 				m.setAddress(rs.getString("address"));
 				m.setNikname(rs.getString("nickname"));
 				m.setGender(rs.getString("gender"));
-				m.setMemberType(rs.getInt("member_Type"));
+				m.setMemberType(rs.getInt("MEMBER_TYPE"));
 				m.setPassword(rs.getString("password"));
 			}
 		}catch (SQLException e) {

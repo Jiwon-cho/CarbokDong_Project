@@ -7,6 +7,9 @@
 	String searchKeyword=request.getParameter("searchKeyword");
 %>    
 <%@ include file="/views/common/header.jsp" %>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
 <center>
 <table class="Qnotice" border="1" cellspacing="0" summary="QnA게시판리스트">
 		<tr><td class="title2"><p style="font-size: 35px;align">Q&A</p></td></tr>

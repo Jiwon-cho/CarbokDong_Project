@@ -33,7 +33,7 @@ public class MyPageServlet extends HttpServlet {
 		String userId=request.getParameter("userId");
 		Member m = new MemberService().selectMemberId(userId);
 		if(m.getMemberType()==0) {
-			response.sendRedirect("/admin/adminMain");
+			request.getRequestDispatcher("/views/admin/adminMain.jsp").forward(request, response);
 		}else {
 			request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
 		}
