@@ -168,4 +168,22 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return result;
 	}
+	public int selectMemberCount() {
+		Connection conn=getConnection();
+		int count=dao.selectMemberCount(conn);
+		close(conn);
+		return count;
+	}
+	public int selectCarCount() {
+		Connection conn=getConnection();
+		int count=dao.selectCarCount(conn);
+		close(conn);
+		return count;
+	}
+	public int selectCampingCount() {
+		Connection conn=getConnection();
+		int count=dao.selectCampingCount(conn);
+		close(conn);
+		return count;
+	}
 }

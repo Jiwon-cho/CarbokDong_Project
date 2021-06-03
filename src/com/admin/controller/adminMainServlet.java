@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.borad.model.service.BoardService;
+
 /**
  * Servlet implementation class adminMainServlet
  */
@@ -27,6 +29,14 @@ public class adminMainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		int mCount=new BoardService().selectMemberCount();
+		int cCount=new BoardService().selectCarCount();
+		int camCount=new BoardService().selectCampingCount();
+		
+		request.setAttribute("mCount", mCount);
+		request.setAttribute("cCount", cCount);
+		request.setAttribute("camCount", camCount);
 		request.getRequestDispatcher("/views/admin/adminMain.jsp").forward(request, response);
 	}
 
