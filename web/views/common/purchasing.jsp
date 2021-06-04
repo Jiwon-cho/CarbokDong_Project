@@ -38,7 +38,7 @@ System.out.println(p.getMemberId());
             var ds=ot.getSeconds();
        
         
-            return yy+"-"+mt+"-"+dt+"-"+dh+"-"+dm+"-"+ds;
+            return yy+"-"+mt+"-"+dt+" "+dh+":"+dm+":"+ds;
         }
         var currentTime=convertTime();
 		var start='<%=start%>';

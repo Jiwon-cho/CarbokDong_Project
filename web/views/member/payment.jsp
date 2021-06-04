@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.member.model.vo.Payment"%>
+<%@ page import="java.util.List, com.payment.model.vo.Payment"%>
 <%
 	List<Payment> list = (List<Payment>) request.getAttribute("list");
 	String pageBar = (String) request.getAttribute("pageBar");
@@ -60,11 +60,11 @@ div#pageBar span.cPage {
         	for(Payment p : list){
         %>
 		<tr>
-			<td><%=p.getType() %></td>
-			<td><%=p.getToDate() %></td>
+			<td><%=p.getPaymetType() %></td>
+			<td><%=p.getPaymentDate() %></td>
 			<td><%=p.getStartDate() %> ~ <%=p.getEndDate() %></td>
-			<td><%=p.getPirce() %></td>
-			<td><%=p.getProductModel() %></td>
+			<td><%=p.getPrice() %></td>
+			<td><%=p.getProductNm() %></td>
 		</tr>
 		<%} 
 		}%>

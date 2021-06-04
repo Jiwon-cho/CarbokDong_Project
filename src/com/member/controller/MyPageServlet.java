@@ -29,14 +29,9 @@ public class MyPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String userId=request.getParameter("userId");
-		Member m = new MemberService().selectMemberId(userId);
-		if(m.getMemberType()==0) {
-			request.getRequestDispatcher("/views/admin/adminMain.jsp").forward(request, response);
-		}else {
-			request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
-		}
+		// TODO Auto-generated method stub 
+		
+		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
 		
 	}
 

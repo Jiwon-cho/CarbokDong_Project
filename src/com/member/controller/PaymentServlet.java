@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.service.MemberService;
-import com.member.model.vo.Payment;
+import com.payment.model.vo.Payment;
 
 /**
  * Servlet implementation class PaymentServlet

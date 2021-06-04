@@ -65,8 +65,8 @@ public class PurchasingCheckServlet extends HttpServlet {
     	 }
     	 
     	 
-    	 System.out.println(start);
-    	 System.out.println(end);
+    	 //System.out.println(start);
+    	 //System.out.println(end);
     	 int product_nb=Integer.parseInt(request.getParameter("pd_no")) ;
     	 String buyer=request.getParameter("buyer");
 		 
