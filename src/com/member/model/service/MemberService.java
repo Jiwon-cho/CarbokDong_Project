@@ -12,8 +12,8 @@ import com.borad.model.vo.Board;
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
-import com.member.model.vo.Payment;
 import com.member.model.vo.QnA;
+import com.payment.model.vo.Payment;
 
 public class MemberService {
 	private MemberDao dao=new MemberDao();
@@ -111,20 +111,6 @@ public class MemberService {
 		return result;
 	}
 	
-	public List<Payment> selectPayment(int cPage, int numPerpage,String userId){
-		Connection conn=getConnection();
-		List<Payment> list=dao.selectPayment(conn,cPage,numPerpage,userId);
-		close(conn);
-		return list;
-	}
-	
-	public int selectPaymentCount(String userId) {
-		Connection conn=getConnection();
-		int result=dao.selectPaymentCount(conn,userId);
-		close(conn);
-		return result;
-	}
-	
 	public List<QnA> selectQnAList(int cPage,int numPerpage){
 		Connection conn=getConnection();
 		List<QnA> list=dao.selectQnAList(conn,cPage,numPerpage);
@@ -149,6 +135,21 @@ public class MemberService {
 	public int selectSearchQnACount(String type,String keyword){
 		Connection conn=getConnection();
 		int result=dao.selectSearchQnACount(conn,type,keyword);
+		close(conn);
+		return result;
+	}
+	
+
+	public List<Payment> selectPayment(int cPage, int numPerpage,String userId){
+		Connection conn=getConnection();
+		List<Payment> list=dao.selectPayment(conn,cPage,numPerpage,userId);
+		close(conn);
+		return list;
+	}
+	
+	public int selectPaymentCount(String userId) {
+		Connection conn=getConnection();
+		int result=dao.selectPaymentCount(conn,userId);
 		close(conn);
 		return result;
 	}

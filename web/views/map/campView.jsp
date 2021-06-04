@@ -61,23 +61,24 @@
 
     <div class="container">
       <div class="head">
-        <div class="title"><%= camp.getName() %></div>
+        <div class="title"><%= camp.getName() %>
+			<div class="like">
+            	<div class="heart">💗</div>
+            	9
+          </div>        
+        </div>
       </div>
       <div class="main">
         <div class="mainPhoto">
-        
-        <%for(int i=0; i<photos.size(); i++ ){%>
+        	<%for(int i=0; i<photos.size(); i++ ){%>
         	<div>
-            <img
-              	class="mainImg"
-              	src="<%=request.getContextPath() %>/images/campImgs/<%=photos.get(i)%>"
-             	alt="<%=photos.get(i)%> 이미지를 불러올 수 없어요"
-           	 />
+            	<img
+              		class="mainImg"
+              		src="<%=request.getContextPath() %>/images/campImgs/<%=photos.get(i)%>"
+             		alt="<%=photos.get(i)%> 이미지를 불러올 수 없어요"
+           	 	/>
           	</div>
         <%}%>
-        
-          
-
         </div>
         <div class="details">
           <div class="detail">
@@ -90,10 +91,7 @@
           <div class="detail">
             🔹 부대시설 : <%= camp.getFacility() %>
           </div>
-          <div class="like">
-            <div class="heart">💗</div>
-            9
-          </div>
+
         </div>
       </div>
     </div>
@@ -172,7 +170,7 @@
 	    	  var customOverlay = new kakao.maps.CustomOverlay({
 	    		    position : markerTest(<%=camp.getLatitude()%>, <%=camp.getLongitude()%>), 
 	    		    content : content,
-	    		    yAnchor: 2.8,
+	    		    yAnchor: 3.2,
 	    		});
 	    	  customOverlay.setMap(map);
 		</script>

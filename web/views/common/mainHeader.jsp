@@ -46,9 +46,14 @@
         <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
         <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
       </ul>
-	<%}else {%>
+	<%}else if(loginMember.getMemberType()==0){%>
 	  <ul class="head-list">
-	  	<li><a href="<%=request.getContextPath() %>/myPage?userId="+<%=loginMember.getUserId()%>>마이페이지</a></li>
+	  	<li><a href="<%=request.getContextPath() %>/admin/adminMain">관리자페이지</a></li>
+	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
+	  </ul>
+	<%}else{ %>
+	<ul class="head-list">
+	  	<li><a href="<%=request.getContextPath() %>/myPage">마이페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 	  </ul>
 	<%} %>
