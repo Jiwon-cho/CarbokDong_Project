@@ -38,21 +38,21 @@ public class PurchasingCheckServlet extends HttpServlet {
 		String merchant_uid=request.getParameter("merchant_uid");
 		 int paid_amount=Integer.parseInt(request.getParameter("paid_amount"));
 		 String sdate=request.getParameter("date") ;
-		 System.out.println(sdate);
-		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+		 //System.out.println(sdate);
+		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 Date date=null;
 		 try {
 		 date=sdf.parse(sdate);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		 System.out.println(date);
+		 //System.out.println(date);
          String pay_method=request.getParameter("pay_method");
          String pd_name=request.getParameter("pd_name");
     	 String sstart=request.getParameter("st") ;
-    	 System.out.println(sstart);
+    	 //System.out.println(sstart);
     	 String send=request.getParameter("ed") ;
-    	 System.out.println(send);
+    	 //System.out.println(send);
     	 Date start=null;
     	 Date end=null;
     	 SimpleDateFormat sef=new SimpleDateFormat("yyyy-MM-dd");
@@ -65,8 +65,8 @@ public class PurchasingCheckServlet extends HttpServlet {
     	 }
     	 
     	 
-    	 System.out.println(start);
-    	 System.out.println(end);
+    	 //System.out.println(start);
+    	 //System.out.println(end);
     	 int product_nb=Integer.parseInt(request.getParameter("pd_no")) ;
     	 String buyer=request.getParameter("buyer");
 		 
