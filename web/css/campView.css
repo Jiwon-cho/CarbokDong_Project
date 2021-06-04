@@ -100,12 +100,17 @@
         font-size: 30px;
         background-color: rgba(245, 179, 179, 0);
         transition: all 20ms ease-in;
+        -webkit-tap-highlight-color:transparent;
+        -webkit-user-select: none;
+  		user-select: none;
       }
+      
 
       .like:hover .heart {
         transition: all 150ms ease-in;
         animation: shake 1s infinite;
       }
+      
 
       @keyframes shake {
         0% {
@@ -145,9 +150,11 @@
 
       /* place */
       .section {
+      	display: flex;
+      	flex-direction: column;
         padding-top: 100px;
         padding-bottom: 100px;
-        width: 1500px;
+        width: 90%;
         text-align: center;
         margin: auto;
         border-bottom: 2px outset rgba(151, 151, 151, 0.5);
@@ -243,12 +250,13 @@
 
       /* 오시는길 지도 */
       .route {
-        width: 1500px;
+      	display: flex;
+      	flex-direction: column;
+        width: 90%;
         height: 800px;
         padding-top: 100px;
         margin: auto;
         text-align: center;
-        
       }
       
       .coming{
@@ -291,15 +299,26 @@
       }
       
       @media screen and (max-width: 1500px) {
-      
+      	.container {
+      		justify-content: center;
+      		align-items: center;
+      	}
       	.main {
      		flex-direction: column;
      		justify-content: center;
      		align-items: center;
+     		width: 600px;
       	}
       	
       	.mainPhoto{
-      		margin: auto;
+      		margin: 20px 0 0 0;
+      		width: 80%;
+      		height: 300px;
+      	}
+      	
+      	.mainImg{
+      		height: 250px;
+      		width: 500px;
       	}
       	
       	.details {
@@ -307,5 +326,15 @@
       		width: 100%;
         	margin: auto;
       	}
+      	
+      	.section {
+      	}
       
+      	.place__categories {
+        	margin: auto;
+      	}
+      	
+      	.route {
+        	
+      	}
       }
