@@ -39,7 +39,7 @@ public class PurchasingCheckServlet extends HttpServlet {
 		String merchant_uid=request.getParameter("merchant_uid");
 		 int paid_amount=Integer.parseInt(request.getParameter("paid_amount"));
 		 String sdate=request.getParameter("date") ;
-		 System.out.println(sdate);
+		 //System.out.println(sdate);
 		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 Date date=null;
 		 try {
@@ -47,13 +47,13 @@ public class PurchasingCheckServlet extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		 System.out.println(date);
+		 //System.out.println(date);
          String pay_method=request.getParameter("pay_method");
          String pd_name=request.getParameter("pd_name");
     	 String sstart=request.getParameter("st") ;
-    	 System.out.println(sstart);
+    	 //System.out.println(sstart);
     	 String send=request.getParameter("ed") ;
-    	 System.out.println(send);
+    	 //System.out.println(send);
     	 Date start=null;
     	 Date end=null;
     	 SimpleDateFormat sef=new SimpleDateFormat("yyyy-MM-dd");
@@ -74,15 +74,9 @@ public class PurchasingCheckServlet extends HttpServlet {
 		
 		 Payment p=new Payment(imp_uid,pay_method,date,start,end,paid_amount,product_nb,buyer,pd_name);
 		 int result=new PaymentService().insertPayment(p);
-		 int result2=new CarService().updateCarPsb(product_nb);
-		 
-		 
-		 
-		 if(result<=0||result2<0) {
+		 if(result<=0) {
 			 System.out.println("멈춰!");
 		 }
-		 
-		 
 		
 		 
 		 response.setContentType("application/json;charset=utf-8");
