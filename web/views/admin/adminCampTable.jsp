@@ -416,7 +416,7 @@
                                     <%for(Camp ca:camlist){ %>
                                         <tr>
                                             <td><%=ca.getNum() %></td>
-                                            <td><%=ca.getNum() %></td>
+                                            <td><%=ca.getName() %></td>
                                             <td><%=ca.getLocation() %></td>
                                             <td><%=ca.getInfo() %></td>
                                             <td><%=ca.getPrice() %></td>
