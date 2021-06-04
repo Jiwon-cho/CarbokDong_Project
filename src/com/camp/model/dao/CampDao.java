@@ -56,13 +56,12 @@ public class CampDao {
 			}catch(Exception e) {
 				e.printStackTrace();
 			} finally {
-				System.out.println("DB¿¬°á½ÃµµÇÔ..");
 			}
 			return v;
 		}
 		
 
-	    //ÇÏ³ªÀÇ Ä·ÇÎÀå Á¤º¸¸¦ ¸®ÅÏÇÏ´Â ¸Å¼Òµå
+	    // ìº í•‘ì¥ í•˜ë‚˜ì˜ ì •ë³´ë¥¼ ë¦¬í„´
 	    public Camp getOneCamp(String name){
 	    	Camp camp = new Camp();
 	    	getCon();
@@ -73,7 +72,6 @@ public class CampDao {
 	     		pstmt.setString(1, name);
 	     		rs = pstmt.executeQuery();
 	     		
-	     		//¹İº¹¹®À» µ¹¸é¼­ µ¥ÀÌÅÍ¸¦ ÀúÀå
 	     		while(rs.next()){
 	     			camp = new Camp();
 	     			camp.setNum(rs.getInt(1));
@@ -93,7 +91,7 @@ public class CampDao {
 	     	return camp;
 	    }
 	    
-	    // Ä·ÇÎÀå »çÁø ÆÄÀÏ¸í ¸®ÅÏ
+	    // ì‚¬ì§„ ìº í•‘ì¥ ì‚¬ì§„ íŒŒì¼ëª… ë¦¬í„´
 	    public List<String> getCampPhoto(int num) {
 	    	List<String> photos = new ArrayList<String>();
 	    	
@@ -115,8 +113,7 @@ public class CampDao {
 	     	return photos;
 	    }
 	    
-	    // ÇÖÇÃ·¹ÀÌ½º - ÆÄÀÏ¸í, Àå¼ÒÀÌ¸§, site/food ±¸ºĞÇØ¼­ °´Ã¼·Î ÀúÀå
-	    // camping_nb °¡ ¸Å°³º¯¼ö
+	    // í•«í”Œë ˆì´ìŠ¤ ë°°ì—´ ë¦¬í„´
 	    public List<CampHotplace> getHotplace(int num){
 	    	List<CampHotplace> hot = new ArrayList<CampHotplace>();
 	    	getCon();
@@ -127,7 +124,6 @@ public class CampDao {
 	     		pstmt.setInt(1, num);
 	     		rs = pstmt.executeQuery();
 	     		
-	     		//¹İº¹¹®À» µ¹¸é¼­ µ¥ÀÌÅÍ¸¦ ÀúÀå
 	     		while(rs.next()){
 	     			CampHotplace campHot = new CampHotplace();
 	     			campHot.setNum(rs.getInt(1));
@@ -173,7 +169,6 @@ public class CampDao {
 //			}catch(Exception e) {
 //				e.printStackTrace();
 //			} finally {
-//				System.out.println("DB¿¬°á½ÃµµÇÔ..");
 //			}
 //			return v;
 //		}
