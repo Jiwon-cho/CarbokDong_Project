@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.borad.model.vo.Reply;
+import com.camp.model.vo.Camp;
+import com.car.model.vo.Car;
+import com.member.model.vo.Member;
 import com.borad.model.dao.BoardDao;
 import com.borad.model.vo.Board;
 import com.borad.model.vo.Files;
@@ -185,5 +188,23 @@ private BoardDao dao=new BoardDao();
 		int count=dao.selectCampingCount(conn);
 		close(conn);
 		return count;
+	}
+	public List<Member>selectMemberList(){
+		Connection conn=getConnection();
+		List<Member>mlist=dao.selectMemberList(conn);
+		close(conn);
+		return mlist;
+	}
+	public List<Car>selectCarList(){
+		Connection conn=getConnection();
+		List<Car>clist=dao.selectCarList(conn);
+		close(conn);
+		return clist;
+	}
+	public List<Camp>selectCampList(){
+		Connection conn=getConnection();
+		List<Camp>camlist=dao.selectCampList(conn);
+		close(conn);
+		return camlist;
 	}
 }
