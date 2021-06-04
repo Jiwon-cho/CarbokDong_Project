@@ -49,13 +49,13 @@ public class PaymentDao {
 			pstmt=conn.prepareStatement(prop.getProperty("insertPayment"));
 			pstmt.setString(1, p.getPaymentsNo());
 			pstmt.setString(2, p.getPaymetType());
-			long pdt=p.getPaymentDate().getTime();
-			Date dt=new Date(pdt);
+			Timestamp ts=new Timestamp(p.getPaymentDate().getTime());
+			
 			long sdt=p.getStartDate().getTime();
 			Date sd=new Date(sdt);
 			long edt=p.getEndDate().getTime();
 			Date ed=new Date(edt);
-			pstmt.setDate(3,dt);
+			pstmt.setTimestamp(3,ts);
 			pstmt.setDate(4,sd);
 			pstmt.setDate(5, ed);
 			pstmt.setInt(6, p.getPrice());

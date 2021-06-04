@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.car.model.service.CarService;
 import com.google.gson.Gson;
 import com.payment.model.service.PaymentService;
 import com.payment.model.vo.Payment;
@@ -39,7 +40,7 @@ public class PurchasingCheckServlet extends HttpServlet {
 		 int paid_amount=Integer.parseInt(request.getParameter("paid_amount"));
 		 String sdate=request.getParameter("date") ;
 		 System.out.println(sdate);
-		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 Date date=null;
 		 try {
 		 date=sdf.parse(sdate);
@@ -73,9 +74,15 @@ public class PurchasingCheckServlet extends HttpServlet {
 		
 		 Payment p=new Payment(imp_uid,pay_method,date,start,end,paid_amount,product_nb,buyer,pd_name);
 		 int result=new PaymentService().insertPayment(p);
-		 if(result<=0) {
+		 int result2=new CarService().updateCarPsb(product_nb);
+		 
+		 
+		 
+		 if(result<=0||result2<0) {
 			 System.out.println("멈춰!");
 		 }
+		 
+		 
 		
 		 
 		 response.setContentType("application/json;charset=utf-8");

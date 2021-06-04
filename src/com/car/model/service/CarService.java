@@ -53,4 +53,14 @@ public class CarService {
 		close(conn);
 		return rlist;
 	}
+	
+	public int updateCarPsb(int carNB) {
+		Connection conn=getConnection();
+		int result=dao.updateCarPsb(conn,carNB);
+		if(result>0) commit(conn);
+		else  rollback(conn);
+		return result;
+	}
+	
+	
 }
