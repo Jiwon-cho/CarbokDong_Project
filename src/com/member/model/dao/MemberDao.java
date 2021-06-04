@@ -15,8 +15,8 @@ import java.util.Properties;
 import com.borad.model.vo.Board;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
-import com.member.model.vo.Payment;
 import com.member.model.vo.QnA;
+import com.payment.model.vo.Payment;
 
 public class MemberDao {
 	private Properties prop=new Properties();
@@ -286,53 +286,6 @@ public class MemberDao {
 		}return result;
 	}
 	
-	public List<Payment> selectPayment(Connection conn,int cPage, int numPerpage,String userId){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<Payment> list=new ArrayList();
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectPayment"));
-			pstmt.setString(1, userId);
-			pstmt.setInt(2, (cPage-1)*numPerpage+1);
-			pstmt.setInt(3, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				Payment p=new Payment();
-				//b.setMemberId(rs.getString("member_id"));
-				p.setNo(rs.getInt("PAYMENTS_NO"));
-				p.setType(rs.getString("PAYMENT_NM"));
-				p.setToDate(rs.getDate("PAYDATE"));
-				p.setStartDate(rs.getDate("RENT_START_DATE"));
-				p.setEndDate(rs.getDate("REND_END_DATE"));
-				p.setPirce(rs.getInt("PRICE"));
-				p.setProductModel(rs.getString("CAR_MODEL"));
-				list.add(p);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return list;
-	}
-	
-	public int selectPaymentCount(Connection conn, String userId) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectPaymentCount"));
-			pstmt.setString(1, userId);
-			rs=pstmt.executeQuery();
-			if(rs.next()) result=rs.getInt(1);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return result;
-	}
-	
 	public List<QnA> selectQnAList(Connection conn,int cPage,int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -416,6 +369,54 @@ public class MemberDao {
 		try {
 			pstmt=conn.prepareStatement(sql.replace("#", type));
 			pstmt.setString(1, "%"+keyword+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
+	public List<Payment> selectPayment(Connection conn,int cPage, int numPerpage,String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Payment> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectPayment"));
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Payment p=new Payment();
+				p.setPaymentsNo(rs.getString("PAYMENTS_NO"));
+				p.setPaymetType(rs.getString("PAYMENT_NM"));
+				p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				p.setStartDate(rs.getDate("START_DATE"));
+				p.setEndDate(rs.getDate("END_DATE"));
+				p.setPrice(rs.getInt("PRICE"));
+				p.setProductNb(rs.getInt("PRODUCT_NB"));
+				p.setProductNm(rs.getString("PRODUCT_NM"));
+				p.setMemberId(rs.getString("MEMBER_ID"));
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int selectPaymentCount(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectPaymentCount"));
+			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 		}catch(SQLException e) {

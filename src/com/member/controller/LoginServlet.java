@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		String userId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
-		System.out.println("userId : "+userId+" password : "+password);
+		//System.out.println("userId : "+userId+" password : "+password);
 
 		Member m = new MemberService().login(userId, password);
 	
@@ -48,7 +48,6 @@ public class LoginServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", m);
-
 			 //response.sendRedirect(request.getContextPath()); 
 			
 			response.sendRedirect(referer);
