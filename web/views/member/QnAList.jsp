@@ -11,9 +11,10 @@
 
 
 <center>
+<form action="<%=request.getContextPath()%>/member/QnAInsert" method="post">
 <table class="Qnotice" border="1" cellspacing="0" summary="QnA게시판리스트">
-		<tr><td class="title2"><p style="font-size: 35px;align">Q&A</p></td></tr>
-        <caption>Q&A게시판리스트</caption>
+		<tr><td class="title2"><p style="font-size: 35px;">Q&A</p></td></tr>
+		<tr><td class="title3" colspan="5"><input type="submit" style="width: 100px;height: 30px" value="글쓰기"></td></tr>
         <colgroup>
         <col width="80">
         <col>
@@ -32,13 +33,21 @@
 			<tr>
             	<td colspan="5">조회된 게시글이 없습니다</td>
             </tr>
-        <%}else{ 
-        	
+        <%}else{
         	for(QnA q : list){
         %>
         <tr>
         <td class="no"><%=q.getNo() %></td>
-        <td class="title2"><a href="<%=request.getContextPath()%>/member/QnAView?no=<%=q.getNo() %>"><%=q.getTitle() %></a></td>
+        <td class="title2">
+        	<%if((q.getQapublic().equals("Y"))||(loginMember.getMemberType()==0)||(loginMember.getUserId().equals(q.getUserId()))){%>
+	        	<a href="<%=request.getContextPath()%>/member/QnAView?QnANo=<%=q.getNo() %>"><%=q.getTitle() %></a>
+	        	<%if(q.getFileOriginalName()!=null){ %>
+	        		<img width="13" height="12" class="pic" alt="" src="<%=request.getContextPath() %>/images/ic_pic.png">
+	        	<%} %>
+	        <%} else if(q.getQapublic().equals("N")){%>
+	        	<a>비공개</a>
+	        <%} %>	
+        </td>
         <%if(q.getResult().equals("Y")) {%>
         	<td class="result2"><a>답변완료</a></td>
         <%}else{ %>
@@ -50,6 +59,7 @@
 		<%} 
 		}%>
 </table>
+</form>
 <br>
 <div id="search-container">
         	검색타입 :
@@ -108,9 +118,10 @@
             .Qnotice{width:91%;border-bottom:1px solid #999;color:#666;font-size:12px;table-layout:fixed}
             .Qnotice caption{display:none}
             .Qnotice th{padding:5px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color:#f1f1f4;color:#333;font-weight:bold;line-height:20px;vertical-align:top}
-            .Qnotice td{padding:8px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+            .Qnotice td{padding:8px 0 4px;text-align:center;line-height:18px;}
             .Qnotice .date,.Qnotice .hit{padding:0;font-family:Tahoma;font-size:11px;line-height:normal}
             .Qnotice .title2{text-align:left; padding-left:15px; font-size:13px;}
+            .Qnotice .title3{text-align:right;}
             .Qnotice .title2 .new .name .date .result2{margin:0 0 2px;vertical-align:middle}
             .result1{margin:0 0 2px;vertical-align:middle;color:blue;}
             .Qnotice .title2 a.comment{padding:0;background:none;color:#f00;font-size:12px;font-weight:bold}
