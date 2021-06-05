@@ -57,7 +57,14 @@
 		<br>
 		<div id="secondBorad" style="position: relative;">
 		<ul class="side">
-			<%for(Board b: list){ %>
+		<%if(list.isEmpty()) {%>
+			<tr>
+            	<center><td colspan="5">조회된 게시글이 없습니다</td></center>
+            	<br><hr>
+            </tr>
+            
+        <%}else{
+			for(Board b: list){ %>
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
 					<span class="artice">
@@ -90,7 +97,8 @@
 					</span>
 				</a>
 			</li>
-			<%} %>
+			<%}
+			}%>
 		</ul>
 		</div>
 		<br><br>
