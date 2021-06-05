@@ -81,12 +81,14 @@ public class MyBoardListServlet extends HttpServlet {
 			+"/member/myBoardList?cPage="+pageNo+"&userId="+userId+"'>[다음]</a>";
 		}
 		List<Board>pplist=new BoardService().selectppBoard();
-		
+		List<Files>flist=new BoardService().selectFileList();
+		request.setAttribute("flist", flist);
 		
 		request.setAttribute("pplist", pplist);
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/member/myBoardList.jsp").forward(request, response);
+		
 	}
 
 	/**

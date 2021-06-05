@@ -7,7 +7,7 @@
 	String searchType= request.getParameter("searchType");
 	String searchKeyword= request.getParameter("searchKeyword");
 	//String img=(String)request.getAttribute("img");
-	//List<Files>flist=(List<Files>)request.getAttribute("flist");
+	List<Files>flist=(List<Files>)request.getAttribute("flist");
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -17,8 +17,8 @@
 		height: 100px;
 		position: absolute;
 		display: block;
-		left: 170px;
-		bottom: 40px;
+		left: 200px;
+		bottom: 30px;
 		column-span: all;
 		overflow: hidden;	
 	}
@@ -35,31 +35,41 @@
 		position: relative;
 		left: 550px;
 	}
+	.txt_de{
+	position:relative;
+	left:150px;
+	bottom:100px;
+	color: #000;
+	font-size: 17px;
+	line-height: 22px;
+	vertical-align: top;
+	white-space: normal;
+	word-break: break-all;
+	}
 </style>
+
 	<section id="borad-container">
-		<p id="titi" style="font-size: 35px;">내가 쓴 글</p>
-		<br><br>
-		<table  id="bb" class="sub_news" border="1" cellspacing="0" summary="게시판의 글제목 리스트">
-		<colgroup>
-		<col>
-		<col width="110">
-		<col width="100">
-		<col width="80">
-		</colgroup>
+		<p id="titi" style="font-size: 35px;">  내가 쓴 글</p>
+		<br><br><br><br>
 		
-		</table>
-		
+		<br>
+		<hr>
 		<br>
 		<div id="secondBorad" style="position: relative;">
 		<ul class="side">
 			<%for(Board b: list){ %>
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
-				<input type="hidden" name="boardNo" value="<%=b.getBoardNb()%>">
 					<span class="artice">
-
-						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120">
-
+				<div id="imgdivback" style="width: 130px; height: 120px; background-color: rgb(234, 234, 234); position: relative; top: 20px;"> 
+					<%for(Files f:flist){%>
+						<%if(f.getBoardNb()==b.getBoardNb()){ %>
+						<img src="<%=request.getContextPath() %>/upload/board/<%=f.getFileNm() %>" width="130" height="120"
+						onerror="this.src='<%=request.getContextPath() %>/images/noimage.gif'">
+						<%}else{ %>
+						<%} %>
+					<%} %>
+					</div>
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>
 						</strong>
@@ -85,5 +95,5 @@
 		</div>
 		<br><br>
 		<div id="pageBarb"><%=request.getAttribute("pageBar") %></div>
-	
+		<br><br>
 <%@ include file="/views/common/footer.jsp" %>
