@@ -74,6 +74,7 @@ public class PurchasingCheckServlet extends HttpServlet {
 		
 		 Payment p=new Payment(imp_uid,pay_method,date,start,end,paid_amount,product_nb,buyer,pd_name);
 		 int result=new PaymentService().insertPayment(p);
+		 int rc=new PaymentService().rentalVeri(imp_uid);
 		 if(result<=0) {
 			 System.out.println("멈춰!");
 		 }

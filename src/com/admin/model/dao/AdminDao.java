@@ -207,10 +207,57 @@ public class AdminDao {
 	
 	
 	
+	public int rentalEnd(Connection conn, String pm_no) {
+		PreparedStatement pstmt=null;
+		int a=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("rentalEnd"));
+			pstmt.setString(1, pm_no);
+			a=pstmt.executeUpdate();	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return a;
+	}
 	
+
+	public int addCar(Connection conn,int pd_nb) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("addCar"));
+			pstmt.setInt(1, pd_nb);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
-	
-	
+	public String returnCheck(Connection conn,String pm_no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String a=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("returnCheck"));
+			pstmt.setString(1, pm_no);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				a=rs.getString("rental_end");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return a;
+		
+	}
 	
 	
 	

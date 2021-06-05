@@ -78,7 +78,23 @@ public class PaymentDao {
 	
 	
 	
-	
+	public int rentalVeri(Connection conn,String pm_no) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("rentalVeri"));
+			pstmt.setString(1, pm_no);
+			
+			result=pstmt.executeUpdate();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

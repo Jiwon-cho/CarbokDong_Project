@@ -21,4 +21,13 @@ public class PaymentService {
 		return result;
 	}
 	
+	public int rentalVeri(String pm_no) {
+		Connection conn=getConnection();
+		int result=dao.rentalVeri(conn,pm_no);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	
 }
