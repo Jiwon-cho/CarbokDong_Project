@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.borad.model.vo.Reply;
 import com.camp.model.vo.Camp;
 import com.car.model.vo.Car;
+import com.mbti.model.vo.Mbti;
 import com.member.model.vo.Member;
 import com.borad.model.vo.Board;
 import com.borad.model.vo.Files;
@@ -567,5 +568,30 @@ private Properties prop=new Properties();
 			close(rs);
 			close(pstmt);
 		}return camlist;
+	}
+	public List<Mbti>selectMbtiList(Connection conn,String type){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Mbti>list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMbtiList"));
+			pstmt.setString(1, type);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Mbti m=new Mbti();
+				m.setMbtiType(rs.getString(1));
+				m.setMbtiInfo(rs.getString(2));
+				m.setMbtiCampName(rs.getString(3));
+				m.setMbtiCampInfo(rs.getString(4));
+				m.setMbtiCampLoc(rs.getString(5));
+				m.setMbtiCampPic(rs.getString(6));
+				list.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
 	}
 }

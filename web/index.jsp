@@ -315,7 +315,8 @@ function showSlides(n) {
             </div>
             </div>
             <div class="col-lg-3" style="background-color:red; height: 250px; background-image:url('https://t1.daumcdn.net/cfile/tistory/99D8F24E5F07D10C2A');
-                background-size: cover;text-align:center;     background-repeat: no-repeat;"> <h2><a href="#">[MBTI 검사~!!]</a></h2></div>
+                background-size: cover;text-align:center;     background-repeat: no-repeat;"> <h2><a href="<%=request.getContextPath() %>/mbti/mbtiPage">
+                [MBTI 검사~!!]</a></h2></div>
             <div class="col-2"></div>
         </div>
         </div>

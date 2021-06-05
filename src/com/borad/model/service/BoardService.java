@@ -11,6 +11,7 @@ import java.util.List;
 import com.borad.model.vo.Reply;
 import com.camp.model.vo.Camp;
 import com.car.model.vo.Car;
+import com.mbti.model.vo.Mbti;
 import com.member.model.vo.Member;
 import com.borad.model.dao.BoardDao;
 import com.borad.model.vo.Board;
@@ -206,5 +207,11 @@ private BoardDao dao=new BoardDao();
 		List<Camp>camlist=dao.selectCampList(conn);
 		close(conn);
 		return camlist;
+	}
+	public List<Mbti>selectMbtiList(String type){
+		Connection conn=getConnection();
+		List<Mbti>list=dao.selectMbtiList(conn,type);
+		close(conn);
+		return list;
 	}
 }
