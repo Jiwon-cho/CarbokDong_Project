@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.List,com.member.model.vo.Member,com.car.model.vo.Car,com.camp.model.vo.Camp" %>
+    <%@ page import="java.util.List,com.payment.model.vo.Payment" %>
 <%
-	List<Member>mlist=(List<Member>)request.getAttribute("mlist");
-	List<Car>clist=(List<Car>)request.getAttribute("clist");
-	List<Camp>camlist=(List<Camp>)request.getAttribute("camlist");
+List<Payment> list=(List<Payment>)request.getAttribute("list");
 %>
 
 <!DOCTYPE html>
@@ -18,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>카복동 관리자페이지</title>
+    <title>SB Admin 2 - Tables</title>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom fonts for this template -->
     <link href="<%=request.getContextPath() %>/Resources/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -95,7 +93,7 @@
                 Controller
             </div>
                 <li class="nav-item">
-                        <a class="nav-link" href="<%=request.getContextPath()%>/admin/adminCheck">
+                   <a class="nav-link" href="<%=request.getContextPath()%>/admin/adminCheck">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Return/Cancellation</span></a>
             </li>
@@ -335,9 +333,9 @@
                 </nav>
                 <!-- End of Topbar -->
 				<select id="searchType" name="searchType" onchange="location.href=this.value">
-					<option value="Member" selected="selected">Member</option>
-					<option value="<%=request.getContextPath()%>/admin/CarTable">Car</option>
-					<option value="<%=request.getContextPath()%>/admin/CampTable">Camp</option>
+					<option value="adminCheck" selected="selected">Return</option>
+					<option value="#">Cancellation</option>
+			
 				</select>
 				
 
@@ -357,35 +355,47 @@
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>회원아이디</th>
-                                            <th>회원이름</th>
-                                            <th>이메일</th>
-                                            <th>주소</th>
-                                            <th>닉네임</th>
-                                            <th>성별</th>
+                                            <th>결제 번호</th>
+                                            <th>결제 타입</th>
+                                            <th>결제 시간</th>
+                                            <th>대여일</th>
+                                            <th>반납일</th>
+                                            <th>지불 금액</th>
+                                              <th>상품 번호</th>
+                                            <th>대여인 아이디</th>
+                                            <th>상품 이름</th>
+                                            <th>반납 확인</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
- 											<th>회원아이디</th>
-                                            <th>회원이름</th>
-                                            <th>이메일</th>
-                                            <th>주소</th>
-                                            <th>닉네임</th>
-                                            <th>성별</th>
+ 										    <th>결제 번호</th>
+                                            <th>결제 타입</th>
+                                            <th>결제 시간</th>
+                                            <th>대여일</th>
+                                            <th>반납일</th>
+                                            <th>지불 금액</th>
+                                              <th>상품 번호</th>
+                                            <th>대여인 아이디</th>
+                                            <th>상품 이름</th>
+                                                  <th>반납 확인</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    <%for(Member m:mlist){ %>
+                                     <%for(Payment p:list){ %>
                                         <tr>
-                                            <td><%=m.getUserId() %></td>
-                                            <td><%=m.getUserName() %></td>
-                                            <td><%=m.getEmail() %></td>
-                                            <td><%=m.getAddress() %></td>
-                                            <td><%=m.getNikname() %></td>
-                                            <td><%=m.getGender() %></td>
+                                            <td><%=p.getPaymentsNo() %></td>
+                                            <td><%=p.getPaymetType() %></td>
+                                            <td><%=p.getPaymentDate() %></td>
+                                            <td><%=p.getStartDate() %></td>
+                                            <td><%=p.getEndDate() %></td>
+                                            <td><%=p.getPrice() %></td>
+                                            <td><%=p.getProductNb() %></td>
+                                            <td><%=p.getMemberId() %></td>
+                                            <td><%=p.getProductNm() %></td>
+                                              <td><button onclick="#">확인</button></td>
                                         </tr>
-                                     <%} %>
+                                     <%} %> 
                                     </tbody>                                
                                 </table>
                             
@@ -404,7 +414,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; CarBok 2021</span>
                     </div>
                 </div>
             </footer>
