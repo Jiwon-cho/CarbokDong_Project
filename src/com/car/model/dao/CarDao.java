@@ -177,4 +177,32 @@ public class CarDao {
 			close(pstmt);
 		}return rlist;
 	}
+	
+	public int updateCarPsb(Connection conn,int carNB) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateCarPsb"));
+			pstmt.setInt(1, carNB);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

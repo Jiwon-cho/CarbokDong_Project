@@ -10,12 +10,16 @@ public class QnA {
 	private String userId;
 	private String result;
 	private String nickName;
+	private String fileOriginalName;
+	private String fileReName;
+	private String qapublic;
 	
 	public QnA() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public QnA(int no, String title, String content, Date date, String userId, String result, String nickName) {
+	public QnA(int no, String title, String content, Date date, String userId, String result, String nickName,
+			String fileOriginalName, String fileReName, String qapublic) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -24,6 +28,9 @@ public class QnA {
 		this.userId = userId;
 		this.result = result;
 		this.nickName = nickName;
+		this.fileOriginalName = fileOriginalName;
+		this.fileReName = fileReName;
+		this.qapublic = qapublic;
 	}
 
 	public int getNo() {
@@ -81,6 +88,34 @@ public class QnA {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
+
+	public String getFileOriginalName() {
+		return fileOriginalName;
+	}
+
+	public void setFileOriginalName(String fileOriginalName) {
+		this.fileOriginalName = fileOriginalName;
+	}
+
+	public String getFileReName() {
+		return fileReName;
+	}
+
+	public void setFileReName(String fileReName) {
+		this.fileReName = fileReName;
+	}
+
+	public String getQapublic() {
+		return qapublic;
+	}
+
+	public void setQapublic(String qapublic) {
+		this.qapublic = qapublic;
+	}
+
+	
+
+	
 
 	
 }

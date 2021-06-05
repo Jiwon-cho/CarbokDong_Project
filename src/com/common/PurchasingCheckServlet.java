@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.car.model.service.CarService;
 import com.google.gson.Gson;
 import com.payment.model.service.PaymentService;
 import com.payment.model.vo.Payment;
@@ -38,21 +39,21 @@ public class PurchasingCheckServlet extends HttpServlet {
 		String merchant_uid=request.getParameter("merchant_uid");
 		 int paid_amount=Integer.parseInt(request.getParameter("paid_amount"));
 		 String sdate=request.getParameter("date") ;
-		 System.out.println(sdate);
-		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+		 //System.out.println(sdate);
+		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 Date date=null;
 		 try {
 		 date=sdf.parse(sdate);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		 System.out.println(date);
+		 //System.out.println(date);
          String pay_method=request.getParameter("pay_method");
          String pd_name=request.getParameter("pd_name");
     	 String sstart=request.getParameter("st") ;
-    	 System.out.println(sstart);
+    	 //System.out.println(sstart);
     	 String send=request.getParameter("ed") ;
-    	 System.out.println(send);
+    	 //System.out.println(send);
     	 Date start=null;
     	 Date end=null;
     	 SimpleDateFormat sef=new SimpleDateFormat("yyyy-MM-dd");

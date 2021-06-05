@@ -53,34 +53,34 @@ font-size:40px;
 
 .pageBar{
 margin-top:50px;
-margin-left:45%;
+margin-left:730PX;
 font-size:40px;
 }
 .search{
 height:100px;
-margin-left:30%;
+margin-left:570PX;
 font-size:40px;
 margin-top:30px;
 }
 
 .news-container {
     display: inline-block;
-    width: 40%;
-    height: 100%;
-    margin-left: 30%;
-    margin-right: 30%;
+    width: 761PX;
+    height: 162PX;
+    margin-left: 570PX;
+    margin-right: 570PX;
     border-top: 1px solid gray;
   }
   .header-container {
     display: inline-block;
     vertical-align: middle;
-    width: 70%;
+    width: 533px;
 float:right;
   }
   .image-right-container {
     display: inline-block;
     vertical-align: middle;
-    width: 30%;
+    width: 220PX;
     float: left;
   }
   .header-news-title, .left-body {

@@ -16,6 +16,7 @@ import com.borad.model.vo.Board;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
 import com.member.model.vo.QnA;
+import com.member.model.vo.QnAReply;
 import com.payment.model.vo.Payment;
 
 public class MemberDao {
@@ -303,6 +304,9 @@ public class MemberDao {
 				q.setDate(rs.getDate("QA_DATE"));
 				q.setUserId(rs.getString("QA_MEMBER_ID"));
 				q.setResult(rs.getString("QA_RESULT"));
+				q.setFileOriginalName(rs.getString("QA_ORIGINAL_FILENAME"));
+				q.setFileReName(rs.getString("QA_RENAME_FILENAME"));
+				q.setQapublic(rs.getString("QA_PUBLIC"));
 				q.setNickName(rs.getString("NICKNAME"));
 				list.add(q);
 			}
@@ -349,6 +353,9 @@ public class MemberDao {
 				q.setDate(rs.getDate("QA_DATE"));
 				q.setUserId(rs.getString("QA_MEMBER_ID"));
 				q.setResult(rs.getString("QA_RESULT"));
+				q.setFileOriginalName(rs.getString("QA_ORIGINAL_FILENAME"));
+				q.setFileReName(rs.getString("QA_RENAME_FILENAME"));
+				q.setQapublic(rs.getString("QA_PUBLIC"));
 				q.setNickName(rs.getString("NICKNAME"));
 				list.add(q);		
 				
@@ -392,7 +399,9 @@ public class MemberDao {
 			while(rs.next()) {
 				Payment p=new Payment();
 				p.setPaymentsNo(rs.getString("PAYMENTS_NO"));
-				p.setPaymetType(rs.getString("PAYMENT_NM"));
+
+				p.setPaymetType(rs.getString("PAYMENT_TYPE"));
+
 				p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
 				p.setStartDate(rs.getDate("START_DATE"));
 				p.setEndDate(rs.getDate("END_DATE"));
@@ -423,6 +432,165 @@ public class MemberDao {
 			e.printStackTrace();
 		}finally {
 			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
+	public QnA selectQnA(Connection conn,int QnANo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		QnA q=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectQnA"));
+			pstmt.setInt(1, QnANo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				q=new QnA();
+				q.setContent(rs.getString("QA_CONTENT"));
+				q.setDate(rs.getDate("QA_DATE"));
+				q.setNickName(rs.getString("NICKNAME"));
+				q.setNo(rs.getInt("QA_NB"));
+				q.setResult(rs.getString("QA_RESULT"));
+				q.setTitle(rs.getString("QA_TITLE"));
+				q.setUserId(rs.getString("QA_MEMBER_ID"));
+				q.setFileOriginalName(rs.getString("QA_ORIGINAL_FILENAME"));
+				q.setFileReName(rs.getString("QA_RENAME_FILENAME"));
+				q.setQapublic(rs.getString("QA_PUBLIC"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return q;
+	}
+	
+	public List<QnAReply> selectQnAReply(Connection conn, int boardNo){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<QnAReply> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectQnAReply"));
+			pstmt.setInt(1, boardNo);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				QnAReply qr=new QnAReply();
+				qr.setQnANb(rs.getInt("QA_REPLY_NB"));
+				qr.setQnAReplyContent(rs.getString("QA_REPLY_CONTENTS"));
+				qr.setQnAReplyDate(rs.getDate("QA_REPLY_DATE"));
+				qr.setQnAReplyNo(rs.getInt("QA_REPLY_NO"));
+				list.add(qr);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int insertQnAReply(Connection conn,QnAReply qr) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertQnAReply"));
+			pstmt.setString(1, qr.getQnAReplyContent());
+			pstmt.setInt(2, qr.getQnANb());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int deleteQnAReply(Connection conn, int QnAReplyNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteQnAReply"));
+			pstmt.setInt(1, QnAReplyNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int deleteQnA(Connection conn, int QnANo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteQnA"));
+			pstmt.setInt(1, QnANo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteQnAReply2"));
+			pstmt.setInt(1, QnANo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int resultQnA(Connection conn, int QnANo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("resultQnA"));
+			pstmt.setString(1, "Y");
+			pstmt.setInt(2, QnANo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int updateQnA(Connection conn, QnA q,int QnANo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateQnA"));
+			pstmt.setString(1, q.getTitle());
+			pstmt.setString(2, q.getContent());
+			pstmt.setString(3, q.getFileOriginalName());
+			pstmt.setString(4, q.getFileReName());
+			pstmt.setString(5, q.getQapublic());
+			pstmt.setInt(6, QnANo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int insertQnA(Connection conn,QnA q) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertQnA"));
+			pstmt.setString(1, q.getTitle());
+			pstmt.setString(2, q.getContent());
+			pstmt.setString(3, q.getUserId());
+			pstmt.setString(4, "N");
+			pstmt.setString(5, q.getFileOriginalName());
+			pstmt.setString(6, q.getFileReName());
+			pstmt.setString(7, q.getQapublic());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
 			close(pstmt);
 		}return result;
 	}

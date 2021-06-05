@@ -13,6 +13,7 @@ import com.member.model.dao.MemberDao;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
 import com.member.model.vo.QnA;
+import com.member.model.vo.QnAReply;
 import com.payment.model.vo.Payment;
 
 public class MemberService {
@@ -153,4 +154,75 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	public QnA selectQnA(int QnANo) {
+		Connection conn=getConnection();
+		QnA b=dao.selectQnA(conn, QnANo);
+		if(b!=null) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return b;
+	}
+	
+	public List<QnAReply> selectQnAReply(int QnANo){
+		Connection conn=getConnection();
+		List<QnAReply> list=dao.selectQnAReply(conn,QnANo);
+		close(conn);
+		return list;
+	}
+	
+	public int insertQnAReply(QnAReply qr) {
+		Connection conn=getConnection();
+		int result=dao.insertQnAReply(conn,qr);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteQnAReply(int QnAReplyNo) {
+		Connection conn=getConnection();
+		int result=dao.deleteQnAReply(conn,QnAReplyNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteQnA(int QnANo) {
+		Connection conn=getConnection();
+		int result=dao.deleteQnA(conn,QnANo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int resultQnA(int QnANo) {
+		Connection conn=getConnection();
+		int result=dao.resultQnA(conn,QnANo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updateQnA(QnA q,int QnANo) {
+		Connection conn=getConnection();
+		int result=dao.updateQnA(conn, q,QnANo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int insertQnA(QnA q) {
+		Connection conn=getConnection();
+		int result=dao.insertQnA(conn,q);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 }
