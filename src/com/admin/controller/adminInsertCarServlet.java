@@ -1,28 +1,23 @@
-package com.mbti.controller;
+package com.admin.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.borad.model.service.BoardService;
-import com.mbti.model.vo.Mbti;
-
 /**
- * Servlet implementation class MbtiViewPageServlet
+ * Servlet implementation class adminInsertCarServlet
  */
-@WebServlet("/mbti/mbtiViewPage")
-public class MbtiViewPageServlet extends HttpServlet {
+@WebServlet("/admin/insertCar")
+public class adminInsertCarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MbtiViewPageServlet() {
+    public adminInsertCarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +27,7 @@ public class MbtiViewPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String type=request.getParameter("type");
-	
-		List<Mbti>list=new BoardService().selectMbtiList(type);
-		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/mbti/mbtiView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/openInsertCar.jsp").forward(request, response);
 	}
 
 	/**

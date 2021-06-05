@@ -346,6 +346,8 @@
                     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <button onclick="fn_insertCar();" style="position: relative; left: 1390px; bottom: 15px;">차량 추가</button>        
+                    <button onclick="fn_deleteCar();" style="position: relative; left: 1400px; bottom: 15px;">차량 삭제</button>
                                                 <!-- DataTales Example -->
                     <div class="card shadow mb-4" >
                         <div class="card-header py-3">
@@ -456,7 +458,24 @@
 
     <!-- Page level custom scripts -->
     <script src="<%=request.getContextPath() %>/Resources/AdminTemplate/js/demo/datatables-demo.js"></script>
+	
+   <script>
+		const fn_insertCar=()=>{
+			const status="width=700px,height=500px,left=500px,top=500px";
+			const title="deleteMember";
+			const url="<%=request.getContextPath()%>/admin/insertCar";
+			open(url,title,status);
 
+	};
+	const fn_deleteCar=()=>{
+		const status="width=700px,height=500px,left=500px,top=500px";
+		const title="deleteMember";
+		const url="<%=request.getContextPath()%>/admin/deleteCar";
+		open(url,title,status);
+
+};
+	</script>
+	
 
 
 </body>

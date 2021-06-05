@@ -347,6 +347,7 @@
                     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p>
+                  <button onclick="fn_deleteMember();" style="position: relative; left: 1500px; bottom: 15px;">회원 삭제</button>
                                                 <!-- DataTales Example -->
                     <div class="card shadow mb-4" >
                         <div class="card-header py-3">
@@ -399,7 +400,7 @@
 
    
                 <!-- /.container-fluid -->
- 
+ 			
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -457,7 +458,15 @@
 
     <!-- Page level custom scripts -->
     <script src="<%=request.getContextPath() %>/Resources/AdminTemplate/js/demo/datatables-demo.js"></script>
+	<script>
+	const fn_deleteMember=()=>{
+		const status="width=700px,height=500px,left=500px,top=500px";
+		const title="deleteMember";
+		const url="<%=request.getContextPath()%>/admin/deleteMember";
+		open(url,title,status);
 
+	};
+	</script>
 
 
 </body>
