@@ -399,7 +399,7 @@ public class MemberDao {
 			while(rs.next()) {
 				Payment p=new Payment();
 				p.setPaymentsNo(rs.getString("PAYMENTS_NO"));
-				p.setPaymetType(rs.getString("PAYMENT_NM"));
+				p.setPaymetType(rs.getString("PAYMENT_type"));
 				p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
 				p.setStartDate(rs.getDate("START_DATE"));
 				p.setEndDate(rs.getDate("END_DATE"));
