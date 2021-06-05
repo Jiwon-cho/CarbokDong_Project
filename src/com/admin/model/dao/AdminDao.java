@@ -204,8 +204,51 @@ public class AdminDao {
 			close(pstmt);
 		}return camlist;
 	}
-	
-	
+	public int DeleteMembersel(Connection conn,String id) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("DeleteMembersel"));
+			pstmt.setString(1, id);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int insertCarsel(Connection conn,Car c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertCarsel"));
+			pstmt.setString(1, c.getCarType());
+			pstmt.setString(2, c.getCarModel());
+			pstmt.setInt(3, c.getCarPpl());
+			pstmt.setInt(4, c.getCarTotal());
+			pstmt.setInt(5, c.getCarPsb());
+			pstmt.setString(6, c.getCarInfo());
+			pstmt.setInt(7, c.getPrice());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int DeleteCarsel(Connection conn,int No) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("DeleteCarsel"));
+			pstmt.setInt(1, No);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	public int rentalEnd(Connection conn, String pm_no) {
 		PreparedStatement pstmt=null;

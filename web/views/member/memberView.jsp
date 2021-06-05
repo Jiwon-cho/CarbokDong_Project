@@ -97,7 +97,7 @@
 <script>
 	const fn_updatePassword=()=>{
 		open("<%=request.getContextPath()%>/member/updatePassword?userId=<%=m.getUserId()%>","updatePassword"
-				,"left=200px,top=200px,width=400px,height=210px");
+				,"left=200px,top=200px,width=400px,height=370px");
 	}
 	const fn_updateMember=()=>{
 		const updateFrm=$("#memberFrm");

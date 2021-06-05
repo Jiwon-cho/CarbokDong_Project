@@ -1,8 +1,11 @@
 package com.admin.model.service;
 import static com.common.JDBCTemplate.close;
-import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.getConnection;
+
 import static com.common.JDBCTemplate.rollback;
+
+
 import java.sql.Connection;
 import java.util.List;
 
@@ -59,6 +62,7 @@ public class AdminService {
 		close(conn);
 		return camlist;
 	}
+
 	
 	public int rentalEnd(String pm_no) {
 		Connection conn=getConnection();
@@ -84,4 +88,30 @@ public class AdminService {
 	}
 	
 	
+
+	public int DeleteMembersel(String id) {
+		Connection conn=getConnection();
+		int result=dao.DeleteMembersel(conn,id);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int insertCarsel(Car c) {
+		Connection conn=getConnection();
+		int result=dao.insertCarsel(conn,c);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int DeleteCarsel(int No) {
+		Connection conn=getConnection();
+		int result=dao.DeleteCarsel(conn,No);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 }
