@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.List,com.payment.model.vo.Payment" %>
+    <%@ page import="java.util.List,com.payment.model.vo.Payment,com.admin.model.service.AdminService" %>
 <%
 List<Payment> list=(List<Payment>)request.getAttribute("list");
 %>
@@ -16,7 +16,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>카복동 관리자 페이지</title>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom fonts for this template -->
     <link href="<%=request.getContextPath() %>/Resources/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -382,7 +382,8 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                     <%for(Payment p:list){ %>
+                                     <%for(Payment p:list){ 
+                                     String rc=new AdminService().returnCheck(p.getPaymentsNo());%>
                                         <tr>
                                             <td><%=p.getPaymentsNo() %></td>
                                             <td><%=p.getPaymetType() %></td>
@@ -393,7 +394,12 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                             <td><%=p.getProductNb() %></td>
                                             <td><%=p.getMemberId() %></td>
                                             <td><%=p.getProductNm() %></td>
-                                              <td><input class="return-very" type="button" value="반납확인"></td>
+                                              <td class="vy">
+                                              <%if(rc.equals("N")){ %>
+                                              <input class="return-very" type="button" value="반납확인">
+                                              <%}else{ %>
+                                              반납 완료</td>
+                                              <%} %>
                                         </tr>
                                      <%} %> 
                                     </tbody>                                
@@ -414,6 +420,34 @@ $(".return-very").click((e)=>{
     
     let f=val[0].innerHTML;
     console.log(f);
+    
+    var result=confirm("차가 안전히 반납되었습니까?");
+    
+    if(result){
+    $.ajax({
+    	url:"<%=request.getContextPath()%>/admin/returnCheck",
+    	data:{
+    		pm_no:f
+    	},
+    	success:data=>{
+    		console.log(data);
+    		alert(data);
+    		
+    		
+    	}
+    	
+    	
+    });
+
+    
+    
+    
+    }else{
+    	alert("반납이 되지 않았습니다.");
+    }
+    
+    
+    
 })
 
 

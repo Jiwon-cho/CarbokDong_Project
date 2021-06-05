@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.car.model.dao.CarDao;
 import com.car.model.vo.Car;
+import com.car.model.vo.Cart;
 import com.car.model.vo.Reviews;
 
 
@@ -61,6 +62,15 @@ public class CarService {
 		else  rollback(conn);
 		return result;
 	}
+	
+	public int insertCart(Cart c) {
+		Connection conn=getConnection();
+		int result=dao.insertCart(conn,c);
+		if(result>0) commit(conn);
+		else  rollback(conn);
+		return result;
+	}
+	
 	
 	
 }

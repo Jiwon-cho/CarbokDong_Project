@@ -8,44 +8,56 @@
 </head>
 <body>
 	<style>
-    div#updatePassword-container{
-        background:red;
-    }
-    div#updatePassword-container table {
-        margin:0 auto;
-        border-spacing: 20px;
-    }
-    div#updatePassword-container table tr:last-of-type td {
-        text-align:center;
-    }
+    * {
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #1BBC9B;
+}
+
+.updatePassword-container {
+    background-color: #EEEFF1;
+    width: 320px;
+    border: none;
+    border-radius: 5px;
+    margin: 50px auto;
+    padding: 20px;
+    
+    
+}
+
+.text-field {
+
+  font-size: 14px;
+  border:none;
+  margin-bottom:30px;
+  width: 260px;
+ 
+}
+
+.submit-btn {
+  font-size: 14px;
+  background-color: #1BBC9B;
+  border: 0px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  width: 130px;
+  padding: 10px;
+  
+ 
+}
     </style>
 
-    <div id="updatePassword-container">
+    <div class="updatePassword-container">
 		<form name="updatePwdFrm" action="<%=request.getContextPath()%>/updatePasswordEnd" method="post" >
-			<table>
-				<tr>
-					<th>현재 비밀번호</th>
-					<td><input type="password" name="password" id="password" required></td>
-				</tr>
-				<tr>
-					<th>변경할 비밀번호</th>
-					<td>
-						<input type="password" name="password_new" id="password_new" required>
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호 확인</th>
-					<td>	
-						<input type="password" id="password_chk" required><br>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<input type="submit" value="변경" />&nbsp;
-						<input type="button" value="닫기" onclick="window.close();"/>						
-					</td>
-				</tr>
-			</table>
+					<input type="password" class="text-field" name="password" id="password" placeholder="현재 비밀번호" required>
+					<input type="password" class="text-field" name="password_new" placeholder="변경할 비밀번호" id="password_new" required>
+					<input type="password" class="text-field" id="password_chk" placeholder="비밀번호 확인" required><br>
+						<input type="submit" class="submit-btn" value="변경" />&nbsp;
+						<input type="button" class="submit-btn" value="닫기" onclick="window.close();"/>	
 			<input type="hidden" name="userId" value="<%=request.getParameter("userId")%>">
 		</form>
 	</div>
@@ -61,6 +73,7 @@
 		});
 		
 	</script>
+
 
 </body>
 </html>

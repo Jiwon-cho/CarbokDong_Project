@@ -2,7 +2,9 @@ package com.admin.model.service;
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
+
 import static com.common.JDBCTemplate.rollback;
+
 
 import java.sql.Connection;
 import java.util.List;
@@ -60,6 +62,33 @@ public class AdminService {
 		close(conn);
 		return camlist;
 	}
+
+	
+	public int rentalEnd(String pm_no) {
+		Connection conn=getConnection();
+		int a=dao.rentalEnd(conn,pm_no);
+		if(a>0)commit(conn);
+		else rollback(conn);
+		return a;
+	}
+	
+	public int addCar(int pd_nb) {
+		Connection conn=getConnection();
+		int a=dao.addCar(conn,pd_nb);
+		if(a>0)commit(conn);
+		else rollback(conn);
+		return a;
+	}
+	
+	public String returnCheck(String pm_no) {
+		Connection conn=getConnection();
+		String a=dao.returnCheck(conn,pm_no);
+		close(conn);
+		return a;
+	}
+	
+	
+
 	public int DeleteMembersel(String id) {
 		Connection conn=getConnection();
 		int result=dao.DeleteMembersel(conn,id);
@@ -84,6 +113,7 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+
 	public int insertCampsel(Camp c) {
 		Connection conn=getConnection();
 		int result=dao.insertCampsel(conn,c);
@@ -100,4 +130,7 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+
+
+
 }

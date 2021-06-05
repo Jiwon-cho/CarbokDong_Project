@@ -103,6 +103,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
         
         cl();
      	page_move(url);
+     	goto_cart()
         /*    carPv(); */	
     }
 
@@ -173,6 +174,62 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
     } --%>  
     function setThumbnail(event) { var reader = new FileReader(); reader.onload = function(event) { var img = document.createElement("img"); img.setAttribute("src", event.target.result); document.querySelector("div#image_container").appendChild(img); }; reader.readAsDataURL(event.target.files[0]); }
 
+    
+    function goto_cart(){
+    	if(<%=id%>!=null){	
+    	var dt3=$('#start').val();
+		var dt4=$('#end').val();
+		var g=$('#gear-select').val();
+		var st_ar=dt3.split("-");
+		var ed_ar=dt4.split("-");
+		
+		var sst=new Date(st_ar[0],Number(st_ar[1]-1),st_ar[2]);
+		var eed=new Date(ed_ar[0],Number(ed_ar[1]-1),ed_ar[2]);
+		
+		var bt=(eed.getTime()-sst.getTime())/1000/60/60/24;
+		var m=bt*<%=c.getPrice()%>;
+		var mid=<%=id%>;
+		
+		
+		
+		
+		var rs=confirm("장바구니에 추가하시겠습니까?");
+		
+	  if(rs){
+    	$.ajax({
+    		url:"<%=request.getContextPath()%>/car/gotoCart",
+    		data:{
+    			carNB:<%=c.getCarNB()%>,
+    			start:dt3,
+    			end:dt4,
+    			id:mid,
+    			money:m,
+    			gear:g
+    			
+    			
+    		},
+    		success:data=>{
+    			console.log(data);
+    			alert(data);
+    		}
+    	});
+    	
+    
+    }else{
+    	alert("장바구니에 담지 못하였습니다.");
+    }
+    	}else{
+    		alert("로그인을 하고 이용해 주십시오");	
+      	   location.assign("<%=request.getContextPath()%>/loginPage");
+    	} 
+    }
+    
+    
+    
+    
+    
+    
+    
 </script>
  
 <body onload="build();">
@@ -233,7 +290,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
             </select>
             <br />
             
-            <button class="basket_btn">장바구니 담기</button>
+            <button class="basket_btn" onclick="goto_cart();">장바구니 담기</button>
   
      <!--        <button class="buy_btn" onclick="carPV();">구매하기</button>  -->
                  <button class="buy_btn" onclick="page_move('<%=request.getContextPath()%>/car/carPurchaseView?carNB=<%=c.getCarNB()%>');">구매하기</button> 

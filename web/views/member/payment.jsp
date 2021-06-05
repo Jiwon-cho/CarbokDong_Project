@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.payment.model.vo.Payment,java.text.SimpleDateFormat,java.util.Date"%>
+<%@ page import="java.util.List, com.payment.model.vo.Payment,java.text.SimpleDateFormat,java.util.Date,com.admin.model.service.AdminService"%>
 <%
 	List<Payment> list = (List<Payment>) request.getAttribute("list");
 	String pageBar = (String) request.getAttribute("pageBar");
 	 Date today=new Date();
+	 
 %>
 <%@ include file="/views/common/header.jsp" %>
 <style>
@@ -60,6 +61,7 @@ div#pageBar span.cPage {
             </tr>
         <%}else{ 
         	for(Payment p : list){
+        		String rc=new AdminService().returnCheck(p.getPaymentsNo());
         %>
 		<tr>
 			<td><%=p.getPaymetType() %></td>
@@ -70,11 +72,11 @@ div#pageBar span.cPage {
 	
 			<%if(p.getStartDate().after(today)) {%>
 			<td style="color:gold;"> 출고 대기중	</td>
-			 <%}else if(p.getStartDate().before(today)&&!!(p.getEndDate().after(today))){%>
+			 <%}else if(p.getStartDate().before(today)||p.getStartDate().equals(today)&&!(p.getEndDate().after(today))){%>
 			<td style="color:blue;"> 대여중	</td>
-			<%}else if(p.getEndDate().after(today)){ %>
+			<%}else if(p.getEndDate().after(today)&&!(rc.equals("Y"))){ %>
 			<td style="color:red;"> 반납 확인중	</td>
-			<%}else if(p.getEndDate().after(today)){ %>	
+			<%}else if(p.getEndDate().after(today)&&rc.equals("Y")){ %>	
 			<td style="color:green;"> 반납 완료	</td>
 			<%} %>	
 		</tr>

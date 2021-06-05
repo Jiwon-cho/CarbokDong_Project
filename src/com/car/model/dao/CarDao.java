@@ -5,6 +5,7 @@ import static com.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.car.model.vo.Car;
+import com.car.model.vo.Cart;
 import com.car.model.vo.Reviews;
 
 
@@ -192,7 +194,31 @@ public class CarDao {
 		}return result;
 	}
 	
-	
+	public int insertCart(Connection conn, Cart c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertCart"));
+			pstmt.setInt(1, c.getProductNb());
+			long sdt=c.getRent_start_date().getTime();
+			Date sd=new Date(sdt);
+			long edt=c.getRent_end_date().getTime();
+			Date ed=new Date(edt);
+			pstmt.setDate(2, sd);
+			pstmt.setString(3, c.getMemberId());
+			pstmt.setDate(4, ed);
+			pstmt.setInt(5, c.getCartPrice());
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+		
+	}
 	
 	
 	
