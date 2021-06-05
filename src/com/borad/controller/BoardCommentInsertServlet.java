@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
-import com.borad.model.vo.BoardComment;
+import com.borad.model.vo.Reply;
 
 /**
  * Servlet implementation class BoardCommentInsertServlet
@@ -38,7 +38,7 @@ public class BoardCommentInsertServlet extends HttpServlet {
 		int commentRef=Integer.parseInt(request.getParameter("commentRef"));
 		
 		
-		BoardComment bc=new BoardComment(0,level,commentWriter,comment,boardRef,commentRef,null);
+		Reply bc=new Reply(0,comment,null,boardRef,level,commentRef,commentWriter);
 		
 		int result=new BoardService().insertBoardComment(bc);
 		String msg="";
@@ -50,6 +50,7 @@ public class BoardCommentInsertServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", "/borad/boardView?No="+boardRef);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**

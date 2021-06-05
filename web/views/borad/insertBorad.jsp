@@ -81,8 +81,22 @@
 	#content{
 		resize: none;
 	}	
+	.iscontainer{
+	width: 70%;
+	position: relative;
+	padding: 100px 100px 100px 100px;
+	left: 200px;
+	}	
 </style>
 <script>
+		
+$("#addFile").click((e)=>{
+    const tr=$(e.target).parent().parent().clone(true);
+    $("table").append(tr);
+});
+$("#deletFile").click((e)=>{
+    $(e.target).parents("tr").remove();
+});
 	$(function(){
 		CKEDITOR.replace("content");
 		$("#frm").submit(function(){
@@ -98,32 +112,42 @@
 		})
 	});
 	const fn_cancel=()=>{
-		  confirm("정말로 취소하시겠습니까?");
-          location.assign('<%=request.getContextPath()%>/borad/mainBorad');
 
-	}
+  		const result=confirm("정말로 취소하시겠습니까?");
+		if(result){
+			location.assign('<%=request.getContextPath()%>/borad/mainBorad');			
+		}	
+
+	};
+	function setThumbnail(event) { var reader = new FileReader(); reader.onload = function(event) { var img = document.createElement("img"); img.setAttribute("src", event.target.result); document.querySelector("div#image_container").appendChild(img); }; reader.readAsDataURL(event.target.files[0]); };
+	
 </script>
 
 <body>
 	
 	<div class="iscontainer">
 		
-		<form method="post" id="frm" action="<%=request.getContextPath() %>/boardWrite">
+		<form method="post" id="frm" action="<%=request.getContextPath() %>/boardWrite" enctype="multipart/form-data">
 			<ul>
-				<li class="title_input"><textarea name="title" id="subject" rows="1" type="text" placeholder="제목을 입력해주세요." maxlength="76" style="height: 26px;"></textarea></li>
+				<li class="title_input"><textarea name="title" id="subject" rows="1" placeholder="제목을 입력해주세요." maxlength="76" style="height: 26px;"></textarea></li>
 				
-				<li><input class="btbt" type="file"></li>
+				<li>
+					<input class="btbt" type="file" name="upfile" accept="image/*" onchange="setThumbnail(event);">
+			    </li>
+				<li><div id="image_container"></div><li>
 				<li><textarea name="content" id="content" cols="100" rows="50" ></textarea></li>
 			</ul>
 			<br>
 			<hr>
+			<!-- 주석처리 할것 -->
+			 <input name="id" value="<%=loginMember.getUserId() %>" type="hidden"> 
 			<br>
 			<div class="btn">
 			<input class="btnbtn" type="submit" value="등록하기" width="20" height="20">
 			<input class="btnbtn2" type="button" value="취소하기" width="20" height="20" onclick="fn_cancel();">
 			</div>
 		</form>
-	</div>
+		</div>
 </body>
 </html>
 

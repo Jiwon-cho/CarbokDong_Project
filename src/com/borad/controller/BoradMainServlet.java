@@ -1,7 +1,6 @@
 package com.borad.controller;
 
 import java.io.IOException;
-
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
+import com.common.Paging;
 
 
 /**
@@ -50,10 +51,15 @@ public class BoradMainServlet extends HttpServlet {
 		List<Board>list=new BoardService().selectBoardList(cPage,numPerpage);
 		//List<Board>list2=new BoardService().selectpopularBoardList(cPage,numPerpage);
 		int totalData=new BoardService().selectNoticeCount();
-		
-		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+
 		
 		int pageBarSize=5;
+		//Paging p=new Paging(totalData,cPage,numPerpage,pageBarSize);
+		//String pageBar=p.pageBar();
+		//System.out.println(pageBar);
+		
+				int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
@@ -84,9 +90,22 @@ public class BoradMainServlet extends HttpServlet {
 		}
 		
 		
+		
 		List<Board>pplist=new BoardService().selectppBoard();
+//		
+//		for(Board b: list) {
+//			int boardNo=b.getBoardNb();
+//			String img=new BoardService().selectImages(boardNo);			
+//			
+//			System.out.println(img);
+//			request.setAttribute("img", img);
+//		}
+		List<Files>flist=new BoardService().selectFileList();
+		request.setAttribute("flist", flist);
 		
+
 		
+
 		request.setAttribute("pplist", pplist);
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("list", list);

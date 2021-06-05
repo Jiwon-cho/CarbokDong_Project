@@ -8,18 +8,24 @@ import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import com.common.AESEncrypt;
+
 public class EncryptWrapper extends HttpServletRequestWrapper {
+	
 	public EncryptWrapper(HttpServletRequest request) {
 		super(request);
-		
 	}
 	
 	@Override
 	public String getParameter(String name) {
-		String value;
+		String value = null;
 		
 		if(name.equals("password")||name.equals("password_new")) {
+			
+			System.out.println("암호화전 : "+super.getParameter(name));
 			value=getSHA512(super.getParameter(name));
+			System.out.println("암호화후 : "+value);
+			
 		}else {
 			value=super.getParameter(name);
 		}
@@ -42,3 +48,6 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		return encValue;
 	}
 }
+
+
+

@@ -2,13 +2,21 @@ package com.borad.controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 import com.borad.model.service.BoardService;
+import com.borad.model.vo.Board;
+import com.borad.model.vo.Files;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.oreilly.servlet.multipart.FileRenamePolicy;
 
 /**
  * Servlet implementation class BoardWrite
@@ -30,10 +38,46 @@ public class BoardWrite extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		String title=request.getParameter("title");
-		String content=request.getParameter("content");
-		int result=new BoardService().WriteBorad(title,content);
+		
+		
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			//잘못된 요청으로 에러처리함.
+			request.setAttribute("msg","작성오류관리자에게 문의하세요 X(");
+			request.setAttribute("loc", "/borad/mainBorad");
+			request.getRequestDispatcher("/views/common/msg.jsp")
+			.forward(request, response);
+			return;
+		}
+	
+		String path=getServletContext().getRealPath("/upload/board/");
+		System.out.println(path);
+		int maxSize=1024*1024*100;
+		String encode="UTF-8";
+		FileRenamePolicy policy=new DefaultFileRenamePolicy();
+		
+		MultipartRequest mr=new MultipartRequest(request,path,maxSize,
+				encode,policy);
+		Files f= new Files();
+		
+		f.setFileNm(mr.getFilesystemName("upfile"));
+		
+		
+		
+		Board b=new Board();
+		b.setBoardTitle(mr.getParameter("title"));
+		b.setBoardContents(mr.getParameter("content"));
+		b.setMemberId(mr.getParameter("id"));
+		
+		
+		
+		//String title=request.getParameter("title");
+		//String content=request.getParameter("content");
+		//String id=request.getParameter("id");
+		int result=new BoardService().WriteBorad(b);
+		
+		int num=new BoardService().FileNoSelect(b);
+		
+		int re=new BoardService().insertFile(f,num);
 		String msg="";
 		String loc="";
 		if(result>0) {

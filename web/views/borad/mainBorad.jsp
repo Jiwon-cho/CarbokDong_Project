@@ -1,9 +1,14 @@
+<%@page import="org.jsoup.select.Evaluator.IsEmpty"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.borad.model.vo.Board" %>
+<%@ page import="java.util.List,com.borad.model.vo.Board,com.borad.model.vo.Files" %>
 <%
 	List<Board>list=(List<Board>)request.getAttribute("list");
 	List<Board>pplist=(List<Board>)request.getAttribute("pplist");
+	String searchType= request.getParameter("searchType");
+	String searchKeyword= request.getParameter("searchKeyword");
+	//String img=(String)request.getAttribute("img");
+	List<Files>flist=(List<Files>)request.getAttribute("flist");
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -13,13 +18,37 @@
 		height: 100px;
 		position: absolute;
 		display: block;
-		left: 170px;
-		bottom: 40px;
+		left: 200px;
+		bottom: 30px;
 		column-span: all;
-		overflow: hidden;
-		
+		overflow: hidden;	
+	}
+	#pageBarb{
+	text-align: center;
+	}
+	#pageBarb a{
+		display: inline-block;
+		font-weight: bold;
+		text-decoration: none;
+		width: 50PX;
+	}
+	#search-container{
+		position: relative;
+		left: 550px;
+	}
+	.txt_de{
+	position:relative;
+	left:150px;
+	bottom:100px;
+	color: #000;
+	font-size: 17px;
+	line-height: 22px;
+	vertical-align: top;
+	white-space: normal;
+	word-break: break-all;
 	}
 </style>
+
 	<section id="borad-container">
 		<p id="titi" style="font-size: 35px;">  커뮤니티 게시판</p>
 		<p id="insertborad" style="cursor:pointer; font-size: 25px;">글쓰기</p>
@@ -36,7 +65,7 @@
 				<th scope="col">제목</th>
 				<th scope="col">글쓴이</th>
 				<th scope="col">날짜</th>
-				<th scope="col">추천</th>
+				<th scope="col">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,7 +88,7 @@
 				</td>
 				<td class="name" style="font-size: 20px;"><%=bbc.getMemberId() %></td>
 				<td class="date" style="font-size: 13px;"><%=bbc.getBoradDate() %></td>
-				<td class="hit" style="font-size: 13px;"><%=bbc.getLikeCount() %></td>
+				<td class="hit" style="font-size: 13px;"><%=bbc.getViewCount() %></td>
 			</tr>
 
 			<%} %>
@@ -74,11 +103,15 @@
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
 					<span class="artice">
-						<%if(b.getFilepath()==null){ %>
-						<img src="<%=request.getContextPath() %>/images/noimage.gif" width="130" height="120" >
+				<div id="imgdivback" style="width: 130px; height: 120px; background-color: rgb(234, 234, 234); position: relative; top: 20px;"> 
+					<%for(Files f:flist){%>
+						<%if(f.getBoardNb()==b.getBoardNb()){ %>
+						<img src="<%=request.getContextPath() %>/upload/board/<%=f.getFileNm() %>" width="130" height="120"
+						onerror="this.src='<%=request.getContextPath() %>/images/noimage.gif'">
 						<%}else{ %>
-						<img src="<%=request.getContextPath() %>/images/<%=b.getFilepath()%>" width="60" height="60" >
 						<%} %>
+					<%} %>
+					</div>
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>
 						</strong>
@@ -93,7 +126,7 @@
 							||
 							</span>
 							<span style="font-size: 17px;">
-							<%=b.getLikeCount() %>
+							<%=b.getViewCount() %>
 							</span>
 						</span>
 					</span>
@@ -105,18 +138,56 @@
 		<br><br>
 		<div id="pageBarb"><%=request.getAttribute("pageBar") %></div>
 		<br><br>
-		<select>
-			<option value="">내용으로찾기</option>
-			<option value="">작성자로찾기</option>
-			<option value="">내용+작성자</option>
+	<div id="search-container">
+		검색:
+		<select id="searchType" size="1">
+			<option value="member_Id" <%=searchType!=null&&searchType.equals("member_Id")?"selected":"" %>>작성자로찾기</option>
+			<option value="board_Contents"  <%=searchType!=null&&searchType.equals("board_Contents")?"selected":"" %>>내용으로찾기</option>
 		</select>
-		<textarea cols="20" rows="1"></textarea>
-		<input type="button" value="검색">
-	</section>
+		<div id="search-member_Id">
+			<form action="<%=request.getContextPath() %>/board/searchMemberList" method="post">
+				<input type="text" name="searchKeyword" size="25"
+				placeholder="검색할 아이디를 입력해주세요"
+				value="<%=searchType!=null&&searchType.equals("member_Id")?searchKeyword:""%>">
+				<input type="hidden" name="searchType" value="member_Id">
+				<button type="submit" >조회</button>
+			</form>
+		</div>
+		<div id="search-board_Contents">
+			<form action="<%=request.getContextPath() %>/board/searchMemberList" method="post">
+				<input type="text" name="searchKeyword" size="25"
+				placeholder="검색할 내용을 입력해주세요"
+				value="<%=searchType!=null&&searchType.equals("board_Contents")?searchKeyword:""%>">
+				<input type="hidden" name="searchType" value="board_Contents">
+				<button type="submit" >조회</button>
+			</form>
+		</div>
+			</div>
 	<br><br>
 	<script>
+	 <%if(loginMember!=null){%> 
 	   $("#insertborad").on("click",(e)=>{
-           location.assign("<%=request.getContextPath()%>/insertBorad")
+           location.assign("<%=request.getContextPath()%>/insertBorad");
        });
+	   <%}else{%>
+	   $("#insertborad").on("click",(e)=>{
+		   alert("로그인후 이용해주세요.");
+           location.assign("<%=request.getContextPath()%>/loginPage");
+       });
+	   <%}%> 
+	  $("#searchType").change(e=>{
+			const userId=$("#search-member_Id");
+			const userName=$("#search-board_Contents");
+			
+			userId.css("display","none");
+			userName.css("display","none");
+
+			
+			$("#search-"+$(e.target).val()).css("display","inline-block");
+		});
+		$(function(){
+			$("#searchType").change();
+		});
+
 	</script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -27,6 +27,10 @@ public class LoginPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String referer = request.getHeader("REFERER")!=null&&!(request.getHeader("REFERER").equals("http://localhost:9090"+request.getContextPath()+"/loginPage"))? request.getHeader("REFERER") : request.getContextPath();
+		
+		
+		request.setAttribute("referer", referer);
 		request.getRequestDispatcher("/views/member/Login.jsp").forward(request, response);
 	}
 

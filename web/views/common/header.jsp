@@ -4,59 +4,69 @@
 <%
 	Member loginMember=(Member)session.getAttribute("loginMember");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>카복동</title>
-
-
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">  
-    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>  
-    <link
-      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
+	<link
       rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic&family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
+      rel="stylesheet">
+      <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/headerStyle.css">   
+
   </head>
+  
  <header> 
-  <body>
-    <div class="headbar">
+     <nav id="navbar__main">
+      <div id="navbar__logo">
+        <a href="<%=request.getContextPath()%>" style="text-decoration: none;"> 차박왕카복동</a>
+      </div>
+      <div id="navbar__menu">
+        <li><a href="<%=request.getContextPath()%>/borad/mainBorad">커뮤니티</a></li>
+        <li>
+          <a href="<%=request.getContextPath()%>/map">여행지 지도</a>
+        </li>
+        <li><a href="<%=request.getContextPath()%>/car/carList">렌트 차 종류</a></li>
+        <li><a href="<%=request.getContextPath()%>/member/QnAList">Q&A</a></li>
+      </div>
+      <ul class="navbar__icons">
        <%if(loginMember==null) {%>
       <ul class="list">
         <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
         <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
       </ul>
-	<%}else {%>
+	<%}else if(loginMember.getMemberType()==0){%>
 	  <ul class="head-list">
-	  	<li><a href="">마이페이지</a></li>
+	  	<li><a href="<%=request.getContextPath() %>/admin/adminMain">관리자페이지</a></li>
+	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
+	  </ul>
+	<%}else{ %>
+	<ul class="head-list">
+	  	<li><a href="<%=request.getContextPath() %>/myPage">마이페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 	  </ul>
 	<%} %>
+      </ul>
 
-    </div>
-    <div class="navbar__logo">
-      <a href="<%=request.getContextPath()%>">차박왕카복동</a>
-    </div>
-    
-    <div class="navbar">
-      <div class="navbar__menu">
-        <li><a href="<%=request.getContextPath()%>/borad/mainBorad">커뮤니티</a></li>
-        <li>
-          <a
-            href="https://www.google.com/maps/d/u/0/viewer?ie=UTF8&oe=UTF8&msa=0&mid=1GS6L7YRskgtfzVebJsDhbgbNsyQ&ll=36.12610142320005%2C128.9769752008968&z=8"
-          >
-            여행지 지도
-          </a>
-        </li>
-        <li><a href="">렌트 차 종류</a></li>
-        <!-- <li><a href="">마이페이지</a></li> -->
-        <li><a href="">Q&A</a></li>
-      </div>
-      <!-- <ul class="navbar__icons">
-        <li>
-          <a href="./mini_Login.html"><i class="fas fa-sign-in-alt"></i></a>
-        </li>
-      </ul> -->
+      <a href="#" class="navbar__toggleBtn">
+        <i class="fas fa-bars"></i></a>
+    </nav>
+	<script>
+      const toggleBtn = document.querySelector(".navbar__toggleBtn");
+      const menu = document.querySelector("#navbar__menu");
+      const icons = document.querySelector(".navbar__icons");
 
-    </div>
+      toggleBtn.addEventListener("click", () => {
+        menu.classList.toggle("active");
+        icons.classList.toggle("active");
+      });
+    </script>
   </header>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
-import com.borad.model.vo.BoardComment;
+import com.borad.model.vo.Files;
+import com.borad.model.vo.Reply;
 
 /**
  * Servlet implementation class BoardViewServlet
@@ -36,12 +38,43 @@ public class BoardViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		int No=Integer.parseInt(request.getParameter("No"));
-		Board b=new BoardService().selectNoPage(No);
+	
+
+		boolean readFlag=false;
+		String boardReadNo="";
+		Cookie[] cookies=request.getCookies();
+		if(cookies!=null) {
+			for(Cookie c: cookies) {
+				String name=c.getName();
+				String value=c.getValue();
+				if(name.equals("boardReadNo")) {
+					if(value.contains("|"+No+"|")) {
+						readFlag=true;
+						break;
+					}
+					boardReadNo=value;
+				}
+			}
+		}
 		
-		List<BoardComment>list=new BoardService().selectBoardComment(No);
+		if(!readFlag) {
+			Cookie c=new Cookie("boardReadNo",boardReadNo+"|"+No+"|");
+			c.setMaxAge(-1);
+			response.addCookie(c);
+		}
+		
+		
+		Board b=new BoardService().selectNoPage(No,readFlag);
+		
+		List<Reply>list=new BoardService().selectBoardComment(No);
 		
 		int replycount=new BoardService().selectReplyCount(No);
 		
+		Files f=new BoardService().selectImgName(No);
+		
+		
+		
+		request.setAttribute("f", f);
 		request.setAttribute("replycount", replycount);
 		request.setAttribute("list", list);
 		request.setAttribute("b", b);
