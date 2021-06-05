@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.admin.model.service.AdminService;
 import com.borad.model.service.BoardService;
 import com.camp.model.vo.Camp;
 
@@ -32,7 +33,7 @@ public class adminCampTableServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Camp>camlist=new BoardService().selectCampList();
+		List<Camp>camlist=new AdminService().selectCampList();
 		
 		
 		request.setAttribute("camlist", camlist);

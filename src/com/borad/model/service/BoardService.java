@@ -172,42 +172,7 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return result;
 	}
-	public int selectMemberCount() {
-		Connection conn=getConnection();
-		int count=dao.selectMemberCount(conn);
-		close(conn);
-		return count;
-	}
-	public int selectCarCount() {
-		Connection conn=getConnection();
-		int count=dao.selectCarCount(conn);
-		close(conn);
-		return count;
-	}
-	public int selectCampingCount() {
-		Connection conn=getConnection();
-		int count=dao.selectCampingCount(conn);
-		close(conn);
-		return count;
-	}
-	public List<Member>selectMemberList(){
-		Connection conn=getConnection();
-		List<Member>mlist=dao.selectMemberList(conn);
-		close(conn);
-		return mlist;
-	}
-	public List<Car>selectCarList(){
-		Connection conn=getConnection();
-		List<Car>clist=dao.selectCarList(conn);
-		close(conn);
-		return clist;
-	}
-	public List<Camp>selectCampList(){
-		Connection conn=getConnection();
-		List<Camp>camlist=dao.selectCampList(conn);
-		close(conn);
-		return camlist;
-	}
+
 	public List<Mbti>selectMbtiList(String type){
 		Connection conn=getConnection();
 		List<Mbti>list=dao.selectMbtiList(conn,type);

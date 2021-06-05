@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import com.admin.model.service.AdminService;
 import com.borad.model.service.BoardService;
 import com.camp.model.vo.Camp;
 import com.car.model.vo.Car;
@@ -37,7 +37,7 @@ public class adminTableServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		List<Member>mlist=new BoardService().selectMemberList();
+		List<Member>mlist=new AdminService().selectMemberList();
 		for(Member m : mlist) {
 			try {
 				m.setEmail(AESEncrypt.decrypt(m.getEmail()));

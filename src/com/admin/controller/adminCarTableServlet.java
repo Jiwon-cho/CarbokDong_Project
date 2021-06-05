@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.admin.model.service.AdminService;
 import com.borad.model.service.BoardService;
 import com.car.model.vo.Car;
 
@@ -32,7 +33,7 @@ public class adminCarTableServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Car>clist=new BoardService().selectCarList();
+		List<Car>clist=new AdminService().selectCarList();
 		request.setAttribute("clist", clist);
 		request.getRequestDispatcher("/views/admin/adminCarTable.jsp").forward(request, response);
 	}
