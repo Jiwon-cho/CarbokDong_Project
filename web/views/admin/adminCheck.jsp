@@ -393,7 +393,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                             <td><%=p.getProductNb() %></td>
                                             <td><%=p.getMemberId() %></td>
                                             <td><%=p.getProductNm() %></td>
-                                              <td><button onclick="#">확인</button></td>
+                                              <td><input class="return-very" type="button" value="반납확인"></td>
                                         </tr>
                                      <%} %> 
                                     </tbody>                                
@@ -407,6 +407,18 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
 
                 </div>
 
+<script>
+$(".return-very").click((e)=>{
+	let val=$(e.target).parent().parent().children();
+    console.log(val);
+    
+    let f=val[0].innerHTML;
+    console.log(f);
+})
+
+
+
+</script>
    
                 <!-- /.container-fluid -->
  
