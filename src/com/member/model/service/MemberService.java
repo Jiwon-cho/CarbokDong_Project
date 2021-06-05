@@ -225,4 +225,10 @@ public class MemberService {
 		return result;
 	}
 	
+	public Member searchId(String name, String email) {
+		Connection conn=getConnection();
+		Member m=dao.searchId(conn,name,email);
+		close(conn);
+		return m;
+	}
 }
