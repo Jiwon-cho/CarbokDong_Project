@@ -84,4 +84,20 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+	public int insertCampsel(Camp c) {
+		Connection conn=getConnection();
+		int result=dao.insertCampsel(conn,c);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int DeleteCampsel(int No) {
+		Connection conn=getConnection();
+		int result=dao.DeleteCampsel(conn,No);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

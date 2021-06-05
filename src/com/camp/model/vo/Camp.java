@@ -59,6 +59,11 @@ public class Camp {
 	public void setFacility(String facility) {
 		this.facility = facility;
 	}
+	@Override
+	public String toString() {
+		return "Camp [num=" + num + ", name=" + name + ", location=" + location + ", info=" + info + ", latitude="
+				+ latitude + ", longitude=" + longitude + ", price=" + price + ", facility=" + facility + "]";
+	}
 	
 	
 	

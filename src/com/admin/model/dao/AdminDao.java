@@ -249,8 +249,38 @@ public class AdminDao {
 			close(pstmt);
 		}return result;
 	}
-	
-	
+	public int insertCampsel(Connection conn,Camp c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertCampsel"));
+			pstmt.setString(1, c.getName());
+			pstmt.setString(2, c.getLocation());
+			pstmt.setString(3, c.getInfo());
+			pstmt.setDouble(4, c.getLatitude());
+			pstmt.setDouble(5, c.getLongitude());
+			pstmt.setInt(6, c.getPrice());
+			pstmt.setString(7, c.getFacility());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int DeleteCampsel(Connection conn,int No) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("DeleteCampsel"));
+			pstmt.setInt(1, No);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	
