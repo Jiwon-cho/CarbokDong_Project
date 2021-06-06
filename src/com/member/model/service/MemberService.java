@@ -231,4 +231,24 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	public Member searchPwd(String userId,String name, String email) {
+		Connection conn=getConnection();
+		Member m=dao.searchPwd(conn,userId,name,email);
+		close(conn);
+		return m;
+	}
+	public int searchPwdResult(String userId, String pwd) {
+		Connection conn=getConnection();
+		int result=dao.searchPwdResult(conn,userId,pwd);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public Member selectMemberEmail(String email) {
+		Connection conn=getConnection();
+		Member m=dao.selectMemberEmail(conn,email);
+		close(conn);
+		return m;
+	}
 }

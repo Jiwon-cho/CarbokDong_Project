@@ -48,11 +48,11 @@ String referer=(String)request.getAttribute("referer");
     <script>
 	    const fn_searchId=()=>{
 			open("<%=request.getContextPath()%>/member/searchId","searchId"
-					,"left=200px,top=200px,width=400px,height=370px");
+					,"left=200px,top=200px,width=450px,height=400px");
 		}
 	    const fn_searchPwd=()=>{
 			open("<%=request.getContextPath()%>/member/searchPwd","searchPwd"
-					,"left=200px,top=200px,width=400px,height=370px");
+					,"left=200px,top=200px,width=450px,height=400px");
 		}
     </script>
     <script type="text/javascript">
