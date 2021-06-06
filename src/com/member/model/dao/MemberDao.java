@@ -156,6 +156,9 @@ public class MemberDao {
 				c.setIsdel(rs.getString("ISDEL"));
 				c.setPrice(rs.getInt("CART_PRICE"));
 				c.setCarIdx(rs.getInt("CART_IDX"));
+				c.setStartDate(rs.getDate("RENT_START_DATE"));
+				c.setEndDate(rs.getDate("rent_end_date"));
+				c.setGear(rs.getString("gear"));
 				list.add(c);
 			}
 		}catch(SQLException e) {
@@ -402,7 +405,7 @@ public class MemberDao {
 
 				p.setPaymetType(rs.getString("PAYMENT_TYPE"));
 
-				p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				p.setPaymentDate(rs.getTimestamp("PAYMENT_DATE"));
 				p.setStartDate(rs.getDate("START_DATE"));
 				p.setEndDate(rs.getDate("END_DATE"));
 				p.setPrice(rs.getInt("PRICE"));

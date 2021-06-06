@@ -16,7 +16,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
       <a class="nav-link" href="<%=request.getContextPath()%>/car/carList">전체 차량</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="소형" href="<%=request.getContextPath()%>/car/searchCar?carType=소형">소형/준중형</a>
+      <a class="nav-link" id="소형" href="<%=request.getContextPath()%>/car/searchCartwo?carType=소형/준중형">소형/준중형</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="<%=request.getContextPath()%>/car/searchCar?carType=중형">중형</a>
@@ -25,7 +25,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
       <a class="nav-link" href="<%=request.getContextPath()%>/car/searchCar?carType=SUV">SUV</a>
     </li>
      <li class="nav-item">
-      <a class="nav-link" href="#">캠핑카</a>
+      <a class="nav-link" href="<%=request.getContextPath()%>/car/searchCar?carType=캠핑카">캠핑카</a>
     </li>
   </ul>
   </div>
@@ -34,7 +34,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
         <div class="car_list">
      
           <img
-            src="https://auto.nate.com/news/photo/old/data/old_img/1804/6547f90d897e2144b85c467f2429ccdb_WGR6Eh1cdlUWlj.jpg"
+            src="<%=request.getContextPath() %>/images/car/<%=c.getCarModel() %>.png"
             alt="car"
             class="thumbnail"
           />

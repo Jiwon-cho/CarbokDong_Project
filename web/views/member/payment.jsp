@@ -49,7 +49,7 @@ div#pageBar span.cPage {
 	<table class="list-table">
 		<tr>
 			<th width="150">결제방식</th>
-            <th width="150">구매일</th>
+            <th width="150">결제시간</th>
 			<th width="300">대여기간</th>
 			<th width="150">가격</th>
 			<th width="150">차량이름</th>

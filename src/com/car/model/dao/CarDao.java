@@ -76,6 +76,37 @@ public class CarDao {
 		
 	}
 	
+	
+	public List<String> selectCarPics(Connection conn, int carNB){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<String> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectCarPics"));
+			pstmt.setInt(1, carNB);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				String a=null;
+				a=rs.getString("car_pic_nm");
+				list.add(a);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public List<Car> searchCar(Connection conn, String carType){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -106,6 +137,43 @@ public class CarDao {
 		
 		
 	}
+	
+	
+	public List<Car> searchCarTwo(Connection conn, String[] carTypes){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Car> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchCars"));
+			pstmt.setString(1, carTypes[0]);
+			pstmt.setString(2, carTypes[1]);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Car c=new Car();
+				c.setCarNB(rs.getInt("car_nb"));
+				c.setCarType(rs.getString("car_type"));
+				c.setCarModel(rs.getString("car_model"));
+				c.setCarPpl(rs.getInt("car_ppl"));
+				c.setCarTotal(rs.getInt("car_total"));
+				c.setCarPsb(rs.getInt("car_psb_"));
+				c.setCarInfo(rs.getString("car_info"));
+				c.setPrice(rs.getInt("price"));
+				list.add(c);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+		
+		
+	}
+	
+	
+	
+	
 	
 	public Car selectCar(Connection conn, int carNB){
 		PreparedStatement pstmt=null;
@@ -208,7 +276,7 @@ public class CarDao {
 			pstmt.setString(3, c.getMemberId());
 			pstmt.setDate(4, ed);
 			pstmt.setInt(5, c.getCartPrice());
-			
+			pstmt.setString(6, c.getGear());
 			result=pstmt.executeUpdate();
 			
 		}catch(Exception e) {

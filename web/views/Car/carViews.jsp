@@ -4,14 +4,14 @@
 <%@ include file="/views/common/header.jsp" %>
 <%
 Car c=(Car)request.getAttribute("car");
-String[] carinfos=c.getCarInfo().split("|");
+String[] carinfos=c.getCarInfo().split("/");
 String id=null;
 if(loginMember!=null){
 	 id="'"+loginMember.getUserId()+"'";
 	 
 }
 List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
-
+List<String> carPics=(List<String>)request.getAttribute("carpics");
 
 %>
 <style>
@@ -148,6 +148,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
 		parm.push( ['start',dt]);
 		parm.push( ['end',dt2]);
 		parm.push( ['gear',gear]);
+		parm.push( ['id',<%=id%>]);
 
 
         for (var i = 0; i < parm.length; i++) {
@@ -237,7 +238,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
       <div class="book">
         <div class="book_img">
           <img
-            src="https://auto.nate.com/news/photo/old/data/old_img/1804/6547f90d897e2144b85c467f2429ccdb_WGR6Eh1cdlUWlj.jpg"
+            src="<%=request.getContextPath() %>/images/car/<%=carPics.get(carPics.size()-1) %>"
             alt="car"
             class="img_file"
           />
@@ -247,9 +248,15 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
             <h1><%=c.getCarModel() %></h1>
             
             <h3 style="text-align: right">재고 : <%=c.getCarPsb() %>대</h3>
-            <h2><%=c.getCarInfo() %></h2>
+            <h2>차량 종류: <%=carinfos[0] %></h2>
             <br>
-            <%=c.getPrice() %>
+            <h2>연료: <%=carinfos[1] %></h2>
+            <br>
+            <h2>차량 연식: <%=carinfos[2] %></h2>
+            <br>
+            <h2>대여 자격: <%=carinfos[3] %>,<%=carinfos[4] %></h2>
+            <br>
+            <h2>대여 비용: 1일-<%=c.getPrice() %> 원</h2>
           </div>
            <div style="height:320px;">
     <table align="center" id="calendar">
@@ -287,6 +294,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
             <select name="gear" id="gear-select">
               <option value="">--- 추가 캠핑용품 ---</option>
               <option value="grill" >바베큐 그릴</option>
+      
             </select>
             <br />
             
@@ -300,11 +308,16 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
         </div>
       </div>
       <div class="item">
+     <%for(int i=0;i<carPics.size()-1;i++){ %>
+     
+      <div class="item-img" style="width:60%; height:810px;"> 
         <img
-          src="http://m.roadtripcamping.co.kr/web/upload/NNEditor/20191202/mobile/5dd3fff18576c74c2b6ec9d830c4d7de_1575282422.jpg"
+          src="<%=request.getContextPath() %>/images/car/<%=carPics.get(i) %>"
           alt=""
           class="item_img"
         />
+        </div>
+        <%} %>
       </div>
       <%for(Reviews r:rlist) {%>
       <hr>
@@ -393,7 +406,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
       justify-content: center;
       flex-direction: row;
       margin: 30px 0;
-      height: 1620px;
+      height: 1120px;
       width: 100%;
       border: 1px gray solid;
       background-color:white;
@@ -424,7 +437,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
     }
 
     .book_subject {
-      height: 60%;
+      height: 500px;
     }
 
     .book_options {
@@ -445,15 +458,16 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
     .item {
       box-sizing: border-box;
       text-align: center;
-      height: 1700px;
+      height: 3300px;
       width: 100%;
       margin: 50px 0;
       border: 1px gray solid;
     }
 
     .item_img {
-      width: 60%;
-      height: 100%;
+      width: 1080px;
+      height:800px;
+    
     }
 
     .review {

@@ -49,6 +49,7 @@ div#pageBar span.cPage {
 			<th width="350">차량이미지</th>
             <th width="120">차량정보</th>
 			<th width="150">가격</th>
+			<th width="150">대여기간</th>
 			<th width="150">존재여부</th>
 			<th width="100">선택</th>
 		</tr>
@@ -60,12 +61,17 @@ div#pageBar span.cPage {
         	for(CarBoard c : list){
         %>
 		<tr>
-			<td><img src="/KH-SEMI-Carbokdong/images/car/<%=c.getCarPicName()%>" alt="" height="150" width="250"/></td>
+			<td><img src="/KH-SEMI-Carbokdong/images/car/<%=c.getCarName()%>.png" alt="" height="150" width="250"/></td>
 			<td>
+			<%if(c.getGear()==null){ %>
 				<%=c.getCarName() %>
+			<%}else if(c.getGear()!=null){ %>
+			<%=c.getCarName() %>(+<%=c.getGear() %>)
+			<%} %>	
 			</td>
 			<td><%=c.getPrice() %></td>
-			<td><%=c.getIsdel() %>(<%=c.getCarPsb() %>/<%=c.getCarTotal() %>)</td>
+			<td><%=c.getStartDate()%>~<%=c.getEndDate() %></td>
+			<td>(<%=c.getCarPsb() %>/<%=c.getCarTotal() %>)</td>
 			<td>
 				<%if(c.getIsdel().equals("N")) {%>
 					<button name="" class="btn" onclick="">구매</button>
