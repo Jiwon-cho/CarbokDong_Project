@@ -66,6 +66,8 @@ public class PurchasingCheckServlet extends HttpServlet {
     	 }
     	 
     	 
+    	 String op=request.getParameter("op");
+    	 
     	 //System.out.println(start);
     	 //System.out.println(end);
     	 int product_nb=Integer.parseInt(request.getParameter("pd_no")) ;
@@ -73,6 +75,8 @@ public class PurchasingCheckServlet extends HttpServlet {
 		 
 		
 		 Payment p=new Payment(imp_uid,pay_method,date,start,end,paid_amount,product_nb,buyer,pd_name);
+		 p.setOpinon(op);
+		 
 		 int result=new PaymentService().insertPayment(p);
 		 int rc=new PaymentService().rentalVeri(imp_uid);
 		 if(result<=0) {

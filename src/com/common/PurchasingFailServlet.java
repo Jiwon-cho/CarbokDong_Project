@@ -1,6 +1,8 @@
 package com.common;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +44,10 @@ public class PurchasingFailServlet extends HttpServlet {
 		case "grill" : g=2000;gn="바베큐그릴";break ;
 		}
 		Car c=new CarService().selectCar(carNB);
+		List<String> carpics=new CarService().selectCarPics(carNB);
+		
+		
+		request.setAttribute("carpics", carpics);
 		request.setAttribute("car", c);
 		request.setAttribute("start", start);
 		request.setAttribute("end", end); 

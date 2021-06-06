@@ -62,6 +62,7 @@ public class PaymentDao {
 			pstmt.setInt(7, p.getProductNb());
 			pstmt.setString(8,p.getMemberId());
 			pstmt.setString(9,p.getProductNm());
+			pstmt.setString(10, p.getOpinion());
 			
 			result=pstmt.executeUpdate();
 			

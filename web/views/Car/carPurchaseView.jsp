@@ -9,7 +9,7 @@ String gear=(String)request.getAttribute("gear")==null?"":(String)request.getAtt
 int money=(int)request.getAttribute("money");
 String[] carinfos=c.getCarInfo().split("/");
 List<String> carPics=(List<String>)request.getAttribute("carpics");
-Member m=(Member)request.getAttribute("member");
+
 
 
 
@@ -58,15 +58,16 @@ Member m=(Member)request.getAttribute("member");
     <div class="carbook pplinfo">
      <div class=" pplinfo-1"><div class="reslabel">예약 정보</div>
      <label>예약자 아이디</label>
-     <input type="text" value="<%=m.getUserId() %>">
+     <input type="text" value="<%=loginMember.getUserId() %>">
         <label>예약자 이름</label>
-       <input type="text" value="<%=m.getUserName() %>">
+       <input type="text" value="<%=loginMember.getUserName() %>">
            <label>예약자 이메일</label>
-         <input type="text" value="<%=m.getEmail() %>">
+         <input type="text" id="email" value="">
      
      </div>
       <div class="pplinfo-2"><div class="tlabel">기타 의견사항</div>
-      <textarea id="opinion" rows="5" cols="33" ></textarea>
+      <textarea id="opinion" rows="5" cols="33" >요구 사항 없음</textarea>
+    <div id="test_cnt">(0 / 50)</div>
       </div>
     </div>
      
@@ -79,7 +80,8 @@ Member m=(Member)request.getAttribute("member");
       <h1><%=money %></h1>
     <form id="frm"  action="<%=request.getContextPath()%>/order/purchasingGo" method="post" >
      <input class="op" type="hidden" name="op" value="">
-    <input type="hidden" name="email" value="<%=m.getEmail() %>">
+    <input type="hidden" name="email" value="" class="email">
+    
      <input type="hidden" name="carNB" value="<%=c.getCarNB() %>">
      <input type="hidden" name="start" value="<%=start%>">
      <input type="hidden" name="end" value="<%=end%>">
@@ -95,13 +97,25 @@ Member m=(Member)request.getAttribute("member");
 </div>
 
 <script>
-<%-- $("#frm").submit(
+$(document).ready(function() {
+    $('#opinion').on('keyup', function() {
+        $('#test_cnt').html("("+$(this).val().length+" / 50)");
+ 
+        if($(this).val().length > 50) {
+            $(this).val($(this).val().substring(0, 50));
+            $('#test_cnt').html("(50 / 50)");
+        }
+    });
+});
+
+
+ $("#frm").submit(
 		function(){
 	$(".op").val($("#opinion").val());
-	location.assign("<%=request.getContextPath()%>/order/purchasingGo");
+	$(".email").val($("#email".val()));
 }
 );
- --%>
+
 </script>
 
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.car.model.vo.Car,com.payment.model.vo.Payment" %>
+<%@ page import="com.car.model.vo.Car,com.payment.model.vo.Payment,java.util.List" %>
 <%
 Car c=(Car)request.getAttribute("car");
 String start=(String)request.getAttribute("start");
@@ -10,15 +10,59 @@ int money=(int)request.getAttribute("money");
 Payment p=(Payment)request.getAttribute("p");
 System.out.println(start);
 System.out.println(p.getMemberId());
- 
+String op=(String)request.getAttribute("op");
+String email=(String)request.getAttribute("email");
+List<String> carPics=(List<String>)request.getAttribute("carpics");
+
 %>
 <%@ include file="/views/common/header.jsp" %>    
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <body>
-<div id="result"></div>
+<div class="table-ct"><table id="result">
+<caption><h2>결제 상세 확인</h2></caption>
+<tbody>
+<tr>
+			<th width="150">결제번호</th>
+            <th width="150">결제방법</th>
+			<th width="300">결제기간</th>
+			<th width="150">대여일</th>
+			<th width="150">반납일</th>
+			<th width="150">결제비용</th>
+			<th width="150">구매자</th>
+			<th width="150">상품이름</th>
+			<th width="350">기타의견</th>
+		</tr>
+</tbody></table></div>
+<style>
+body{
+height:auto;
 
+}
+
+
+#result {
+			margin-left:90px;
+	        margin-top: 20px;
+	        margin-bottom: 60px;
+	    }
+        #result th{
+            height:40px;
+            border-top:2px solid skyblue;
+            border-bottom:1px solid #CCC;
+            font-weight: bold;
+            font-size: 17px;
+        }
+        #result td{
+            text-align:center;
+            padding:10px 0;
+            border-bottom:1px solid	 #CCC; height:20px;
+            font-size: 14px 
+        }
+
+
+</style>
 
 
     <script>
@@ -50,7 +94,7 @@ System.out.println(p.getMemberId());
             merchant_uid : 'merchant_' + cDate,
             name : '<%=c.getCarModel()%>',
             amount : 100,
-            buyer_email : 'SS',
+            buyer_email : '<%=email%>',
             buyer_name : '<%=loginMember.getUserId()%>',
             buyer_tel : '1',
             buyer_addr : '한국',
@@ -74,12 +118,13 @@ System.out.println(p.getMemberId());
                         date: currentTime,
                         pay_method:rsp.pay_method,
                         pd_name:rsp.name,
+                        op:'<%=op%>'
                     },
                      success:data=>{
                     	console.log(data);
-                    	const table=$("<table>");
-                    	const head=$("<tr>").html("<th>고유 아이디</th><th>결제 방법</th><th>결제 시간</th><th>대여일</th><th>반납일</th><th>결제 비용</th><th>구매자</th><th>상품이름</th>");
-                    	table.append(head);
+                    /* 	const table=$("<table>");
+                    	const head=$("<tr>").html("<th>고유 아이디</th><th>결제 방법</th><th>결제 시간</th><th>대여일</th><th>반납일</th><th>결제 비용</th><th>구매자</th><th>상품이름</th><th>기타 의견</th>");
+                    	table.append(head); */
                     	const body=$("<tr>");
         				const id=$("<td>").html(data.paymentsNo);
         				const pm=$("<td>").html(data.paymetType);
@@ -89,10 +134,11 @@ System.out.println(p.getMemberId());
         				const amount=$("<td>").html(data.price);
         				const buyer=$("<td>").html(data.memberId);
         				const pd=$("<td>").html(data.productNm);
-        				body.append(id).append(pm).append(time).append(std).append(etd).append(amount).append(buyer).append(pd);
-        				table.append(body);
-                    	$("#result").html(table);
-                    	
+        				const opm=$("<td>").html(data.opinion);
+        				body.append(id).append(pm).append(time).append(std).append(etd).append(amount).append(buyer).append(pd).append(opm);
+        				/* table.append(body); */
+                    	//$("#result").html(table);
+        				$("#result").append(body);
                     	
                   
                     } 
@@ -104,6 +150,9 @@ System.out.println(p.getMemberId());
                 msg += '에러내용 : ' + rsp.error_msg;
                 //실패시 이동할 페이지
                 alert(msg);
+                if(rsp.error_msg=='사용자가 결제를 취소하셨습니다'){
+                var result=confirm('결제 상세페이지로 돌아가시겠습니까?')
+                if(result){
                 (function(){
                 	 var form = document.createElement("form");
                      var parm = new Array();
@@ -131,7 +180,14 @@ System.out.println(p.getMemberId());
                      document.body.appendChild(form);
                      form.submit();
                 }());
-                
+                }else{
+                	alert("홈페이지로 돌아가겠습니다.");
+                	location.replace("<%=request.getContextPath()%>");
+                }
+                }else{
+                	alert("홈페이지로 돌아가겠습니다.");
+                	location.replace("<%=request.getContextPath()%>");
+                }
            
             }
         })

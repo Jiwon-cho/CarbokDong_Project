@@ -38,15 +38,9 @@ public class CarPurchaseViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int carNB=Integer.parseInt(request.getParameter("carNB"));
-		String id=request.getParameter("id");
-		Member m=new MemberService().selectMemberId(id);
+
 		
 		//암호화된 자료를 복호화처리
-		try {
-			m.setEmail(AESEncrypt.decrypt(m.getEmail()));
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 		
 		
 		List<String> carpics=new CarService().selectCarPics(carNB);
@@ -78,7 +72,7 @@ public class CarPurchaseViewServlet extends HttpServlet {
 		
 		int money=c.getPrice()*(int)calDateDays+g;
 		
-		request.setAttribute("member",m);
+
 		request.setAttribute("carpics", carpics);
 		request.setAttribute("car", c);
 		request.setAttribute("start", start);

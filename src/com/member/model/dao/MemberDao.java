@@ -150,7 +150,7 @@ public class MemberDao {
 			while(rs.next()) {
 				CarBoard c=new CarBoard();
 				c.setCarName(rs.getString("CAR_MODEL"));
-				c.setCarPicName(rs.getString("CAR_PIC_NM"));
+			
 				c.setCarPsb(rs.getInt("CAR_PSB_"));
 				c.setCarTotal(rs.getInt("CAR_TOTAL"));
 				c.setIsdel(rs.getString("ISDEL"));

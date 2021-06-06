@@ -24,7 +24,8 @@
             text-align:center;
             padding:10px 0;
             border-bottom:1px solid	 #CCC; height:20px;
-            font-size: 14px 
+            font-size: 14px ;
+            word-break: break-all;
         }
         .btn{
             margin: 10px;
