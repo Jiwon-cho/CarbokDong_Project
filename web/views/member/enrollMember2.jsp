@@ -71,7 +71,8 @@
 				<td width="15%">이메일</td>
 				<td><input name="email1" type="text" class="box" id="email1"
 					size="15"> @ <input name="email2" type="text" class="box"
-					id="email2" size="20">
+					id="email2" size="20"> <input type="button" value="이메일 중복확인" onclick="fn_duplicateEmail();">
+				
 				<!-- <input type="button" value="인증번호 받기" id="emailCheckBtn" name="emailCheckBtn"> --></td>
 			</tr>
 			<!-- <tr height="7">
@@ -120,9 +121,11 @@
 			</form>
 			<form name="duplicateFrm" action="" method="post">
 				<input type="hidden" name="userId">
+				<input type="hidden" name="email">
 				<input type="hidden" name="nickName">
 				<input type="hidden" id="checknickName" value="0">
 				<input type="hidden" id="checkId" value="0"> 
+				<input type="hidden" id="checkEmail" value="0"> 
 				<input type="hidden" id="checkpwd" value="0"> 
 				<input type="hidden" id="checkdriver" value="0">
 				<input type="hidden" name="checkaddress" value="0"> 
@@ -201,6 +204,11 @@
 			$("#email1").focus();
 			return false;
 		}
+		if(checkEmail==0){
+			alert("이메일 중복확인을 해주세요");
+			$("#email1").focus();
+			return false;
+		}
 		if(checkaddress.trim()==""){
 			alert("주소를 입력해주세요");
 			return false;
@@ -243,6 +251,17 @@
 			alert("패스워드가 일치합니다.");
 			$("#checkpwd").val("1");
 		}
+	}
+	const fn_duplicateEmail=()=>{
+		const status="width=300px,height=200px,left=500px,top=500px";
+		const title="duplicateEmail";
+		const url="<%=request.getContextPath()%>/checkDuplicateEmail";
+		open("",title,status);
+		console.log(duplicateFrm);
+		duplicateFrm.email.value=$("#email1").val()+"@"+$("#email2").val();
+		duplicateFrm.target=title;
+		duplicateFrm.action=url;
+		duplicateFrm.submit();
 	}
 	const fn_duplicateId=()=>{
 		const status="width=300px,height=200px,left=500px,top=500px";
