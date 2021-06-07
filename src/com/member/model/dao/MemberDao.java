@@ -15,7 +15,6 @@ import java.util.Properties;
 import com.borad.model.vo.Board;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
-import com.member.model.vo.NaverMember;
 import com.member.model.vo.QnA;
 import com.member.model.vo.QnAReply;
 import com.payment.model.vo.Payment;
@@ -685,18 +684,20 @@ public class MemberDao {
 		return m;
 	}
 	
-	public NaverMember chakeNaver(Connection conn, String email) {
+	public Member chakeNaver(Connection conn, String email) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		NaverMember n=null;
+		Member n=null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("chakeNaver"));
 			pstmt.setString(1, email);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				n=new NaverMember();
-				n.setEmail(rs.getString("EMAIL"));
-				n.setNickname(rs.getString("NICKNAME"));
+				n=new Member();
+				n.setUserId(rs.getString("NAVER_EMAIL"));
+				n.setNikname("NICKNAME");
+				n.setGender(rs.getString("GENDER"));
+				n.setUserName(rs.getString("NAME"));
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -707,13 +708,15 @@ public class MemberDao {
 		return n;
 	}
 	
-	public int insertNaverMemver(Connection conn,String email, String nickname) {
+	public int insertNaverMemver(Connection conn,String email, String nickname,String GENDER, String name) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertNaverMemver"));
 			pstmt.setString(1, email);
 			pstmt.setString(2, nickname);
+			pstmt.setString(3, GENDER);
+			pstmt.setString(4, name);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

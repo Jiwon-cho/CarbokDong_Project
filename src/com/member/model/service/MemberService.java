@@ -12,7 +12,6 @@ import com.borad.model.vo.Board;
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
-import com.member.model.vo.NaverMember;
 import com.member.model.vo.QnA;
 import com.member.model.vo.QnAReply;
 import com.payment.model.vo.Payment;
@@ -252,16 +251,16 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
-	public NaverMember chakeNaver(String email) {
+	public Member chakeNaver(String email) {
 		Connection conn=getConnection();
-		NaverMember n=dao.chakeNaver(conn,email);
+		Member n=dao.chakeNaver(conn,email);
 		close(conn);
 		return n;
 	}
 	
-	public int insertNaverMemver(String email,String nickname) {
+	public int insertNaverMemver(String email,String nickname,String Gender,String Name) {
 		Connection conn=getConnection();
-		int result=dao.insertNaverMemver(conn,email,nickname);
+		int result=dao.insertNaverMemver(conn,email,nickname,Gender,Name);
 		close(conn);
 		return result;
 	}

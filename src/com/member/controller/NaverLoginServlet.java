@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.member.model.service.MemberService;
-import com.member.model.vo.NaverMember;
+import com.member.model.vo.Member;
 
 /**
  * Servlet implementation class NaverLoginServlet
@@ -34,15 +34,17 @@ public class NaverLoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email=request.getParameter("email");
 		String nickname=request.getParameter("nickname");
-		NaverMember n=new NaverMember(email,nickname);
-		NaverMember chake=new MemberService().chakeNaver(email);
+		String gender=request.getParameter("gender");
+		String name=request.getParameter("name");
+		Member n=new Member(email,name,"","",nickname,gender,3,"");
+		Member chake=new MemberService().chakeNaver(email);
 		if(chake==null) {
-			int result=new MemberService().insertNaverMemver(email,nickname);
+			int result=new MemberService().insertNaverMemver(email,nickname,gender,name);
 		}
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("loginMember2", n);
-		response.sendRedirect(request.getContextPath());
+		session.setAttribute("loginMember", n);
+		response.sendRedirect(request.getContextPath()+"/");
 	}
 
 	/**

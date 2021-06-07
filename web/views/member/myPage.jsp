@@ -10,8 +10,8 @@
             </div>
             <div class="contents-mid">
             <form action="" method="post" name="form1">
-            	<%if(loginMember2!=null) {%>
-            	<input type="hidden" name="userId" value="<%=loginMember2.getEmail() %>">
+            	<%if(loginMember.getMemberType()==3) {%>
+            	<input type="hidden" name="userId" value="<%=loginMember.getUserId() %>">
             	<input type="hidden" name="userType" value="naver">
                 <div class="join-type">
                     <h3 class="join-type-title">장바구니<br><img src="https://media.istockphoto.com/vectors/add-to-cart-icon-shopping-cart-icon-vector-illustration-vector-id1179275901?k=6&m=1179275901&s=170667a&w=0&h=LTlzJ6cdRT0GeHtRL3LpDLrfjYrMHzrLsdKdDfyZl60=" alt="" width="100" height="100"></h3>

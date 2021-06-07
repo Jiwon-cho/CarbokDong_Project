@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="com.member.model.vo.NaverMember" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +19,11 @@
   function naverSignInCallback() {
 	const email=naver_id_login.getProfileData('email');
     const nickname=naver_id_login.getProfileData('nickname');
-    location.assign("<%=request.getContextPath()%>/naverLogin?email="+email+"&nickname="+nickname);
-    //window.close();
+    const name=naver_id_login.getProfileData('name');
+    const gender=naver_id_login.getProfileData('gender'); //F:여 M:남 U:확인불가
+    location.assign("<%=request.getContextPath()%>/naverLogin?email="+email+"&nickname="+nickname+"&name="+name+"&gender="+gender);
     opener.parent.location.replace("<%=request.getContextPath()%>/");
+    //close();
   }
 </script>
 </body>

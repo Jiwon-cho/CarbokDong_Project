@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.member.model.vo.Member,com.member.model.vo.NaverMember" %>
+<%@ page import="com.member.model.vo.Member" %>
 <%
 	Member loginMember=(Member)session.getAttribute("loginMember");
-	NaverMember loginMember2=(NaverMember)session.getAttribute("loginMember2");
 %>
 
 <!DOCTYPE html>
@@ -42,16 +41,11 @@
       </div>
       <ul class="navbar__icons">
         
-       <%if(loginMember==null&&loginMember2==null) {%>
+       <%if(loginMember==null) {%>
       <ul class="list">
         <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
         <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
       </ul>
-      <%}else if(loginMember2!=null) {%>
-      <ul class="head-list">
-	  	<li><a href="<%=request.getContextPath() %>/myPage">마이페이지</a></li>
-	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
-	  </ul>
 	<%}else if(loginMember.getMemberType()==0){%>
 	  <ul class="head-list">
 	  	<li><a href="<%=request.getContextPath() %>/admin/adminMain">관리자페이지</a></li>
