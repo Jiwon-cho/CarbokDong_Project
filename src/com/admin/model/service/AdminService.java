@@ -12,6 +12,7 @@ import java.util.List;
 import com.admin.model.dao.AdminDao;
 import com.camp.model.vo.Camp;
 import com.car.model.vo.Car;
+import com.car.model.vo.CarFile;
 import com.member.model.vo.Member;
 import com.payment.model.vo.Payment;
 
@@ -130,7 +131,14 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
-
+	public int insertCarFile(CarFile f) {
+		Connection conn=getConnection();
+		int result=dao.insertCarFile(conn,f);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 
 
 }
