@@ -13,17 +13,20 @@
         margin:0;
         z-index: 1;
         position: relative;
+        width: 1900px;
       }
       #navbar__logo {
       	margin: 0 0 0 100px;
         font-size: 70px;
       }
       #navbar__menu {
+      	position: absolute;
       	font-size: 20px;
         font-family: "Black Han Sans", sans-serif;
         display: flex;
         list-style: none;
         padding-left: 0;
+        margin-left: 700px;
       }
       #navbar__menu li {
         padding: 8px 50px;
