@@ -18,21 +18,21 @@
       <hr>
       <ul class="level1" style="height: 150px;">
 				<li>
-					<div class="reply_div">
-						<span class="txt_info" style="font-size: 20px; position: relative; left: 20px;" >
-							<%=m.getMbtiCampName() %>
-						</span>
-						<strong class="reply_st">
-							<span class="txt_de" style="font-size: 20px; position: relative; top: 40px; right: 80px;">&emsp;<%=m.getMbtiCampLoc() %></span>
-							<span class="txt_de" style="font-size: 20px; position: relative; top: 90px; right: 400px;">&emsp;<%=m.getMbtiCampInfo() %></span>
-						</strong>
 						<div style="display: inline-block; float: left; position: relative; " >
           					  <img
              					     src="<%=request.getContextPath() %>/images/campImgs/<%=m.getMbtiCampPic() %>"
               						alt=""
               						style="width: 200px;height: 150px; float: left; position: relative; display: inline-block;"
             							/>
-          					</div>
+          				</div>
+					<div class="reply_div">
+						<span class="txt_info" style="font-size: 20px; position: relative; left: 20px;" >
+							<%=m.getMbtiCampName() %>
+						</span>
+						<strong class="reply_st">
+							<span class="txt_de" style="font-size: 20px; position: relative; top: 40px; right: 80px;">&emsp;<%=m.getMbtiCampLoc() %></span>
+							<span class="txt_de" style="font-size: 20px; position: relative; top: 90px; right: 320px;">&emsp;<%=m.getMbtiCampInfo() %></span>
+						</strong>
 					</div>
 				</li>
 			</ul>
