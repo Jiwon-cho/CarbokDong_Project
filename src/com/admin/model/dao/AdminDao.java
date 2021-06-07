@@ -13,6 +13,7 @@ import static com.common.JDBCTemplate.close;
 
 import com.camp.model.vo.Camp;
 import com.car.model.vo.Car;
+import com.car.model.vo.CarFile;
 import com.member.model.vo.Member;
 import com.payment.model.vo.Payment;
 
@@ -222,13 +223,14 @@ public class AdminDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertCarsel"));
-			pstmt.setString(1, c.getCarType());
-			pstmt.setString(2, c.getCarModel());
-			pstmt.setInt(3, c.getCarPpl());
-			pstmt.setInt(4, c.getCarTotal());
-			pstmt.setInt(5, c.getCarPsb());
-			pstmt.setString(6, c.getCarInfo());
-			pstmt.setInt(7, c.getPrice());
+			pstmt.setInt(1, c.getCarNB());
+			pstmt.setString(2, c.getCarType());
+			pstmt.setString(3, c.getCarModel());
+			pstmt.setInt(4, c.getCarPpl());
+			pstmt.setInt(5, c.getCarTotal());
+			pstmt.setInt(6, c.getCarPsb());
+			pstmt.setString(7, c.getCarInfo());
+			pstmt.setInt(8, c.getPrice());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -341,7 +343,20 @@ public class AdminDao {
 			close(pstmt);
 		}return result;
 	}
-
+	public int insertCarFile(Connection conn,CarFile f) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertCarFile"));
+			pstmt.setString(1, f.getCarPicNm());
+			pstmt.setInt(2, f.getCarPicNb());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	
