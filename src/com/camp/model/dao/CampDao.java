@@ -1,14 +1,19 @@
 package com.camp.model.dao;
-
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import com.borad.model.dao.BoardDao;
 import com.camp.model.vo.Camp;
 import com.camp.model.vo.CampHotplace;
 import com.camp.model.vo.CampReserve;
 
 public class CampDao {
+	
+	private Properties prop = new Properties();
 	
 	String id = "CARBOK";
 	String pass = "CARBOK";
@@ -17,6 +22,15 @@ public class CampDao {
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
+	
+	public CampDao() {
+		String path=BoardDao.class.getResource("/sql/map_sql.properties").getPath();
+		try {
+			prop.load(new FileReader(path));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void getCon() {
 	
@@ -34,8 +48,7 @@ public class CampDao {
 			
 			try {
 				getCon();
-				String sql = "SELECT * FROM CAMPING";
-				pstmt = con.prepareStatement(sql);
+				pstmt = con.prepareStatement(prop.getProperty("selectAllCamp"));
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
 					Camp camp = new Camp();
@@ -67,8 +80,7 @@ public class CampDao {
 	    	getCon();
 	 		
 	     	try {
-	     		String sql = "SELECT * FROM CAMPING WHERE CAMPING_NM = ?";
-	     		pstmt = con.prepareStatement(sql);
+	     		pstmt = con.prepareStatement(prop.getProperty("getOneCamp"));
 	     		pstmt.setString(1, name);
 	     		rs = pstmt.executeQuery();
 	     		
@@ -98,8 +110,7 @@ public class CampDao {
 	     	try {
 	     		getCon();
 	     		
-	     		String sql = "SELECT CAMPING_PIC_NM FROM CAMPING_PIC WHERE CAMPING_NB = ?";
-	     		pstmt = con.prepareStatement(sql);
+	     		pstmt = con.prepareStatement(prop.getProperty("getCampPhoto"));
 	     		pstmt.setInt(1, num);
 	     		rs = pstmt.executeQuery();
 	     		while(rs.next()){
@@ -119,8 +130,7 @@ public class CampDao {
 	    	getCon();
 	 		
 	     	try {
-	     		String sql = "SELECT * FROM CAMPING_HOTPLACE WHERE CAMPING_NB = ?";
-	     		pstmt = con.prepareStatement(sql);
+	     		pstmt = con.prepareStatement(prop.getProperty("getHotplace"));
 	     		pstmt.setInt(1, num);
 	     		rs = pstmt.executeQuery();
 	     		
