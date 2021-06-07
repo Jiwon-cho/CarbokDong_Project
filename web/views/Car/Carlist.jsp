@@ -39,7 +39,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
           />
           <h3><%=c.getCarModel() %></h3>
           <br>
-          <h6><%=c.getCarInfo() %></h6>
+          <h6  style="color: gray"><%=c.getCarInfo() %></h6>
           
          <input type="hidden" name="carNB" value="<%=c.getCarNB()%>">
          <button class="reservation" onclick="location.assign('<%=request.getContextPath()%>/car/carView?carNB=<%=c.getCarNB()%>')">예약하기</button>
@@ -126,6 +126,8 @@ List<Car> list=(List<Car>)request.getAttribute("list");
         width: 100%;
         margin-top: 20px;
         cursor: pointer;
+        background-color: rgba(58, 123, 203, 1);
+        color: white;
       }
       
       a.nav-link:hover{
