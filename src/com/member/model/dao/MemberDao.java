@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.borad.model.vo.Board;
 import com.member.model.vo.CarBoard;
 import com.member.model.vo.Member;
+import com.member.model.vo.NaverMember;
 import com.member.model.vo.QnA;
 import com.member.model.vo.QnAReply;
 import com.payment.model.vo.Payment;
@@ -682,6 +683,43 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return m;
+	}
+	
+	public NaverMember chakeNaver(Connection conn, String email) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		NaverMember n=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("chakeNaver"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				n=new NaverMember();
+				n.setEmail(rs.getString("EMAIL"));
+				n.setNickname(rs.getString("NICKNAME"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return n;
+	}
+	
+	public int insertNaverMemver(Connection conn,String email, String nickname) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertNaverMemver"));
+			pstmt.setString(1, email);
+			pstmt.setString(2, nickname);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
 	
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
+import com.member.model.vo.NaverMember;
 
 /**
  * Servlet implementation class LoginServlet
@@ -37,30 +38,32 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String referer=request.getParameter("referer");
-		String userId = request.getParameter("loginId");
-		String password = request.getParameter("password");
+			String userId = request.getParameter("loginId");
+			String password = request.getParameter("password");
 
-		//System.out.println("userId : "+userId+" password : "+password);
+			//System.out.println("userId : "+userId+" password : "+password);
 
-		Member m = new MemberService().login(userId, password);
-	
-		if (m != null) {
+			Member m = new MemberService().login(userId, password);
+		
+			if (m != null) {
 
-			HttpSession session = request.getSession();
-			session.setAttribute("loginMember", m);
-			 //response.sendRedirect(request.getContextPath()); 
-			
-			response.sendRedirect(referer);
+				HttpSession session = request.getSession();
+				session.setAttribute("loginMember", m);
+				 //response.sendRedirect(request.getContextPath()); 
 				
-		} else {
-			String msg = "아이디, 비밀번호가 일치하지 않습니다!";
-			String loc = "/";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
+				response.sendRedirect(referer);
+					
+			} else {
+				String msg = "아이디, 비밀번호가 일치하지 않습니다!";
+				String loc = "/";
+				request.setAttribute("msg", msg);
+				request.setAttribute("loc", loc);
 
-			RequestDispatcher rd = request.getRequestDispatcher("/views/common/msg.jsp");
-			rd.forward(request, response);
-		}
+				RequestDispatcher rd = request.getRequestDispatcher("/views/common/msg.jsp");
+				rd.forward(request, response);
+			}
+			
+		
 
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.member.model.vo.NaverMember" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +18,11 @@
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
   function naverSignInCallback() {
-    /* alert(naver_id_login.getProfileData('email'));
-    alert(naver_id_login.getProfileData('nickname'));
-    alert(naver_id_login.getProfileData('age')); */
-	window.close();
+	const email=naver_id_login.getProfileData('email');
+    const nickname=naver_id_login.getProfileData('nickname');
+    location.assign("<%=request.getContextPath()%>/naverLogin?email="+email+"&nickname="+nickname);
+    //window.close();
+    opener.parent.location.replace("<%=request.getContextPath()%>/");
   }
 </script>
 </body>
