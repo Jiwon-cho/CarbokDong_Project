@@ -3,6 +3,7 @@ package com.member.model.vo;
 import java.util.Date;
 
 public class CarBoard {
+	private int rnum;
 	private int carIdx;
 	private String carPicName;
 	private String carName;
@@ -13,6 +14,7 @@ public class CarBoard {
 	private Date startDate;
 	private Date endDate;
 	private String gear;
+	private int carNB;
 	public CarBoard() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -91,6 +93,21 @@ public class CarBoard {
 	public void setGear(String gear) {
 		this.gear = gear;
 	}
+	public int getCarNB() {
+		return carNB;
+	}
+	public void setCarNB(int carNB) {
+		this.carNB = carNB;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "CarBoard [carIdx=" + carIdx + ", carPicName=" + carPicName + ", carName=" + carName + ", price=" + price

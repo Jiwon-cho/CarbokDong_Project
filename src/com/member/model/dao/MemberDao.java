@@ -150,7 +150,8 @@ public class MemberDao {
 			while(rs.next()) {
 				CarBoard c=new CarBoard();
 				c.setCarName(rs.getString("CAR_MODEL"));
-			
+				c.setCarNB(rs.getInt("product_nb"));
+				c.setRnum(rs.getInt("rnum"));
 				c.setCarPsb(rs.getInt("CAR_PSB_"));
 				c.setCarTotal(rs.getInt("CAR_TOTAL"));
 				c.setIsdel(rs.getString("ISDEL"));
@@ -402,7 +403,7 @@ public class MemberDao {
 			while(rs.next()) {
 				Payment p=new Payment();
 				p.setPaymentsNo(rs.getString("PAYMENTS_NO"));
-
+				p.setRnum(rs.getInt("rnum"));
 				p.setPaymetType(rs.getString("PAYMENT_TYPE"));
 
 				p.setPaymentDate(rs.getTimestamp("PAYMENT_DATE"));

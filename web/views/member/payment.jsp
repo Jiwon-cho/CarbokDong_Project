@@ -49,6 +49,7 @@ div#pageBar span.cPage {
 	<h2>구매내역</h2>
 	<table class="list-table">
 		<tr>
+			<th width="150">구매내역번호</th>
 			<th width="150">결제방식</th>
             <th width="150">결제시간</th>
 			<th width="300">대여기간</th>
@@ -58,13 +59,14 @@ div#pageBar span.cPage {
 		</tr>
 		<%if(list.isEmpty()) {%>
 			<tr>
-            	<td colspan="6">구매내역이 없습니다.</td>
+            	<td colspan="7">구매내역이 없습니다.</td>
             </tr>
         <%}else{ 
         	for(Payment p : list){
         		String rc=new AdminService().returnCheck(p.getPaymentsNo());
         %>
 		<tr>
+			<td><%=p.getRnum() %></td>
 			<td><%=p.getPaymetType() %></td>
 			<td><%=p.getPaymentDate() %></td>
 			<td><%=p.getStartDate() %> ~ <%=p.getEndDate() %></td>

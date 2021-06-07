@@ -3,6 +3,7 @@ package com.payment.model.vo;
 import java.util.Date;
 
 public class Payment {
+	private int rnum;
 	private String paymentsNo;
 	private String paymetType;
 	private Date paymentDate;
@@ -92,6 +93,13 @@ public class Payment {
 	public void setOpinon(String opinion) {
 		this.opinion = opinion;
 	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	
 	
 	
 	
