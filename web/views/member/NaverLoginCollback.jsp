@@ -9,14 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>알림메세지</title>
+<title>네이버로그인처리</title>
 </head>
 <body>
 	<script>
-		alert('<%=msg%>');
 		opener.parent.location.replace("<%=request.getContextPath()%>/");
-		<%=request.getAttribute("script")!=null?request.getAttribute("script"):""%>;
-		location.replace('<%=request.getContextPath()%><%=loc%>');
+		<%=request.getAttribute("script")%>;
 	</script>
 </body>
 </html>

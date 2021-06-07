@@ -43,30 +43,30 @@
       
       .camp_name{
       	font-family: 'Do Hyeon', sans-serif;
-        font-size: 22px;
+        font-size: 18px;
         cursor: pointer;
       }
       
       .camp_location{
-      	font-size: 15px;
-        font-family: 'Sunflower', sans-serif;
+      	font-size: 12px;
+        font-family: -apple-system, BlinkMacSystemFont;
         cursor: pointer;
       }
 
       #menu_wrap {
         position: absolute;
-        top: 30px;
+        top: 0;
         left: 20px;
         bottom: 0;
         width: 250px;
-        height: 80%;
+        height: 85%;
         margin: 10px 0 30px 10px;
         padding: 5px;
         overflow-y: auto;
         background: rgba(255, 255, 255, 0.7);
         z-index: 1;
         font-size: 12px;
-        border-radius: 10px;
+        border-radius: 5px;
         border: 3px solid black;
         -webkit-box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 15px -2px rgba(0,0,0,0); 
 		box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 15px -2px rgba(0,0,0,0);
@@ -219,7 +219,7 @@
 
       	font-family: "Do Hyeon", sans-serif;
       	font-size: 1rem;
-      	background-color: wheat;
+      	background-color: #ecf0f1;
       	padding : 5px;
       	border: 3px solid black;
       	border-radius: 5px;
@@ -228,7 +228,7 @@
       
       .list_line{
       	width: 100%;
-      	height: 3px;
+      	height: 1px;
       	background-color: rgba(128, 128, 128, 0.493);
       	border-radius: 5px;
       	

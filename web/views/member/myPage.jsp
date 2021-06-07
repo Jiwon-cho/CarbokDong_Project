@@ -10,7 +10,27 @@
             </div>
             <div class="contents-mid">
             <form action="" method="post" name="form1">
+            	<%if(loginMember.getMemberType()==3) {%>
             	<input type="hidden" name="userId" value="<%=loginMember.getUserId() %>">
+            	<input type="hidden" name="userType" value="naver">
+                <div class="join-type">
+                    <h3 class="join-type-title">장바구니<br><img src="https://media.istockphoto.com/vectors/add-to-cart-icon-shopping-cart-icon-vector-illustration-vector-id1179275901?k=6&m=1179275901&s=170667a&w=0&h=LTlzJ6cdRT0GeHtRL3LpDLrfjYrMHzrLsdKdDfyZl60=" alt="" width="100" height="100"></h3>
+                    <p class="join-type-desc">찜목록</p>
+                    <input type="submit" onclick="btn_ShoppingBag();" value="선택">
+                </div>
+                <div class="join-type">
+                    <h3 class="join-type-title">결재 내역<br><img src="https://img.icons8.com/ios/452/payment-history.png" alt="" width="100" height="100"></h3>
+                    <p class="join-type-desc">구매 내역</p>
+                    <input type="submit" onclick="btn_Payment();" value="선택">
+                </div>
+                <div class="join-type">
+                    <h3 class="join-type-title">내가 쓴글<br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6pbUybzmIExB2NazJYIj6rYorJdM_wxmQpg&usqp=CAU" alt="" width="100" height="100"></h3>
+                    <p class="join-type-desc">나의글 / 나의댓글</p>
+                    <input type="submit" onclick="btn_MyBoardList();" value="선택">
+                </div>
+            	<%}else{ %>
+            	<input type="hidden" name="userId" value="<%=loginMember.getUserId() %>">
+            	<input type="hidden" name="userType" value="user">
                 <div class="join-type">
                     <h3 class="join-type-title">장바구니<br><img src="https://media.istockphoto.com/vectors/add-to-cart-icon-shopping-cart-icon-vector-illustration-vector-id1179275901?k=6&m=1179275901&s=170667a&w=0&h=LTlzJ6cdRT0GeHtRL3LpDLrfjYrMHzrLsdKdDfyZl60=" alt="" width="100" height="100"></h3>
                     <p class="join-type-desc">찜목록</p>
@@ -31,6 +51,7 @@
                     <p class="join-type-desc">탈퇴 / 변경</p>
                     <input type="submit" onclick="btn_MyUpdate();" value="선택">
                 </div>
+                <%} %>
                 </form>
             </div>
         </div>

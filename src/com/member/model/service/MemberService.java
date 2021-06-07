@@ -251,4 +251,17 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	public Member chakeNaver(String email) {
+		Connection conn=getConnection();
+		Member n=dao.chakeNaver(conn,email);
+		close(conn);
+		return n;
+	}
+	
+	public int insertNaverMemver(String email,String nickname,String Gender,String Name) {
+		Connection conn=getConnection();
+		int result=dao.insertNaverMemver(conn,email,nickname,Gender,Name);
+		close(conn);
+		return result;
+	}
 }

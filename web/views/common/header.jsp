@@ -48,7 +48,7 @@
 	  	<li><a href="<%=request.getContextPath() %>/admin/adminMain">관리자페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 	  </ul>
-	<%}else{ %>
+	<%}else if(loginMember!=null){ %>
 	<ul class="head-list">
 	  	<li><a href="<%=request.getContextPath() %>/myPage">마이페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>

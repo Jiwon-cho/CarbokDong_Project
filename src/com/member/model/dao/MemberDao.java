@@ -684,4 +684,45 @@ public class MemberDao {
 		return m;
 	}
 	
+	public Member chakeNaver(Connection conn, String email) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member n=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("chakeNaver"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				n=new Member();
+				n.setUserId(rs.getString("NAVER_EMAIL"));
+				n.setNikname("NICKNAME");
+				n.setGender(rs.getString("GENDER"));
+				n.setUserName(rs.getString("NAME"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return n;
+	}
+	
+	public int insertNaverMemver(Connection conn,String email, String nickname,String GENDER, String name) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertNaverMemver"));
+			pstmt.setString(1, email);
+			pstmt.setString(2, nickname);
+			pstmt.setString(3, GENDER);
+			pstmt.setString(4, name);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 }
