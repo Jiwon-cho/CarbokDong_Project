@@ -2,12 +2,13 @@ package com.admin.model.service;
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
-
 import static com.common.JDBCTemplate.rollback;
 
-
 import java.sql.Connection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.admin.model.dao.AdminDao;
 import com.camp.model.vo.Camp;
@@ -27,6 +28,28 @@ public class AdminService {
 		
 		
 	}
+	
+	
+	public TreeMap<Date,Integer>  selectGraphMember(){
+		Connection conn=getConnection();
+		TreeMap<Date,Integer> list=dao.selectGraphMember(conn);
+		close(conn);
+		return list;
+	}
+	
+	public List<Integer> carPercentage(){
+		Connection conn=getConnection();
+		List<Integer> list=dao.carPercentage(conn);
+		close(conn);
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
 	public int selectMemberCount() {
 		Connection conn=getConnection();
 		int count=dao.selectMemberCount(conn);

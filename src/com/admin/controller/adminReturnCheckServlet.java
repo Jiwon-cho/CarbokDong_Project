@@ -44,16 +44,15 @@ public class adminReturnCheckServlet extends HttpServlet {
 		}
 		
 		int c=new AdminService().addCar(b);
-		String msg="";
-		if(a>0&&c>0) {
-			msg+="반납이 확인되었습니다";
-		}else {
-			msg+="반납에 실패하였습니다.";
-		}
+		/*
+		 * String msg=""; if(a>0&&c>0) { msg+="반납이 확인되었습니다"; }else {
+		 * msg+="반납에 실패하였습니다."; }
+		 * 
+		 * response.getWriter().write(msg);
+		 */
 		
-		response.getWriter().write(msg);
-		
-		
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/admin/adminCheck").forward(request, response);
 	}
 
 	/**

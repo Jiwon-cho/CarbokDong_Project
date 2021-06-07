@@ -93,7 +93,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                 Controller
             </div>
                 <li class="nav-item">
-                   <a class="nav-link" href="<%=request.getContextPath()%>/admin/adminCheck">
+                <a class="nav-link" href="<%=request.getContextPath()%>/admin/adminCheck">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Return/Cancellation</span></a>
             </li>
@@ -111,15 +111,6 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
 
         </ul>
         <!-- End of Sidebar -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
-        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -131,11 +122,9 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </form>
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
                     <!-- Topbar Search -->
                     <form
@@ -179,14 +168,14 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                   <!--      <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
+                                Counter - Alerts
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                            Dropdown - Alerts
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -227,10 +216,17 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
-                        </li>
+                        </li> -->
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
+                        <div style="height:20px;"></div>
+                        <button type="button" class="btn btn-outline-primary" onclick="location.assign('<%=request.getContextPath()%>')">Go to Homepage</button>
+                     
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+               <%--          <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
@@ -293,7 +289,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
-                        </li>
+                        </li> --%>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -348,7 +344,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                                 <!-- DataTales Example -->
                     <div class="card shadow mb-4" >
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">차량 반납 확인 </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" >
@@ -418,13 +414,16 @@ $(".return-very").click((e)=>{
 	let val=$(e.target).parent().parent().children();
     console.log(val);
     
-    let f=val[0].innerHTML;
+    var f=val[0].innerHTML;
     console.log(f);
     
     var result=confirm("차가 안전히 반납되었습니까?");
     
     if(result){
-    $.ajax({
+    	location.assign("<%=request.getContextPath()%>/admin/returnCheck?pm_no="+f)	;
+    	alert("반납이 확인되었습니다.")
+    }
+<%--     $.ajax({
     	url:"<%=request.getContextPath()%>/admin/returnCheck",
     	data:{
     		pm_no:f
@@ -437,12 +436,12 @@ $(".return-very").click((e)=>{
     	}
     	
     	
-    });
+    }); --%>
 
     
     
     
-    }else{
+    /* } */else{
     	alert("반납이 되지 않았습니다.");
     }
     

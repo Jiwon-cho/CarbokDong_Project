@@ -49,8 +49,7 @@
 
 
 
-  </script>
-  <script>
+
   var slideIndex = 0; //slide index
 
 // HTML 로드가 끝난 후 동작

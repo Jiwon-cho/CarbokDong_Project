@@ -1,5 +1,7 @@
 package com.admin.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,9 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
-import static com.common.JDBCTemplate.close;
+import java.util.TreeMap;
 
 import com.camp.model.vo.Camp;
 import com.car.model.vo.Car;
@@ -46,6 +50,58 @@ public class AdminDao {
 	}
 	
 	
+	public TreeMap<Date,Integer> selectGraphMember(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		TreeMap<Date,Integer>list=new TreeMap<Date,Integer>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectGraphMember"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				
+				list.put(rs.getDate("enrolldate"),rs.getInt("total"));
+			}
+			
+			
+		}catch(Exception e) {
+			
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
+	
+	
+	
+	public List<Integer> carPercentage(Connection conn){
+		PreparedStatement  pstmt=null;
+		ResultSet rs=null;
+		List<Integer> list=new ArrayList<Integer>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("carPercentage"));
+			rs=pstmt.executeQuery();
+		while(rs.next()) {	
+			list.add(rs.getInt("total"));
+			list.add(rs.getInt("left"));
+			list.add(rs.getInt("used"));
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public List<Payment> selectPayments(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -57,7 +113,7 @@ public class AdminDao {
 				Payment p=new Payment();
 				p.setPaymentsNo(rs.getString("payments_no"));
 				p.setPaymetType(rs.getString("payment_type"));
-				p.setPaymentDate(rs.getDate("payment_date"));
+				p.setPaymentDate(rs.getTimestamp("payment_date"));
 				p.setStartDate(rs.getDate("start_date"));
 				p.setEndDate(rs.getDate("end_date"));
 				p.setPrice(rs.getInt("price"));

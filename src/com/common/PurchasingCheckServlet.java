@@ -83,6 +83,8 @@ public class PurchasingCheckServlet extends HttpServlet {
 			 System.out.println("멈춰!");
 		 }
 		
+		 new CarService().updateCarPsb(product_nb);
+		 
 		 
 		 response.setContentType("application/json;charset=utf-8");
 		 new Gson().toJson(p,response.getWriter());
