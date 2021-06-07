@@ -23,7 +23,6 @@
     const gender=naver_id_login.getProfileData('gender'); //F:여 M:남 U:확인불가
     location.assign("<%=request.getContextPath()%>/naverLogin?email="+email+"&nickname="+nickname+"&name="+name+"&gender="+gender);
     opener.parent.location.replace("<%=request.getContextPath()%>/");
-    //close();
   }
 </script>
 </body>

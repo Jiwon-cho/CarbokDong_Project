@@ -2,6 +2,7 @@ package com.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,10 @@ public class NaverLoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("loginMember", n);
-		response.sendRedirect(request.getContextPath()+"/");
+		request.setAttribute("loc", "/");
+		request.setAttribute("script","window.close();");
+		//response.sendRedirect(request.getContextPath()+"/");
+		request.getRequestDispatcher("/views/member/NaverLoginCollback.jsp").forward(request, response);
 	}
 
 	/**
