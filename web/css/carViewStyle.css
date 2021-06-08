@@ -66,6 +66,7 @@
       height: 100%;
       float: right;
       margin-right: 50px;
+      line-height: 1;
     }
 
     .book_subject {

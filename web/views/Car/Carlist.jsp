@@ -9,7 +9,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
 
 <%@ include file="/views/common/header.jsp" %>
 <div class="list_container">
-<div style="background-color:white;">
+<div class="list-subject" style="background-color:white;">
   <ul class="nav nav-tabs nav-justified">
     <li class="nav-item">
       <a class="nav-link" href="<%=request.getContextPath()%>/car/carList">전체 차량</a>
@@ -81,12 +81,17 @@ List<Car> list=(List<Car>)request.getAttribute("list");
       }
 
       .list_container {
+        display: flex;
+        flex-direction: column;
         margin: auto;
         margin-bottom: 150px;
         padding: 10px;
-        height: 900px;
-        width: 1700px;
+        width: 90%;
        
+      }
+      
+      .list-subject{
+      	
       }
 
       .navbar {
@@ -119,7 +124,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
 
       .car_list {
         display: inline-block;
-        height: 300px;
+        height: 320px;
         width: 260px;
         align-items: center;
         margin: 50px 20px 20px 20px;
@@ -168,6 +173,16 @@ List<Car> list=(List<Car>)request.getAttribute("list");
 		height: 50px;
 		justify-content: center;
 		align-items: center;
+	}
+	
+	@media screen and (max-width: 540px){
+		.nav-link{
+			padding: 0;
+
+		}
+		
+		.list_container{
+		}
 	}
       
     </style>

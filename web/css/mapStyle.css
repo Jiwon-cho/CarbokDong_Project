@@ -26,6 +26,7 @@
         padding: 0;
         font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
         font-size: 12px;
+        z-index: 0;
       }
       .map_wrap a,
       .map_wrap a:hover,
