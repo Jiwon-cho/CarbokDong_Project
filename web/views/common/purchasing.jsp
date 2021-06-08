@@ -93,7 +93,7 @@ height:auto;
             pay_method : 'card',
             merchant_uid : 'merchant_' + cDate,
             name : '<%=c.getCarModel()%>',
-            amount : 100,
+            amount : <%=money%>,
             buyer_email : '<%=email%>',
             buyer_name : '<%=loginMember.getUserId()%>',
             buyer_tel : '1',

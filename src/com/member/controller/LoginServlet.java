@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 					
 			} else {
 				String msg = "아이디, 비밀번호가 일치하지 않습니다!";
-				String loc = "/loginPage";
+				String loc = "/";
 				request.setAttribute("msg", msg);
 				request.setAttribute("loc", loc);
 
