@@ -35,6 +35,11 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
    	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>	
    	<!--Alert 디자인 라이브러리 -->
    	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   	  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ajax-cross-origin.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -311,8 +316,8 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                 </nav>
                 <!-- End of Topbar -->
 				<select id="searchType" name="searchType" onchange="location.href=this.value">
-					<option value="adminCheck" selected="selected">Return</option>
-					<option value="#">Cancellation</option>
+					<option value="adminCheck" selected="selected">Return/Cancellation</option>
+				
 			
 				</select>
 				
@@ -343,6 +348,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                             <th>대여인 아이디</th>
                                             <th>상품 이름</th>
                                             <th>반납 확인</th>
+                                            <th>결제 취소</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -357,11 +363,13 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                             <th>대여인 아이디</th>
                                             <th>상품 이름</th>
                                                   <th>반납 확인</th>
+                                                       <th>결제 취소</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                      <%for(Payment p:list){ 
                                      String rc=new AdminService().returnCheck(p.getPaymentsNo());
+                                     String cc=new AdminService().cancelCheck(p.getPaymentsNo());
                                      %>
                                         <tr>
                                             <td><%=p.getPaymentsNo() %></td>
@@ -378,6 +386,12 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                               <input class="return-very" type="button" value="반납확인">
                                                <%}else{ %>
                                               반납 완료 </td>
+                                              <%} %>
+                                               <td >
+                                               <%if(cc.equals("N")){ %> 
+                                              <input class="cancel-very" type="button" value="결제 취소">
+                                               <%}else{ %>
+                                              결제 취소 완료</td>
                                               <%} %>
                                         </tr>
                                      <%} %> 
@@ -411,7 +425,7 @@ $(".return-very").click((e)=>{
     }
      --%>
 $.ajax({
-    	url:"<%=request.getContextPath()%>/admin/returnCheck",
+    	 url:"<%=request.getContextPath()%>/admin/returnCheck",
     	 type: 'POST',
          dataType: 'json',
     	data:{
@@ -440,7 +454,65 @@ $.ajax({
     
     
     
-})
+});
+
+
+
+$(".cancel-very").click((e)=>{
+	var token;
+	var vall=$(e.target).parent().parent().children();
+    
+    
+    var fa=vall[0].innerHTML;
+
+	$.ajax({
+        url: "<%=request.getContextPath()%>/admin/refund",
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        success:data=>{
+        	alert("실험중");
+        	token=data.response.access_token;
+        	
+        	$.ajax({
+        		url:"https://api.iamport.kr/payments/cancel",
+        	    async : true, 
+        		 crossOrigin : true,
+                method: "post",
+                headers: {
+                  Content_Type: "application/json",
+                  Authorization: token
+             
+                  },
+                  data:{
+                	  imp_uid:fa 
+                  },
+                  success:data=>{
+                	  alert("환불끝");
+                  }
+        		
+        		
+        		
+        	});
+        }
+        });
+	
+	
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -50,23 +50,28 @@ div#pageBar span.cPage {
 	<table class="list-table">
 		<tr>
 			<th width="150">구매내역번호</th>
+			<th width="150">결제번호</th>
 			<th width="150">결제방식</th>
             <th width="150">결제시간</th>
 			<th width="300">대여기간</th>
 			<th width="150">가격</th>
 			<th width="150">차량이름</th>
 			<th width="150">대여상태</th>
+			<th width="150">결제취소</th>	
 		</tr>
 		<%if(list.isEmpty()) {%>
 			<tr>
-            	<td colspan="7">구매내역이 없습니다.</td>
+            	<td colspan="9">구매내역이 없습니다.</td>
             </tr>
         <%}else{ 
         	for(Payment p : list){
         		String rc=new AdminService().returnCheck(p.getPaymentsNo());
-        %>
+        		String cc=new AdminService().cancelCheck(p.getPaymentsNo());
+        		System.out.println(cc);
+        %>	
 		<tr>
 			<td><%=p.getRnum() %></td>
+			<td><%=p.getPaymentsNo() %></td>
 			<td><%=p.getPaymetType() %></td>
 			<td><%=p.getPaymentDate() %></td>
 			<td><%=p.getStartDate() %> ~ <%=p.getEndDate() %></td>
@@ -81,7 +86,14 @@ div#pageBar span.cPage {
 			<td style="color:red;"> 반납 확인중	</td>
 			<%}else if(p.getEndDate().after(today)&&rc.equals("Y")){ %>	
 			<td style="color:green;"> 반납 완료	</td>
-			<%} %>	
+			<%} %>
+			<%if(cc.equals("D")){ %>
+			<td><input class="cancel-very" type="button" value="신청"></td>
+			<%}else if(cc.equals("N")) {%>
+			<td>취소 심사 중</td>
+			<%}else{ %>
+			<td style="color:lightgreen;">취소 됨</td>
+			<%} %>
 		</tr>
 		<%} 
 		}%>
@@ -92,4 +104,56 @@ div#pageBar span.cPage {
 	<div id="pageBar">
 		<%=pageBar %>
 	</div>
+<script>
+$(".cancel-very").click((e)=>{
+	let val=$(e.target).parent().parent().children();
+ 
+    
+    var f=val[1].innerHTML;
+    console.log(f);
+  	var a=val[8].innerHTML;
+    console.log(a);
+    
+    
+    var result=confirm("결제 취소 신청을 하시겠습니까?");
+    
+    if(result){
+	$.ajax({
+    	url:"<%=request.getContextPath()%>/payment/cancelCheck",
+    	 type: 'POST',
+         dataType: 'json',
+    	data:{
+    		pm_no:f
+    	},
+    	success:data=>{
+    		console.log(data.msg);
+    		alert(data.msg);
+    	
+    		console.log(data.rc);
+    		if(data.rc=='N'){
+    			val[8].innerHTML='취소 심사 중';
+    		}
+    		
+    	}
+    	
+    	
+    });
+
+    
+    
+    
+    } else{
+    	alert("반납이 되지 않았습니다.");
+    }
+    
+    
+    
+});
+
+
+
+</script>	
+	
+	
+	
 <%@ include file="/views/common/footer.jsp" %>
