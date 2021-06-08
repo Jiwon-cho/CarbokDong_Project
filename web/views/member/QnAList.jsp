@@ -33,9 +33,35 @@
 			<tr>
             	<td colspan="5">조회된 게시글이 없습니다</td>
             </tr>
-        <%}else{
-        	for(QnA q : list){
-        %>
+        <%}else{%>
+        
+        <%-- <%for(int i=0;i<2;i++){ %> --%>
+        	<%for(QnA a:list){ %>
+        		<%if(a.getUserId().equals("admin")){ %>
+        		<tr>
+        <td class="no"><%=a.getNo() %></td>
+        <td class="title2">
+        	<%if((a.getQapublic().equals("Y"))||(loginMember.getMemberType()==0)||(loginMember.getUserId().equals(a.getUserId()))){%>
+	        	<input type="button" value="공지"><a href="<%=request.getContextPath()%>/member/QnAView?QnANo=<%=a.getNo() %>"><%=a.getTitle() %></a>
+	        	<%if(a.getFileOriginalName()!=null){ %>
+	        		<img width="13" height="12" class="pic" alt="" src="<%=request.getContextPath() %>/images/ic_pic.png">
+	        	<%} %>
+	        <%} else if(a.getQapublic().equals("N")){%>
+	        	<a>비공개</a>
+	        <%} %>	
+        </td>
+        <%if(a.getResult().equals("Y")) {%>
+        	<td class="result2"><a>답변완료</a></td>
+        <%}else{ %>
+        	<td class="result1"><a>접수중</a></td>
+        <%} %>
+        <td class="name"><%=a.getNickName() %>(<%=a.getUserId() %>)</td>
+        <td class="date"><%=a.getDate() %></td>
+        </tr>
+        		<%} %>
+        	<%} %>
+      <%--   <%} %> --%>
+        	<%for(QnA q : list){%>
         <tr>
         <td class="no"><%=q.getNo() %></td>
         <td class="title2">

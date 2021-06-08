@@ -30,14 +30,26 @@ List<Car> list=(List<Car>)request.getAttribute("list");
   </div>
       <div class="car_container">
       <%for(Car c: list){ %>
+      <% System.out.println("수량 : "+c.getCarPsb()); %>
       	<%if(c.getCarPsb()==0){ %>
-     	<!-- 분기처리 필요-->
-  		<%}else{ %>
-        <div class="car_list">
-     <img src="<%=request.getContextPath() %>/images/car/<%=c.getCarModel() %>.png"
+			<% System.out.println(c.getCarPsb()); %>
+     		<div class="car_list">
+     		<img src="<%=request.getContextPath() %>/images/car/<%=c.getCarModel() %>.png"
             alt="car"
             class="thumbnail"
-          />
+          	/>
+          <h3><%=c.getCarModel() %></h3>
+          <br>
+          <h6  style="color: gray"><%=c.getCarInfo() %></h6>
+          
+         <input type="hidden" name="carNB" value="<%=c.getCarNB()%>">
+         <button class="stockout" onclick="location.assign('<%=request.getContextPath()%>/car/carView?carNB=<%=c.getCarNB()%>')" disabled>재고없음</button>
+  		<%}else{ %>
+        <div class="car_list">
+     		<img src="<%=request.getContextPath() %>/images/car/<%=c.getCarModel() %>.png"
+            alt="car"
+            class="thumbnail"
+          	/>
           <h3><%=c.getCarModel() %></h3>
           <br>
           <h6  style="color: gray"><%=c.getCarInfo() %></h6>
@@ -129,6 +141,15 @@ List<Car> list=(List<Car>)request.getAttribute("list");
         cursor: pointer;
         background-color: rgba(58, 123, 203, 1);
         color: white;
+      }
+      
+      .stockout{
+        height: 30px;
+        width: 100%;
+        margin-top: 20px;
+        cursor: pointer;
+        background-color: grey;
+        color: red;
       }
       
       a.nav-link:hover{
