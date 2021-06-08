@@ -13,7 +13,7 @@
         margin:0;
         z-index: 1;
         position: relative;
-        width: 1900px;
+        width: 90%;
       }
       #navbar__logo {
       	margin: 0 0 0 100px;
@@ -77,12 +77,12 @@
       	list-style: none;
       }
 
-      @media screen and (max-width: 1200px) {
+      @media screen and (max-width: 1610px) {
       
         #navbar__main {
           flex-direction: column;
+          justify-content: center;
           align-items: flex-start;
-          padding: 21px;
         }
         #navbar__menu {
           display: none;

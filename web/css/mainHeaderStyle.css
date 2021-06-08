@@ -13,7 +13,7 @@
         margin:0;
         z-index: 1;
         position: relative;
-        width: 1900px;
+       width: 90%;
       }
       #navbar__logo {
       	margin: 0 0 0 100px;
@@ -74,11 +74,12 @@ ul{
       	font-family: 'Do Hyeon', sans-serif;
       }
 
-      @media screen and (max-width: 1200px) {
+      @media screen and (max-width: 1610px) {
       
       
         #navbar__main {
           flex-direction: column;
+          justify-content: center;
           align-items: flex-start;
         }
         #navbar__menu {
@@ -99,7 +100,6 @@ ul{
           width: 100%;
         }
         .navbar__toggleBtn {
-        	margin-top:30px;
           display: block;
         }
 
