@@ -264,4 +264,10 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	public List<QnA>selectQnAddList(){
+		Connection conn=getConnection();
+		List<QnA>qlist=dao.selectQnAddList(conn);
+		close(conn);
+		return qlist;
+	}
 }

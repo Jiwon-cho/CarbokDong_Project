@@ -725,5 +725,32 @@ public class MemberDao {
 			close(pstmt);
 		}return result;
 	}
+	public List<QnA> selectQnAddList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<QnA> qlist=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectQnAddList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				QnA q=new QnA();
+				q.setNo(rs.getInt("QA_NB"));
+				q.setTitle(rs.getString("QA_TITLE"));
+				q.setContent(rs.getString("QA_CONTENT"));
+				q.setDate(rs.getDate("QA_DATE"));
+				q.setUserId(rs.getString("QA_MEMBER_ID"));
+				q.setResult(rs.getString("QA_RESULT"));
+				q.setFileOriginalName(rs.getString("QA_ORIGINAL_FILENAME"));
+				q.setFileReName(rs.getString("QA_RENAME_FILENAME"));
+				q.setQapublic(rs.getString("QA_PUBLIC"));
+				qlist.add(q);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return qlist;
+	}
 	
 }
