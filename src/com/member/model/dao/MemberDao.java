@@ -526,7 +526,8 @@ public class MemberDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("deleteQnA"));
+			
+			pstmt=conn.prepareStatement(prop.getProperty("deleteQnAReply2"));
 			pstmt.setInt(1, QnANo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -535,7 +536,7 @@ public class MemberDao {
 			close(pstmt);
 		}
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("deleteQnAReply2"));
+			pstmt=conn.prepareStatement(prop.getProperty("deleteQnA"));
 			pstmt.setInt(1, QnANo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
