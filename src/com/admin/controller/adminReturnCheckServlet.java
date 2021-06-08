@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.admin.model.service.AdminService;
 import com.payment.model.vo.Payment;
 
@@ -44,15 +46,23 @@ public class adminReturnCheckServlet extends HttpServlet {
 		}
 		
 		int c=new AdminService().addCar(b);
-		/*
-		 * String msg=""; if(a>0&&c>0) { msg+="반납이 확인되었습니다"; }else {
-		 * msg+="반납에 실패하였습니다."; }
-		 * 
-		 * response.getWriter().write(msg);
-		 */
+		String rc=new AdminService().returnCheck(pm_no);
 		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/admin/adminCheck").forward(request, response);
+		
+		
+		  String msg=""; if(a>0&&c>0) { msg+="반납이 확인되었습니다"; }else {
+		 msg+="반납에 실패하였습니다."; }
+		  
+		  
+		  JSONObject jo=new JSONObject();
+		  jo.put("rc", rc);
+		  jo.put("msg",msg);
+		  
+		  
+		  response.getWriter().print(jo);
+		 
+		
+	
 	}
 
 	/**

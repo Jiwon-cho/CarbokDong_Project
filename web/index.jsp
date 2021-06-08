@@ -188,19 +188,19 @@ function showSlides(n) {
 /* Fading animation */
 .fade {
   -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
+  -webkit-animation-duration: 500.5s;
   animation-name: fade;
-  animation-duration: 1.5s;
+  animation-duration: 500.5s;
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  from {opacity: 4}
+  to {opacity: 0.1}
 }
 
 @keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  from {opacity: 4}
+  to {opacity: 0.1}
 }
   </style>
   <%@ include file="views/common/mainHeader.jsp" %>
@@ -299,11 +299,11 @@ function showSlides(n) {
             </div>
             </div>
             <div class="col-lg-3" style="background-color:white; height: 250px;  ">
-              <div class="container-fluid" style="font-size:;">
-            <div class="row">
+              <!-- <div class="container-fluid" style="font-size:;"> -->
+           <!--  <div class="row">
               <div class="col" style="height: 20px;"></div>
-          </div>
-              <table align="center" id="weather-tb" style="font-size:50px;">
+          </div> -->
+              <table align="center" id="weather-tb" style="font-size:50px;width:100%;height:auoto;">
                       <tr>
                       <th colspan="5">===== 날씨예보 ====</th>
                   </tr>
@@ -311,7 +311,7 @@ function showSlides(n) {
                   </table>
                   
            
-            </div>
+            <!-- </div> -->
             </div>
             <div class="col-lg-3" style="background-color:red; height: 250px; background-image:url('https://t1.daumcdn.net/cfile/tistory/99D8F24E5F07D10C2A');
                 background-size: cover;text-align:center;     background-repeat: no-repeat;"> <h2><a href="<%=request.getContextPath() %>/mbti/mbtiPage">

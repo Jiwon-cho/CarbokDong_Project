@@ -379,7 +379,8 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                     </tfoot>
                                     <tbody>
                                      <%for(Payment p:list){ 
-                                     String rc=new AdminService().returnCheck(p.getPaymentsNo());%>
+                                     String rc=new AdminService().returnCheck(p.getPaymentsNo());
+                                     %>
                                         <tr>
                                             <td><%=p.getPaymentsNo() %></td>
                                             <td><%=p.getPaymetType() %></td>
@@ -390,11 +391,11 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                             <td><%=p.getProductNb() %></td>
                                             <td><%=p.getMemberId() %></td>
                                             <td><%=p.getProductNm() %></td>
-                                              <td class="vy">
-                                              <%if(rc.equals("N")){ %>
+                                             <td class="vy">
+                                               <%if(rc.equals("N")){ %> 
                                               <input class="return-very" type="button" value="반납확인">
-                                              <%}else{ %>
-                                              반납 완료</td>
+                                               <%}else{ %>
+                                              반납 완료 </td>
                                               <%} %>
                                         </tr>
                                      <%} %> 
@@ -416,32 +417,42 @@ $(".return-very").click((e)=>{
     
     var f=val[0].innerHTML;
     console.log(f);
+  	var a=val[9].innerHTML;
+    console.log(a);
+    
     
     var result=confirm("차가 안전히 반납되었습니까?");
     
     if(result){
-    	location.assign("<%=request.getContextPath()%>/admin/returnCheck?pm_no="+f)	;
+<%--     	location.assign("<%=request.getContextPath()%>/admin/returnCheck?pm_no="+f)	;
     	alert("반납이 확인되었습니다.")
     }
-<%--     $.ajax({
+     --%>
+$.ajax({
     	url:"<%=request.getContextPath()%>/admin/returnCheck",
+    	 type: 'POST',
+         dataType: 'json',
     	data:{
     		pm_no:f
     	},
     	success:data=>{
-    		console.log(data);
-    		alert(data);
-    		
+    		console.log(data.msg);
+    		alert(data.msg);
+    		console.log(a);
+    		console.log(data.rc);
+    		if(data.rc=='Y'){
+    			val[9].innerHTML='반납완료';
+    		}
     		
     	}
     	
     	
-    }); --%>
+    });
 
     
     
     
-    /* } */else{
+    } else{
     	alert("반납이 되지 않았습니다.");
     }
     
