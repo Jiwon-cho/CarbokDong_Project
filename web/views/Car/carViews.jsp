@@ -302,11 +302,11 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
         </div>
         <%} %>
       </div>
+      <div class="review">
       <%for(Reviews r:rlist) {%>
-      <hr>
       <ul class="level1" >
 				<li>
-					<div class="reply_div">
+					<div class="review_content">
  						<span>
  						<%if(r.getRating()==1){ %>
  						⭐
@@ -332,12 +332,12 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
               						alt=""
               						style="width: 80px;height: 70px; float: right;"
             							/>
-          					</div>
+          				</div>
 					</div>
 				</li>
 			</ul>
-			<hr>
 			<%} %>
+	</div>
 			<br><br>
 			<div class="comment-editor" >
 			<form action="<%=request.getContextPath() %>/car/insertReview" method="post" enctype="multipart/form-data">			
@@ -351,13 +351,16 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
 						<option value="5">5점</option>
 					</select>
 				</span>
-					<input type="file" name="filename" accept="image/*" onchange="setThumbnail(event);">
+					
 					<div class="inner-comment">
-							<textarea name="content" rows="3" cols="120" style="resize: none;" placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
+							
+							<textarea class="comment" name="content" rows="3" cols="120"  placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
 							<input type="hidden" name="memberId" value="<%=loginMember==null?"":loginMember.getUserId()%>">
-							<input type="hidden" name="carNo" value="<%=c.getCarNB()%>">
-							<button type="submit" value="등록" id="btn-insert">등록</button>
+								<input type="hidden" name="carNo" value="<%=c.getCarNB()%>">
+								<button class="commentBtn" type="submit" value="등록" id="btn-insert">등록</button>
 					</div>
+					<input type="file" name="filename" accept="image/*" onchange="setThumbnail(event);">
+					
 				</form>
 			</div>
     </div>

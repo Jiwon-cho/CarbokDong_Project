@@ -105,7 +105,7 @@ public class BoradMainServlet extends HttpServlet {
 		List<Files>flist=new BoardService().selectFileList();
 		
 		
-		List<QnA> qlist=new MemberService().selectQnAList(cPage,numPerpage);
+		List<QnA> qlist=new MemberService().selectQnAddList();
 		
 		request.setAttribute("flist", flist);
 		

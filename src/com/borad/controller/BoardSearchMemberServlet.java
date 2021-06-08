@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
 import com.borad.model.vo.Files;
+import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
+import com.member.model.vo.QnA;
 
 /**
  * Servlet implementation class BoardSearchMemberServlet
@@ -89,7 +91,10 @@ public class BoardSearchMemberServlet extends HttpServlet {
 		}
 		List<Board>pplist=new BoardService().selectppBoard();
 		
+		List<QnA> qlist=new MemberService().selectQnAddList();
+		
 		List<Files>flist=new BoardService().selectFileList();
+		request.setAttribute("qlist", qlist);
 		request.setAttribute("flist", flist);
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("pplist", pplist);
