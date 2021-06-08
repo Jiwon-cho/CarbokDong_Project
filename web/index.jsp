@@ -217,37 +217,37 @@ function showSlides(n) {
         <div class="mySlides fade" >
           <div class="numbertext"></div>
           <img src="<%=request.getContextPath() %>/images/캠핑 메인1.jpg" style="width:100%"> -->
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">2 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인2.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">3 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인3.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">4 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인4.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">5 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">6 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인6.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <!-- Next and previous buttons -->
@@ -270,14 +270,14 @@ function showSlides(n) {
 
   <div style="height:100px;"></div><!-- rgba(248, 215, 176, 0.925) -->
       <div class="row"> 	
-        <div class="col" style="height: 350px;background-color:rgba(231, 223, 223, 0.555);">
+        <div class="col" style="height: 350px;border-top:5px solid rgba(231, 223, 223, 0.555);">
           <div class="container-fluid">
             <div class="row">
               <div class="col" style="height: 50px; text-align:center;">
-              <h2>==== 캠핑 스토리 ===</h2>
+              <h2><span><img src="<%=request.getContextPath() %>/images/연필.png" style="width:40px;height:40px;"></span>캠핑 스토리 </h2>
               </div>
           </div>
-            <div class="row" style="text-align:center;">
+            <div class="row" style="text-align:center;margin-top:20px;">
              <div class="col-2"></div>
              
             <div class="col-lg-2" style="background-color:black;height: 250px; background-image:url('<%=request.getContextPath() %>/images/campingnews.jpg'); background-size:cover;
@@ -298,14 +298,17 @@ function showSlides(n) {
               </a>
             </div>
             </div>
-            <div class="col-lg-3" style="background-color:white; height: 250px;  ">
+<!--             background-color:rgb(233, 245, 244); -->
+            <div class="col-lg-3" style="border:5px solid rgba(231, 223, 223, 0.555); height: 250px;  ">
               <!-- <div class="container-fluid" style="font-size:;"> -->
            <!--  <div class="row">
               <div class="col" style="height: 20px;"></div>
           </div> -->
-              <table align="center" id="weather-tb" style="font-size:50px;width:100%;height:auoto;">
+              <table align="center" id="weather-tb" style="font-size:50px;width:400px;height:100%;"
+
+>
                       <tr>
-                      <th colspan="5">===== 날씨예보 ====</th>
+                      <th colspan="5">================== 날씨예보 ==================</th>
                   </tr>
                  
                   </table>

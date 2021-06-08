@@ -1,0 +1,166 @@
+
+    table
+    {
+        border:1px solid #BDBDBD;
+        text-align:center;
+        width:320px;
+        height:300px;
+    }
+
+    .header {
+      width: 100%;
+      height: 100px;
+      background-color: rgb(0, 0, 0);
+      color: white;
+      text-align: center;
+      font-size: 3em;
+    }
+
+    .content_container {
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin: auto;
+      width: 70vw;
+      height: auoto;
+    }
+
+    .book {
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      margin: 50px 0;
+      height: 1100px;
+      width: 100%;
+      border-top: 2px gray solid;
+      border-bottom: 1px gray solid;
+      background-color:white;
+    }
+    
+    .book_subject_main{
+    	margin : 0 50px 30px 50px;
+    	border-bottom: 1px rgb(233, 233, 233) solid;
+    }
+	
+	.book_content{
+		font-size: 15px;
+		text-align: left;
+		color: grey;
+		margin: 10px 50px;
+	}
+	
+    .book_img {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      /* border: 1px gray solid; */
+      width: 45%;
+      height: 100%;
+      margin-left: 50px;
+    }
+	
+    .img_file {
+      width: 100%;
+    }
+
+    .book_option {
+      margin-top: 20px;
+      margin-left: 150px;
+      margin-right: 150px;
+      text-align: center;
+      width: 50%;
+      height: 100%;
+    }
+
+    .book_subject {
+      height: 400px;
+    }
+
+    .book_options {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      height: 35%;
+      margin: auto;
+      margin-top: 20px;
+    }
+    
+    .dateInput{
+    	width:20%;
+    }
+
+    .basket_btn,
+    .buy_btn {
+      margin-bottom: 20px;
+      height: 15%;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    
+    .basket_btn{
+    	background-color: #ecf0f1;
+    }
+    
+    .buy_btn {
+    	color: white;
+   		border: none;
+    	background-color: #0984e3;
+    }
+
+    .item {
+      box-sizing: border-box;
+      text-align: center;
+      height: 3300px;
+      width: 100%;
+      margin: auto;
+    }
+
+    .item_img {
+    	margin: auto;
+      width: 1080px;
+      height:800px;
+    
+    }
+
+    .review {
+      display: block;
+      flex-direction: column;
+      margin: 0;
+      width: 100%;
+      height: 700px;
+      border: 1px gray solid;
+    }
+
+    .review_content {
+      display: flex;
+      height: 120px;
+      width: 95%;
+      margin: 20px 20px;
+      border-top: 1px gray dashed;
+      border-bottom: 1px gray dashed;
+    }
+
+    .review_subject {
+      height: 100px;
+      width: 50%;
+      margin: 0 50px;
+    }
+
+    .review_img {
+      width: 30%;
+      height: 100%;
+      float: right;
+    }
+
+    select {
+      width: 100%;
+      height: 30px;
+      font-size: large;
+      text-align-last: center;
+      margin: 10px 0;
+    }
+    
+    .comment-editor{
+    	margin-bottom: 100px;
+    }
