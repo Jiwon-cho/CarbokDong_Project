@@ -53,7 +53,7 @@
   var slideIndex = 0; //slide index
 
 // HTML 로드가 끝난 후 동작
-window.onload=function(){
+$(document).ready(function(){
   showSlides(slideIndex);
 
   // Auto Move Slide
@@ -63,7 +63,7 @@ window.onload=function(){
     showSlides(slideIndex);
 
   }, sec);
-}
+});
 
 
 // Next/previous controls
