@@ -38,14 +38,11 @@
         </li>
         <li><a href="<%=request.getContextPath()%>/car/carList">렌트 차 종류</a></li>
         <li><a href="<%=request.getContextPath()%>/member/QnAList">Q&A</a></li>
-      </div>
-      <ul class="navbar__icons">
+        <ul class="navbar__icons">
         
        <%if(loginMember==null) {%>
-      <ul class="list">
         <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
         <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
-      </ul>
 	<%}else if(loginMember.getMemberType()==0){%>
 	  <ul class="head-list">
 	  	<li><a href="<%=request.getContextPath() %>/admin/adminMain">관리자페이지</a></li>
@@ -58,6 +55,8 @@
 	  </ul>
 	<%} %>
       </ul>
+      </div>
+      
 
 
       <a href="#" class="navbar__toggleBtn">

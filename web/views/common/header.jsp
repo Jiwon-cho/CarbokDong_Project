@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>카복동</title>
+
 	<link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -19,7 +20,8 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic&family=Black+Han+Sans&family=East+Sea+Dokdo&display=swap"
       rel="stylesheet">
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+      
  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/headerStyle.css">   
 
   </head>
@@ -36,13 +38,11 @@
         </li>
         <li><a href="<%=request.getContextPath()%>/car/carList">렌트 차 종류</a></li>
         <li><a href="<%=request.getContextPath()%>/member/QnAList">Q&A</a></li>
-      </div>
-      <ul class="navbar__icons">
+        <ul class="navbar__icons">
+        
        <%if(loginMember==null) {%>
-      <ul class="list">
         <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
         <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
-      </ul>
 	<%}else if(loginMember.getMemberType()==0){%>
 	  <ul class="head-list">
 	  	<li><a href="<%=request.getContextPath() %>/admin/adminMain">관리자페이지</a></li>
@@ -55,6 +55,9 @@
 	  </ul>
 	<%} %>
       </ul>
+      </div>
+      
+
 
       <a href="#" class="navbar__toggleBtn">
         <i class="fas fa-bars"></i></a>

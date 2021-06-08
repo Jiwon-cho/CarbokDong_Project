@@ -2,7 +2,7 @@
 
 	body{
 	margin:0;
-	line-height: 1;
+	line-height: 1.6;
 	}
 	
 	header {
@@ -13,20 +13,20 @@
         margin:0;
         z-index: 1;
         position: relative;
-        width: 90%;
+       width: 90%;
       }
       #navbar__logo {
       	margin: 0 0 0 100px;
         font-size: 70px;
       }
       #navbar__menu {
-      	position: absolute;
+      position: absolute;
       	font-size: 20px;
         font-family: "Black Han Sans", sans-serif;
         display: flex;
         list-style: none;
-        padding-left: 0;
         margin-left: 700px;
+        align-items: center;
       }
       #navbar__menu li {
         padding: 8px 50px;
@@ -47,11 +47,16 @@
         list-style: none;
         color: black;
         display: flex;
+        flex-direction: column;
         padding-left: 0;
         margin: 0;
+        margin-left: 100px;
       }
       .navbar__icons li {
-        padding: 8px 12px;
+        padding: 2px 12px;
+      }
+      li{
+      	list-style: none;
       }
       a {
         text-decoration: none;
@@ -68,46 +73,56 @@
         right: 32px;
         color: rgb(0, 69, 172);
       }
-      
-      ul{
+ul{
       	font-family: 'Do Hyeon', sans-serif;
       }
-      
-      li{
-      	list-style: none;
-      }
 
-      @media screen and (max-width: 1610px) {
+      @media screen and (max-width: 1900px) {
+      	header{
+      		margin: auto;
+      	}
       
         #navbar__main {
+      	  width: 100%;
           flex-direction: column;
-          justify-content: center;
           align-items: flex-start;
+          justify-content: center;
         }
+        #navbar__logo{
+      		display:block;
+      	}
         #navbar__menu {
-          display: none;
+          display: block;
           flex-direction: column;
           align-items: center;
           width: 100%;
+          margin: auto;
+          display: none;
+          margin-top: 300px;
+          background-color: white;
+          border: 1px solid gray;
+          z-index: 1;
         }
 
         #navbar__menu li {
           width: 100%;
           text-align: center;
+          border-bottom: 1px solid rgb(233, 233, 233);
+          padding:0;
         }
 
         .navbar__icons {
           display: none;
           justify-content: center;
           width: 100%;
+          margin-left:0;
         }
         .navbar__toggleBtn {
-        	margin-top:10px;
           display: block;
         }
 
         #navbar__menu.active,
         .navbar__icons.active {
-          display: flex;
+          display: block;
         }
       }
