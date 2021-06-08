@@ -23,7 +23,7 @@
 
       
  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/headerStyle.css">   
-
+<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
   </head>
   
  <header> 

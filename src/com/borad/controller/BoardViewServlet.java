@@ -70,7 +70,7 @@ public class BoardViewServlet extends HttpServlet {
 		
 		int replycount=new BoardService().selectReplyCount(No);
 		
-		Files f=new BoardService().selectImgName(No);
+		List<Files> f=new BoardService().selectImgName(No);
 		
 		
 		
