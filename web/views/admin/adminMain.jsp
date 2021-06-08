@@ -134,7 +134,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+            <!--         <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -146,7 +146,7 @@
                             </div>
                         </div>
                     </form>
-
+ -->
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -274,11 +274,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <!--     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+                    </div> -->
 
                     <!-- Content Row -->
                     <div class="row">
@@ -455,7 +455,10 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                       <address class="addr">
+            상호명:차박왕 카복동 │ 대표:KH	 │ 개인정보관리자:BS
+          </address>
+          <p class="copy">Copyright 2021-0820 by 차박왕 카복동. All rights reserved.</p>
                     </div>
                 </div>
             </footer>
