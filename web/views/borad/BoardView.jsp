@@ -14,10 +14,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/BoardView.css">
 <style>
 	#btn-insert{
-		width:50px; height:60px; color:#fff; background:#ff5656; 
+		width:50px; height:50px; color:#fff; background:#ff5656; 
    	 	font-size: 13px;
    	 	position: relative;
-   	 	top:-27px;
+   	 	top:-21px;
    	 	}
 
 </style>
