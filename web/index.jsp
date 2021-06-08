@@ -268,9 +268,9 @@ function showSlides(n) {
 
       
 
-  <div style="height:100px;"></div>
-      <div class="row">
-        <div class="col" style="height: 350px;background-color:rgba(248, 215, 176, 0.925);">
+  <div style="height:100px;"></div><!-- rgba(248, 215, 176, 0.925) -->
+      <div class="row"> 	
+        <div class="col" style="height: 350px;background-color:rgba(231, 223, 223, 0.555);">
           <div class="container-fluid">
             <div class="row">
               <div class="col" style="height: 50px; text-align:center;">

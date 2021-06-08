@@ -30,10 +30,11 @@ List<Car> list=(List<Car>)request.getAttribute("list");
   </div>
       <div class="car_container">
       <%for(Car c: list){ %>
+      	<%if(c.getCarPsb()==0){ %>
+     	<!-- 분기처리 필요-->
+  		<%}else{ %>
         <div class="car_list">
-     
-          <img
-            src="<%=request.getContextPath() %>/images/car/<%=c.getCarModel() %>.png"
+     <img src="<%=request.getContextPath() %>/images/car/<%=c.getCarModel() %>.png"
             alt="car"
             class="thumbnail"
           />
@@ -43,7 +44,7 @@ List<Car> list=(List<Car>)request.getAttribute("list");
           
          <input type="hidden" name="carNB" value="<%=c.getCarNB()%>">
          <button class="reservation" onclick="location.assign('<%=request.getContextPath()%>/car/carView?carNB=<%=c.getCarNB()%>')">예약하기</button>
-     
+     	<%} %>
         </div>
         <%} %>
        
