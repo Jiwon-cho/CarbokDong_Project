@@ -29,6 +29,28 @@ public class AdminService {
 		
 	}
 	
+	public int updateCancel(String pn) {
+		Connection conn=getConnection();
+		int result=dao.updateCancel(conn,pn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	
+	
+	
+	public String cancelCheck(String pn) {
+		Connection conn=getConnection();
+		String rc=dao.cancelCheck(conn,pn);
+		close(conn);
+		return rc;
+	}
+	
+	
+	
+	
+	
 	
 	public TreeMap<Date,Integer>  selectGraphMember(){
 		Connection conn=getConnection();

@@ -280,24 +280,26 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return num;
 	}
-	public Files selectImgName(Connection conn,int No) {
+	public List<Files> selectImgName(Connection conn,int No) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		Files f=null;
+		List<Files>flist=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectImgName"));
 			pstmt.setInt(1, No);
 			rs=pstmt.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
+				Files f=new Files();
 				f=new Files();
 				f.setFileNm(rs.getString("file_nm"));
+				flist.add(f);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return f;
+		}return flist;
 	}
 	public List<Board>selectSearchMember(Connection conn,String type,String keyword,int cPage,int numPerpage){
 		PreparedStatement pstmt=null;

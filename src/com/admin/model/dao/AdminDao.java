@@ -50,6 +50,61 @@ public class AdminDao {
 	}
 	
 	
+
+	
+	
+	public String cancelCheck(Connection conn, String pn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String a=null;
+		try{
+			pstmt=conn.prepareStatement(prop.getProperty("cancelCheck"));
+			pstmt.setString(1, pn);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				a=rs.getString("cancellation");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return a;
+	}
+	
+	
+	public int updateCancel(Connection conn, String pn) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateCancel"));
+			pstmt.setString(1, pn);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public TreeMap<Date,Integer> selectGraphMember(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

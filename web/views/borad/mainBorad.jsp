@@ -112,14 +112,15 @@
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
 					<span class="artice">
-				<div id="imgdivback" style="width: 130px; height: 120px; background-color: rgb(234, 234, 234); position: relative; top: 20px;"> 
+				<div id="imgdivback" style=" width: 130px; resize:none; height: 120px; background-color: rgb(234, 234, 234); position: relative; top: 20px;"> 
 					<%for(Files f:flist){%>
 						<%if(f.getBoardNb()==b.getBoardNb()){ %>
 						<img src="<%=request.getContextPath() %>/upload/board/<%=f.getFileNm() %>" width="130" height="120"
-						onerror="this.src='<%=request.getContextPath() %>/images/noimage.gif'">
-						<%}else{ %>
+						onerror="this.src='<%=request.getContextPath() %>/images/noimage.gif'" >
+						<%break;}else{ %>
 						<%} %>
 					<%} %>
+					
 					</div>
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>

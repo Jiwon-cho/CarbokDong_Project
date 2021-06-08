@@ -115,11 +115,11 @@ private BoardDao dao=new BoardDao();
 		close(conn);
 		return num;
 	}
-	public Files selectImgName(int No) {
+	public List<Files> selectImgName(int No) {
 		Connection conn=getConnection();
-		Files f=dao.selectImgName(conn,No);
+		List<Files> flist=dao.selectImgName(conn,No);
 		close(conn);
-		return f;
+		return flist;
 	}
 	public List<Board>selectSearchMember(String type,String keyword,int cPage,int numPerpage){
 		Connection conn=getConnection();
