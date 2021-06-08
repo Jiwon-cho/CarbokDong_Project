@@ -277,7 +277,7 @@ function showSlides(n) {
               <h2><span><img src="<%=request.getContextPath() %>/images/연필.png" style="width:40px;height:40px;"></span>캠핑 스토리 </h2>
               </div>
           </div>
-            <div class="row" style="text-align:center;">
+            <div class="row" style="text-align:center;margin-top:20px;">
              <div class="col-2"></div>
              
             <div class="col-lg-2" style="background-color:black;height: 250px; background-image:url('<%=request.getContextPath() %>/images/campingnews.jpg'); background-size:cover;
@@ -298,7 +298,8 @@ function showSlides(n) {
               </a>
             </div>
             </div>
-            <div class="col-lg-3" style="background-color:rgb(233, 245, 244); height: 250px;  ">
+<!--             background-color:rgb(233, 245, 244); -->
+            <div class="col-lg-3" style="border:5px solid rgba(231, 223, 223, 0.555); height: 250px;  ">
               <!-- <div class="container-fluid" style="font-size:;"> -->
            <!--  <div class="row">
               <div class="col" style="height: 20px;"></div>
