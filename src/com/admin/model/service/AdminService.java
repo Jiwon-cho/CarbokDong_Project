@@ -45,6 +45,12 @@ public class AdminService {
 	}
 	
 	
+	public int selectQcount() {
+		Connection conn=getConnection();
+		int count=dao.selectQcount(conn);
+		close(conn);
+		return count;
+	}
 	
 	
 	

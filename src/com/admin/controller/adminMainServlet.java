@@ -38,6 +38,7 @@ public class adminMainServlet extends HttpServlet {
 		int mCount=new AdminService().selectMemberCount();
 		int cCount=new AdminService().selectCarCount();
 		int camCount=new AdminService().selectCampingCount();
+		int qCount=new AdminService().selectQcount();
 		
 		
 		TreeMap<Date,Integer> graphmember=new AdminService().selectGraphMember();
@@ -53,7 +54,7 @@ public class adminMainServlet extends HttpServlet {
 		List<Integer> pie=new AdminService().carPercentage();
 		System.out.println(pie);
 		
-
+		request.setAttribute("qcount", qCount);
 		request.setAttribute("pie", pie);
 		request.setAttribute("gcount", gcount);
 		request.setAttribute("gdate", gdate);

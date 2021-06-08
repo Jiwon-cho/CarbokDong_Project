@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.List,com.member.model.vo.Member,com.car.model.vo.Car,com.camp.model.vo.Camp" %>
+<%@page import="com.member.model.vo.Member" %>    
 <%
-	List<Member>mlist=(List<Member>)request.getAttribute("mlist");
-	List<Car>clist=(List<Car>)request.getAttribute("clist");
-	List<Camp>camlist=(List<Camp>)request.getAttribute("camlist");
-%>
-
+	Member m=(Member)request.getAttribute("member");
+%>     
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +15,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>카복동 관리자페이지</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>카복동</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom fonts for this template -->
     <link href="<%=request.getContextPath() %>/Resources/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -157,9 +155,8 @@
                                 </form>
                             </div>
                         </li>
-
                         <!-- Nav Item - Alerts -->
-                   <!--      <li class="nav-item dropdown no-arrow mx-1">
+      <!--                   <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -207,34 +204,43 @@
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
-                        </li> -->
-
+                        </li>
+ -->
                         <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                               <li class="nav-item dropdown no-arrow mx-1">
                         <div style="height:20px;"></div>
                         <button type="button" class="btn btn-outline-primary" onclick="location.assign('<%=request.getContextPath()%>')">Go to Homepage</button>
                      
                         </li>
+                      
+
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
                                     src="<%=request.getContextPath() %>/Resources/AdminTemplate/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/admin/adminView?userId=admin">
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                       
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="<%=request.getContextPath() %>/logout" >
+                                <a class="dropdown-item" href="<%=request.getContextPath() %>/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -245,75 +251,26 @@
 
                 </nav>
                 <!-- End of Topbar -->
-				<select id="searchType" name="searchType" onchange="location.href=this.value">
-					<option value="Member" selected="selected">Member</option>
-					<option value="<%=request.getContextPath()%>/admin/CarTable">Car</option>
-					<option value="<%=request.getContextPath()%>/admin/CampTable">Camp</option>
-				</select>
-				
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid" >
-					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
-                  <button onclick="fn_deleteMember();" style="position: relative; left: 1500px; bottom: 15px;">회원 삭제</button>
-                                                <!-- DataTales Example -->
-                    <div class="card shadow mb-4" >
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive" >
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>회원아이디</th>
-                                            <th>회원이름</th>
-                                            <th>이메일</th>
-                                            <th>주소</th>
-                                            <th>닉네임</th>
-                                            <th>성별</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
- 											<th>회원아이디</th>
-                                            <th>회원이름</th>
-                                            <th>이메일</th>
-                                            <th>주소</th>
-                                            <th>닉네임</th>
-                                            <th>성별</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <%for(Member m:mlist){ %>
-                                        <tr>
-                                            <td><%=m.getUserId() %></td>
-                                            <td><%=m.getUserName() %></td>
-                                            <td><%=m.getEmail() %></td>
-                                            <td><%=m.getAddress() %></td>
-                                            <td><%=m.getNikname() %></td>
-                                            <td><%=m.getGender() %></td>
-                                        </tr>
-                                     <%} %>
-                                    </tbody>                                
-                                </table>
-                            
-                            </div>
-                        </div>
-                    </div>
+                <div class="container-fluid">
+
                     <!-- Page Heading -->
-                    
+                    <h1 class="h3 mb-4 text-gray-800">Admin View</h1>
 
                 </div>
-
-   
                 <!-- /.container-fluid -->
- 			
+<div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart"></canvas>
+                                    </div>
+                                </div>
+
+            </div>
+            <!-- End of Main Content -->
+
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+                   <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                        <address class="addr">
@@ -355,7 +312,7 @@
             </div>
         </div>
     </div>
-	
+
     <!-- Bootstrap core JavaScript-->
     <script src="<%=request.getContextPath() %>/Resources/AdminTemplate/vendor/jquery/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/Resources/AdminTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -366,22 +323,6 @@
     <!-- Custom scripts for all pages-->
     <script src="<%=request.getContextPath() %>/Resources/AdminTemplate/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="<%=request.getContextPath() %>/Resources/AdminTemplate/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="<%=request.getContextPath() %>/Resources/AdminTemplate/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<%=request.getContextPath() %>/Resources/AdminTemplate/js/demo/datatables-demo.js"></script>
-	<script>
-	const fn_deleteMember=()=>{
-		const status="width=700px,height=500px,left=500px,top=500px";
-		const title="deleteMember";
-		const url="<%=request.getContextPath()%>/admin/deleteMember";
-		open(url,title,status);
-
-	};
-	</script>
-
-
 </body>
+
 </html>

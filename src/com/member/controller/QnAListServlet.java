@@ -79,6 +79,7 @@ public class QnAListServlet extends HttpServlet {
 
 		List<QnA> list=new MemberService().selectQnAList(cPage,numPerpage);
 		
+		
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/member/QnAList.jsp").forward(request, response);
