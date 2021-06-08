@@ -217,37 +217,37 @@ function showSlides(n) {
         <div class="mySlides fade" >
           <div class="numbertext"></div>
           <img src="<%=request.getContextPath() %>/images/캠핑 메인1.jpg" style="width:100%"> -->
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">2 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인2.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">3 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인3.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">4 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인4.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">5 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">6 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인6.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <!-- Next and previous buttons -->
