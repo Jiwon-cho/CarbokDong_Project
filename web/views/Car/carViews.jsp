@@ -14,15 +14,8 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
 List<String> carPics=(List<String>)request.getAttribute("carpics");
 
 %>
-<style>
-    table
-    {
-        border:1px solid #BDBDBD;
-        text-align:center;
-        width:320px;
-        height:300px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/carViewStyle.css">
+
  
 <script language="javascript">
     var today = new Date(); // 오늘 날짜
@@ -225,12 +218,6 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
     	} 
     }
     
-    
-    
-    
-    
-    
-    
 </script>
  
 <body onload="build();">
@@ -245,19 +232,23 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
         </div>
         <div class="book_option">
           <div class="book_subject">
+          <div class="book_subject_main">
             <h1><%=c.getCarModel() %></h1>
-            
-            <h3 style="text-align: right">재고 : <%=c.getCarPsb() %>대</h3>
-            <h2>차량 종류: <%=carinfos[0] %></h2>
-            <br>
-            <h2>연료: <%=carinfos[1] %></h2>
-            <br>
-            <h2>차량 연식: <%=carinfos[2] %></h2>
-            <br>
-            <h2>대여 자격: <%=carinfos[3] %>,<%=carinfos[4] %></h2>
-            <br>
-            <h2>대여 비용: 1일-<%=c.getPrice() %> 원</h2>
-          </div>
+           </div>
+              <div class="book_content">
+            	<h3 style="text-align: right">재고 : <%=c.getCarPsb() %>대</h3>
+            	<p>차량 종류 : <%=carinfos[0] %></p>
+            	<br/>
+            	<p>연료 : <%=carinfos[1] %></p>
+            	<br/>
+            	<p>차량 연식 : <%=carinfos[2] %></p>
+            	<br/>
+            	<p>대여 자격 : <%=carinfos[3] %>, <%=carinfos[4] %></p>
+            	<br/>
+            	<p>대여 비용 : 1일-<%=c.getPrice() %> 원</p>
+            	<br/>
+            </div>
+         </div>
            <div style="height:320px;">
     <table align="center" id="calendar">
         <tr>
@@ -276,31 +267,23 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
         </tr>
     </table>
 </div>
-
-<div >
-
-    <input type="text" id="start" name="trip-start"
+	<span>대여일 - </span>
+    <input class="dateInput" type="text" id="start" name="trip-start"
+    value="">
+    <br/><br/>
+    <span>반납일 - </span>
+    <input class="dateInput" type="text" id="end" name="trip-end"
     value="">
     
-    <input type="text" id="end" name="trip-end"
-    value="">
-    
-</div>
           <div class="book_options">
-           <!--  <select name="gear" id="gear-select">
-              <option value="">--- 차량 대여일자 ---</option>
-              <option value="rental_date">2021-05-05</option>
-            </select> -->
             <select name="gear" id="gear-select">
               <option value="">--- 추가 캠핑용품 ---</option>
               <option value="grill" >바베큐 그릴</option>
-      
             </select>
             <br />
             
-            <button class="basket_btn" onclick="goto_cart();">장바구니 담기</button>
+            	<button class="basket_btn" onclick="goto_cart();">장바구니 담기</button>
   
-     <!--        <button class="buy_btn" onclick="carPV();">구매하기</button>  -->
                  <button class="buy_btn" onclick="page_move('<%=request.getContextPath()%>/car/carPurchaseView?carNB=<%=c.getCarNB()%>');">구매하기</button> 
        
             </form>
@@ -310,7 +293,7 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
       <div class="item">
      <%for(int i=0;i<carPics.size()-1;i++){ %>
      
-      <div class="item-img" style="width:60%; height:810px;"> 
+      <div class="item-img" height:810px;"> 
         <img
           src="<%=request.getContextPath() %>/images/car/<%=carPics.get(i) %>"
           alt=""
@@ -319,11 +302,11 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
         </div>
         <%} %>
       </div>
+      <div class="review">
       <%for(Reviews r:rlist) {%>
-      <hr>
       <ul class="level1" >
 				<li>
-					<div class="reply_div">
+					<div class="review_content">
  						<span>
  						<%if(r.getRating()==1){ %>
  						⭐
@@ -349,12 +332,12 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
               						alt=""
               						style="width: 80px;height: 70px; float: right;"
             							/>
-          					</div>
+          				</div>
 					</div>
 				</li>
 			</ul>
-			<hr>
 			<%} %>
+	</div>
 			<br><br>
 			<div class="comment-editor" >
 			<form action="<%=request.getContextPath() %>/car/insertReview" method="post" enctype="multipart/form-data">			
@@ -368,144 +351,20 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
 						<option value="5">5점</option>
 					</select>
 				</span>
-					<input type="file" name="filename" accept="image/*" onchange="setThumbnail(event);">
+					
 					<div class="inner-comment">
-							<textarea name="content" rows="3" cols="120" style="resize: none;" placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
+							
+							<textarea class="comment" name="content" rows="3" cols="120"  placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
 							<input type="hidden" name="memberId" value="<%=loginMember==null?"":loginMember.getUserId()%>">
-							<input type="hidden" name="carNo" value="<%=c.getCarNB()%>">
-							<button type="submit" value="등록" id="btn-insert">등록</button>
+								<input type="hidden" name="carNo" value="<%=c.getCarNB()%>">
+								<button class="commentBtn" type="submit" value="등록" id="btn-insert">등록</button>
 					</div>
+					<input type="file" name="filename" accept="image/*" onchange="setThumbnail(event);">
+					
 				</form>
 			</div>
     </div>
   </body>
 
-  <style>
-    .header {
-      width: 100%;
-      height: 100px;
-      background-color: rgb(0, 0, 0);
-      color: white;
-      text-align: center;
-      font-size: 3em;
-    }
-
-    .content_container {
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      margin: auto;
-      width: 70vw;
-      height: auoto;
-      background-color: rgb(233, 233, 233);
-    }
-
-    .book {
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-      margin: 30px 0;
-      height: 1120px;
-      width: 100%;
-      border: 1px gray solid;
-      background-color:white;
-    }
-
-    .book_img {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      /* border: 1px gray solid; */
-      width: 45%;
-      height: 100%;
-      border: 1px rgba(202, 202, 202, 0.514) solid;
-      margin-left: 50px;
-    }
-
-    .img_file {
-      width: 100%;
-    }
-
-    .book_option {
-      margin-left: 150px;
-      margin-right: 150px;
-      border: 1px rgba(202, 202, 202, 0.514) solid;
-      text-align: center;
-      width: 50%;
-      height: 100%;
-    }
-
-    .book_subject {
-      height: 500px;
-    }
-
-    .book_options {
-      display: flex;
-      flex-direction: column;
-      width: 70%;
-      height: 35%;
-      margin: auto;
-    }
-
-    .basket_btn,
-    .buy_btn {
-      margin-bottom: 20px;
-      height: 15%;
-      cursor: pointer;
-    }
-
-    .item {
-      box-sizing: border-box;
-      text-align: center;
-      height: 3300px;
-      width: 100%;
-      margin: 50px 0;
-      border: 1px gray solid;
-    }
-
-    .item_img {
-      width: 1080px;
-      height:800px;
-    
-    }
-
-    .review {
-      display: block;
-      flex-direction: column;
-      margin: 0;
-      width: 100%;
-      height: 700px;
-      border: 1px gray solid;
-    }
-
-    .review_content {
-      display: flex;
-      height: 120px;
-      width: 95%;
-      margin: 20px 20px;
-      border-top: 1px gray dashed;
-      border-bottom: 1px gray dashed;
-    }
-
-    .review_subject {
-      height: 100px;
-      width: 50%;
-      margin: 0 50px;
-    }
-
-    .review_img {
-      width: 30%;
-      height: 100%;
-      float: right;
-    }
-
-    select {
-      width: 100%;
-      height: 30px;
-      font-size: large;
-      text-align-last: center;
-      margin: 10px 0;
-    }
-  </style>
+  
 <%@ include file="/views/common/footer.jsp" %>	

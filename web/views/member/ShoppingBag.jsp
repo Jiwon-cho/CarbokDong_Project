@@ -65,7 +65,7 @@ div#pageBar span.cPage {
         %>
 		<tr>
 			<td><%=c.getRnum() %></td>
-			<td><img src="/KH-SEMI-Carbokdong/images/car/<%=c.getCarName()%>.png" alt="" height="150" width="250"/></td>
+			<td><img src="<%=request.getContextPath() %>/images/car/<%=c.getCarName()%>.png" alt="" height="150" width="250"/></td>
 			<td>
 			<%if(c.getGear()==null){ %>
 				<%=c.getCarName() %>
