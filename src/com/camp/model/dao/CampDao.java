@@ -153,6 +153,80 @@ public class CampDao {
 	     	return hot;
 	    }
 	    
+	    public boolean checkLike(String id, int num) {
+	    	boolean result = false;
+	    	String user = null;
+	    	getCon();
+	    	try {
+	     		pstmt = con.prepareStatement(prop.getProperty("checkLike"));
+	     		pstmt.setInt(1, num);
+	     		rs = pstmt.executeQuery();
+	     		while(rs.next()) {
+	     			user = rs.getString(1);
+	     		}
+	     		System.out.println("id : "+id);
+	     		System.out.println("user : "+user);
+	     		// 일치하지않아서 등록 가능하면 true 반환
+	     		if(user.equals(id)) {
+	     			result=false;
+	     		} else if(id.equals("no")){
+	     			result=false;
+	     		} else if(user.equals(null)){
+	     			result=false;
+	     		} else if(user.equals("null")){
+	     			result=false;
+	     		} else {
+	     			result=true;
+	     		}
+	     		System.out.println(result);
+	     		con.close();
+	     	}catch (Exception e){
+	     		result=true;
+	     		System.out.println(result);
+	     	} finally {
+	     		if(result) {
+	     			addLike(id, num);
+	     		}
+	     	}
+	    	return result;
+	    }
+	    
+	    public int addLike(String id, int num) {
+	    	int result = 0;
+	    	getCon();
+	    	try {
+	     		pstmt = con.prepareStatement(prop.getProperty("addLike"));
+	     		pstmt.setString(1, id);
+	     		pstmt.setInt(2, num);
+	     		rs = pstmt.executeQuery();
+	     		result=1;
+	     		System.out.println("좋아요 등록완료");
+	     		con.close();
+	     	}catch (Exception e){
+	     		e.printStackTrace();
+	     	}
+	    	return result;
+	    }
+	    
+	    public int getLike(int num) {
+	    	getCon();
+	    	int result=0;
+	 		
+	     	try {
+	     		pstmt = con.prepareStatement(prop.getProperty("getLike"));
+	     		pstmt.setInt(1, num);
+	     		rs = pstmt.executeQuery();
+	     		while(rs.next()) {
+	     			result = rs.getInt(1);
+	     		}
+	     		con.close();
+	     	}catch (Exception e){
+	     		e.printStackTrace();
+	     	}
+			System.out.println("좋아요 숫자 : "+result);
+	     	return result;
+	    }
+	    
 //	    public List<CampReserve> campReserveInfo(){
 //			List<CampReserve> v = new ArrayList();
 //			

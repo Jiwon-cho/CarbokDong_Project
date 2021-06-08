@@ -27,15 +27,14 @@
 		System.out.println("불러온 이미지배열:"+photos);
 		String path="/SemiTest/resources/campImgs";
 		System.out.println("불러온 경로:"+path);
+		
+		String userId = loginMember==null?"no":loginMember.getUserId();
 	%>
 	<title><%= camp.getName() %>에 어서오세요</title>
 	
  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/campView.css">   
  	
-     <script
-      type="text/javascript"
-      src="//code.jquery.com/jquery-1.11.0.min.js"
-    ></script>
+     <script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script> 
 
     <script type="text/javascript" src="slick/slick.min.js"></script>
     <link
@@ -64,7 +63,7 @@
         <div class="title"><%= camp.getName() %>
 			<div class="like">
             	<div class="heart">💗</div>
-            	9
+            	<%= campDao.getLike(camp.getNum()) %>
           </div>        
         </div>
       </div>
@@ -254,6 +253,24 @@
       like.addEventListener("mouseup", () => {
         like.style.transform = "scale(1.0)";
       });
+      
+      const checkLike = function(){
+    	  if(<%=campDao.checkLike(userId ,camp.getNum())%>){
+    		  alert("좋아요!");
+    	  } else {
+    		 alert("추천은 ID당 한 번만 가능합니다!"); 
+    	  }
+    	  
+      };
+      
+      like.addEventListener("click", ()=>{
+    	  if(<%=loginMember!=null%>){
+    		  checkLike();
+    	  } else {
+    		  alert('로그인을 해주세요!')
+    	  }
+      })
+      
     </script>
   </body>
 
