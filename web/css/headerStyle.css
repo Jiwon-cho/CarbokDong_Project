@@ -2,7 +2,7 @@
 
 	body{
 	margin:0;
-	line-height: 1.6;
+	
 	}
 	
 	header {
@@ -13,7 +13,9 @@
         margin:0;
         z-index: 1;
         position: relative;
-       width: 90%;
+       width: 100%;
+       line-height: 2;
+       
       }
       #navbar__logo {
       	margin: 0 0 0 100px;
@@ -98,7 +100,7 @@ ul{
           width: 100%;
           margin: auto;
           display: none;
-          margin-top: 300px;
+          margin-top: 320px;
           background-color: white;
           border: 1px solid gray;
           z-index: 1;
@@ -124,5 +126,9 @@ ul{
         #navbar__menu.active,
         .navbar__icons.active {
           display: block;
+        }
+        
+        .head-list{
+        	padding-left:0;
         }
       }

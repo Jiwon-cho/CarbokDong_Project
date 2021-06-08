@@ -26,7 +26,7 @@ display:inline-block;
 height:50px;
 width:100%;	
 border-bottom: 1px solid #b2bec3; 
-
+padding-bottom: 10px;
 }
 
 
@@ -115,7 +115,7 @@ height:100px;
 .carreser{
     display:inline-block; 
     width:300px;
-    height:200px; 
+    height:250px; 
     border-top: 1px solid #dfe6e9; 
     border-bottom: 1px solid #dfe6e9; 
     margin-top: 10px;

@@ -14,6 +14,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
 List<String> carPics=(List<String>)request.getAttribute("carpics");
 
 %>
+<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script> 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/carViewStyle.css">
 
  

@@ -25,7 +25,7 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
 			<b>대여일</b><br/><%=start %><br/><br/>
 			<b>반납일</b><br/><%=end %>
 		</div>
-	<div  class="carreser insurance "><br><b>보험</b><br> 가입(가격에 포함)</div>
+	<div  class="carreser insurance "><br><b>보험</b><br/> 가입(가격에 포함)</div>
 	<div  class="carreser info ">
     <h4><b>차량 종류:</b> <%=carinfos[0] %></h4>
             <br>
