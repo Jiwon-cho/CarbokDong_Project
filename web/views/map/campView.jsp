@@ -257,6 +257,7 @@
       const checkLike = function(){
     	  if(<%=campDao.checkLike(userId ,camp.getNum())%>){
     		  alert("좋아요!");
+    		  window.location.reload();
     	  } else {
     		 alert("추천은 ID당 한 번만 가능합니다!"); 
     	  }
