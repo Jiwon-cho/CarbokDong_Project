@@ -6,6 +6,7 @@
 	List<Car>clist=(List<Car>)request.getAttribute("clist");
 	List<Camp>camlist=(List<Camp>)request.getAttribute("camlist");
 %>
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 
 <!DOCTYPE html>
 <html lang="en">

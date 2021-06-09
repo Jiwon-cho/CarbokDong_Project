@@ -4,7 +4,7 @@
 <%
 List<Payment> list=(List<Payment>)request.getAttribute("list");
 %>
-
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 <!DOCTYPE html>
 <html lang="en">
 <head>

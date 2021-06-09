@@ -11,6 +11,7 @@
 	List<Integer> pie=(List<Integer>)request.getAttribute("pie");
 	
 %>
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 <!DOCTYPE html>
 <html lang="en">
 

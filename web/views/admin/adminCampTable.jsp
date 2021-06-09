@@ -5,6 +5,7 @@
 
 	List<Camp>camlist=(List<Camp>)request.getAttribute("camlist");
 %>
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 <!DOCTYPE html>
 <html lang="en">
 <head>

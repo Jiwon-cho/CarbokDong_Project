@@ -6,6 +6,7 @@
 	List<Car>clist=(List<Car>)request.getAttribute("clist");
 
 %>
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 <!DOCTYPE html>
 <html lang="en">
 <head>

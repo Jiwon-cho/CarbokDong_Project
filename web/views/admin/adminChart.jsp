@@ -4,6 +4,7 @@
 <%
 	Member m=(Member)request.getAttribute("member");
 %>     
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 <!DOCTYPE html>
 <html lang="en">
 
