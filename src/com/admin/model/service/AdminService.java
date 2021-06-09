@@ -29,6 +29,21 @@ public class AdminService {
 		
 	}
 	
+	
+	public int selectPayment(String pn) {
+		Connection conn=getConnection();
+		int carNB=dao.selectPayment(conn,pn);
+		close(conn);
+		return carNB;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	public int updateCancel(String pn) {
 		Connection conn=getConnection();
 		int result=dao.updateCancel(conn,pn);
