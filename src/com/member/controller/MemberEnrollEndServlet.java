@@ -57,7 +57,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		int result=new MemberService().insertMember(m);
 
-		int a=new MemberService().insertEnroll();
+		Date d=new Date();
+		int a=new MemberService().insertEnroll(d);
 		
 		
 		//클라이언트에게 보여준 페이지 선택!

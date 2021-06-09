@@ -6,6 +6,7 @@ import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 import com.borad.model.vo.Board;
@@ -38,9 +39,9 @@ public class MemberService {
 	
 	
 	
-	public int insertEnroll() {
+	public int insertEnroll(Date d) {
 		Connection conn=getConnection();
-		int result=dao.insertEnroll(conn);
+		int result=dao.insertEnroll(conn,d);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

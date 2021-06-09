@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -82,11 +83,13 @@ public class MemberDao {
 	}
 	
 	
-	public int insertEnroll(Connection conn) {
+	public int insertEnroll(Connection conn, Date d) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertEnroll"));
+			 java.sql.Date sqlDate = new java.sql.Date(d.getTime());
+			pstmt.setDate(1, sqlDate);
 			result=pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

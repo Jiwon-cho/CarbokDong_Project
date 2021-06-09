@@ -546,7 +546,31 @@
 	
 	
 	/*꺾은선 그래프  */
-
+	function number_format(number, decimals, dec_point, thousands_sep) {
+	  // *     example: number_format(1234.56, 2, ',', ' ');
+	  // *     return: '1 234,56'
+	  number = (number + '').replace(',', '').replace(' ', '');
+	  var n = !isFinite(+number) ? 0 : +number,
+	    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+	    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+	    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+	    s = '',
+	    toFixedFix = function(n, prec) {
+	      var k = Math.pow(10, prec);
+	      return '' + Math.round(n * k) / k;
+	    };
+	 
+	  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+	  if (s[0].length > 3) {
+	    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+	  }
+	  if ((s[1] || '').length < prec) {
+	    s[1] = s[1] || '';
+	    s[1] += new Array(prec - s[1].length + 1).join('0');
+	  }
+	  return s.join(dec);
+	}
+	
 	  
 	    
 	    var days=[];
@@ -584,12 +608,16 @@
 	val.push(<%=a%>);
 	<%}%>
 	
+	var total=0;
+	
 	for(var i=0;i<7;i++){
 	        if(val[i]===undefined){
 	            val.push(0);
 	        }
+	        total+=val[i];
 	    };
-	
+		
+	    console.log(total);
 	
 	const labels = [
 		  days[0]
@@ -616,7 +644,7 @@
 			      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
 			      pointHitRadius: 10,
 			      pointBorderWidth: 2,
-			    data: [val[0], val[1] , val[2] , val[3] , val[4] , val[5] , val[6]],
+			    data: [val[0], val[1] , val[2] , val[3] , val[4] , val[5] , val[6], total],
 			  }]
 			};
 	
@@ -650,6 +678,9 @@
 				        ticks: {
 				          maxTicksLimit: 5,
 				          padding: 10,
+				          callback: function(value, index, values) {
+					            return number_format(value);
+				          }
 				      
 				        },
 				        gridLines: {
@@ -678,10 +709,15 @@
 				      intersect: false,
 				      mode: 'index',
 				      caretPadding: 10,
-				 
+				      callbacks: {
+					        label: function(tooltipItem, chart) {
+					          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+					          return datasetLabel +  number_format(tooltipItem.yLabel);
+					        }
 				    }
 				  }
-			};
+			}
+	};
 	
 	var myChart = new Chart(
 		    document.getElementById('myAreaChart'),
