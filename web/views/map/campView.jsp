@@ -62,7 +62,7 @@
       <div class="head">
         <div class="title"><%= camp.getName() %>
 			<div class="like">
-            	<div class="heart">💗</div>
+            	<div class="heart">👍</div>
             	<%= campDao.getLike(camp.getNum()) %>
           </div>        
         </div>
