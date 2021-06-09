@@ -82,14 +82,14 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-      <!--        
-            <!-- Nav Item - Charts -->
+        <!--     <li class="nav-item">
+             
+            <!-- Nav Item - Charts
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -546,18 +546,36 @@
 	
 	
 	/*꺾은선 그래프  */
-	 var dt2=new Date('<%=gdate.get(0)%>'); 
-	    var ddt2=(dt2.getMonth()+1)+'.'+dt2.getDate();
+
+	  
 	    
 	    var days=[];
-	    days.push(ddt2);
+	    <%for(int k=0;k<gdate.size();k++){
+	    
+			 Date d=gdate.get(k);
+	    
+
+		%>
+		 var dt2=new Date('<%=d%>'); 
+		 var ddt2=(dt2.getMonth()+1)+'.'+dt2.getDate();
+		days.push(ddt2);
+		<%}%>
+	    
+		for(var i=0;i<7;i++){
+	        if(days[i]===undefined){
+	            days.push('.');
+	        }
+	    };
+	    
+	    
+	<%--   
 		for(var i=1;i<7;i++){
 	        var dt=new Date('<%=gdate.get(0)%>'); 
 	       var ddt= new Date(dt.setDate(dt.getDate()+i))
 	       var dddt=(ddt.getMonth()+1)+'.'+ddt.getDate();  
 		days.push(dddt);
 		};
-		
+		 --%>
 		
 	var val=[];
 	<%for(int j=0;j<gcount.size();j++){

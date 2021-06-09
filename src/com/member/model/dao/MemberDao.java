@@ -81,6 +81,29 @@ public class MemberDao {
 		}return result;
 	}
 	
+	
+	public int insertEnroll(Connection conn) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertEnroll"));
+			result=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	public Member selectMemberId(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

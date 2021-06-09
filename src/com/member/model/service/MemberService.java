@@ -35,6 +35,24 @@ public class MemberService {
 		return result;
 	}
 	
+	
+	
+	
+	public int insertEnroll() {
+		Connection conn=getConnection();
+		int result=dao.insertEnroll(conn);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
 	public Member selectMemberId(String userId) {
 		Connection conn=getConnection();
 		Member m=dao.selectMemberId(conn,userId);

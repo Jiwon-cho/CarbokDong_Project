@@ -130,7 +130,7 @@ public class AdminDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				
-				list.put(rs.getDate("enrolldate"),rs.getInt("total"));
+				list.put(rs.getDate("ENROLL_DATE"),rs.getInt("total"));
 			}
 			
 			

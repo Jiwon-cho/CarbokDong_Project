@@ -40,7 +40,7 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
 </div>
 <div class="box2">
    
-    <div class="warn carbook "><div class="reslabel"><h2>자차공통 사항</h2></div>
+    <div class="warn_carbook "><div class="reslabel"><h2>자차공통 사항</h2></div>
 
 <br><br>차량손해면책제도 가입 여부와 관계없이 미적용 경우 <br>
 <div class="warnContent">
@@ -60,7 +60,7 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
 <span class="noti">6.생선비린내/구토/실내 악취 발생시 클리닝 비용 10만원이 부과 됩니다.</span><br>
 <span class="noti">※ 손해면책제도보험 및 특약보험은 1회 소멸성입니다.(사고발생 즉시 본사로 연락을 주셔야 보험처리 가능합니다.)</span></div>
 </div>
-    <div class="carbook pplinfo">
+    <div class="carbook_pplinfo">
      <div class=" pplinfo-1"><div class="reslabel"><h2>예약 정보</h2></div>
      <br/>
      <div class="user_info">
@@ -87,7 +87,7 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
      
      
     
-    <div class="carbook money"><div class="reslabel"><h2>총 비용</h2></div>
+    <div class="carbook_money"><div class="reslabel"><h2>총 비용</h2></div>
       
      <div >
       <h1><%=money %></h1>

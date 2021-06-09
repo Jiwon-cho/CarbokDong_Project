@@ -79,14 +79,14 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-      <!--        
-            <!-- Nav Item - Charts -->
+      <!--       <li class="nav-item">
+             
+            <!-- Nav Item - Charts
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -486,9 +486,9 @@ $(".cancel-very").click((e)=>{
         		rmsg=msg;
         	}
         	
-        	
+        	console.log(data.rc);
         	if(data.rc=='Y'){
-    			vall[9].innerHTML='환불 완료';
+    			vall[10].innerHTML='환불 완료';
     		}
         	alert(rmsg);
    

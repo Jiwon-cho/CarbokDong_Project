@@ -43,24 +43,20 @@ resize:none;
 color:red;
 }
 
-.warn{
-height:400px;
-}
 
 
 body{
 }
 
 
-.carbook{
-    display:inline-block; 
+.warn_carbook{
+    display:block; 
     width:700px;
     margin-left: 50px;
-    margin-top: 10px;
 
 }
 
-.pplinfo{
+.carbook_pplinfo{
     height:350px;
 
 }
@@ -95,9 +91,9 @@ body{
 	
 }
 
-.money{
+.carbook_money{
 height:100px;
-
+margin-top:20px;
 
 }
 
@@ -155,9 +151,9 @@ height:100px;
 	}
 
 	.box2{
-    	display: inline-block;
+    	display: block;
 		width: 800px;
-		height: 1000px;
+		height: 1200px;
 		margin-left: 120px;
 		position:relative;
 	}

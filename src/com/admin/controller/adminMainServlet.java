@@ -51,8 +51,12 @@ public class adminMainServlet extends HttpServlet {
 			gcount.add(graphmember.get(d));
 		}
 		
+		System.out.println(gdate);
+		System.out.println(gcount);
+		
+		
 		List<Integer> pie=new AdminService().carPercentage();
-		System.out.println(pie);
+	
 		
 		request.setAttribute("qcount", qCount);
 		request.setAttribute("pie", pie);
