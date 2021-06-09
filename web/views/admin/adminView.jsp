@@ -73,16 +73,16 @@
                 Managing
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+       <!--      Nav Item - Pages Collapse Menu
             <li class="nav-item">
-      <!--        
-            <!-- Nav Item - Charts -->
+             
+            <!-- Nav Item - Charts
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
-
+ -->
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/adminTableServlet">

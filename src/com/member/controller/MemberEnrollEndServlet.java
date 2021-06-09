@@ -1,6 +1,7 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,6 +56,9 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		Member m=new Member(userId,userName,email,address,nikname,gender,memberType,password);
 		
 		int result=new MemberService().insertMember(m);
+
+		int a=new MemberService().insertEnroll();
+		
 		
 		//클라이언트에게 보여준 페이지 선택!
 		String msg="";
