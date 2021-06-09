@@ -20,9 +20,7 @@
   function naverSignInCallback() {
 	const email=naver_id_login.getProfileData('email');
     const nickname=naver_id_login.getProfileData('nickname');
-    const name=naver_id_login.getProfileData('name');
-    const gender=naver_id_login.getProfileData('gender'); //F:여 M:남 U:확인불가
-    location.assign("<%=request.getContextPath()%>/naverLogin?email="+email+"&nickname="+nickname+"&name="+name+"&gender="+gender);
+    location.assign("<%=request.getContextPath()%>/naverLogin?email="+email+"&nickname="+nickname);
     opener.parent.location.replace("<%=request.getContextPath()%>/");
   }
 </script>

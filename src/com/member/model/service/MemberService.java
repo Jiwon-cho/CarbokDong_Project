@@ -258,9 +258,9 @@ public class MemberService {
 		return n;
 	}
 	
-	public int insertNaverMemver(String email,String nickname,String Gender,String Name) {
+	public int insertNaverMemver(String email,String nickname) {
 		Connection conn=getConnection();
-		int result=dao.insertNaverMemver(conn,email,nickname,Gender,Name);
+		int result=dao.insertNaverMemver(conn,email,nickname);
 		close(conn);
 		return result;
 	}
