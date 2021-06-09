@@ -80,19 +80,23 @@ div#pageBar span.cPage {
 	
 			<%if(p.getStartDate().after(today)) {%>
 			<td style="color:gold;"> 출고 대기중	</td>
-			 <%}else if(p.getStartDate().before(today)||p.getStartDate().equals(today)&&!(p.getEndDate().after(today))){%>
+			 <%}else if((p.getStartDate().before(today)||p.getStartDate().equals(today))&&p.getEndDate().after(today)){%>
 			<td style="color:blue;"> 대여중	</td>
 			<%}else if(p.getEndDate().after(today)&&!(rc.equals("Y"))){ %>
 			<td style="color:red;"> 반납 확인중	</td>
-			<%}else if(p.getEndDate().after(today)&&rc.equals("Y")){ %>	
+			<%}else if(p.getEndDate().before(today)&&rc.equals("Y")){ %>	
 			<td style="color:green;"> 반납 완료	</td>
 			<%} %>
+			<%if(p.getStartDate().after(today)){ %>
 			<%if(cc.equals("D")){ %>
 			<td><input class="cancel-very" type="button" value="신청"></td>
 			<%}else if(cc.equals("N")) {%>
 			<td>취소 심사 중</td>
 			<%}else{ %>
 			<td style="color:lightgreen;">취소 됨</td>
+			<%} %>
+			<%}else{ %>
+			<td>X</td>
 			<%} %>
 		</tr>
 		<%} 
