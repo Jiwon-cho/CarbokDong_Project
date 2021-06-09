@@ -4,6 +4,7 @@
 <%
 	Member loginMember=(Member)session.getAttribute("loginMember");
 %>
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 
 <!DOCTYPE html>
 <html>
