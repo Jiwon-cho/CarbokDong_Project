@@ -5,8 +5,7 @@ Member m = (Member) request.getAttribute("member");
 %>
 <%@ include file="/views/common/header.jsp"%>
 <center>
-	<form action="<%=request.getContextPath()%>/memberUpdate"
-		method="post" id="memberFrm" onsubmit="return fn_invalidate();">
+	<form action="<%=request.getContextPath()%>/memberUpdate" method="post" id="memberFrm" onsubmit="return fn_invalidate();">
 		<table width="800">
 			<tr height="40">
 
@@ -66,8 +65,8 @@ Member m = (Member) request.getAttribute("member");
 				<td><input name="email1" type="text" class="box" id="email1"
 					size="15" value="<%=m.getEmail().split("@")[0]%>"> @ <input
 					name="email2" type="text" class="box" id="email2" size="15"
-					value="<%=m.getEmail().split("@")[1]%>"> <input
-					type="button" value="이메일 중복확인" onclick="fn_duplicateEmail();">
+					value="<%=m.getEmail().split("@")[1]%>"> 
+					<input type="button" value="이메일 중복확인" onclick="fn_duplicateEmail();">
 					<input type="button" value="인증번호 발송" onclick="fn_email();">
 					<input type="hidden" name="email1_" id="email1_" value="<%=m.getEmail().split("@")[0]%>">
 					<input type="hidden" name="email2_" id="email2_" value="<%=m.getEmail().split("@")[1]%>">
@@ -102,14 +101,20 @@ Member m = (Member) request.getAttribute("member");
 					type="button" value="탈퇴" onclick="fn_deleteMember();" /></td>
 			</tr>
 		</table>
-	</form>
+	</form> 
 	<form name="duplicateFrm" action="" method="post">
-		<input type="hidden" name="userId"> <input type="hidden"
-			name="nickName"> <input type="hidden" id="checkEmail"
-			value="0"> <input type="hidden" id="emailresult" value="0">
+		<input type="hidden" id="emailresult" value="0"> 
+		<input type="hidden" name="userId"> 
+		<input type="hidden" name="email"> 
+		<input type="hidden" name="nickName"> 
+		<input type="hidden" id="checknickName" value="0"> 
+		<input type="hidden" id="checkId" value="0"> 
+		<input type="hidden" id="checkEmail" value="0"> 
+		<input type="hidden" id="checkpwd" value="0"> 
+		<input type="hidden" id="checkdriver" value="0">
+		<input type="hidden" name="checkaddress" value="0">
 	</form>
 </center>
-</form>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src='https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js'></script>
 <script>
@@ -118,9 +123,8 @@ Member m = (Member) request.getAttribute("member");
 		const email2=$("#email2").val();
 		const email1_=$("#email1_").val();
 		const email2_=$("#email2_").val();
-		const checkdriver=$("#checkdriver").val();
+		const checkEmail=$("#checkEmail").val();
 		const emailresult=$("#emailresult").val();
-		
 		if(email1 == email1_ && email2 == email2_){
 		}else{
 			if(checkEmail==0){
@@ -132,32 +136,51 @@ Member m = (Member) request.getAttribute("member");
 				alert("변경된 이메일을 인증 해주세요");
 				return false;
 			}
+		
 		}
 	}
 	const fn_email=()=>{
 		const email1=$("#email1").val();
 		const email2=$("#email2").val();
-		const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+		const email1_=$("#email1_").val();
+		const email2_=$("#email2_").val();
+		const checkEmail=$("#checkEmail").val();
 		const email=email1+"@"+email2;
-		if(!reg_email.test(email)) {     
-	    	 alert("이메일형식이 올바르지 않습니다.");
-	    	 
-	     }                            
-	     else {                       
+		if(email1 == email1_ && email2 == email2_){
+			alert("기존 이메일 입니다");
+		}else if(checkEmail==0){
+			alert("이메일 중복확인을 해주세요")
+		}else {                       
 	    	 open("<%=request.getContextPath()%>/member/email?email1="+email1+"&email2="+email2,"email"
 	 				,"left=200px,top=200px,width=450px,height=400px");     
 	     }  
 	}
 	const fn_duplicateEmail=()=>{
-		const status="width=300px,height=200px,left=500px,top=500px";
-		const title="duplicateEmail";
-		const url="<%=request.getContextPath()%>/checkDuplicateEmail";
-		open("",title,status);
-		console.log(duplicateFrm);
-		duplicateFrm.email.value=$("#email1").val()+"@"+$("#email2").val();
-		duplicateFrm.target=title;
-		duplicateFrm.action=url;
-		duplicateFrm.submit();
+		const email1=$("#email1").val();
+		const email2=$("#email2").val();
+		const email1_=$("#email1_").val();
+		const email2_=$("#email2_").val();
+		if(email1 == email1_ && email2 == email2_){
+			alert("기존 이메일 입니다");
+		}else{
+			const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			const email=email1+"@"+email2;
+			if(!reg_email.test(email)) {     
+		    	 alert("이메일형식이 올바르지 않습니다.");
+		    	 
+		     } else{
+				const status="width=300px,height=200px,left=500px,top=500px";
+				const title="duplicateEmail";
+				const url="<%=request.getContextPath()%>/checkDuplicateEmail";
+				open("",title,status);
+				console.log(duplicateFrm);
+				duplicateFrm.email.value=email1+"@"+email2;
+				duplicateFrm.target=title;
+				duplicateFrm.action=url;
+				duplicateFrm.submit();
+		     }
+		}
+		
 	}
 	const fn_updatePassword=()=>{
 		open("<%=request.getContextPath()%>/member/updatePassword?userId=<%=m.getUserId()%>","updatePassword"
