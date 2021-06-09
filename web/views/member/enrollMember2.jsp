@@ -145,7 +145,6 @@
 <script>
 
 	const fn_email=()=>{
-		const code_check=$("#code_check").val();
 		const email1=$("#email1").val();
 		const email2=$("#email2").val();
 		const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
@@ -155,7 +154,7 @@
 	    	 
 	     }                            
 	     else {                       
-	    	 open("<%=request.getContextPath()%>/member/email?email1="+email1+"&email2="+email2+"&code_check="+code_check,"email"
+	    	 open("<%=request.getContextPath()%>/member/email?email1="+email1+"&email2="+email2,"email"
 	 				,"left=200px,top=200px,width=450px,height=400px");     
 	     }  
 	}
