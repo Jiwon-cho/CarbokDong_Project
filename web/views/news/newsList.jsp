@@ -66,7 +66,7 @@ margin-top:30px;
 .news-container {
     display: inline-block;
     width: 761PX;
-    height: 162PX;
+    height: 170PX;
     margin-left: 570PX;
     margin-right: 570PX;
     border-top: 1px solid gray;
@@ -74,8 +74,9 @@ margin-top:30px;
   .header-container {
     display: inline-block;
     vertical-align: middle;
+    height: 100%;
     width: 533px;
-float:right;
+	float:right;
   }
   .image-right-container {
     display: inline-block;
@@ -93,7 +94,6 @@ float:right;
   }
 
   .footer-date {
-    margin-top:30px;
   }
   .title {
     font-size: 18px;
