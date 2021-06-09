@@ -141,6 +141,7 @@
 	</form>
 </center>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src='https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js'></script>
 <script>
 
 	const fn_email=()=>{
