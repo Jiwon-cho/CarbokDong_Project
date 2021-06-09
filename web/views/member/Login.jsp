@@ -104,7 +104,6 @@ button, input, select, td, textarea, th {
 .inp_text input {
 	display: block;
 	width: 100%;
-	height: 100%;
 	font-size: 13px;
 	color: #000;
 	border: none;

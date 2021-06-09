@@ -14,7 +14,9 @@
 <form action="<%=request.getContextPath()%>/member/QnAInsert" method="post">
 <table class="Qnotice" border="1" cellspacing="0" summary="QnA게시판리스트">
 		<tr><td class="title2"><p style="font-size: 35px;">Q&A</p></td></tr>
+		<%if(loginMember!=null) {%>
 		<tr><td class="title3" colspan="5"><input type="submit" style="width: 100px;height: 30px" value="글쓰기"></td></tr>
+		<%}else{ }%>
         <colgroup>
         <col width="80">
         <col>
