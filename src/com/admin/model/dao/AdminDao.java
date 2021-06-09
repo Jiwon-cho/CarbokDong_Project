@@ -92,6 +92,22 @@ public class AdminDao {
 	}
 	
 	
+	public int updateRefund(Connection conn, String pn) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateRefund"));
+			pstmt.setString(1, pn);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

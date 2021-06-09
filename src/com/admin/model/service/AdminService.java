@@ -48,6 +48,23 @@ public class AdminService {
 	}
 	
 	
+	public int updateRefund (String pn) {
+		Connection conn=getConnection();
+		int result=dao.updateRefund(conn,pn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
