@@ -5,6 +5,8 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.common.AESEncrypt;
+import com.news.controller.NewsScheduler;
+
 
 /**
  * Application Lifecycle Listener implementation class AESEncryptListener
@@ -33,6 +35,10 @@ public class AESEncryptListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
     	new AESEncrypt();
+		/*
+		 * try { new NewsScheduler().scheduler(); }catch(Exception e) {
+		 * e.printStackTrace(); }
+		 */
     }
 	
 }

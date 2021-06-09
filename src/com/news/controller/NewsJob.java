@@ -1,9 +1,14 @@
 package com.news.controller;
+import static com.common.JDBCTemplate.getConnection;
+
+import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Properties;
+import static com.common.JDBCTemplate.close;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,6 +20,21 @@ import com.news.model.vo.News;
 
 
 public class NewsJob implements Job  {
+private Properties prop=new Properties();
+	
+
+	private NewsJob() {
+		String path=NewsJob.class.getResource("/sql/news_sql.properties").getPath();
+	
+		try {
+			prop.load(new FileReader(path));
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	public void execute(JobExecutionContext context) {
 		String url=null;
 		int idx=0;
@@ -42,11 +62,24 @@ public class NewsJob implements Job  {
 	}
 	
 	PreparedStatement pstmt=null;
+	Connection conn=getConnection();
 	
 	try {
+		pstmt=conn.prepareStatement(prop.getProperty("insertNews"));
+		for(News n:list) {
+			pstmt.setInt(1,n.getNewsNo());
+			pstmt.setString(2, n.getNewsTitle());
+			pstmt.setString(3, n.getImgUrl());
+			pstmt.setString(4, n.getNewsPrev());
+			pstmt.setString(5,n.getNewsDate());
+			pstmt.setString(6, n.getNewsUrl());
+			pstmt.executeUpdate();
+		}
 		
 	}catch(Exception e) {
 	e.printStackTrace();	
+	}finally {
+		close(pstmt);
 	}
 	
 		
