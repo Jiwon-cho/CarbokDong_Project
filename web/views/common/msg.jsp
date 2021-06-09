@@ -13,6 +13,9 @@
 </head>
 <body>
 	<script>
+		if(<%=request.getAttribute("emailresult")!=null%>){
+			opener.document.getElementById("emailresult").value=1
+		}
 		alert('<%=msg%>');
 		<%=request.getAttribute("script")!=null?request.getAttribute("script"):""%>;
 		location.replace('<%=request.getContextPath()%><%=loc%>');

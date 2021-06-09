@@ -3,6 +3,7 @@
 <%@ include file="/views/common/header.jsp" %>
 <form method="POST" action = "<%=request.getContextPath()%>/member/QnAInsertEnd" enctype="multipart/form-data">
 <input type="hidden" name="writer" value="<%=loginMember.getUserId()%>">
+<input type="hidden" name="nickname" value="<%=loginMember.getNikname()%>">
         <table style="padding-top:50px" align="center" width="800" cellpadding="2">
             <tr>
             <th height="20" align="center" bgcolor="#ccc"><font color="white">QnA글쓰기</font></th>

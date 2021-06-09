@@ -154,10 +154,12 @@ button, input, select, td, textarea, th {
 		}
     </script>
 <script type="text/javascript">
-	  	var naver_id_login = new naver_id_login("uESYdXxeCHDQJ1wuF95U", "http://localhost:9090/KH-SEMI-Carbokdong/views/member/Callback.jsp");
+	  	//var naver_id_login = new naver_id_login("uESYdXxeCHDQJ1wuF95U", "http://localhost:9090/KH-SEMI-Carbokdong/views/member/Callback.jsp");
+	  	var naver_id_login = new naver_id_login("uESYdXxeCHDQJ1wuF95U", "https://rclass.iptime.org/21PM_Carbokdong/views/member/Callback.jsp");
 	  	var state = naver_id_login.getUniqState();
 	  	naver_id_login.setButton("white", 2,40);
-	  	naver_id_login.setDomain("http://localhost:9090/KH-SEMI-Carbokdong/Login");
+	  	//naver_id_login.setDomain("http://localhost:9090/KH-SEMI-Carbokdong/Login");
+	  	naver_id_login.setDomain("https://rclass.iptime.org/21PM_Carbokdong/Login");
 	  	naver_id_login.setState(state);
 	  	naver_id_login.setPopup();
 	  	naver_id_login.init_naver_id_login();

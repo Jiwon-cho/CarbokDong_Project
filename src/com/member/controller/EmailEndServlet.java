@@ -1,23 +1,25 @@
 package com.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginPageServlet
+ * Servlet implementation class EmailEndServlet
  */
-@WebServlet("/loginPage")
-public class LoginPageServlet extends HttpServlet {
+@WebServlet("/member/emailEnd")
+public class EmailEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginPageServlet() {
+    public EmailEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,11 +29,27 @@ public class LoginPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String referer = request.getHeader("REFERER")!=null&&!(request.getHeader("REFERER").equals("http://localhost:9090"+request.getContextPath()+"/loginPage"))&&!(request.getHeader("REFERER").equals("http://localhost:9090"+request.getContextPath()+"/map/CampView"))? request.getHeader("REFERER") : request.getContextPath();
+		int random=Integer.parseInt(request.getParameter("random"));
+		int result=Integer.parseInt(request.getParameter("code"));
+		String msg="";
+		String loc="";
+		if(random==result) {
+			HttpSession session=request.getSession(false);
+	    	if(session!=null) {
+	    		session.invalidate();
+	    	}
+			msg="이메일 인증성공!";
+			loc="/";
+			request.setAttribute("script","window.close();");
+			request.setAttribute("emailresult", "Y");
+		}else {
+			msg="이메일 인증실패!";
+			loc="/views/member/email.jsp";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
-		
-		request.setAttribute("referer", referer);
-		request.getRequestDispatcher("/views/member/Login.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

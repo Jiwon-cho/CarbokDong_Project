@@ -592,6 +592,7 @@ public class MemberDao {
 			pstmt.setString(5, q.getFileOriginalName());
 			pstmt.setString(6, q.getFileReName());
 			pstmt.setString(7, q.getQapublic());
+			pstmt.setString(8, q.getNickName());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
