@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>카복동</title>
-
+	<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 	<link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
