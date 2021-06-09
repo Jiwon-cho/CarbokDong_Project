@@ -165,11 +165,14 @@ public class adminRefundServlet extends HttpServlet {
 	  JSONObject jj2 = (JSONObject) ob2;
 		System.out.println(jj2 );
 	
-	
-		int a=new AdminService().updateRefund(pm_no);
-		String rc=new AdminService().cancelCheck(pm_no);
+		AdminService ac=new AdminService();
+		int a=ac.updateRefund(pm_no);
+		String rc=ac.cancelCheck(pm_no);
+		int carNB=ac.selectPayment(pm_no);
+		int x=ac.addCar(carNB);
+		
 		jj2.put("rc", rc);
-	
+	System.out.println(jj2);
 	
 	
 	

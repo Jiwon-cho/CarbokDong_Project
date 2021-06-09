@@ -478,8 +478,8 @@ $(".cancel-very").click((e)=>{
         	pm_no:fa
         },
         success:data=>{
-        	const msg=data.message;
-        	const rmsg;
+        	var msg=data.message;
+        	var rmsg;
         	if(msg==null){
         		rmsg="결제가 취소되었습니다."
         	}else{
@@ -487,10 +487,10 @@ $(".cancel-very").click((e)=>{
         	}
         	
         	
-        	alert(rmsg);
         	if(data.rc=='Y'){
-    			val[9].innerHTML='환불 완료';
+    			vall[9].innerHTML='환불 완료';
     		}
+        	alert(rmsg);
    
         }
         });

@@ -186,6 +186,35 @@ public class AdminDao {
 	
 	
 	
+	public int selectPayment(Connection conn, String pn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectPayment"));
+			pstmt.setString(1, pn);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt("product_nb");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
