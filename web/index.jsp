@@ -216,7 +216,7 @@ function showSlides(n) {
         <!-- Full-width images with number and caption text -->
         <div class="mySlides fade" >
           <div class="numbertext"></div>
-          <img src="<%=request.getContextPath() %>/images/캠핑 메인1.jpg" style="width:100%"> -->
+          <img src="<%=request.getContextPath() %>/images/캠핑 메인1.jpg" style="width:100%">
           <div class="text">CAR BOKDONG</div>
         </div>
   
@@ -231,7 +231,7 @@ function showSlides(n) {
           <img src="<%=request.getContextPath() %>/images/캠핑메인3.jpg" style="width:100%">
           <div class="text">CAR BOKDONG</div>
         </div>
-  
+    
         <div class="mySlides fade">
           <div class="numbertext">4 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인4.jpg" style="width:100%">
