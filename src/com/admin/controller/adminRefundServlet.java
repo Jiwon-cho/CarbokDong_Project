@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.admin.model.service.AdminService;
+
 /**
  * Servlet implementation class adminRefundServlet
  */
@@ -39,9 +41,14 @@ public class adminRefundServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpURLConnection conn=null;
-		String access_token=null;
+		//String access_token=null;
 		JSONParser parser = new JSONParser();
 		Object ob =null;
+		Object ob2 =null;
+		String pm_no=request.getParameter("pm_no");
+		System.out.println(pm_no);
+		
+		
 	try {	
 		URL url=new URL("https://api.iamport.kr/users/getToken");
 		conn=(HttpURLConnection)url.openConnection();
@@ -91,10 +98,87 @@ public class adminRefundServlet extends HttpServlet {
     }catch(Exception e){
     	e.printStackTrace();
     }
+	
+	
 
 	JSONObject jj = (JSONObject) ob;
+	System.out.println(jj+"sss" );
+	JSONObject rs=new JSONObject();
+	rs=(JSONObject)jj.get("response");
+	String access_token=(String)rs.get("access_token");
+	System.out.println(rs.get("access_token"));
 	
-	 response.getWriter().print(jj);
+	System.out.println("=====여기는 환불 로직=====");
+	
+	
+	
+	
+
+	
+	  try { 
+		  URL url=new URL("https://api.iamport.kr/payments/cancel");
+	  
+	  conn=(HttpURLConnection)url.openConnection(); conn.setRequestMethod("POST");
+	  
+	  conn.setRequestProperty("Content-Type", "application/json");
+	  conn.setRequestProperty("Authorization", access_token);
+	conn.setDoOutput(true);
+	  
+	JSONObject obj=new JSONObject();
+	
+	obj.put("imp_uid",pm_no);
+	
+	BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+	
+	bw.write(obj.toString());
+	bw.flush();
+	bw.close();
+	
+	int result=0;
+	int responseCode=conn.getResponseCode();
+	System.out.println(responseCode);
+	if(responseCode ==200) {
+		BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		StringBuilder sb=new StringBuilder();
+		String line=null;
+		while((line=br.readLine())!=null) {
+			
+			sb.append(line+"\n");
+		}
+		
+		br.close();
+		System.out.println(sb);
+		System.out.println(sb.getClass().getName());
+		System.out.println(sb.toString().getClass().getName());
+	System.out.println(""+sb.toString());
+	
+	ob2=parser.parse(sb.toString());
+	
+	}
+	
+	
+	  }catch (MalformedURLException e) { e.printStackTrace(); } catch (IOException
+	  e) { e.printStackTrace(); }catch(Exception e){ e.printStackTrace(); }
+	 
+	
+	
+	  JSONObject jj2 = (JSONObject) ob2;
+		System.out.println(jj2 );
+	
+	
+		int a=new AdminService().updateRefund(pm_no);
+		String rc=new AdminService().cancelCheck(pm_no);
+		jj2.put("rc", rc);
+	
+	
+	
+	
+	
+	
+	
+	
+	 
+	response.getWriter().print(jj2); 
 	
 	
 	}

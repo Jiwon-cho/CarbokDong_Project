@@ -388,11 +388,14 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                               반납 완료 </td>
                                               <%} %>
                                                <td >
-                                               <%if(cc.equals("N")){ %> 
+                                               <%if(cc.equals("D")){ %> 
+                                               X
+                                               <%}else if(cc.equals("N")){ %>
                                               <input class="cancel-very" type="button" value="결제 취소">
-                                               <%}else{ %>
-                                              결제 취소 완료</td>
+                                              <%}else if(cc.equals("Y")){ %>
+                                              환불 완료 
                                               <%} %>
+                                             </td>
                                         </tr>
                                      <%} %> 
                                     </tbody>                                
@@ -464,36 +467,31 @@ $(".cancel-very").click((e)=>{
     
     
     var fa=vall[0].innerHTML;
+    console.log(typeof fa);
 
 	$.ajax({
         url: "<%=request.getContextPath()%>/admin/refund",
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         dataType: "json",
+        data:{
+        	pm_no:fa
+        },
         success:data=>{
-        	alert("실험중");
-        	token=data.response.access_token;
+        	const msg=data.message;
+        	const rmsg;
+        	if(msg==null){
+        		rmsg="결제가 취소되었습니다."
+        	}else{
+        		rmsg=msg;
+        	}
         	
-        	$.ajax({
-        		url:"https://api.iamport.kr/payments/cancel",
-        	    async : true, 
-        		 crossOrigin : true,
-                method: "post",
-                headers: {
-                  Content_Type: "application/json",
-                  Authorization: token
-             
-                  },
-                  data:{
-                	  imp_uid:fa 
-                  },
-                  success:data=>{
-                	  alert("환불끝");
-                  }
-        		
-        		
-        		
-        	});
+        	
+        	alert(rmsg);
+        	if(data.rc=='Y'){
+    			val[9].innerHTML='환불 완료';
+    		}
+   
         }
         });
 	

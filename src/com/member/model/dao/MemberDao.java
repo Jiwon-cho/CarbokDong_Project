@@ -592,6 +592,7 @@ public class MemberDao {
 			pstmt.setString(5, q.getFileOriginalName());
 			pstmt.setString(6, q.getFileReName());
 			pstmt.setString(7, q.getQapublic());
+			pstmt.setString(8, q.getNickName());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -709,15 +710,13 @@ public class MemberDao {
 		return n;
 	}
 	
-	public int insertNaverMemver(Connection conn,String email, String nickname,String GENDER, String name) {
+	public int insertNaverMemver(Connection conn,String email, String nickname) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertNaverMemver"));
 			pstmt.setString(1, email);
 			pstmt.setString(2, nickname);
-			pstmt.setString(3, GENDER);
-			pstmt.setString(4, name);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
