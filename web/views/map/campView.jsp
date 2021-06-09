@@ -269,6 +269,7 @@
     		  checkLike();
     	  } else {
     		  alert('로그인을 해주세요!')
+    		  location.assign('<%=request.getContextPath()%>/loginPage');
     	  }
       })
       
