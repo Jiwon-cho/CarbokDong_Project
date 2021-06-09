@@ -289,3 +289,20 @@
         height: 100%;
         width: 100%;
       }
+      
+      .aojiBtn{
+      	background-color: black;
+        border: none;
+        color: red;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "BenchNine", Arial, sans-serif;
+        font-size: 11px;
+        line-height: 1em;
+        margin: 10px 20px;
+        outline: none;
+        padding: 6px 20px 5px;
+        position: relative;
+        text-transform: uppercase;
+        font-weight: 700;
+      }

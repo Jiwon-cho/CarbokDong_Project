@@ -114,8 +114,8 @@
 			<tr class="" height="30">
 				<td></td>
 				<td width="15%">운전면허</td>
-				<td><input type="number" name="driver" id="driver2" size="30" />
-					<input type="button" value="확인" onclick="driverBtn();"></td>
+				<td><input type="text" name="driver" id="driver2" size="30" />
+					<input type="button" value="확인" onclick="driverBtn();"><p>'-'빼고 입력하세요</p></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
@@ -147,13 +147,10 @@
 	const fn_email=()=>{
 		const email1=$("#email1").val();
 		const email2=$("#email2").val();
-		const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-		const email=email1+"@"+email2;
-		if(!reg_email.test(email)) {     
-	    	 alert("이메일형식이 올바르지 않습니다.");
-	    	 
-	     }                            
-	     else {                       
+		const checkEmail=$("#checkEmail").val();
+		if(checkEmail==0){
+			alert("이메일 중복확인을 해주세요");
+		} else {                       
 	    	 open("<%=request.getContextPath()%>/member/email?email1="+email1+"&email2="+email2,"email"
 	 				,"left=200px,top=200px,width=450px,height=400px");     
 	     }  
@@ -171,8 +168,10 @@
 		const nikName=$("#nikName").val();
 		const checknickName=$("#checknickName").val();
 		const checkaddress=$("#sample4_postcode").val();
+		const checkEmail=$("#checkEmail").val();
 		const checkdriver=$("#checkdriver").val();
 		const emailresult=$("#emailresult").val();
+		const no=/^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))-[1-4][0-9]{6}$/;
 		
 		if(userId.trim()==""){
 			alert("아이디를 입력해주세요");
@@ -214,7 +213,10 @@
 			$("#userNo2").focus();
 			return false;
 		}
-		
+		if(!no.test(userNo1.trim()+"-"+userNo2.trim())) {     
+	    	 alert("주민등록형식이 올바르지 않습니다.");
+	    	 return false;
+	     } 
 		if(nikName.trim()==""){
 			alert("닉네임을 입력해주세요");
 			$("#nikName").focus();
@@ -262,14 +264,16 @@
 	}
 	const driverBtn=()=>{
 		const driver=$("#driver2").val();
-		if(driver.trim().length>12 || driver.trim().length<12){
-			alert("12숫자를 제대로 입력하세요");
+		const drivercheck=/^(\d{2}\d{2}\d{6}\d{2})$/;
+		
+		if(!drivercheck.test(driver.trim())){
+			alert("운전면허 번호 12숫자를 제대로 입력하세요");
 			$("#driver2").focus();
 			$("#checkdriver").val("0");
 		}else{
 			alert("확인되셨습니다!");
 			$("#checkdriver").val("1");
-		}
+		} 
 	}
 	const fn_pwcheck=()=>{
 		const pw=$("#password_").val();
@@ -283,6 +287,14 @@
 		}
 	}
 	const fn_duplicateEmail=()=>{
+		const email1=$("#email1").val();
+		const email2=$("#email2").val();
+		const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+		const email=email1+"@"+email2;
+		if(!reg_email.test(email)) {     
+	    	 alert("이메일형식이 올바르지 않습니다.");
+	    	 
+	     } else{
 		const status="width=300px,height=200px,left=500px,top=500px";
 		const title="duplicateEmail";
 		const url="<%=request.getContextPath()%>/checkDuplicateEmail";
@@ -292,17 +304,21 @@
 		duplicateFrm.target=title;
 		duplicateFrm.action=url;
 		duplicateFrm.submit();
+	     }
 	}
 	const fn_duplicateId=()=>{
-		const status="width=300px,height=200px,left=500px,top=500px";
-		const title="duplicateId";
-		const url="<%=request.getContextPath()%>/checkDuplicateId";
-		open("",title,status);
-		console.log(duplicateFrm);
-		duplicateFrm.userId.value=$("#userId_").val();
-		duplicateFrm.target=title;
-		duplicateFrm.action=url;
-		duplicateFrm.submit();
+		const fn_duplicateId=()=>{
+			const status="width=300px,height=200px,left=500px,top=500px";
+			const title="duplicateId";
+			const url="<%=request.getContextPath()%>/checkDuplicateId";
+			open("",title,status);
+			console.log(duplicateFrm);
+			duplicateFrm.userId.value=$("#userId_").val();
+			duplicateFrm.target=title;
+			duplicateFrm.action=url;
+			duplicateFrm.submit();
+		}
+		
 	}
     function sample4_execDaumPostcode() {
         new daum.Postcode({

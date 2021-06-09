@@ -46,14 +46,14 @@ public class MemberUpdateServlet extends HttpServlet {
 				+ "/" + request.getParameter("sample4_roadAddress") + "/" + request.getParameter("address")));
 
 		int result = new MemberService().updateMember(m);
-
 		String msg = "";
 		String loc = "";
 		if (result > 0) {
+			Member m1 = new MemberService().selectMemberId(request.getParameter("userId"));
 			msg = "회원수정성공";
 			loc = "/";
 			HttpSession session = request.getSession(false);
-			session.setAttribute("loginMember", m);
+			session.setAttribute("loginMember", m1);
 		} else {
 			msg = "회원수정실패";
 			loc = "/member/memberView?userId=" + m.getUserId();

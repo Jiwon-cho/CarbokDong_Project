@@ -36,7 +36,7 @@ public class EmailEndServlet extends HttpServlet {
 		if(random==result) {
 			HttpSession session=request.getSession(false);
 	    	if(session!=null) {
-	    		session.invalidate();
+	    		session.removeAttribute("random");
 	    	}
 			msg="이메일 인증성공!";
 			loc="/";

@@ -61,7 +61,13 @@
         		</form>
         	</div>
         	<%} %> 
-        	
+        	<div>
+        		<div class="camp_name">지상낙원아오지</div> <br/>
+        		<div class="camp_location">1박당 요금 : -1000</div> <br/>
+        		<div class="camp_location">함경북도 경흥군 아오지읍 탄광체험장</div> <br/>
+        		<button class="aojiBtn" type="submit">상세정보</button> <br/><br/>
+        		<div class="list_line"></div><br/>
+        	</div>
         </ul>
         <div id="pagination"></div>
       </div>
