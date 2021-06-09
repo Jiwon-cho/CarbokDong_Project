@@ -4,6 +4,7 @@
 <%
 	Member loginMember=(Member)session.getAttribute("loginMember");
 %>
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,7 @@
  <header> 
      <nav id="navbar__main">
       <div id="navbar__logo">
-        <a href="<%=request.getContextPath()%>" style="text-decoration: none;"> 차박왕카복동</a>
+        <a href="<%=request.getContextPath()%>" style="text-decoration: none;"> <i class="fas fa-campground"></i>차박왕카복동</a>
       </div>
       <div id="navbar__menu">
         <li><a href="<%=request.getContextPath()%>/borad/mainBorad">커뮤니티</a></li>

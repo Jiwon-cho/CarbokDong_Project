@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>카복동</title>
-
+	<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 	<link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -29,7 +29,7 @@
  <header> 
      <nav id="navbar__main">
       <div id="navbar__logo">
-        <a href="<%=request.getContextPath()%>" style="text-decoration: none;"> 차박왕카복동</a>
+        <a href="<%=request.getContextPath()%>" style="text-decoration: none;"> <i class="fas fa-campground"></i>차박왕카복동</a>
       </div>
       <div id="navbar__menu">
         <li><a href="<%=request.getContextPath()%>/borad/mainBorad">커뮤니티</a></li>
