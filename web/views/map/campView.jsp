@@ -169,7 +169,7 @@
 	    	  var customOverlay = new kakao.maps.CustomOverlay({
 	    		    position : markerTest(<%=camp.getLatitude()%>, <%=camp.getLongitude()%>), 
 	    		    content : content,
-	    		    yAnchor: 3.2,
+	    		    yAnchor: 2.5,
 	    		});
 	    	  customOverlay.setMap(map);
 		</script>
