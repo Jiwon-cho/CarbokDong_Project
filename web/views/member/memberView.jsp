@@ -93,7 +93,7 @@
 				<input type="hidden" name="nickName">
 			</form>
 			</center>
-			<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+			<script src="https://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	const fn_updatePassword=()=>{
 		open("<%=request.getContextPath()%>/member/updatePassword?userId=<%=m.getUserId()%>","updatePassword"
