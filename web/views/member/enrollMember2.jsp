@@ -306,7 +306,6 @@
 		duplicateFrm.submit();
 	     }
 	}
-	const fn_duplicateId=()=>{
 		const fn_duplicateId=()=>{
 			const status="width=300px,height=200px,left=500px,top=500px";
 			const title="duplicateId";
@@ -318,8 +317,6 @@
 			duplicateFrm.action=url;
 			duplicateFrm.submit();
 		}
-		
-	}
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
