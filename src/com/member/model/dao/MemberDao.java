@@ -710,15 +710,13 @@ public class MemberDao {
 		return n;
 	}
 	
-	public int insertNaverMemver(Connection conn,String email, String nickname,String GENDER, String name) {
+	public int insertNaverMemver(Connection conn,String email, String nickname) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertNaverMemver"));
 			pstmt.setString(1, email);
 			pstmt.setString(2, nickname);
-			pstmt.setString(3, GENDER);
-			pstmt.setString(4, name);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

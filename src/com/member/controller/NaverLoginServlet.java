@@ -35,12 +35,10 @@ public class NaverLoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email=request.getParameter("email");
 		String nickname=request.getParameter("nickname");
-		String gender=request.getParameter("gender");
-		String name=request.getParameter("name");
-		Member n=new Member(email,name,"","",nickname,gender,3,"");
+		Member n=new Member(email,"","","",nickname,"",3,"");
 		Member chake=new MemberService().chakeNaver(email);
 		if(chake==null) {
-			int result=new MemberService().insertNaverMemver(email,nickname,gender,name);
+			int result=new MemberService().insertNaverMemver(email,nickname);
 		}
 		
 		HttpSession session = request.getSession();
