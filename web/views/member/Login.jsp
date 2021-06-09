@@ -26,11 +26,11 @@ String referer = (String) request.getAttribute("referer");
 						placeholder="Password">
 				</div>
 			</div>
-
 			<button type="submit" class="btn_login">로그인</button>
 			<br>
-			<div id="naver_id_login"></div>
-
+			<center>
+			<div id="naver_id_login" ></div>
+			</center>
 		</form>
 		<form>
 			<input type="button" class="btn_serch" value="아이디찾기"
@@ -45,7 +45,7 @@ String referer = (String) request.getAttribute("referer");
 </div>
 <style>
 .btn_serch {
-	margin: 15px 1px 0;
+	margin: 10px 1px 0;
 	width: 48%;
 	height: 40px;
 	border-radius: 3px;
@@ -114,7 +114,7 @@ button, input, select, td, textarea, th {
 }
 
 .btn_login {
-	margin: 15px 0 0;
+	margin: 15px 0 15px;
 	width: 100%;
 	height: 40px;
 	border-radius: 3px;
@@ -157,7 +157,7 @@ button, input, select, td, textarea, th {
 	  	//var naver_id_login = new naver_id_login("uESYdXxeCHDQJ1wuF95U", "http://localhost:9090/KH-SEMI-Carbokdong/views/member/Callback.jsp");
 	  	var naver_id_login = new naver_id_login("uESYdXxeCHDQJ1wuF95U", "https://rclass.iptime.org/21PM_Carbokdong/views/member/Callback.jsp");
 	  	var state = naver_id_login.getUniqState();
-	  	naver_id_login.setButton("white", 2,40);
+	  	naver_id_login.setButton("green", 3,40);
 	  	//naver_id_login.setDomain("http://localhost:9090/KH-SEMI-Carbokdong/Login");
 	  	naver_id_login.setDomain("https://rclass.iptime.org/21PM_Carbokdong/Login");
 	  	naver_id_login.setState(state);
