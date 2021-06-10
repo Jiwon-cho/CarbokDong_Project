@@ -253,10 +253,10 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid" >
-					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+					<h1 class="h3 mb-2 text-gray-800">Camp Table</h1>
+             <!--        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
                     <button onclick="fn_insertCamp();" style="position: relative; left: 1390px; bottom: 15px;">캠핑장 추가</button>        
                     <button onclick="fn_deleteCamp();" style="position: relative; left: 1400px; bottom: 15px;">캠핑장 삭제</button>
                                                 <!-- DataTales Example -->

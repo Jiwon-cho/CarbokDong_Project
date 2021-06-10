@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ page import="java.util.List,com.car.model.vo.Car" %>
@@ -256,10 +257,8 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid" >
-					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+					<h1 class="h3 mb-2 text-gray-800">Car Table</h1>
+                  
                     <button onclick="fn_insertCar();" style="position: relative; left: 1390px; bottom: 15px;">차량 추가</button>        
                     <button onclick="fn_deleteCar();" style="position: relative; left: 1400px; bottom: 15px;">차량 삭제</button>
                                                 <!-- DataTales Example -->

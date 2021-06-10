@@ -12,25 +12,36 @@ import org.quartz.impl.StdSchedulerFactory;
 
 public class NewsScheduler {
 	
-	public void scheduler() throws SchedulerException {
-SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+	public void scheduler() 	{/*throws SchedulerExceptio*/ 
+
+/*SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+Scheduler scheduler=null;
         
         try {
-            Scheduler scheduler = schedulerFactory.getScheduler();
+        	scheduler  = schedulerFactory.getScheduler();
             
             JobDetail job = newJob(NewsJob.class).build();
             
             Trigger trigger = newTrigger()
-                .withIdentity("trggerName", Scheduler.DEFAULT_GROUP)
-                .withSchedule(cronSchedule("* 47 * * * ?"))
+                .withIdentity("triggerName", Scheduler.DEFAULT_GROUP)
+                .withSchedule(cronSchedule("1 * * * * ?"))
                 .build();
                         
             scheduler.start();
             scheduler.scheduleJob(job, trigger);
         } catch(Exception e) {
             e.printStackTrace();
+            if(scheduler !=null) {
+            	try {
+            		scheduler.shutdown(false);
+            	}catch(SchedulerException e1) {
+            		e1.printStackTrace();
+            	}
+            	
+            }
+            scheduler=null;
         }        
-    }
+    }*/
 }
-
+}
 

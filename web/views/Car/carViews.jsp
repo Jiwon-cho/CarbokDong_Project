@@ -103,35 +103,130 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
 
     function cl(){
     $("td").click((e)=>{
+    	var s=$("#start").val();
+    	var ed=$("#end").val();
+    	console.log(typeof s);
+    	//들어갈 선택될 문자열
+    	console.log($(e.tartget).text());
         var dt=String(today.getFullYear())+"-"+  String((today.getMonth() + 1))+"-"+ $(e.target).text();
+        console.log(dt);
+        //선택하는 날짜
         var ddt=new Date(dt);
-        var det;
-        if($("#end").val!=null){
+
+        
+        //시작날짜
+        var sdt=new Date($("#start").val());
+        //반납 날짜
+        var det=new Date($("#end").val());
+        //오늘 날짜
+        var d=new Date();
+        console.log(d);
+       /*  var det;
+        if($("#end").val()!=null){
+        	
         det=new Date($("#end").val());
-        }else{
-            det=today;
+        } 
+         */
+       /*  var sdt=new Date($("#start").val());
+        console.log(det); */
+        
+      /*   
+		var yyyyMMdd = dt;
+	    var sYear = yyyyMMdd.substring(0,4);
+	    var sMonth = yyyyMMdd.substring(5,6);
+		console.log(sMonth)
+	    var sDate = yyyyMMdd.substring(7,9); */
+		
+	   // var ssdt=new Date(Number(sYear), Number(sMonth)-1, Number(sDate));
+	    
+		var diff=Math.abs(ddt-d);
+		var days=diff/(1000*3600*24);
+        
+        
+        /* if(days>=7){
+        	  alert("카복동 프리미엄 서비스로 인하여, 대여일은 오늘로부터 7일 안까지만 선택하실 수 있습니다.");	
+              $('#start').val("");
+      		$('#end').val("");
+        } */
+        
+        
+        
+        
+        
+        
+        
+        if(ddt<d){
+        	alert("당일 예약은 오후 3시까지 가능하며,이전 날짜는 선택하실 수 없습니다.");
+        	console.log(ddt);
+        }else if(s===""||(s===""&&ddt>det)){
+        	if(days>=7){
+          	  alert("카복동 프리미엄 서비스로 인하여, 대여일은 오늘로부터 7일 안까지만 선택하실 수 있습니다.");	
+                $('#start').val("");
+        		$('#end').val("");
+          }else{
+        	$("#start").val(dt);
+        	$("#end").val("");
+          }
+        }else if(ddt>sdt){
+        	  $("#end").val(dt);
+        }else if(ddt<sdt&&ddt>=d){
+        	$("#start").val(dt);
+        	 $("#end").val("");
         }
-        if($("#start").val()==""||ddt>=det){
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+/*         if($("#start").val()==""&&(ddt>det||$("#end").val()==""){
 
         $("#start").val(dt);
         $("#end").val("");
         
-    }else if(ddt<today||ddt<new Date($("#start").val())){
+    }else if(ddt<det){
+    	 $("#start").val(dt);
+         $("#end").val(det);
+    }
+        else if(ddt<d||ddt<sdt){
         alert("안돼!");
+        console.log(d);
+        console.log( $("#end").val())
+        
     }
     else{
         $("#end").val(dt);
         
-    }
-})}
+    } */
+ })}
     
     function page_move(url) {
-    	if(<%=id%>!==null){	
+		var dt=$('#start').val();
+		var dt2=$('#end').val();
+		var ddd=new Date();
+		
+		var yyyyMMdd = dt;
+	    var sYear = yyyyMMdd.substring(0,4);
+	    var sMonth = yyyyMMdd.substring(5,6);
+		console.log(sMonth)
+	    var sDate = yyyyMMdd.substring(7,9);
+		
+	    var sdt=new Date(Number(sYear), Number(sMonth)-1, Number(sDate));
+	    
+		var diff=Math.abs(sdt-ddd);
+		var days=diff/(1000*3600*24);
+		
+		console.log(sdt);
+		
+    	if(<%=id%>!==null&&dt!=""&&dt2!=""&&days<7){	
         var form = document.createElement("form");
         var parm = new Array();
         var input = new Array();
-		var dt=$('#start').val();
-		var dt2=$('#end').val();
 		var gear=$('#gear-select').val();
         
         form.action = url;
@@ -153,10 +248,20 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
             form.appendChild(input[i]);
         }
         document.body.appendChild(form);
-        form.submit();}else{
+        form.submit();}else if(<%=id%>==null){
         	alert("로그인을 하고 이용해 주십시오");	
-     	   location.assign("<%=request.getContextPath()%>/loginPage");
-     }
+      	   location.assign("<%=request.getContextPath()%>/loginPage");
+      }
+    	/* else if(days>=7){
+        alert("카복동 프리미엄 서비스로 인하여, 대여일은 오늘로부터 7일 안까지만 선택하실 수 있습니다.");	
+        $('#start').val("");
+		$('#end').val("");
+        } */
+    	else if(dt==""||dt2==""){
+        	alert("날짜를 정하셔야 합니다.");
+        	
+        }
+    	
     }
   <%--    function carPV(){
     
@@ -275,7 +380,9 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
     <span>반납일 - </span>
     <input class="dateInput" type="text" id="end" name="trip-end"
     value="">
-    
+    <br>
+    <br>
+    <span><h6>*카복동 프리미엄 정책으로 인해 대여일은 당일 기준 <span style="color:red;">7일</span> 안의 날짜만 가능합니다.*</h6></span>
           <div class="book_options">
             <select name="gear" id="gear-select">
               <option value="">--- 추가 캠핑용품 ---</option>

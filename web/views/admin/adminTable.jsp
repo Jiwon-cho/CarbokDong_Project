@@ -255,10 +255,8 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid" >
-					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+					<h1 class="h3 mb-2 text-gray-800">Member Table</h1>
+              
                   <button onclick="fn_deleteMember();" style="position: relative; left: 1500px; bottom: 15px;">회원 삭제</button>
                                                 <!-- DataTales Example -->
                     <div class="card shadow mb-4" >
