@@ -160,7 +160,7 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
         	console.log(ddt);
         }else if(s===""||(s===""&&ddt>det)){
         	if(days>=7){
-          	  alert("카복동 프리미엄 서비스로 인하여, 대여일은 오늘로부터 7일 안까지만 선택하실 수 있습니다.");	
+          	  alert("카복동 프리미엄 서비스로 인하여, 대여일은 당일로부터 일주일안의 날짜로만 선택하실 수 있습니다.");	
                 $('#start').val("");
         		$('#end').val("");
           }else{
@@ -435,11 +435,19 @@ List<String> carPics=(List<String>)request.getAttribute("carpics");
 							<span class="txt_de" style="font-size: 20px; ">&emsp;<%=r.getReviewContents() %></span>
 						</strong>
 						<div style="display: inline-block; float: right; position: relative; bottom: 20px;" >
+						<%if(r.getFileName()!=null){ %>
           					  <img
              					     src="<%=request.getContextPath() %>/upload/car/<%=r.getFileName() %>"
               						alt=""
               						style="width: 80px;height: 70px; float: right;"
             							/>
+            			<%}else{ %>
+            			<img
+             					     src="<%=request.getContextPath() %>/images/noimage.gif"
+              						alt=""
+              						style="width: 80px;height: 70px; float: right;"
+            							/>
+            							<%} %>
           				</div>
 					</div>
 				</li>

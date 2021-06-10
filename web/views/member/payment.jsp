@@ -77,12 +77,15 @@ div#pageBar span.cPage {
 			<td><%=p.getStartDate() %> ~ <%=p.getEndDate() %></td>
 			<td><%=p.getPrice() %></td>
 			<td><%=p.getProductNm() %></td>
-	
-			<%if(p.getStartDate().after(today)) {%>
+			
+			
+			<%if(cc.equals("Y")){ %>
+			<td style="color:lightgreen;">취소 됨</td>
+			<%}else if(p.getStartDate().after(today)) {%>
 			<td style="color:gold;"> 출고 대기중	</td>
 			 <%}else if((p.getStartDate().before(today)||p.getStartDate().equals(today))&&p.getEndDate().after(today)){%>
 			<td style="color:blue;"> 대여중	</td>
-			<%}else if(p.getEndDate().after(today)&&!(rc.equals("Y"))){ %>
+			<%}else if(p.getEndDate().before(today)&&!(rc.equals("Y"))){ %>
 			<td style="color:red;"> 반납 확인중	</td>
 			<%}else if(p.getEndDate().before(today)&&rc.equals("Y")){ %>	
 			<td style="color:green;"> 반납 완료	</td>
