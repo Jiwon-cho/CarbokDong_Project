@@ -5,7 +5,7 @@
 List<Reply>list=(List<Reply>)request.getAttribute("list");
 	Board b=(Board)request.getAttribute("b");
 	int replycount=(int)request.getAttribute("replycount");
-	Files f=(Files)request.getAttribute("f");
+	List<Files> f=(List<Files>)request.getAttribute("f");
 
 %>    
     
@@ -14,10 +14,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/BoardView.css">
 <style>
 	#btn-insert{
-		width:50px; height:60px; color:#fff; background:#ff5656; 
+		width:50px; height:50px; color:#fff; background:#ff5656; 
    	 	font-size: 13px;
    	 	position: relative;
-   	 	top:-27px;
+   	 	top:-21px;
    	 	}
 
 </style>
@@ -49,7 +49,10 @@ List<Reply>list=(List<Reply>)request.getAttribute("list");
 	</div>
 	<div class="view_info">
 		<%if(f!=null){ %>
-		<img src="<%=request.getContextPath() %>/upload/board/<%=f.getFileNm() %>" width="600" height="400" >
+			<%for(Files a:f){ %>
+		<img src="<%=request.getContextPath() %>/upload/board/<%=a.getFileNm() %>" width="500" height="300" >
+		<br>
+			<%} %>
 		<%}else{ %>
 		<%} %>
 		<div id="article" style="font-size: 20px;"><%=b.getBoardContents()%></div>

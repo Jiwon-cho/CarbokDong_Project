@@ -4,25 +4,19 @@
 <%@ include file="/views/common/header.jsp" %>
 <%
 Car c=(Car)request.getAttribute("car");
-String[] carinfos=c.getCarInfo().split("|");
+String[] carinfos=c.getCarInfo().split("/");
 String id=null;
 if(loginMember!=null){
 	 id="'"+loginMember.getUserId()+"'";
 	 
 }
 List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
-
+List<String> carPics=(List<String>)request.getAttribute("carpics");
 
 %>
-<style>
-    table
-    {
-        border:1px solid #BDBDBD;
-        text-align:center;
-        width:320px;
-        height:300px;
-    }
-</style>
+<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/carViewStyle.css">
+
  
 <script language="javascript">
     var today = new Date(); // 오늘 날짜
@@ -109,35 +103,130 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
 
     function cl(){
     $("td").click((e)=>{
+    	var s=$("#start").val();
+    	var ed=$("#end").val();
+    	console.log(typeof s);
+    	//들어갈 선택될 문자열
+    	console.log($(e.tartget).text());
         var dt=String(today.getFullYear())+"-"+  String((today.getMonth() + 1))+"-"+ $(e.target).text();
+        console.log(dt);
+        //선택하는 날짜
         var ddt=new Date(dt);
-        var det;
-        if($("#end").val!=null){
+
+        
+        //시작날짜
+        var sdt=new Date($("#start").val());
+        //반납 날짜
+        var det=new Date($("#end").val());
+        //오늘 날짜
+        var d=new Date();
+        console.log(d);
+       /*  var det;
+        if($("#end").val()!=null){
+        	
         det=new Date($("#end").val());
-        }else{
-            det=today;
+        } 
+         */
+       /*  var sdt=new Date($("#start").val());
+        console.log(det); */
+        
+      /*   
+		var yyyyMMdd = dt;
+	    var sYear = yyyyMMdd.substring(0,4);
+	    var sMonth = yyyyMMdd.substring(5,6);
+		console.log(sMonth)
+	    var sDate = yyyyMMdd.substring(7,9); */
+		
+	   // var ssdt=new Date(Number(sYear), Number(sMonth)-1, Number(sDate));
+	    
+		var diff=Math.abs(ddt-d);
+		var days=diff/(1000*3600*24);
+        
+        
+        /* if(days>=7){
+        	  alert("카복동 프리미엄 서비스로 인하여, 대여일은 오늘로부터 7일 안까지만 선택하실 수 있습니다.");	
+              $('#start').val("");
+      		$('#end').val("");
+        } */
+        
+        
+        
+        
+        
+        
+        
+        if(ddt<d){
+        	alert("당일 예약은 오후 3시까지 가능하며,이전 날짜는 선택하실 수 없습니다.");
+        	console.log(ddt);
+        }else if(s===""||(s===""&&ddt>det)){
+        	if(days>=7){
+          	  alert("카복동 프리미엄 서비스로 인하여, 대여일은 당일로부터 일주일안의 날짜로만 선택하실 수 있습니다.");	
+                $('#start').val("");
+        		$('#end').val("");
+          }else{
+        	$("#start").val(dt);
+        	$("#end").val("");
+          }
+        }else if(ddt>sdt){
+        	  $("#end").val(dt);
+        }else if(ddt<sdt&&ddt>=d){
+        	$("#start").val(dt);
+        	 $("#end").val("");
         }
-        if($("#start").val()==""||ddt>=det){
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+/*         if($("#start").val()==""&&(ddt>det||$("#end").val()==""){
 
         $("#start").val(dt);
         $("#end").val("");
         
-    }else if(ddt<today||ddt<new Date($("#start").val())){
+    }else if(ddt<det){
+    	 $("#start").val(dt);
+         $("#end").val(det);
+    }
+        else if(ddt<d||ddt<sdt){
         alert("안돼!");
+        console.log(d);
+        console.log( $("#end").val())
+        
     }
     else{
         $("#end").val(dt);
         
-    }
-})}
+    } */
+ })}
     
     function page_move(url) {
-    	if(<%=id%>!==null){	
+		var dt=$('#start').val();
+		var dt2=$('#end').val();
+		var ddd=new Date();
+		
+		var yyyyMMdd = dt;
+	    var sYear = yyyyMMdd.substring(0,4);
+	    var sMonth = yyyyMMdd.substring(5,6);
+		console.log(sMonth)
+	    var sDate = yyyyMMdd.substring(7,9);
+		
+	    var sdt=new Date(Number(sYear), Number(sMonth)-1, Number(sDate));
+	    
+		var diff=Math.abs(sdt-ddd);
+		var days=diff/(1000*3600*24);
+		
+		console.log(sdt);
+		
+    	if(<%=id%>!==null&&dt!=""&&dt2!=""&&days<7){	
         var form = document.createElement("form");
         var parm = new Array();
         var input = new Array();
-		var dt=$('#start').val();
-		var dt2=$('#end').val();
 		var gear=$('#gear-select').val();
         
         form.action = url;
@@ -148,6 +237,7 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
 		parm.push( ['start',dt]);
 		parm.push( ['end',dt2]);
 		parm.push( ['gear',gear]);
+		parm.push( ['id',<%=id%>]);
 
 
         for (var i = 0; i < parm.length; i++) {
@@ -158,10 +248,20 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
             form.appendChild(input[i]);
         }
         document.body.appendChild(form);
-        form.submit();}else{
+        form.submit();}else if(<%=id%>==null){
         	alert("로그인을 하고 이용해 주십시오");	
-     	   location.assign("<%=request.getContextPath()%>/loginPage");
-     }
+      	   location.assign("<%=request.getContextPath()%>/loginPage");
+      }
+    	/* else if(days>=7){
+        alert("카복동 프리미엄 서비스로 인하여, 대여일은 오늘로부터 7일 안까지만 선택하실 수 있습니다.");	
+        $('#start').val("");
+		$('#end').val("");
+        } */
+    	else if(dt==""||dt2==""){
+        	alert("날짜를 정하셔야 합니다.");
+        	
+        }
+    	
     }
   <%--    function carPV(){
     
@@ -224,12 +324,6 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
     	} 
     }
     
-    
-    
-    
-    
-    
-    
 </script>
  
 <body onload="build();">
@@ -237,20 +331,30 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
       <div class="book">
         <div class="book_img">
           <img
-            src="https://auto.nate.com/news/photo/old/data/old_img/1804/6547f90d897e2144b85c467f2429ccdb_WGR6Eh1cdlUWlj.jpg"
+            src="<%=request.getContextPath() %>/images/car/<%=carPics.get(carPics.size()-1) %>"
             alt="car"
             class="img_file"
           />
         </div>
         <div class="book_option">
           <div class="book_subject">
+          <div class="book_subject_main">
             <h1><%=c.getCarModel() %></h1>
-            
-            <h3 style="text-align: right">재고 : <%=c.getCarPsb() %>대</h3>
-            <h2><%=c.getCarInfo() %></h2>
-            <br>
-            <%=c.getPrice() %>
-          </div>
+           </div>
+              <div class="book_content">
+            	<h3 style="text-align: right">재고 : <%=c.getCarPsb() %>대</h3>
+            	<p>차량 종류 : <%=carinfos[0] %></p>
+            	<br/>
+            	<p>연료 : <%=carinfos[1] %></p>
+            	<br/>
+            	<p>차량 연식 : <%=carinfos[2] %></p>
+            	<br/>
+            	<p>대여 자격 : <%=carinfos[3] %>, <%=carinfos[4] %></p>
+            	<br/>
+            	<p>대여 비용 : 1일-<%=c.getPrice() %> 원</p>
+            	<br/>
+            </div>
+         </div>
            <div style="height:320px;">
     <table align="center" id="calendar">
         <tr>
@@ -269,30 +373,25 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
         </tr>
     </table>
 </div>
-
-<div >
-
-    <input type="text" id="start" name="trip-start"
+	<span>대여일 - </span>
+    <input class="dateInput" type="text" id="start" name="trip-start"
     value="">
-    
-    <input type="text" id="end" name="trip-end"
+    <br/><br/>
+    <span>반납일 - </span>
+    <input class="dateInput" type="text" id="end" name="trip-end"
     value="">
-    
-</div>
+    <br>
+    <br>
+    <span><h6>*카복동 프리미엄 정책으로 인해 대여일은 당일 기준 <span style="color:red;">7일</span> 안의 날짜만 가능합니다.*</h6></span>
           <div class="book_options">
-           <!--  <select name="gear" id="gear-select">
-              <option value="">--- 차량 대여일자 ---</option>
-              <option value="rental_date">2021-05-05</option>
-            </select> -->
             <select name="gear" id="gear-select">
               <option value="">--- 추가 캠핑용품 ---</option>
               <option value="grill" >바베큐 그릴</option>
             </select>
             <br />
             
-            <button class="basket_btn" onclick="goto_cart();">장바구니 담기</button>
+            	<button class="basket_btn" onclick="goto_cart();">장바구니 담기</button>
   
-     <!--        <button class="buy_btn" onclick="carPV();">구매하기</button>  -->
                  <button class="buy_btn" onclick="page_move('<%=request.getContextPath()%>/car/carPurchaseView?carNB=<%=c.getCarNB()%>');">구매하기</button> 
        
             </form>
@@ -300,17 +399,22 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
         </div>
       </div>
       <div class="item">
+     <%for(int i=0;i<carPics.size()-1;i++){ %>
+     
+      <div class="item-img" height:810px;"> 
         <img
-          src="http://m.roadtripcamping.co.kr/web/upload/NNEditor/20191202/mobile/5dd3fff18576c74c2b6ec9d830c4d7de_1575282422.jpg"
+          src="<%=request.getContextPath() %>/images/car/<%=carPics.get(i) %>"
           alt=""
           class="item_img"
         />
+        </div>
+        <%} %>
       </div>
+      <div class="review">
       <%for(Reviews r:rlist) {%>
-      <hr>
       <ul class="level1" >
 				<li>
-					<div class="reply_div">
+					<div class="review_content">
  						<span>
  						<%if(r.getRating()==1){ %>
  						⭐
@@ -331,17 +435,25 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
 							<span class="txt_de" style="font-size: 20px; ">&emsp;<%=r.getReviewContents() %></span>
 						</strong>
 						<div style="display: inline-block; float: right; position: relative; bottom: 20px;" >
+						<%if(r.getFileName()!=null){ %>
           					  <img
              					     src="<%=request.getContextPath() %>/upload/car/<%=r.getFileName() %>"
               						alt=""
               						style="width: 80px;height: 70px; float: right;"
             							/>
-          					</div>
+            			<%}else{ %>
+            			<img
+             					     src="<%=request.getContextPath() %>/images/noimage.gif"
+              						alt=""
+              						style="width: 80px;height: 70px; float: right;"
+            							/>
+            							<%} %>
+          				</div>
 					</div>
 				</li>
 			</ul>
-			<hr>
 			<%} %>
+	</div>
 			<br><br>
 			<div class="comment-editor" >
 			<form action="<%=request.getContextPath() %>/car/insertReview" method="post" enctype="multipart/form-data">			
@@ -355,143 +467,20 @@ List<Reviews>rlist=(List<Reviews>)request.getAttribute("rlist");
 						<option value="5">5점</option>
 					</select>
 				</span>
-					<input type="file" name="filename" accept="image/*" onchange="setThumbnail(event);">
+					
 					<div class="inner-comment">
-							<textarea name="content" rows="3" cols="120" style="resize: none;" placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
+							
+							<textarea class="comment" name="content" rows="3" cols="120"  placeholder="로그인을 하셔야 댓글에 글을 쓸수 있습니다."></textarea>
 							<input type="hidden" name="memberId" value="<%=loginMember==null?"":loginMember.getUserId()%>">
-							<input type="hidden" name="carNo" value="<%=c.getCarNB()%>">
-							<button type="submit" value="등록" id="btn-insert">등록</button>
+								<input type="hidden" name="carNo" value="<%=c.getCarNB()%>">
+								<button class="commentBtn" type="submit" value="등록" id="btn-insert">등록</button>
 					</div>
+					<input type="file" name="filename" accept="image/*" onchange="setThumbnail(event);">
+					
 				</form>
 			</div>
     </div>
   </body>
 
-  <style>
-    .header {
-      width: 100%;
-      height: 100px;
-      background-color: rgb(0, 0, 0);
-      color: white;
-      text-align: center;
-      font-size: 3em;
-    }
-
-    .content_container {
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      margin: auto;
-      width: 70vw;
-      height: auoto;
-      background-color: rgb(233, 233, 233);
-    }
-
-    .book {
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-      margin: 30px 0;
-      height: 1620px;
-      width: 100%;
-      border: 1px gray solid;
-      background-color:white;
-    }
-
-    .book_img {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      /* border: 1px gray solid; */
-      width: 45%;
-      height: 100%;
-      border: 1px rgba(202, 202, 202, 0.514) solid;
-      margin-left: 50px;
-    }
-
-    .img_file {
-      width: 100%;
-    }
-
-    .book_option {
-      margin-left: 150px;
-      margin-right: 150px;
-      border: 1px rgba(202, 202, 202, 0.514) solid;
-      text-align: center;
-      width: 50%;
-      height: 100%;
-    }
-
-    .book_subject {
-      height: 60%;
-    }
-
-    .book_options {
-      display: flex;
-      flex-direction: column;
-      width: 70%;
-      height: 35%;
-      margin: auto;
-    }
-
-    .basket_btn,
-    .buy_btn {
-      margin-bottom: 20px;
-      height: 15%;
-      cursor: pointer;
-    }
-
-    .item {
-      box-sizing: border-box;
-      text-align: center;
-      height: 1700px;
-      width: 100%;
-      margin: 50px 0;
-      border: 1px gray solid;
-    }
-
-    .item_img {
-      width: 60%;
-      height: 100%;
-    }
-
-    .review {
-      display: block;
-      flex-direction: column;
-      margin: 0;
-      width: 100%;
-      height: 700px;
-      border: 1px gray solid;
-    }
-
-    .review_content {
-      display: flex;
-      height: 120px;
-      width: 95%;
-      margin: 20px 20px;
-      border-top: 1px gray dashed;
-      border-bottom: 1px gray dashed;
-    }
-
-    .review_subject {
-      height: 100px;
-      width: 50%;
-      margin: 0 50px;
-    }
-
-    .review_img {
-      width: 30%;
-      height: 100%;
-      float: right;
-    }
-
-    select {
-      width: 100%;
-      height: 30px;
-      font-size: large;
-      text-align-last: center;
-      margin: 10px 0;
-    }
-  </style>
+  
 <%@ include file="/views/common/footer.jsp" %>	

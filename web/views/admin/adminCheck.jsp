@@ -4,7 +4,7 @@
 <%
 List<Payment> list=(List<Payment>)request.getAttribute("list");
 %>
-
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +17,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
     <meta name="author" content="">
 
     <title>카복동 관리자 페이지</title>
-	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom fonts for this template -->
     <link href="<%=request.getContextPath() %>/Resources/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -35,6 +35,11 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
    	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>	
    	<!--Alert 디자인 라이브러리 -->
    	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   	  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ajax-cross-origin.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -74,14 +79,14 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-      <!--        
-            <!-- Nav Item - Charts -->
+      <!--       <li class="nav-item">
+             
+            <!-- Nav Item - Charts
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -93,7 +98,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                 Controller
             </div>
                 <li class="nav-item">
-                   <a class="nav-link" href="<%=request.getContextPath()%>/admin/adminCheck">
+                <a class="nav-link" href="<%=request.getContextPath()%>/admin/adminCheck">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Return/Cancellation</span></a>
             </li>
@@ -111,15 +116,6 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
 
         </ul>
         <!-- End of Sidebar -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
-        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -131,25 +127,12 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </form>
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                   
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -179,14 +162,14 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                   <!--      <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
+                                Counter - Alerts
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                            Dropdown - Alerts
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -227,10 +210,17 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
-                        </li>
+                        </li> -->
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
+                        <div style="height:20px;"></div>
+                        <button type="button" class="btn btn-outline-primary" onclick="location.assign('<%=request.getContextPath()%>')">Go to Homepage</button>
+                     
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+               <%--          <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
@@ -293,35 +283,28 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
-                        </li>
+                        </li> --%>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
+                              <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
                                 <img class="img-profile rounded-circle"
                                     src="<%=request.getContextPath() %>/Resources/AdminTemplate/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/admin/adminView?userId=admin">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+                       
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="<%=request.getContextPath() %>/logout" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -333,22 +316,20 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                 </nav>
                 <!-- End of Topbar -->
 				<select id="searchType" name="searchType" onchange="location.href=this.value">
-					<option value="adminCheck" selected="selected">Return</option>
-					<option value="#">Cancellation</option>
+					<option value="adminCheck" selected="selected">Return/Cancellation</option>
+				
 			
 				</select>
 				
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid" >
-					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+					<h1 class="h3 mb-2 text-gray-800">Return/Cancellation Table</h1>
+       
                                                 <!-- DataTales Example -->
                     <div class="card shadow mb-4" >
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">차량 반납 확인 </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" >
@@ -365,6 +346,7 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                             <th>대여인 아이디</th>
                                             <th>상품 이름</th>
                                             <th>반납 확인</th>
+                                            <th>결제 취소</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -379,11 +361,14 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                             <th>대여인 아이디</th>
                                             <th>상품 이름</th>
                                                   <th>반납 확인</th>
+                                                       <th>결제 취소</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                      <%for(Payment p:list){ 
-                                     String rc=new AdminService().returnCheck(p.getPaymentsNo());%>
+                                     String rc=new AdminService().returnCheck(p.getPaymentsNo());
+                                     String cc=new AdminService().cancelCheck(p.getPaymentsNo());
+                                     %>
                                         <tr>
                                             <td><%=p.getPaymentsNo() %></td>
                                             <td><%=p.getPaymetType() %></td>
@@ -394,12 +379,21 @@ List<Payment> list=(List<Payment>)request.getAttribute("list");
                                             <td><%=p.getProductNb() %></td>
                                             <td><%=p.getMemberId() %></td>
                                             <td><%=p.getProductNm() %></td>
-                                              <td class="vy">
-                                              <%if(rc.equals("N")){ %>
+                                             <td class="vy">
+                                               <%if(rc.equals("N")){ %> 
                                               <input class="return-very" type="button" value="반납확인">
-                                              <%}else{ %>
-                                              반납 완료</td>
+                                               <%}else{ %>
+                                              반납 완료 </td>
                                               <%} %>
+                                               <td >
+                                               <%if(cc.equals("D")){ %> 
+                                               X
+                                               <%}else if(cc.equals("N")){ %>
+                                              <input class="cancel-very" type="button" value="결제 취소">
+                                              <%}else if(cc.equals("Y")){ %>
+                                              환불 완료 
+                                              <%} %>
+                                             </td>
                                         </tr>
                                      <%} %> 
                                     </tbody>                                
@@ -418,21 +412,34 @@ $(".return-very").click((e)=>{
 	let val=$(e.target).parent().parent().children();
     console.log(val);
     
-    let f=val[0].innerHTML;
+    var f=val[0].innerHTML;
     console.log(f);
+  	var a=val[9].innerHTML;
+    console.log(a);
+    
     
     var result=confirm("차가 안전히 반납되었습니까?");
     
     if(result){
-    $.ajax({
-    	url:"<%=request.getContextPath()%>/admin/returnCheck",
+<%--     	location.assign("<%=request.getContextPath()%>/admin/returnCheck?pm_no="+f)	;
+    	alert("반납이 확인되었습니다.")
+    }
+     --%>
+$.ajax({
+    	 url:"<%=request.getContextPath()%>/admin/returnCheck",
+    	 type: 'POST',
+         dataType: 'json',
     	data:{
     		pm_no:f
     	},
     	success:data=>{
-    		console.log(data);
-    		alert(data);
-    		
+    		console.log(data.msg);
+    		alert(data.msg);
+    		console.log(a);
+    		console.log(data.rc);
+    		if(data.rc=='Y'){
+    			val[9].innerHTML='반납완료';
+    		}
     		
     	}
     	
@@ -442,13 +449,66 @@ $(".return-very").click((e)=>{
     
     
     
-    }else{
+    } else{
     	alert("반납이 되지 않았습니다.");
     }
     
     
     
-})
+});
+
+
+
+$(".cancel-very").click((e)=>{
+	var token;
+	var vall=$(e.target).parent().parent().children();
+    
+    
+    var fa=vall[0].innerHTML;
+    console.log(typeof fa);
+
+	$.ajax({
+        url: "<%=request.getContextPath()%>/admin/refund",
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        data:{
+        	pm_no:fa
+        },
+        success:data=>{
+        	var msg=data.message;
+        	var rmsg;
+        	if(msg==null){
+        		rmsg="결제가 취소되었습니다."
+        	}else{
+        		rmsg=msg;
+        	}
+        	
+        	console.log(data.rc);
+        	if(data.rc=='Y'){
+    			vall[10].innerHTML='환불 완료';
+    		}
+        	alert(rmsg);
+   
+        }
+        });
+	
+	
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -460,7 +520,10 @@ $(".return-very").click((e)=>{
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; CarBok 2021</span>
+                        <address class="addr">
+            상호명:차박왕 카복동 │ 대표:KH	 │ 개인정보관리자:BS
+          </address>
+          <p class="copy">Copyright 2021-0820 by 차박왕 카복동. All rights reserved.</p>
                     </div>
                 </div>
             </footer>

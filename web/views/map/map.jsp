@@ -61,7 +61,13 @@
         		</form>
         	</div>
         	<%} %> 
-        	
+        	<div>
+        		<div class="camp_name">지상낙원아오지</div> <br/>
+        		<div class="camp_location">1박당 요금 : -1000</div> <br/>
+        		<div class="camp_location">함경북도 경흥군 아오지읍 탄광체험장</div> <br/>
+        		<button class="aojiBtn" type="submit">상세정보</button> <br/><br/>
+        		<div class="list_line"></div><br/>
+        	</div>
         </ul>
         <div id="pagination"></div>
       </div>
@@ -102,12 +108,19 @@
    		}
    		
      }
+     
+     var imageSrc = "<%=request.getContextPath() %>/images/campsite3.png", // 마커이미지의 주소입니다    
+     imageSize = new kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
+     imageOption = {offset: new kakao.maps.Point(20, 40)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+     
+     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
       // 마커 생성
       // 마커를 담을 배열
       const markers = [];
       <%for(int i=0; i<list.size(); i++){%>
     	  var marker = new kakao.maps.Marker({
-    	        position: markerTest(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)
+    	        position: markerTest(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>),
+    	        image: markerImage
     	      });
     	  marker.setClickable(true);
     	  markers.push(marker);

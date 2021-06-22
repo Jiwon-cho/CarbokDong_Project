@@ -1,14 +1,19 @@
 package com.camp.model.dao;
-
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import com.borad.model.dao.BoardDao;
 import com.camp.model.vo.Camp;
 import com.camp.model.vo.CampHotplace;
 import com.camp.model.vo.CampReserve;
 
 public class CampDao {
+	
+	private Properties prop = new Properties();
 	
 	String id = "CARBOK";
 	String pass = "CARBOK";
@@ -17,6 +22,15 @@ public class CampDao {
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
+	
+	public CampDao() {
+		String path=BoardDao.class.getResource("/sql/map_sql.properties").getPath();
+		try {
+			prop.load(new FileReader(path));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void getCon() {
 	
@@ -34,8 +48,7 @@ public class CampDao {
 			
 			try {
 				getCon();
-				String sql = "SELECT * FROM CAMPING";
-				pstmt = con.prepareStatement(sql);
+				pstmt = con.prepareStatement(prop.getProperty("selectAllCamp"));
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
 					Camp camp = new Camp();
@@ -67,8 +80,7 @@ public class CampDao {
 	    	getCon();
 	 		
 	     	try {
-	     		String sql = "SELECT * FROM CAMPING WHERE CAMPING_NM = ?";
-	     		pstmt = con.prepareStatement(sql);
+	     		pstmt = con.prepareStatement(prop.getProperty("getOneCamp"));
 	     		pstmt.setString(1, name);
 	     		rs = pstmt.executeQuery();
 	     		
@@ -98,8 +110,7 @@ public class CampDao {
 	     	try {
 	     		getCon();
 	     		
-	     		String sql = "SELECT CAMPING_PIC_NM FROM CAMPING_PIC WHERE CAMPING_NB = ?";
-	     		pstmt = con.prepareStatement(sql);
+	     		pstmt = con.prepareStatement(prop.getProperty("getCampPhoto"));
 	     		pstmt.setInt(1, num);
 	     		rs = pstmt.executeQuery();
 	     		while(rs.next()){
@@ -119,8 +130,7 @@ public class CampDao {
 	    	getCon();
 	 		
 	     	try {
-	     		String sql = "SELECT * FROM CAMPING_HOTPLACE WHERE CAMPING_NB = ?";
-	     		pstmt = con.prepareStatement(sql);
+	     		pstmt = con.prepareStatement(prop.getProperty("getHotplace"));
 	     		pstmt.setInt(1, num);
 	     		rs = pstmt.executeQuery();
 	     		
@@ -141,6 +151,80 @@ public class CampDao {
 	     	}
 			
 	     	return hot;
+	    }
+	    
+	    public boolean checkLike(String id, int num) {
+	    	boolean result = false;
+	    	String user = null;
+	    	getCon();
+	    	try {
+	     		pstmt = con.prepareStatement(prop.getProperty("checkLike"));
+	     		pstmt.setInt(1, num);
+	     		rs = pstmt.executeQuery();
+	     		while(rs.next()) {
+	     			user = rs.getString(1);
+	     		}
+	     		System.out.println("id : "+id);
+	     		System.out.println("user : "+user);
+	     		// 일치하지않아서 등록 가능하면 true 반환
+	     		if(user.equals(id)) {
+	     			result=false;
+	     		} else if(id.equals("no")){
+	     			result=false;
+	     		} else if(user.equals(null)){
+	     			result=false;
+	     		} else if(user.equals("null")){
+	     			result=false;
+	     		} else {
+	     			result=true;
+	     		}
+	     		System.out.println(result);
+	     		con.close();
+	     	}catch (Exception e){
+	     		result=true;
+	     		System.out.println(result);
+	     	} finally {
+	     		if(result) {
+	     			addLike(id, num);
+	     		}
+	     	}
+	    	return result;
+	    }
+	    
+	    public int addLike(String id, int num) {
+	    	int result = 0;
+	    	getCon();
+	    	try {
+	     		pstmt = con.prepareStatement(prop.getProperty("addLike"));
+	     		pstmt.setString(1, id);
+	     		pstmt.setInt(2, num);
+	     		rs = pstmt.executeQuery();
+	     		result=1;
+	     		System.out.println("좋아요 등록완료");
+	     		con.close();
+	     	}catch (Exception e){
+	     		e.printStackTrace();
+	     	}
+	    	return result;
+	    }
+	    
+	    public int getLike(int num) {
+	    	getCon();
+	    	int result=0;
+	 		
+	     	try {
+	     		pstmt = con.prepareStatement(prop.getProperty("getLike"));
+	     		pstmt.setInt(1, num);
+	     		rs = pstmt.executeQuery();
+	     		while(rs.next()) {
+	     			result = rs.getInt(1);
+	     		}
+	     		con.close();
+	     	}catch (Exception e){
+	     		e.printStackTrace();
+	     	}
+			System.out.println("좋아요 숫자 : "+result);
+	     	return result;
 	    }
 	    
 //	    public List<CampReserve> campReserveInfo(){

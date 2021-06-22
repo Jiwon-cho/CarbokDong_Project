@@ -11,6 +11,7 @@ public class Member {
 	private String gender;
 	private int memberType;
 	private String password;
+	private Date enrollDate;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
@@ -92,6 +93,14 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate=enrollDate;
+	}
+	
 
 	@Override
 	public String toString() {

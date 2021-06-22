@@ -6,6 +6,7 @@ import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 import com.borad.model.vo.Board;
@@ -34,6 +35,24 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	
+	
+	
+	public int insertEnroll(Date d) {
+		Connection conn=getConnection();
+		int result=dao.insertEnroll(conn,d);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
 	
 	public Member selectMemberId(String userId) {
 		Connection conn=getConnection();
@@ -230,5 +249,44 @@ public class MemberService {
 		Member m=dao.searchId(conn,name,email);
 		close(conn);
 		return m;
+	}
+	public Member searchPwd(String userId,String name, String email) {
+		Connection conn=getConnection();
+		Member m=dao.searchPwd(conn,userId,name,email);
+		close(conn);
+		return m;
+	}
+	public int searchPwdResult(String userId, String pwd) {
+		Connection conn=getConnection();
+		int result=dao.searchPwdResult(conn,userId,pwd);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public Member selectMemberEmail(String email) {
+		Connection conn=getConnection();
+		Member m=dao.selectMemberEmail(conn,email);
+		close(conn);
+		return m;
+	}
+	public Member chakeNaver(String email) {
+		Connection conn=getConnection();
+		Member n=dao.chakeNaver(conn,email);
+		close(conn);
+		return n;
+	}
+	
+	public int insertNaverMemver(String email,String nickname) {
+		Connection conn=getConnection();
+		int result=dao.insertNaverMemver(conn,email,nickname);
+		close(conn);
+		return result;
+	}
+	public List<QnA>selectQnAddList(){
+		Connection conn=getConnection();
+		List<QnA>qlist=dao.selectQnAddList(conn);
+		close(conn);
+		return qlist;
 	}
 }

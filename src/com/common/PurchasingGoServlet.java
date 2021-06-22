@@ -1,6 +1,8 @@
 package com.common;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.car.model.service.CarService;
 import com.car.model.vo.Car;
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 import com.payment.model.vo.Payment;
 
 /**
@@ -44,10 +48,21 @@ public class PurchasingGoServlet extends HttpServlet {
 		}
 		Car c=new CarService().selectCar(carNB);
 		
+		
+	
+		
+		String email=request.getParameter("email");
+		String op=request.getParameter("op");
+		
 		Payment p=new Payment();
 		p.setPrice(money);
 		p.setMemberId(start);
 		p.setPaymentsNo(end);
+		
+		request.setAttribute("email",email);
+		request.setAttribute("op", op);
+	
+	
 		request.setAttribute("car", c);
 		request.setAttribute("start", start);
 		request.setAttribute("end", end); 

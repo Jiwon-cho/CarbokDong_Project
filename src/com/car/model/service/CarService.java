@@ -26,6 +26,17 @@ public class CarService {
 		
 	}
 	
+	public List<String> selectCarPics(int carNB) {
+		Connection conn=getConnection();
+		List<String> list=dao.selectCarPics(conn,carNB);
+		close(conn);
+		return list;
+		
+		
+	}
+	
+	
+	
 	public List<Car> searchCar(String carType) {
 		Connection conn=getConnection();
 		List<Car> list=dao.searchCar(conn,carType);
@@ -34,6 +45,16 @@ public class CarService {
 		
 		
 	}
+	
+	public List<Car> searchCarTwo(String[] carTypes) {
+		Connection conn=getConnection();
+		List<Car> list=dao.searchCarTwo(conn,carTypes);
+		close(conn);
+		return list;
+		
+		
+	}
+	
 	
 	public Car selectCar(int carNB) {
 		Connection conn=getConnection();

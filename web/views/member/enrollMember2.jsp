@@ -1,23 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-
 <center>
-	<form action="<%=request.getContextPath() %>/memberEnrollEnd" method="post" name="" onsubmit="return fn_invalidate();">
+	<form action="<%=request.getContextPath()%>/memberEnrollEnd"
+		method="post" name="" onsubmit="return fn_invalidate();">
 		<table width="800">
 			<tr height="40">
 				<td align="center"><b>[회원가입]</b></td>
 			</tr>
-			
+
 		</table>
-		<table width="700" height="650" cellpadding="0" style="border-collapse: collapse;">
+		<table width="700" height="650" cellpadding="0"
+			style="border-collapse: collapse;">
 			<tr height="7">
-				<td colspan="3"><input type="hidden" id="memberType" name="memberType" value="1"><hr></td>
+				<td colspan="3"><input type="hidden" id="memberType"
+					name="memberType" value="1">
+					<hr></td>
 			</tr>
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
 				<td width="15%">회원 ID</td>
-				<td><input type="text" name="userId" id="userId_"/> <input type="button" value="중복확인" onclick="fn_duplicateId();"></td>
+				<td><input type="text" name="userId" id="userId_" /> <input
+					type="button" value="중복확인" onclick="fn_duplicateId();"></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
@@ -34,7 +38,8 @@
 				<td width="5%" align="center">*</td>
 				<td width="15%">비밀번호 확인</td>
 				<td><input type="password" name="pwdCheck" id="pwCheck" /> <input
-					type="button" value="확인" name="pwdCheckBtn" id="pwdCheckBtn" onclick="fn_pwcheck();"></td>
+					type="button" value="확인" name="pwdCheckBtn" id="pwdCheckBtn"
+					onclick="fn_pwcheck();"></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
@@ -42,7 +47,7 @@
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
 				<td width="15%">이 름</td>
-				<td><input type="text" name="userName" id="userName"/></td>
+				<td><input type="text" name="userName" id="userName" /></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
@@ -50,9 +55,9 @@
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
 				<td width="15%">주민등록번호</td>
-				<td><input name="userNo1" type="number" class="box" id="userNo1"
-					size="15"> - <input name="userNo2" type="number" class="box"
-					id="userNo2" size="20"></td>
+				<td><input name="userNo1" type="number" class="box"
+					id="userNo1" size="15"> - <input name="userNo2"
+					type="number" class="box" id="userNo2" size="20"></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
@@ -60,19 +65,23 @@
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
 				<td width="15%">닉네임</td>
-				<td><input type="text" name="nikName" id="nikName" /> 
-				<input type="button" value="중복확인" name="nikNameBtn" onclick="fn_nikNameBtn();"> </td>
+				<td><input type="text" name="nikName" id="nikName" /> <input
+					type="button" value="중복확인" name="nikNameBtn"
+					onclick="fn_nikNameBtn();"></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
 			</tr>
+
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
 				<td width="15%">이메일</td>
 				<td><input name="email1" type="text" class="box" id="email1"
 					size="15"> @ <input name="email2" type="text" class="box"
-					id="email2" size="20">
-				<!-- <input type="button" value="인증번호 받기" id="emailCheckBtn" name="emailCheckBtn"> --></td>
+					id="email2" size="20"> <input type="button"
+					value="이메일 중복확인" onclick="fn_duplicateEmail();"> <input
+					type="button" value="인증번호 발송" onclick="fn_email();"> <%-- <input type="hidden" readonly="readonly" name="code_check"
+					id="code_check" value="<%=getRandom()%>" /> --%></td>
 			</tr>
 			<!-- <tr height="7">
 				<td colspan="3"><hr></td>
@@ -89,13 +98,15 @@
 			<tr class="" height="30">
 				<td width="5%" align="center">*</td>
 				<td width="15%">주 소</td>
-				<td><input type="text" size="15" name="sample4_postcode" id="sample4_postcode"
-					placeholder="우편번호" readonly> <input type="button" value="우편번호 찾기" onclick="sample4_execDaumPostcode()"><br>
-				<br> <input type="text" size="30" name="sample4_roadAddress" id="sample4_roadAddress"
-					placeholder="도로명주소" readonly> <input type="text" size="30" name="sample4_jibunAddress" id="sample4_jibunAddress"
-					placeholder="지번주소" readonly><br>
-				<br> <input type="text" name="address" placeholder="나머지 주소" size="70">
-				</td>
+				<td><input type="text" size="15" name="sample4_postcode"
+					id="sample4_postcode" placeholder="우편번호" readonly> <input
+					type="button" value="우편번호 찾기" onclick="sample4_execDaumPostcode()"><br>
+					<br> <input type="text" size="30" name="sample4_roadAddress"
+					id="sample4_roadAddress" placeholder="도로명주소" readonly> <input
+					type="text" size="30" name="sample4_jibunAddress"
+					id="sample4_jibunAddress" placeholder="지번주소" readonly><br>
+					<br> <input type="text" name="address" placeholder="나머지 주소"
+					size="70"></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
@@ -103,33 +114,47 @@
 			<tr class="" height="30">
 				<td></td>
 				<td width="15%">운전면허</td>
-				<td><input type="number" name="driver" id="driver2" size="30" /> <input
-					type="button" value="확인" onclick="driverBtn();"></td>
+				<td><input type="text" name="driver" id="driver2" size="30" />
+					<input type="button" value="확인" onclick="driverBtn();"><p>'-'빼고 입력하세요</p></td>
 			</tr>
 			<tr height="7">
 				<td colspan="3"><hr></td>
 			</tr>
 			<tr>
-				<td colspan="3" align="center">
-					<input type="submit" value="확인">
-					<input type="reset" value="취소">
-				</td>
+				<td colspan="3" align="center"><input type="submit" value="확인">
+					<input type="reset" value="취소"></td>
 			</tr>
-			</table>
-			
-			</form>
-			<form name="duplicateFrm" action="" method="post">
-				<input type="hidden" name="userId">
-				<input type="hidden" name="nickName">
-				<input type="hidden" id="checknickName" value="0">
-				<input type="hidden" id="checkId" value="0"> 
-				<input type="hidden" id="checkpwd" value="0"> 
-				<input type="hidden" id="checkdriver" value="0">
-				<input type="hidden" name="checkaddress" value="0"> 
-			</form>
-			</center>
-			<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+		</table>
+
+	</form>
+	<form name="duplicateFrm" action="" method="post">
+		<input type="hidden" id="emailresult" value="0"> 
+		<input type="hidden" name="userId"> 
+		<input type="hidden" name="email"> 
+		<input type="hidden" name="nickName"> 
+		<input type="hidden" id="checknickName" value="0"> 
+		<input type="hidden" id="checkId" value="0"> 
+		<input type="hidden" id="checkEmail" value="0"> 
+		<input type="hidden" id="checkpwd" value="0"> 
+		<input type="hidden" id="checkdriver" value="0">
+		<input type="hidden" name="checkaddress" value="0">
+	</form>
+</center>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src='https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js'></script>
 <script>
+
+	const fn_email=()=>{
+		const email1=$("#email1").val();
+		const email2=$("#email2").val();
+		const checkEmail=$("#checkEmail").val();
+		if(checkEmail==0){
+			alert("이메일 중복확인을 해주세요");
+		} else {                       
+	    	 open("<%=request.getContextPath()%>/member/email?email1="+email1+"&email2="+email2,"email"
+	 				,"left=200px,top=200px,width=450px,height=400px");     
+	     }  
+	}
 	const fn_invalidate=()=>{
 		const userName=$("#userName").val();
 		const userNo1=$("#userNo1").val();
@@ -143,7 +168,10 @@
 		const nikName=$("#nikName").val();
 		const checknickName=$("#checknickName").val();
 		const checkaddress=$("#sample4_postcode").val();
+		const checkEmail=$("#checkEmail").val();
 		const checkdriver=$("#checkdriver").val();
+		const emailresult=$("#emailresult").val();
+		const no=/^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))-[1-4][0-9]{6}$/;
 		
 		if(userId.trim()==""){
 			alert("아이디를 입력해주세요");
@@ -185,7 +213,10 @@
 			$("#userNo2").focus();
 			return false;
 		}
-		
+		if(!no.test(userNo1.trim()+"-"+userNo2.trim())) {     
+	    	 alert("주민등록형식이 올바르지 않습니다.");
+	    	 return false;
+	     } 
 		if(nikName.trim()==""){
 			alert("닉네임을 입력해주세요");
 			$("#nikName").focus();
@@ -199,6 +230,15 @@
 		if(email1.trim()=="" || email2.trim()==""){
 			alert("이메일을 입력해주세요");
 			$("#email1").focus();
+			return false;
+		}
+		if(checkEmail==0){
+			alert("이메일 중복확인을 해주세요");
+			$("#email1").focus();
+			return false;
+		}
+		if(emailresult==0){
+			alert("이메일 인증을 해주세요");
 			return false;
 		}
 		if(checkaddress.trim()==""){
@@ -224,14 +264,16 @@
 	}
 	const driverBtn=()=>{
 		const driver=$("#driver2").val();
-		if(driver.trim().length>12 || driver.trim().length<12){
-			alert("12숫자를 제대로 입력하세요");
+		const drivercheck=/^(\d{2}\d{2}\d{6}\d{2})$/;
+		
+		if(!drivercheck.test(driver.trim())){
+			alert("운전면허 번호 12숫자를 제대로 입력하세요");
 			$("#driver2").focus();
 			$("#checkdriver").val("0");
 		}else{
 			alert("확인되셨습니다!");
 			$("#checkdriver").val("1");
-		}
+		} 
 	}
 	const fn_pwcheck=()=>{
 		const pw=$("#password_").val();
@@ -244,17 +286,37 @@
 			$("#checkpwd").val("1");
 		}
 	}
-	const fn_duplicateId=()=>{
+	const fn_duplicateEmail=()=>{
+		const email1=$("#email1").val();
+		const email2=$("#email2").val();
+		const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+		const email=email1+"@"+email2;
+		if(!reg_email.test(email)) {     
+	    	 alert("이메일형식이 올바르지 않습니다.");
+	    	 
+	     } else{
 		const status="width=300px,height=200px,left=500px,top=500px";
-		const title="duplicateId";
-		const url="<%=request.getContextPath()%>/checkDuplicateId";
+		const title="duplicateEmail";
+		const url="<%=request.getContextPath()%>/checkDuplicateEmail";
 		open("",title,status);
 		console.log(duplicateFrm);
-		duplicateFrm.userId.value=$("#userId_").val();
+		duplicateFrm.email.value=$("#email1").val()+"@"+$("#email2").val();
 		duplicateFrm.target=title;
 		duplicateFrm.action=url;
 		duplicateFrm.submit();
+	     }
 	}
+		const fn_duplicateId=()=>{
+			const status="width=300px,height=200px,left=500px,top=500px";
+			const title="duplicateId";
+			const url="<%=request.getContextPath()%>/checkDuplicateId";
+			open("",title,status);
+			console.log(duplicateFrm);
+			duplicateFrm.userId.value=$("#userId_").val();
+			duplicateFrm.target=title;
+			duplicateFrm.action=url;
+			duplicateFrm.submit();
+		}
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -304,4 +366,4 @@
         }).open();
     }
 </script>
-			<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/common/footer.jsp"%>

@@ -52,6 +52,7 @@ public class QnAInsertEndServlet extends HttpServlet {
 		q.setFileOriginalName(mr.getOriginalFileName("upfile"));
 		q.setFileReName(mr.getFilesystemName("upfile"));
 		q.setQapublic(mr.getParameter("public"));
+		q.setNickName(mr.getParameter("nickname"));
 		int result=new MemberService().insertQnA(q);
 		String msg="";
 		String loc="";

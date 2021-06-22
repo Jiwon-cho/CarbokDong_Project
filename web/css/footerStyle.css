@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+
+#footer {
+	height: 140px;
+	background: #272424e8;
+	color: #fff;
+}
+
+/* 푸터 영역1 */
+#footer .inner .addr {
+	float: left;
+	font-style: normal;
+	width: 100%;
+	padding-top: 15px
+}
+/* 푸터 영역2 */
+#footer .inner .copy {
+	float: left;
+	width: 100%;
+	padding-top: 20px;
+}
+/* 푸터 로그인, 회원가입 영역 */
+#footer .inner .social {
+	float: right;
+	margin-right: 25px;
+	margin-top: -90px;
+	list-style-type: none;
+}
+
+#footer .inner .social li {
+	float: left;
+	margin-left: 25px;
+	top: 19px;	
+}
+#footer .inner .social li a {
+	text-decoration: none;
+}
+#footer .inner .social li a img {
+	height: 38px;
+	width: 38px;
+}

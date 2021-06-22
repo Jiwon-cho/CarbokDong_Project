@@ -2,16 +2,18 @@ package com.admin.model.service;
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
-
 import static com.common.JDBCTemplate.rollback;
 
-
 import java.sql.Connection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.admin.model.dao.AdminDao;
 import com.camp.model.vo.Camp;
 import com.car.model.vo.Car;
+import com.car.model.vo.CarFile;
 import com.member.model.vo.Member;
 import com.payment.model.vo.Payment;
 
@@ -26,6 +28,88 @@ public class AdminService {
 		
 		
 	}
+	
+	
+	public int selectPayment(String pn) {
+		Connection conn=getConnection();
+		int carNB=dao.selectPayment(conn,pn);
+		close(conn);
+		return carNB;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	public int updateCancel(String pn) {
+		Connection conn=getConnection();
+		int result=dao.updateCancel(conn,pn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	
+	
+	
+	public String cancelCheck(String pn) {
+		Connection conn=getConnection();
+		String rc=dao.cancelCheck(conn,pn);
+		close(conn);
+		return rc;
+	}
+	
+	
+	public int updateRefund (String pn) {
+		Connection conn=getConnection();
+		int result=dao.updateRefund(conn,pn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public TreeMap<Date,Integer>  selectGraphMember(){
+		Connection conn=getConnection();
+		TreeMap<Date,Integer> list=dao.selectGraphMember(conn);
+		close(conn);
+		return list;
+	}
+	
+	public List<Integer> carPercentage(){
+		Connection conn=getConnection();
+		List<Integer> list=dao.carPercentage(conn);
+		close(conn);
+		return list;
+	}
+	
+	
+	public int selectQcount() {
+		Connection conn=getConnection();
+		int count=dao.selectQcount(conn);
+		close(conn);
+		return count;
+	}
+	
+	
+	
+	
+	
 	public int selectMemberCount() {
 		Connection conn=getConnection();
 		int count=dao.selectMemberCount(conn);
@@ -113,5 +197,31 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+
+	public int insertCampsel(Camp c) {
+		Connection conn=getConnection();
+		int result=dao.insertCampsel(conn,c);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int DeleteCampsel(int No) {
+		Connection conn=getConnection();
+		int result=dao.DeleteCampsel(conn,No);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int insertCarFile(CarFile f) {
+		Connection conn=getConnection();
+		int result=dao.insertCarFile(conn,f);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 
 }

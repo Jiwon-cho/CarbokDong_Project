@@ -49,12 +49,11 @@
 
 
 
-  </script>
-  <script>
+
   var slideIndex = 0; //slide index
 
 // HTML 로드가 끝난 후 동작
-window.onload=function(){
+$(document).ready(function(){
   showSlides(slideIndex);
 
   // Auto Move Slide
@@ -64,7 +63,7 @@ window.onload=function(){
     showSlides(slideIndex);
 
   }, sec);
-}
+});
 
 
 // Next/previous controls
@@ -189,19 +188,19 @@ function showSlides(n) {
 /* Fading animation */
 .fade {
   -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
+  -webkit-animation-duration: 500.5s;
   animation-name: fade;
-  animation-duration: 1.5s;
+  animation-duration: 500.5s;
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  from {opacity: 4}
+  to {opacity: 0.1}
 }
 
 @keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  from {opacity: 4}
+  to {opacity: 0.1}
 }
   </style>
   <%@ include file="views/common/mainHeader.jsp" %>
@@ -217,38 +216,38 @@ function showSlides(n) {
         <!-- Full-width images with number and caption text -->
         <div class="mySlides fade" >
           <div class="numbertext"></div>
-          <img src="<%=request.getContextPath() %>/images/캠핑 메인1.jpg" style="width:100%"> -->
-          <div class="text">ACNE STUDIO</div>
+          <img src="<%=request.getContextPath() %>/images/캠핑 메인1.jpg" style="width:100%">
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">2 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인2.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">3 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인3.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
-  
+    
         <div class="mySlides fade">
           <div class="numbertext">4 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인4.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">5 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <div class="mySlides fade">
           <div class="numbertext">6 / 6</div>
           <img src="<%=request.getContextPath() %>/images/캠핑메인6.jpg" style="width:100%">
-          <div class="text">ACNE STUDIO</div>
+          <div class="text">CAR BOKDONG</div>
         </div>
   
         <!-- Next and previous buttons -->
@@ -269,16 +268,16 @@ function showSlides(n) {
 
       
 
-  <div style="height:100px;"></div>
-      <div class="row">
-        <div class="col" style="height: 350px;background-color:rgba(248, 215, 176, 0.925);">
+  <div style="height:100px;"></div><!-- rgba(248, 215, 176, 0.925) -->
+      <div class="row"> 	
+        <div class="col" style="height: 350px;border-top:5px solid rgba(231, 223, 223, 0.555);">
           <div class="container-fluid">
             <div class="row">
               <div class="col" style="height: 50px; text-align:center;">
-              <h2>==== 캠핑 스토리 ===</h2>
+              <h2><span><img src="<%=request.getContextPath() %>/images/연필.png" style="width:40px;height:40px;"></span>캠핑 스토리 </h2>
               </div>
           </div>
-            <div class="row" style="text-align:center;">
+            <div class="row" style="text-align:center;margin-top:20px;">
              <div class="col-2"></div>
              
             <div class="col-lg-2" style="background-color:black;height: 250px; background-image:url('<%=request.getContextPath() %>/images/campingnews.jpg'); background-size:cover;
@@ -299,24 +298,27 @@ function showSlides(n) {
               </a>
             </div>
             </div>
-            <div class="col-lg-3" style="background-color:white; height: 250px;  ">
-              <div class="container-fluid" style="font-size:;">
-            <div class="row">
+<!--             background-color:rgb(233, 245, 244); -->
+            <div class="col-lg-3" style="border:5px solid rgba(231, 223, 223, 0.555); height: 250px;  ">
+              <!-- <div class="container-fluid" style="font-size:;"> -->
+           <!--  <div class="row">
               <div class="col" style="height: 20px;"></div>
-          </div>
-              <table align="center" id="weather-tb" style="font-size:50px;">
+          </div> -->
+              <table align="center" id="weather-tb" style="font-size:50px;width:400px;height:100%;"
+
+>
                       <tr>
-                      <th colspan="5">===== 날씨예보 ====</th>
+                      <th colspan="5">================== 날씨예보 ==================</th>
                   </tr>
                  
                   </table>
                   
            
-            </div>
+            <!-- </div> -->
             </div>
             <div class="col-lg-3" style="background-color:red; height: 250px; background-image:url('https://t1.daumcdn.net/cfile/tistory/99D8F24E5F07D10C2A');
                 background-size: cover;text-align:center;     background-repeat: no-repeat;"> <h2><a href="<%=request.getContextPath() %>/mbti/mbtiPage">
-                [MBTI 검사~!!]</a></h2></div>
+               MBTI</a></h2></div>
             <div class="col-2"></div>
         </div>
         </div>

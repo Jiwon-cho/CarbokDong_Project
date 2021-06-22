@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -81,6 +82,31 @@ public class MemberDao {
 		}return result;
 	}
 	
+	
+	public int insertEnroll(Connection conn, Date d) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertEnroll"));
+			 java.sql.Date sqlDate = new java.sql.Date(d.getTime());
+			pstmt.setDate(1, sqlDate);
+			result=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	public Member selectMemberId(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -150,12 +176,16 @@ public class MemberDao {
 			while(rs.next()) {
 				CarBoard c=new CarBoard();
 				c.setCarName(rs.getString("CAR_MODEL"));
-				c.setCarPicName(rs.getString("CAR_PIC_NM"));
+				c.setCarNB(rs.getInt("product_nb"));
+				c.setRnum(rs.getInt("rnum"));
 				c.setCarPsb(rs.getInt("CAR_PSB_"));
 				c.setCarTotal(rs.getInt("CAR_TOTAL"));
 				c.setIsdel(rs.getString("ISDEL"));
 				c.setPrice(rs.getInt("CART_PRICE"));
 				c.setCarIdx(rs.getInt("CART_IDX"));
+				c.setStartDate(rs.getDate("RENT_START_DATE"));
+				c.setEndDate(rs.getDate("rent_end_date"));
+				c.setGear(rs.getString("gear"));
 				list.add(c);
 			}
 		}catch(SQLException e) {
@@ -399,10 +429,10 @@ public class MemberDao {
 			while(rs.next()) {
 				Payment p=new Payment();
 				p.setPaymentsNo(rs.getString("PAYMENTS_NO"));
-
+				p.setRnum(rs.getInt("rnum"));
 				p.setPaymetType(rs.getString("PAYMENT_TYPE"));
 
-				p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				p.setPaymentDate(rs.getTimestamp("PAYMENT_DATE"));
 				p.setStartDate(rs.getDate("START_DATE"));
 				p.setEndDate(rs.getDate("END_DATE"));
 				p.setPrice(rs.getInt("PRICE"));
@@ -522,7 +552,8 @@ public class MemberDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("deleteQnA"));
+			
+			pstmt=conn.prepareStatement(prop.getProperty("deleteQnAReply2"));
 			pstmt.setInt(1, QnANo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -531,7 +562,7 @@ public class MemberDao {
 			close(pstmt);
 		}
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("deleteQnAReply2"));
+			pstmt=conn.prepareStatement(prop.getProperty("deleteQnA"));
 			pstmt.setInt(1, QnANo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -587,6 +618,7 @@ public class MemberDao {
 			pstmt.setString(5, q.getFileOriginalName());
 			pstmt.setString(6, q.getFileReName());
 			pstmt.setString(7, q.getQapublic());
+			pstmt.setString(8, q.getNickName());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -616,4 +648,134 @@ public class MemberDao {
 		}
 		return m;
 	}
+	public Member searchPwd(Connection conn, String userId,String name, String email) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchPwd"));
+			pstmt.setString(1, userId);
+			pstmt.setString(2, name);
+			pstmt.setString(3, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setUserId(rs.getString("member_Id"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	public int searchPwdResult(Connection conn,String userId, String pwd) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchPwdResult"));
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, userId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public Member selectMemberEmail(Connection conn, String email) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberEmail"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setUserId(rs.getString("member_Id"));
+				m.setUserName(rs.getString("member_nm"));
+				m.setEmail(rs.getString("email"));
+				m.setAddress(rs.getString("address"));
+				m.setNikname(rs.getString("nickname"));
+				m.setGender(rs.getString("gender"));
+				m.setMemberType(rs.getInt("MEMBER_TYPE"));
+				m.setPassword(rs.getString("password"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public Member chakeNaver(Connection conn, String email) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member n=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("chakeNaver"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				n=new Member();
+				n.setUserId(rs.getString("NAVER_EMAIL"));
+				n.setNikname("NICKNAME");
+				n.setGender(rs.getString("GENDER"));
+				n.setUserName(rs.getString("NAME"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return n;
+	}
+	
+	public int insertNaverMemver(Connection conn,String email, String nickname) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertNaverMemver"));
+			pstmt.setString(1, email);
+			pstmt.setString(2, nickname);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public List<QnA> selectQnAddList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<QnA> qlist=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectQnAddList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				QnA q=new QnA();
+				q.setNo(rs.getInt("QA_NB"));
+				q.setTitle(rs.getString("QA_TITLE"));
+				q.setContent(rs.getString("QA_CONTENT"));
+				q.setDate(rs.getDate("QA_DATE"));
+				q.setUserId(rs.getString("QA_MEMBER_ID"));
+				q.setResult(rs.getString("QA_RESULT"));
+				q.setFileOriginalName(rs.getString("QA_ORIGINAL_FILENAME"));
+				q.setFileReName(rs.getString("QA_RENAME_FILENAME"));
+				q.setQapublic(rs.getString("QA_PUBLIC"));
+				qlist.add(q);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return qlist;
+	}
+	
 }

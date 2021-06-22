@@ -1,6 +1,7 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,16 +45,21 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String password=request.getParameter("password");
 		String address=(request.getParameter("sample4_jibunAddress")+"/"+request.getParameter("sample4_postcode")+"/"+request.getParameter("sample4_roadAddress")+"/"+request.getParameter("address"));
 		String nikname=request.getParameter("nikName");
-		String userNo2=(request.getParameter("userNo")+"-"+request.getParameter("userNo2"));
-		char userNo=userNo2.charAt(7);
+		String userNo2=(request.getParameter("userNo2"));
+		char userNo=userNo2.charAt(0);
+		System.out.println(userNo);
 		String gender="";
 		if(userNo=='1' || userNo=='3') {gender="M";}
 		else {gender="F";}
 		int memberType=Integer.parseInt(request.getParameter("memberType"));
 		
 		Member m=new Member(userId,userName,email,address,nikname,gender,memberType,password);
-	
+		
 		int result=new MemberService().insertMember(m);
+
+		Date d=new Date();
+		int a=new MemberService().insertEnroll(d);
+		
 		
 		//클라이언트에게 보여준 페이지 선택!
 		String msg="";

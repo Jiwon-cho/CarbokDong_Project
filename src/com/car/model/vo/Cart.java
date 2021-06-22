@@ -10,12 +10,13 @@ public class Cart {
 	private Date rent_end_date;
 	private String memberId;
 	private int cartPrice;
+	private String gear;
 	public Cart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Cart(int cartIdx, String isDel, int productNb, Date rent_start_date, Date rent_end_date, String memberId,
-			int cartPrice) {
+			int cartPrice, String gear) {
 		super();
 		this.cartIdx = cartIdx;
 		this.isDel = isDel;
@@ -24,6 +25,7 @@ public class Cart {
 		this.rent_end_date = rent_end_date;
 		this.memberId = memberId;
 		this.cartPrice = cartPrice;
+		this.gear = gear;
 	}
 	public int getCartIdx() {
 		return cartIdx;
@@ -67,12 +69,20 @@ public class Cart {
 	public void setCartPrice(int cartPrice) {
 		this.cartPrice = cartPrice;
 	}
+	public String getGear() {
+		return gear;
+	}
+	public void setGear(String gear) {
+		this.gear = gear;
+	}
 	@Override
 	public String toString() {
 		return "Cart [cartIdx=" + cartIdx + ", isDel=" + isDel + ", productNb=" + productNb + ", rent_start_date="
 				+ rent_start_date + ", rent_end_date=" + rent_end_date + ", memberId=" + memberId + ", cartPrice="
-				+ cartPrice + "]";
+				+ cartPrice + ", gear=" + gear + "]";
 	}
+	
+	
 	
 	
 	

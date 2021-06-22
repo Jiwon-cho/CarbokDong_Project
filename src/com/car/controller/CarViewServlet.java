@@ -36,11 +36,14 @@ public class CarViewServlet extends HttpServlet {
 		int carNB=Integer.parseInt(request.getParameter("carNB"));
 		
 		Car c=new CarService().selectCar(carNB);
+		List<String> carpics=new CarService().selectCarPics(carNB);
 		
 		List<Reviews>rlist=new CarService().selectReviewList(carNB);
 		
+		
 		request.setAttribute("car", c);
 		request.setAttribute("rlist", rlist);
+		request.setAttribute("carpics", carpics);
 		
 		
 		request.getRequestDispatcher("/views/Car/carViews.jsp").forward(request, response);

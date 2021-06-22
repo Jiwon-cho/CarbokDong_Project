@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.admin.model.service.AdminService;
 import com.car.model.service.CarService;
 import com.google.gson.Gson;
 import com.payment.model.service.PaymentService;
@@ -66,6 +67,8 @@ public class PurchasingCheckServlet extends HttpServlet {
     	 }
     	 
     	 
+    	 String op=request.getParameter("op");
+    	 
     	 //System.out.println(start);
     	 //System.out.println(end);
     	 int product_nb=Integer.parseInt(request.getParameter("pd_no")) ;
@@ -73,12 +76,21 @@ public class PurchasingCheckServlet extends HttpServlet {
 		 
 		
 		 Payment p=new Payment(imp_uid,pay_method,date,start,end,paid_amount,product_nb,buyer,pd_name);
-		 int result=new PaymentService().insertPayment(p);
-		 int rc=new PaymentService().rentalVeri(imp_uid);
+		 p.setOpinon(op);
+		 
+		 PaymentService ps=new PaymentService();
+		 
+		 int result=ps.insertPayment(p);
+		 int rc=ps.rentalVeri(imp_uid);
+		 int cc=ps.insertCancel(imp_uid);
+		 
+		 
 		 if(result<=0) {
 			 System.out.println("멈춰!");
 		 }
 		
+		 new CarService().updateCarPsb(product_nb);
+		 
 		 
 		 response.setContentType("application/json;charset=utf-8");
 		 new Gson().toJson(p,response.getWriter());

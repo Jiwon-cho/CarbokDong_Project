@@ -65,6 +65,7 @@ public class GotoCartServlet extends HttpServlet {
 		c.setRent_end_date(endd);
 		c.setMemberId(id);
 		c.setCartPrice(money);
+		c.setGear(gn);
 		
 		int result=new CarService().insertCart(c);
 		String msg="";

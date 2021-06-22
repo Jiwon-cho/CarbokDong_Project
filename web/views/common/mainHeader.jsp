@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>카복동</title>
-
+	<link rel="shortcut icon" href="<%=request.getContextPath() %>/images/favicon.ico">
 	<link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -29,7 +29,7 @@
  <header> 
      <nav id="navbar__main">
       <div id="navbar__logo">
-        <a href="<%=request.getContextPath()%>" style="text-decoration: none;"> 차박왕카복동</a>
+        <a href="<%=request.getContextPath()%>" style="text-decoration: none;"> <i class="fas fa-campground"></i>차박왕카복동</a>
       </div>
       <div id="navbar__menu">
         <li><a href="<%=request.getContextPath()%>/borad/mainBorad">커뮤니티</a></li>
@@ -38,26 +38,25 @@
         </li>
         <li><a href="<%=request.getContextPath()%>/car/carList">렌트 차 종류</a></li>
         <li><a href="<%=request.getContextPath()%>/member/QnAList">Q&A</a></li>
-      </div>
-      <ul class="navbar__icons">
+        <ul class="navbar__icons">
         
        <%if(loginMember==null) {%>
-      <ul class="list">
         <li><a href="<%=request.getContextPath() %>/loginPage">로그인</a></li>
         <li><a href="<%=request.getContextPath() %>/enrollMember">회원 가입</a></li>
-      </ul>
 	<%}else if(loginMember.getMemberType()==0){%>
 	  <ul class="head-list">
 	  	<li><a href="<%=request.getContextPath() %>/admin/adminMain">관리자페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 	  </ul>
-	<%}else{ %>
+	<%}else if(loginMember!=null){ %>
 	<ul class="head-list">
 	  	<li><a href="<%=request.getContextPath() %>/myPage">마이페이지</a></li>
 	  	<li><a href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 	  </ul>
 	<%} %>
       </ul>
+      </div>
+      
 
 
       <a href="#" class="navbar__toggleBtn">

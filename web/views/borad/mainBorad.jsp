@@ -1,7 +1,7 @@
 <%@page import="org.jsoup.select.Evaluator.IsEmpty"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.borad.model.vo.Board,com.borad.model.vo.Files" %>
+<%@ page import="java.util.List,com.borad.model.vo.Board,com.borad.model.vo.Files,com.member.model.vo.QnA" %>
 <%
 	List<Board>list=(List<Board>)request.getAttribute("list");
 	List<Board>pplist=(List<Board>)request.getAttribute("pplist");
@@ -9,6 +9,7 @@
 	String searchKeyword= request.getParameter("searchKeyword");
 	//String img=(String)request.getAttribute("img");
 	List<Files>flist=(List<Files>)request.getAttribute("flist");
+	List<QnA>qlist=(List<QnA>)request.getAttribute("qlist");
 %>    
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainBoradStyle.css">
@@ -51,7 +52,7 @@
 
 	<section id="borad-container">
 		<p id="titi" style="font-size: 35px;">  커뮤니티 게시판</p>
-		<p id="insertborad" style="cursor:pointer; font-size: 25px;">글쓰기</p>
+		<p id="insertborad" style="cursor:pointer; font-size: 16px;">글쓰기</p>
 		<hr>
 		<table  id="bb" class="sub_news" border="1" cellspacing="0" summary="게시판의 글제목 리스트">
 		<colgroup>
@@ -69,17 +70,25 @@
 			</tr>
 		</thead>
 		<tbody>
-		<%for(int i=0;i<2;i++){ %>
+		
+		
+		<%for(QnA q:qlist){ %>
+			<%if(q.getUserId().equals("admin")){ %>
 			<tr>
 				<td class="title">
 				<input type="button" value="공지" class="btnmain" readonly="readonly">
-				<a href="#" style="font-size: 20px;">게시판 제목이 들어갑니다</a>
+				<a href="<%=request.getContextPath()%>/member/QnAView?QnANo=<%=q.getNo() %>" style="font-size: 20px;"><%=q.getTitle() %></a>
 				</td>
-				<td class="name" style="font-size: 20px;">글쓴이이름</td>
-				<td class="date" style="font-size: 13px;">2021/05/15</td>
-				<td class="hit" style="font-size: 13px;">10</td>
+				<td class="name" style="font-size: 20px;"><%=q.getUserId() %></td>
+				<td class="date" style="font-size: 13px;"><%=q.getDate() %></td>
+				<td class="hit" style="font-size: 13px;">0</td>
 			</tr>
-			<%} %>
+			
+			
+			
+				<%} %>
+			<% } %>
+			
 				<%for(Board bbc:pplist){ %>
 			<tr>
 				<td class="title">
@@ -103,14 +112,15 @@
 			<li>
 				<a href="<%=request.getContextPath() %>/borad/boardView?No=<%=b.getBoardNb() %>" class="aaa">
 					<span class="artice">
-				<div id="imgdivback" style="width: 130px; height: 120px; background-color: rgb(234, 234, 234); position: relative; top: 20px;"> 
+				<div id="imgdivback" style=" width: 130px; resize:none; height: 120px; background-color: rgb(234, 234, 234); position: relative; top: 20px;"> 
 					<%for(Files f:flist){%>
 						<%if(f.getBoardNb()==b.getBoardNb()){ %>
 						<img src="<%=request.getContextPath() %>/upload/board/<%=f.getFileNm() %>" width="130" height="120"
-						onerror="this.src='<%=request.getContextPath() %>/images/noimage.gif'">
-						<%}else{ %>
+						onerror="this.src='<%=request.getContextPath() %>/images/noimage.gif'" >
+						<%break;}else{ %>
 						<%} %>
 					<%} %>
+					
 					</div>
 						<strong class="tit" style="display: inline-block;">
 							<span class="txt_de" style="font-size: 23px;">&emsp;<%=b.getBoardTitle() %></span>
@@ -164,6 +174,7 @@
 		</div>
 			</div>
 	<br><br>
+	</section>
 	<script>
 	 <%if(loginMember!=null){%> 
 	   $("#insertborad").on("click",(e)=>{

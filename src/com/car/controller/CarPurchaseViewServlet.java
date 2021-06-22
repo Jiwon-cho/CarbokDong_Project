@@ -3,6 +3,7 @@ package com.car.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.car.model.service.CarService;
 import com.car.model.vo.Car;
+import com.common.AESEncrypt;
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 
 /**
  * Servlet implementation class CarPurchaseViewServlet
@@ -34,6 +38,12 @@ public class CarPurchaseViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int carNB=Integer.parseInt(request.getParameter("carNB"));
+
+		
+		//암호화된 자료를 복호화처리
+		
+		
+		List<String> carpics=new CarService().selectCarPics(carNB);
 		String start=request.getParameter("start");
 		String end=request.getParameter("end");
 		String gear=request.getParameter("gear")!=null?request.getParameter("gear"):"";		
@@ -61,7 +71,9 @@ public class CarPurchaseViewServlet extends HttpServlet {
 		Car c=new CarService().selectCar(carNB);
 		
 		int money=c.getPrice()*(int)calDateDays+g;
-	
+		
+
+		request.setAttribute("carpics", carpics);
 		request.setAttribute("car", c);
 		request.setAttribute("start", start);
 		request.setAttribute("end", end);

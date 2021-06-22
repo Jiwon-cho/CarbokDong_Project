@@ -1,7 +1,10 @@
 package com.borad.controller;
 
+import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,20 +51,17 @@ public class BoardWrite extends HttpServlet {
 			.forward(request, response);
 			return;
 		}
-	
+		
+
+		
 		String path=getServletContext().getRealPath("/upload/board/");
 		System.out.println(path);
 		int maxSize=1024*1024*100;
 		String encode="UTF-8";
 		FileRenamePolicy policy=new DefaultFileRenamePolicy();
-		
+
 		MultipartRequest mr=new MultipartRequest(request,path,maxSize,
 				encode,policy);
-		Files f= new Files();
-		
-		f.setFileNm(mr.getFilesystemName("upfile"));
-		
-		
 		
 		Board b=new Board();
 		b.setBoardTitle(mr.getParameter("title"));
@@ -74,10 +74,37 @@ public class BoardWrite extends HttpServlet {
 		//String content=request.getParameter("content");
 		//String id=request.getParameter("id");
 		int result=new BoardService().WriteBorad(b);
+
+		ArrayList<String> originFiles = new ArrayList<String>();
+		Enumeration<String> files = mr.getFileNames();
+		while(files.hasMoreElements()) {
+   
+      
+            String name = files.nextElement();
+            
+            if(mr.getFilesystemName(name) != null) {
+            	// getFilesystemName(key) : rename된 파일명 얻어오기
+                originFiles.add(mr.getOriginalFileName(name));
+            }
+        }
+		ArrayList<Files> fList = new ArrayList<Files>();
+		 for(int i = originFiles.size()-1; i>=0; i--) {
+			Files f= new Files();
+			f.setFileNm(originFiles.get(i));
+			int num=new BoardService().FileNoSelect(b);
+			int re=new BoardService().insertFile(f,num);
+		}
 		
-		int num=new BoardService().FileNoSelect(b);
+		String ss=mr.getFilesystemName("files");
+		System.out.println(ss);
+	
 		
-		int re=new BoardService().insertFile(f,num);
+		
+		
+		
+		
+		
+		
 		String msg="";
 		String loc="";
 		if(result>0) {

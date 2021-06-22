@@ -16,29 +16,18 @@ public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	
-		String url="http://pop.heraldcorp.com/view.php?ud=202105232102500066857_1&ACE_SEARCH=1";
-		
-		
-		Document doc=null;
-		try {
-			doc = Jsoup.connect(url).get();
-		}catch(IOException	 e) {
-			throw new RuntimeException("[Error: Crawling fail : " + e.getMessage() + "]");
+		int idx=0;
+		int a=0;
+		for(int i=0;i<11;i++) {
+			for(int j=0;j<11;j++) {
+				a=idx+1;
+				idx++;
+			}
 		}
-		Elements title=doc.select("#content > div.article > div.top > div.title > h1");
-		Elements images=doc.select("#CmAdContent > div > div > img");
-		Elements contents=doc.select("#CmAdContent");
-		News n=new News();
-		
+
 		
 	
-		
-		for(Element el: contents) {
-			n.setNewsContent(el.html());
-		}
-	
-		System.out.println(n.getNewsContent());
+		System.out.println(a);
 		
 	}
 

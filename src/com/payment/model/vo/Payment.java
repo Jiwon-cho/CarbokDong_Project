@@ -3,6 +3,7 @@ package com.payment.model.vo;
 import java.util.Date;
 
 public class Payment {
+	private int rnum;
 	private String paymentsNo;
 	private String paymetType;
 	private Date paymentDate;
@@ -12,6 +13,8 @@ public class Payment {
 	private int productNb;
 	private String memberId;
 	private String productNm;
+	private String opinion;
+	
 	public Payment() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -83,6 +86,25 @@ public class Payment {
 	public void setProductNm(String productNm) {
 		this.productNm = productNm;
 	}
+	
+	public String getOpinion() {
+		return opinion;
+	}
+	public void setOpinon(String opinion) {
+		this.opinion = opinion;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Payment [paymentsNo=" + paymentsNo + ", paymetType=" + paymetType + ", paymentDate=" + paymentDate

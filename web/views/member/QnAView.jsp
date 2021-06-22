@@ -30,6 +30,7 @@
         </tr>
         </table>
 		<br>
+		<%if(loginMember!=null){ %>
         <%if(loginMember.getMemberType()==0) {%>
 	        <form action="<%=request.getContextPath() %>/member/insertReply" method="post">
 	        	<input type="hidden" name="QnAReply" value="<%=q.getNo()%>">
@@ -41,7 +42,8 @@
 		        </table>
 			</form>
 			<br>
-        <%} %>
+        <%}
+        }%>
         <form action="<%=request.getContextPath() %>/member/deleteReply" method="post">
         <input type="hidden" name="QnANo" value="<%=q.getNo()%>">
         
@@ -50,9 +52,11 @@
 					<tr>
 		                <td class="result" style=" width: 80px; height: 100px;">답변</td>
 		                <td colspan="3" class="result2" valign="top" style=" width: 800px; height: 100px;"><%=qp.getQnAReplyContent() %></td>
+		                <%if(loginMember!=null) {%>
 		                <%if(loginMember.getMemberType()==0) {%>
 		                <td><input type="hidden"  name="QnAReplyNo" value="<%=qp.getQnAReplyNo()%>"><button type="submit" id="btn-delete" style=" width: 50px; height: 100px;">삭제</button></td>
-		                <%} %>
+		                <%} 
+		                }%>
 		            </tr>
 				<%} %>
             
@@ -63,13 +67,15 @@
         <div class="btn">
         		<input type="hidden" name="QnANo" value="<%=q.getNo()%>">
         		<input type="submit" onclick="btn_QnAList();" value="목록으로">
+        		<%if(loginMember!=null) {%>
                 <%if(loginMember.getUserId().equals(q.getUserId())||(loginMember.getMemberType()==0)){ %>
                 <input type="submit" onclick="btn_QnAUpdate();" value="수정">
                 <input type="submit" onclick="btn_QnADelete();" value="삭제">
                 <%} %>
                 <%if((loginMember.getMemberType()==0)&&(q.getResult().equals("N"))) {%>
                 <input type="submit" onclick="btn_QnAResult();" value="답변완료">
-                <%} %>
+                <%} 
+                }%>
         </div>
         </form>
         <script>

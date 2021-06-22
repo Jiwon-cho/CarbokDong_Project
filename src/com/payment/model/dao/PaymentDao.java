@@ -62,6 +62,7 @@ public class PaymentDao {
 			pstmt.setInt(7, p.getProductNb());
 			pstmt.setString(8,p.getMemberId());
 			pstmt.setString(9,p.getProductNm());
+			pstmt.setString(10, p.getOpinion());
 			
 			result=pstmt.executeUpdate();
 			
@@ -97,7 +98,24 @@ public class PaymentDao {
 	}
 	
 	
-	
+	public int insertCancel(Connection conn, String pn) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertCancel"));
+			pstmt.setString(1, pn);
+			
+			
+			result=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
 	
 	
 	

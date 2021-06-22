@@ -71,6 +71,7 @@ body {
 }
     </style>
     <div class="searchId-container">
+    	<center><h2>아이디 찾기</h2></center>
 		<form name="searchIdFrm" action="<%=request.getContextPath()%>/member/searchIdEnd" method="post" >
 					<input type="text" class="text-field" name="name" placeholder="이름" required>
         <input type="text" class="text-field2" name="email1" placeholder="이메일" required> @ <input type="text" class="text-field2" name="email2" placeholder="주소" required>

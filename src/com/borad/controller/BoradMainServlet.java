@@ -13,6 +13,8 @@ import com.borad.model.service.BoardService;
 import com.borad.model.vo.Board;
 import com.borad.model.vo.Files;
 import com.common.Paging;
+import com.member.model.service.MemberService;
+import com.member.model.vo.QnA;
 
 
 /**
@@ -101,10 +103,14 @@ public class BoradMainServlet extends HttpServlet {
 //			request.setAttribute("img", img);
 //		}
 		List<Files>flist=new BoardService().selectFileList();
+		
+		
+		List<QnA> qlist=new MemberService().selectQnAddList();
+		
 		request.setAttribute("flist", flist);
 		
 
-		
+		request.setAttribute("qlist",qlist);
 
 		request.setAttribute("pplist", pplist);
 		request.setAttribute("pageBar",pageBar);
